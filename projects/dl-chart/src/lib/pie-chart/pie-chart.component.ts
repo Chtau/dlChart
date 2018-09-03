@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, Renderer2, ViewEncapsulation, OnChanges, SimpleChanges, Output, EventEmitter, ViewChildren, QueryList } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
 import { Slice } from '../models/slice.model';
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
@@ -10,8 +10,6 @@ import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
   encapsulation: ViewEncapsulation.Emulated
 })  
 export class PieChartComponent implements OnInit, AfterViewInit {
-
-  @ViewChildren('path') paths : QueryList<ElementRef>;
 
   @Output() valueSelect: EventEmitter<any> = new EventEmitter<any>();
   @Output() valueDeselect: EventEmitter<any> = new EventEmitter<any>();
@@ -114,7 +112,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     return id;
   } 
 
-  constructor(private _renderer: Renderer2) {
+  constructor() {
       
   }
 
@@ -123,9 +121,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.paths.forEach(item => {
-      // console.log(item.nativeElement.id);
-    });
+
   }
   
   onClickSegment(event: Slice) {
