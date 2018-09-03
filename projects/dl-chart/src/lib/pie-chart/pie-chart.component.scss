@@ -1,0 +1,65 @@
+.pie-chart-svg {
+  padding: 10px;
+}
+
+.slice {
+  transform: scale(1, 1);
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.slice:hover {
+  opacity: .8;
+  transform: scale(1.05, 1.05);
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.slice-selected {
+  transform: scale(1.05, 1.05);
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.tooltiptext {
+  position:fixed;
+  overflow:hidden;
+}
+
+.tooltiptext {
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+
+.slice-anim {
+  animation: scaleSlice 0.4s reverse;
+}
+
+.slice-anim-even {
+  animation: scaleSlice 0.5s reverse;
+}
+
+@keyframes scaleSlice {
+  100% {
+    transform: scale(0, 0);
+  }
+}
