@@ -1,5 +1,17 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Visual Studio 2015 cache/options directory
+.vs/
+
 # compiled output
 /dist
 /tmp
