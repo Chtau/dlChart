@@ -1,9 +1,10 @@
 <div>
   <ul class="container flex">
-      <li class="legend-item flex-item" *ngFor="let item of chartItems">
+      <li (click)="onItemClick($event, item)" class="legend-item flex-item tooltip" *ngFor="let item of chartItems">
         <span class="legend-color-box" [style.background-color]="item.color"></span>
-        <span class="legend-text-content">  
-          {{ item.sourceItem.name }}
+        <span class="legend-text-content ">  
+          {{ legendTextValue(item) }}
+          <span id="dlChartTooltip" class="tooltiptext">{{ tooltipTextValue(item) }}</span>
         </span>
       </li>
   </ul>

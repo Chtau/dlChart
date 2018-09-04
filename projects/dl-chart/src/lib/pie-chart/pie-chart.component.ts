@@ -12,11 +12,11 @@ import { ChartItemService } from '../services/chart-item.service';
 })  
 export class PieChartComponent implements OnInit, AfterViewInit {
 
-  @Output() valueSelect: EventEmitter<any> = new EventEmitter<any>();
-  @Output() valueDeselect: EventEmitter<any> = new EventEmitter<any>();
+  @Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() valueDeselect: EventEmitter<Value> = new EventEmitter<Value>();
 
-  @Output() valueClick: EventEmitter<any> = new EventEmitter<any>();
-  @Output() valueChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() valueClick: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() valueChange: EventEmitter<Value> = new EventEmitter<Value>();
   
   @Input()
   set values(val: Value[]) {

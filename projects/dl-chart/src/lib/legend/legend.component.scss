@@ -9,6 +9,10 @@
   margin-right: 5px;
 }
 
+.legend-item:hover {
+  cursor: pointer;
+}
+
 .legend-color-box {
   min-height: 15px;
   min-width: 15px;
@@ -35,4 +39,20 @@
   flex-flow: row wrap;
   -webkit-flex-flow: row wrap;
   justify-content: space-around;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
