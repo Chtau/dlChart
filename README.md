@@ -4,6 +4,9 @@ Lightweight Angular Chart Library.
 
 The goal of this Library is to have an easy to use and small in size Chart Library.
 
+## Install
+
+`npm i dl-chart` [npm](https://www.npmjs.com/package/dl-chart)
 
 
 ## Build
