@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
-import { PieChartComponent } from './pie-chart.component';
 import { CommonModule } from '@angular/common';
+import { LegendComponent } from "./legend.component";
 import { ChartItemService } from '../services/chart-item.service';
-
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   declarations: [
-    PieChartComponent
+    LegendComponent
   ],
   providers: [
     ChartItemService
   ],
   entryComponents: [ 
-    PieChartComponent
+    LegendComponent
   ],
   exports: [
-    PieChartComponent
+    LegendComponent
   ]
 })
-export class DlPieChartModule { }
+export class DlLegendModule { }

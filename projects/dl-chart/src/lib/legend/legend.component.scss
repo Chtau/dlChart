@@ -1,0 +1,38 @@
+.container {
+  list-style:none;
+  margin: 0;
+  padding: 0;
+}
+
+.legend-item {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.legend-color-box {
+  min-height: 15px;
+  min-width: 15px;
+  display: inline-block;
+  border: 1px solid black;
+}
+
+.legend-text-content {
+  min-width: 25px;
+  vertical-align: top;
+}
+
+.flex {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  
+  flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}

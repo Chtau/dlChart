@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
-import { PieChartModule } from './pie-chart/pie-chart.module';
+import { DlPieChartModule } from './pie-chart/pie-chart.module';
+import { DlLegendModule } from "./legend/legend.module";
 
 @NgModule({
   imports: [
-    PieChartModule,
-    
+    DlPieChartModule,
+    DlLegendModule
   ],
   declarations: [
   ],
+  providers: [
+  ],
   exports: [
-    PieChartModule,
+    DlPieChartModule,
+    DlLegendModule
   ]
 })
 export class DlChartModule { }

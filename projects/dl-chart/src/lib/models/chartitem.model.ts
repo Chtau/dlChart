@@ -1,8 +1,10 @@
-export class Slice {
+import { Value } from "./value.model";
+
+export class ChartItem {
   id: string;
   draw: string;
   color: string;
   allowActivate: boolean;
-  sourceItem: any;
+  sourceItem: Value;
   calculatedPercent: number;
 }

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PieChartComponent } from './pie-chart.component';
-import { PieChartModule } from "./pie-chart.module";
+import { DlPieChartModule } from "./pie-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 
@@ -12,7 +12,7 @@ describe('PieChartComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        PieChartModule
+        DlPieChartModule
       ]
     })
     .compileComponents();
