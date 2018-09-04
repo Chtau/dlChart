@@ -10,5 +10,5 @@
         [attr.fill]="slice.color"
         ></path>
     </svg>
-    <span *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">{{ tooltipValue }}</span>
+    <span id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">{{ tooltipValue }}</span>
 </ng-container>

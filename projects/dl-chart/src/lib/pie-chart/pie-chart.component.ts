@@ -46,6 +46,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   tooltipShow: boolean = false;
   tooltipContentItem: Value;
   tooltipContentSlice: Slice;
+  tooltipClass: string = '';
 
   get pie() {
     return this.slices;
