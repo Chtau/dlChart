@@ -1,6 +1,11 @@
 {
   "name": "dl-chart",
   "version": "0.0.1",
+  "description": "Lightweight Angular Chart Library",
+  "keywords": ["angular", "chart", "lightweight", "angular6", "typescript"],
+  "author": "Christoph Taucher",
+  "license": "MIT",
+  "homepage": "https://github.com/Chtau/dlChart",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0"
