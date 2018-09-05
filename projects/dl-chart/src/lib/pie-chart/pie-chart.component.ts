@@ -4,6 +4,8 @@ import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from '../shared/utils';
+import { BaseChartComponent } from '../shared/base-chart.component';
+import { ServiceItem } from '../models/serviceitem.model';
 
 @Component({  
   selector: 'dl-pie-chart',  
@@ -11,7 +13,7 @@ import { Utils } from '../shared/utils';
   styleUrls: ['./pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class PieChartComponent implements OnInit, AfterViewInit {
+export class PieChartComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   @Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
   @Output() valueDeselect: EventEmitter<Value> = new EventEmitter<Value>();
@@ -95,8 +97,8 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     return id;
   } 
 
-  constructor(private chartItemService: ChartItemService) {
-      
+  constructor(chartItemService: ChartItemService) {
+      super(chartItemService);
   }
 
   ngOnInit() {
@@ -150,7 +152,8 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     this.currentValues.forEach(item => {
       cumulativePercent = this.createSlice(item, totalValue, cumulativePercent, true);
     });
-    this.chartItemService.items = this.pie;
+
+    this.chartItemService.setChartValues(new ServiceItem<ChartItem[]>(this.chartid, this.pie));
   }
 
   createSlice(item: Value, totalValue: number, cumulativePercent: number, active: boolean) {

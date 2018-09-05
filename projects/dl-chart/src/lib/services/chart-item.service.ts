@@ -1,21 +1,38 @@
 import { Injectable, Input, EventEmitter, Output } from '@angular/core';
 import { ChartItem } from '../models/chartitem.model';
+import { ServiceItem } from '../models/serviceitem.model';
 
 @Injectable()
 export class ChartItemService {
 
-  @Output() itemsChange: EventEmitter<ChartItem[]> = new EventEmitter<ChartItem[]>();
-  @Input()
-  get items() {
-    return this.currentItems;
-  }
+  values: ServiceItem<ChartItem[]>[] = [];
+
+  @Output() itemsChange: EventEmitter<ServiceItem<ChartItem[]>> = new EventEmitter<ServiceItem<ChartItem[]>>();
   
-  set items(val) {
-    this.currentItems = val;
-    this.itemsChange.emit(this.currentItems);
+  public setChartValues(val: ServiceItem<ChartItem[]>) {
+    var values = this.values.find(item => {
+      if (item.chartId === val.chartId) {
+        return true;
+      }
+      return false;
+    });
+    if (values) {
+      values = val;
+    } else {
+      this.values.push(val);
+    }
+    this.itemsChange.emit(val);
   }
-  currentItems: ChartItem[] = [];
-  
+
+  public getChartValues(chartId: string):ServiceItem<ChartItem[]> {
+    return this.values.find(item => {
+      if (item.chartId === chartId) {
+        return true;
+      }
+      return false;
+    });
+  }
+
   constructor() { 
 
   }

@@ -7,8 +7,8 @@
 <div style="width: 400px; height: 400px;text-align:center;">
   <h2>Pie Chart</h2>
   <input (keyup)="onKey($event)" placeholder="Filter to Chart ('3' shows only two Values)">
-  <dl-pie-chart [values]="filterValues"></dl-pie-chart>
-  <dl-chart-legend></dl-chart-legend>
+  <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues"></dl-pie-chart>
+  <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
 </div>
 
 

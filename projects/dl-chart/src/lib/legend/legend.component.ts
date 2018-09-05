@@ -4,6 +4,8 @@ import { ChartItem } from '../models/chartitem.model';
 import { Value } from '../models/value.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
+import { BaseChartComponent } from '../shared/base-chart.component';
+import { ServiceItem } from '../models/serviceitem.model';
 
 @Component({  
   selector: 'dl-chart-legend',  
@@ -11,14 +13,14 @@ import { Utils } from "../shared/utils";
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LegendComponent implements OnInit, AfterViewInit {
+export class LegendComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
   @Output() legendClick: EventEmitter<Value> = new EventEmitter<Value>();
 
-  items: ChartItem[] = [];
+  items: ServiceItem<ChartItem[]> = null;
 
   get chartItems():ChartItem[] {
-    return this.items;
+    return this.items.value;
   }
 
   @Input()
@@ -27,15 +29,17 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
   currentLegendConfiguration: LegendConfiguration = null;
 
-  constructor(private chartItemService: ChartItemService) {
-    
+  constructor(chartItemService: ChartItemService) {
+    super(chartItemService);
   }
 
   ngOnInit() {
-    this.items = this.chartItemService.items;
-
+    this.items = this.chartItemService.getChartValues(this.chartid);
+    
     this.chartItemService.itemsChange.subscribe(items => {
-      this.items = items;
+      if (items.chartId === this.chartid) {
+        this.items = items;
+      }
     });
   }
 
