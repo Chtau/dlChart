@@ -7,7 +7,7 @@ export class ChartItemService {
 
   values: ServiceItem<ChartItem[]>[] = [];
 
-  @Output() itemsChange: EventEmitter<ServiceItem<ChartItem[]>> = new EventEmitter<ServiceItem<ChartItem[]>>();
+  public chartValueChange: EventEmitter<ServiceItem<ChartItem[]>> = new EventEmitter<ServiceItem<ChartItem[]>>();
   
   public setChartValues(val: ServiceItem<ChartItem[]>) {
     var values = this.values.find(item => {
@@ -21,7 +21,7 @@ export class ChartItemService {
     } else {
       this.values.push(val);
     }
-    this.itemsChange.emit(val);
+    this.chartValueChange.emit(val);
   }
 
   public getChartValues(chartId: string):ServiceItem<ChartItem[]> {

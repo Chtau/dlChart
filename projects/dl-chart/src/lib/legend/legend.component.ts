@@ -35,8 +35,8 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
 
   ngOnInit() {
     this.items = this.chartItemService.getChartValues(this.chartid);
-    
-    this.chartItemService.itemsChange.subscribe(items => {
+
+    this.chartItemService.chartValueChange.subscribe(items => {
       if (items.chartId === this.chartid) {
         this.items = items;
       }
