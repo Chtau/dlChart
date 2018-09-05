@@ -1,6 +1,7 @@
 import { Value } from "./value.model";
+import { ITextConfiguration } from "./textConfiguration.interface";
 
-export class TooltipConfiguration {
+export class TooltipConfiguration implements ITextConfiguration {
   HideValue: boolean = false;
   ValueFunction: (n: Value, percent: number) => string = null;
 

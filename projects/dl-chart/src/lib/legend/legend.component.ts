@@ -3,6 +3,7 @@ import { ChartItemService } from '../services/chart-item.service';
 import { ChartItem } from '../models/chartitem.model';
 import { Value } from '../models/value.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
+import { Utils } from "../shared/utils";
 
 @Component({  
   selector: 'dl-chart-legend',  
@@ -43,33 +44,11 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
 
   legendTextValue(item: ChartItem) {
-    if (this.currentLegendConfiguration != null) {
-      if (this.currentLegendConfiguration.ValueFunction != null) {
-        return this.currentLegendConfiguration.ValueFunction(item.sourceItem, item.calculatedPercent);
-      } else {
-        if (this.currentLegendConfiguration.HideValue) {
-          return item.sourceItem.name;  
-        } else {
-          return item.sourceItem.name + ' ' + item.sourceItem.value;
-        }
-      }
-    }
-    return item.sourceItem.name;
+    return Utils.textValue(this.currentLegendConfiguration, item.sourceItem, item.calculatedPercent);
   }
 
   tooltipTextValue(item: ChartItem) {
-    if (item.sourceItem.tooltipConfig != null) {
-      if (item.sourceItem.tooltipConfig.ValueFunction != null) {
-        return item.sourceItem.tooltipConfig.ValueFunction(item.sourceItem, item.calculatedPercent);
-      } else {
-        if (item.sourceItem.tooltipConfig.HideValue) {
-          return item.sourceItem.name;  
-        } else {
-          return item.sourceItem.name + ' ' + item.sourceItem.value;
-        }
-      }
-    }
-    return item.sourceItem.name;
+    return Utils.textValue(item.sourceItem.tooltipConfig, item.sourceItem, item.calculatedPercent);
   }
 
   onItemClick(event: any, item: ChartItem) {

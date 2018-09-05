@@ -3,6 +3,7 @@ import { ChartItem } from '../models/chartitem.model';
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { ChartItemService } from '../services/chart-item.service';
+import { Utils } from '../shared/utils';
 
 @Component({  
   selector: 'dl-pie-chart',  
@@ -56,30 +57,10 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   get tooltipValue() {
     if (this.tooltipContentItem) {
       if (this.tooltipContentItem.tooltipConfig != null) {
-        if (this.tooltipContentItem.tooltipConfig.ValueFunction != null) {
-          return this.tooltipContentItem.tooltipConfig.ValueFunction(this.tooltipContentItem, this.tooltipContentSlice.calculatedPercent);
-        } else {
-          if (this.tooltipContentItem.tooltipConfig.HideValue) {
-            return this.tooltipContentItem.name;  
-          } else {
-            return this.tooltipContentItem.name + ' ' + this.tooltipContentItem.value;
-          }
-        }
+        return Utils.textValue(this.tooltipContentSlice.sourceItem.tooltipConfig, this.tooltipContentSlice.sourceItem, this.tooltipContentSlice.calculatedPercent);
       } else {
         // use fallback / default configuration
-        if (this.currentTooltipConfiguration != null) {
-          if (this.currentTooltipConfiguration.ValueFunction != null) {
-            return this.currentTooltipConfiguration.ValueFunction(this.tooltipContentItem, this.tooltipContentSlice.calculatedPercent);
-          } else {
-            if (this.currentTooltipConfiguration.HideValue) {
-              return this.tooltipContentItem.name;  
-            } else {
-              return this.tooltipContentItem.name + ' ' + this.tooltipContentItem.value;
-            }
-          }
-        } else {
-          return this.tooltipContentItem.name;
-        }
+        return Utils.textValue(this.currentTooltipConfiguration, this.tooltipContentSlice.sourceItem, this.tooltipContentSlice.calculatedPercent);
       }
     }
     return null;
