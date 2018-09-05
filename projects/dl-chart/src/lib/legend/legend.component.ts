@@ -20,7 +20,10 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
   items: ServiceItem<ChartItem[]> = null;
 
   get chartItems():ChartItem[] {
+    if (this.items) {
     return this.items.value;
+    }
+    return [];
   }
 
   @Input()
