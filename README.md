@@ -23,7 +23,7 @@ Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner
   * ~~Pie Chart~~
   * Bar Chart
   * Documentation
-  * Legend
+  * ~~Legend~~
 
 
 ## Version
