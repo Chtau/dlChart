@@ -59,11 +59,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     });
     var maxItem = items[0];
     let maxValue: number = maxItem.value;
-    // console.log('max Value Item =>' + maxValue);
-
     let steps: number = 6;
     var oneS = (maxValue / steps)
-    // console.log('oneS =>' + oneS);
     var yA: string[] = [];
     for (let index = 0; index < (steps + 1); index++) {
       yA.push(Utils.roundScale(oneS * index).toString());
@@ -72,7 +69,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
 
     var singleBarWidht = ((this.viewBoxWidht - (items.length * this.barWidhtOffset)) / items.length);
-    // console.log('Single Bar Width =>' + singleBarWidht);
     let bars: { val: Value, position: number}[] = [];
     let index: number = 1;
     this.currentValues.forEach(item => {
@@ -85,7 +81,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
       index++;
     });
 
-    // console.log('Bars =>' + JSON.stringify(bars));
     this.createXAxis(singleBarWidht, bars);
     this.createBars(maxValue, singleBarWidht, bars);
   }
@@ -96,7 +91,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
       var pos = ((element.position + singleBarWidht) - (singleBarWidht / 2));
-      // console.log('x Axis =>' + element.val.name + ' =>' + pos);
       this.xAxis.push(
         {
           text: element.val.name,
@@ -126,9 +120,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   createYAxis(items: string[]) {
     this.yAxis = [];
-    // we need to use -1 in the Value column for the correct display at the 0 position
     var step = (this.viewBoxHeight / (items.length - 1));
-    // console.log('one Y step =>' + JSON.stringify(step));
     for (let index = 0; index < (items.length - 1); index++) {
       const element = items[index];
       this.yAxis.push(
