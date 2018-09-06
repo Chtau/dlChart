@@ -16,7 +16,7 @@
         <path class="domain" d="M-6,0H0V450H-6"></path>
         <text transform="rotate(-90)" y="6" dy=".71em" style="text-anchor: end;">{{ currentScaleLabel }}</text>
       </g>
-        <rect class="bar" [attr.fill]="bar.value.color" [attr.x]="bar.position" [attr.width]="bar.width" [attr.y]="viewBoxHeight - bar.height" [attr.height]="bar.height" *ngFor="let bar of bars"></rect>
+        <rect class="bar bar-anim" [attr.fill]="bar.value.color" [attr.x]="bar.position" [attr.width]="bar.width" [attr.y]="viewBoxHeight - bar.height" [attr.height]="bar.height" *ngFor="let bar of bars"></rect>
       </g>
     </svg>
 </ng-container>

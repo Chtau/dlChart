@@ -1,9 +1,12 @@
-/*.bar {
-  fill: #d81c3f;
-}*/
-
 .bar:hover {
-  fill: darkgray;
+  opacity: .8;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
 }
 
 .axis {
@@ -19,4 +22,19 @@
 
 .x.axis path {
   display: none;
+}
+
+.bar-anim {
+  animation: scaleBar 0.4s reverse;
+  -webkit-transform-origin : 100% 90% 0;
+  -moz-transform-origin : 100% 90% 0;
+  -o-transform-origin : 100% 90% 0;
+  -ms-transform-origin : 100% 90% 0;
+  transform-origin : 100% 90% 0;
+}
+
+@keyframes scaleBar {
+  100% {
+    transform: scaleY(0);
+  }
 }
