@@ -4,11 +4,20 @@
     dlChart Demo
   </h1>
 </div>
-<div style="width: 400px; height: 400px;text-align:center;">
-  <h2>Pie Chart</h2>
-  <input (keyup)="onKey($event)" placeholder="Filter to Chart ('3' shows only two Values)">
-  <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues"></dl-pie-chart>
-  <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
+<div style="text-align: center;">
+  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+    <h2>Pie Chart</h2>
+    <input (keyup)="onKey($event)" placeholder="Filter to Chart ('3' shows only two Values)">
+    <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues"></dl-pie-chart>
+    <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
+  </div>
+
+  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+    <h2>Bar Chart</h2>
+    <input (keyup)="onKeyBar($event)" placeholder="Filter to Chart ('3' shows only two Values)">
+    <dl-bar-chart [chartid]="'test-chart-bar'"  [values]="filterValuesBar"></dl-bar-chart>
+    <dl-chart-legend [chartid]="'test-chart-bar'"></dl-chart-legend>
+  </div>
 </div>
 
 

@@ -17,10 +17,24 @@ export class AppComponent {
   ];
 
   filterValues: Value[] = this.values;
+  filterValuesBar: Value[] = this.values;
 
   onKey(event: any) {
     let inputValue = event.target.value;
     this.filterValues = this.values.filter(val => {
+      if (inputValue === undefined || inputValue === '') {
+        return true;
+      }
+      if (val.name === inputValue || val.value.toString() === inputValue) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  onKeyBar(event: any) {
+    let inputValue = event.target.value;
+    this.filterValuesBar = this.values.filter(val => {
       if (inputValue === undefined || inputValue === '') {
         return true;
       }

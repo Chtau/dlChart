@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { DlPieChartModule } from './pie-chart/pie-chart.module';
 import { DlLegendModule } from "./legend/legend.module";
+import { DlBarChartModule } from "./bar-chart/bar-chart.module";
 
 @NgModule({
   imports: [
     DlPieChartModule,
-    DlLegendModule
+    DlLegendModule,
+    DlBarChartModule
   ],
   declarations: [
   ],
@@ -13,7 +15,8 @@ import { DlLegendModule } from "./legend/legend.module";
   ],
   exports: [
     DlPieChartModule,
-    DlLegendModule
+    DlLegendModule,
+    DlBarChartModule
   ]
 })
 export class DlChartModule { }

@@ -3,7 +3,7 @@ import { Value } from "../models/value.model";
 
 export class Utils {
 
-  static textValue(config: ITextConfiguration, item: Value, percent: number) {
+  static textValue(config: ITextConfiguration, item: Value, percent: number): string {
     if (config != null) {
       if (config.ValueFunction != null) {
         return config.ValueFunction(item, percent);
@@ -16,6 +16,10 @@ export class Utils {
       }
     }
     return item.name;
+  }
+
+  static roundScale(value: number): number {
+    return Math.round(value * 100) / 100;
   }
 
 }
