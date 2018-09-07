@@ -29,7 +29,7 @@
           [attr.height]="bar.height" 
           *ngFor="let bar of bars">
         </rect>
-        <line *ngIf="currentActiveBar != null" [attr.y1]="(viewBoxHeight - currentActiveBar.height)" x1="0" [attr.y2]="(viewBoxHeight - currentActiveBar.height)" [attr.x2]="viewBoxWidht" class="active-stroke" />
+        <line id="dlChartBarSelectLineIndicator" *ngIf="currentActiveBar != null" [attr.y1]="(viewBoxHeight - currentActiveBar.height)" x1="0" [attr.y2]="(viewBoxHeight - currentActiveBar.height)" [attr.x2]="viewBoxWidht" class="active-stroke" />
       </g>
     </svg>
     <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">
