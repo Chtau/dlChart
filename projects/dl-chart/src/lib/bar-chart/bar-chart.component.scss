@@ -33,6 +33,19 @@
   transform-origin : 100% 90% 0;
 }
 
+.tooltiptext {
+  position:fixed;
+  overflow:hidden;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+span {
+  background-color: #555;
+  color: #fff;
+}
+
 @keyframes scaleBar {
   100% {
     transform: scaleY(0);

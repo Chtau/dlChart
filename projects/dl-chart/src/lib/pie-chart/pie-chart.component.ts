@@ -15,11 +15,11 @@ import { Slice } from '../models/slice.model';
 })  
 export class PieChartComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
-  @Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
+  /*@Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
   @Output() valueDeselect: EventEmitter<Value> = new EventEmitter<Value>();
 
   @Output() valueClick: EventEmitter<Value> = new EventEmitter<Value>();
-  @Output() valueChange: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() valueChange: EventEmitter<Value> = new EventEmitter<Value>();*/
   
   @Input()
   set values(val: Value[]) {
@@ -28,35 +28,35 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
   }
   currentValues: Value[] = [];
 
-  @Input()
+  /*@Input()
   set tooltipConfiguration(val: TooltipConfiguration) {
     this.currentTooltipConfiguration = val;
   }
-  currentTooltipConfiguration: TooltipConfiguration = null;
+  currentTooltipConfiguration: TooltipConfiguration = null;*/
 
-  @Input()
+  /*@Input()
   set allowSelect(val: boolean) {
     this.currentAllowSelect = val;
   }
-  currentAllowSelect: boolean = true;
+  currentAllowSelect: boolean = true;*/
 
 
   slices: Slice[] = [];
 
-  currentActiveSlice: Slice;
+  //currentActiveSlice: Slice;
 
-  tooltipLeft: number;
-  tooltipTop: number;
-  tooltipShow: boolean = false;
-  tooltipContentItem: Value;
-  tooltipContentSlice: Slice;
-  tooltipClass: string = '';
+  //tooltipLeft: number;
+  //tooltipTop: number;
+  //tooltipShow: boolean = false;
+  //tooltipContentItem: Value;
+  //tooltipContentSlice: Slice;
+  //tooltipClass: string = '';
 
   get pie() {
     return this.slices;
   }
 
-  get tooltipValue() {
+  /*get tooltipValue() {
     if (this.tooltipContentItem) {
       if (this.tooltipContentItem.tooltipConfig != null) {
         return Utils.textValue(this.tooltipContentSlice.sourceItem.tooltipConfig, this.tooltipContentSlice.sourceItem, this.tooltipContentSlice.calculatedPercent);
@@ -66,7 +66,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
       }
     }
     return null;
-  }
+  }*/
 
   cssClassSegment(slice: Slice, index: number): string {
     let css: string = '';
@@ -75,7 +75,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     } else {
       css += 'fill';
     }
-    if (slice === this.currentActiveSlice) {
+    if (slice === this.currentActiveChartItem) {
       css += ' slice-selected';
     }
     if (slice.sourceItem) {
@@ -109,7 +109,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   }
   
-  onClickSegment(event: Slice) {
+  /*onClickSegment(event: Slice) {
     if (event.allowActivate) {
       if (this.currentAllowSelect) {
         if (event === this.currentActiveSlice) {
@@ -126,7 +126,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   onHoverSegment(event: any, slice: Slice) {
     if (slice.allowActivate) {
-      this.tooltipContentSlice = slice;
+      this.tooltipContentChartItem = slice;
       this.tooltipContentItem = slice.sourceItem;
       this.tooltipLeft = (event.clientX + 10);
       this.tooltipTop = (event.clientY + 10);
@@ -136,11 +136,11 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   onLeaveSegment(event: any) {
-    this.tooltipContentSlice = null;
+    this.tooltipContentChartItem = null;
     this.tooltipContentItem = null;
     this.tooltipShow = false;
     this.valueChange.emit(null);
-  }
+  }*/
 
   calculateSlices() {
     let cumulativePercent: number = 0;

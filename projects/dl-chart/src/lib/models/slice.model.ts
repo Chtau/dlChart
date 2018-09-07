@@ -6,7 +6,7 @@ export class Slice implements IChartItem {
   color: string;
   sourceItem: Value;
   calculatedPercent: number;
+  allowActivate: boolean;
 
   draw: string;
-  allowActivate: boolean;
 }

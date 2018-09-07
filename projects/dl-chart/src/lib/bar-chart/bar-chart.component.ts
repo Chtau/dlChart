@@ -117,7 +117,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
           sourceItem: element.val,
           calculatedPercent: (element.val.value / onePercent),
           color: element.val.color,
-          id: Utils.createElementId('chart-bar-', index)
+          id: Utils.createElementId('chart-bar-', index),
+          allowActivate: true
         }
       );
     }
