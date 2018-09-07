@@ -4,6 +4,12 @@ Lightweight Angular Chart Library.
 
 The goal of this Library is to have an easy to use and small in size Chart Library.
 
+Currently if both Charts and the Legend is imported the `main.js` for Angular in Production build with Webpack is only ~6kb bigger which makes it perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a full blown Chart Library.
+
+[Example](https://chtau.github.io/dlChartHost/)
+
+![Import Assembly in Blazor](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
+
 ## Install
 
 `npm i dl-chart` [npm](https://www.npmjs.com/package/dl-chart)
@@ -17,7 +23,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { DlChartModule } from "dlChart";
+import { DlChartModule } from "dl-chart";
 
 @NgModule({
   declarations: [
