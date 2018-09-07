@@ -16,6 +16,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   @Input()
   set values(val: Value[]) {
+    this.resetActiveElement();
     this.currentValues = val;
     this.calculateSlices();
   }
@@ -120,6 +121,10 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
       return 0;
     }
     return percent / 100;
+  }
+
+  resetActiveElement() {
+    super.resetActive();
   }
 
 }

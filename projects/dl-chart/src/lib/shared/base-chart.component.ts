@@ -99,4 +99,11 @@ export class BaseChartComponent {
     this.valueChange.emit(null);
   }
 
+  resetActive() {
+    this.tooltipContentChartItem = null;
+    this.tooltipContentItem = null;
+    this.tooltipShow = false;
+    this.valueChange.emit(null);
+  }
+
 }

@@ -29,6 +29,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   @Input()
   set values(val: Value[]) {
+    this.resetActiveElement();
     this.currentValues = val;
     this.calculateChart();
   }
@@ -148,6 +149,11 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     } else {
       this.currentActiveBar = null;
     }
+  }
+
+  resetActiveElement() {
+    this.currentActiveBar = null;
+    super.resetActive();
   }
 
   cssClassSegment(item: Bar): string {
