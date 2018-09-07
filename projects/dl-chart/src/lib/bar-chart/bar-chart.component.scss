@@ -15,6 +15,17 @@
   transition:.5s;
 }
 
+.bar-selected {
+  opacity: .8;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
 .axis {
   font: 10px sans-serif;
 }
@@ -37,6 +48,12 @@
   -o-transform-origin : 100% 90% 0;
   -ms-transform-origin : 100% 90% 0;
   transform-origin : 100% 90% 0;
+}
+
+.active-stroke {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 1;
+  stroke-dasharray: 5;
 }
 
 @keyframes scaleBar {

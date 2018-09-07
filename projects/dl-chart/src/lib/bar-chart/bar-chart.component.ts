@@ -144,4 +144,29 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     )
   }
 
+  currentActiveBar: Bar = null;
+  onClickSegment(event: Bar) {
+    super.onClickSegment(event);
+    
+    if (event === this.currentActiveChartItem) {
+      this.currentActiveBar = event;
+    } else {
+      this.currentActiveBar = null;
+    }
+  }
+
+  cssClassSegment(item: Bar): string {
+    let css: string = '';
+    
+    if (item === this.currentActiveChartItem) {
+      css += ' bar-selected';
+    }
+    if (item.sourceItem) {
+      if (item.sourceItem.cssClass != null) {
+        css += ' ' + item.sourceItem.cssClass;
+      }
+    }
+    return css;
+  }
+
 }
