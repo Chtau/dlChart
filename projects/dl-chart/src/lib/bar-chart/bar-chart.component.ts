@@ -24,6 +24,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   yAxis: Axis[] = [];
   bars: Bar[] = [];
 
+  currentActiveBar: Bar = null;
+
 
   @Input()
   set values(val: Value[]) {
@@ -144,7 +146,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     )
   }
 
-  currentActiveBar: Bar = null;
   onClickSegment(event: Bar) {
     super.onClickSegment(event);
     

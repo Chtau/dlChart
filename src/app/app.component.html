@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     dlChart Demo
@@ -15,7 +14,7 @@
   <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <input (keyup)="onKeyBar($event)" placeholder="Filter to Chart ('3' shows only two Values)">
-    <dl-bar-chart [chartid]="'test-chart-bar'"  [values]="filterValuesBar"></dl-bar-chart>
+    <dl-bar-chart [chartid]="'test-chart-bar'" [scaleLabel]="'Demo Values'" [values]="filterValuesBar"></dl-bar-chart>
     <dl-chart-legend [chartid]="'test-chart-bar'"></dl-chart-legend>
   </div>
 </div>
