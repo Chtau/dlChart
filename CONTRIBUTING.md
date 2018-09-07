@@ -10,6 +10,11 @@ git clone https://github.com/Chtau/dlChart.git
 npm install
 ```
 
+* Build the project
+```
+ng build dlChart
+```
+
 * Run the project
 ```
 ng serve
