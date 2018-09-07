@@ -1,6 +1,5 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';  
 import { Value } from '../models/value.model';
-import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from '../shared/utils';
 import { BaseChartComponent } from '../shared/base-chart.component';

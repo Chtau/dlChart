@@ -1,7 +1,6 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
-import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';

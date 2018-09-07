@@ -31,5 +31,7 @@
         </rect>
       </g>
     </svg>
-    <span id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">{{ tooltipValue }}</span>
+    <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">
+        <span>{{ tooltipValue }}</span>
+    </div>
 </ng-container>
