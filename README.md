@@ -4,7 +4,7 @@ Lightweight Angular Chart Library.
 
 The goal of this Library is to have an easy to use and small in size Chart Library.
 
-Currently if both Charts and the Legend is imported the `main.js` for Angular in Production build with Webpack is only ~6kb bigger which makes it perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a full blown Chart Library.
+Currently if both Charts and the Legend is imported the `main.js` for Angular in Production build with Webpack is only **~6kb** bigger which makes it perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a full blown Chart Library.
 
 [Example](https://chtau.github.io/dlChartHost/)
 
