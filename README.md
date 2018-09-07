@@ -11,7 +11,7 @@ The goal of this Library is to have an easy to use and small in size Chart Libra
 ## Usage
 
 Add `DlChartModule` to your module's imports
-```
+```javascript
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -33,7 +33,7 @@ import { DlChartModule } from "dlChart";
 export class AppModule { }
 ```
 And then use it in your component
-```
+```html
 <div style="text-align:center">
   <h1>
     dlChart Demo
@@ -169,6 +169,8 @@ Run `ng build dlChart` to build the library.The build artifacts will be stored i
 
 Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## License
+[MIT](https://github.com/Chtau/dlChart/blob/master/LICENSE) © [Christoph Taucher](https://github.com/Chtau)
 
 ## Version
 
