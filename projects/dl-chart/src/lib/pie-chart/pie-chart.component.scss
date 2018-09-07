@@ -1,3 +1,5 @@
+@import '../shared/tooltip.scss';
+
 .pie-chart-svg {
   padding: 10px;
 }
@@ -34,19 +36,6 @@
   -webkit-transition:.5s;
   
   transition:.5s;
-}
-
-.tooltiptext {
-  position:fixed;
-  overflow:hidden;
-  text-align: center;
-  padding: 5px 10px;
-  border-radius: 6px;
-}
-
-span {
-  background-color: #555;
-  color: #fff;
 }
 
 .slice-anim {

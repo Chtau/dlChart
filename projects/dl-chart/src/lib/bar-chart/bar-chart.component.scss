@@ -1,3 +1,9 @@
+@import '../shared/tooltip.scss';
+
+.bar-chart-svg {
+  padding: 10px;
+}
+
 .bar:hover {
   opacity: .8;
 
@@ -31,19 +37,6 @@
   -o-transform-origin : 100% 90% 0;
   -ms-transform-origin : 100% 90% 0;
   transform-origin : 100% 90% 0;
-}
-
-.tooltiptext {
-  position:fixed;
-  overflow:hidden;
-  text-align: center;
-  padding: 5px 10px;
-  border-radius: 6px;
-}
-
-span {
-  background-color: #555;
-  color: #fff;
 }
 
 @keyframes scaleBar {
