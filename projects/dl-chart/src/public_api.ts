@@ -13,3 +13,4 @@ export * from './lib/legend/legend.module';
 // models
 export * from './lib/models/tooltipconfiguration.model';
 export * from './lib/models/value.model';
+export * from './lib/models/legendconfiguration.model';
