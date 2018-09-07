@@ -163,6 +163,13 @@ Property | Type | default | description
 `ValueFunction` | (n: Value, percent: number) => string | null | function to return the Legend text
 
 
+### CSS
+
+The Tooltip can be overriden with the CSS Id `dlChartTooltip`
+
+Slice in the Pie Chart can be overriden with the CSS Id `chart-slice-0` (the number is the index of the element)
+
+Bars in the Bar Chart can be override with the CSS Id `chart-bar-0` (the number is the index of the element)
 
 
 
