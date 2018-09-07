@@ -15,12 +15,6 @@ import { Slice } from '../models/slice.model';
 })  
 export class PieChartComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
-  /*@Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
-  @Output() valueDeselect: EventEmitter<Value> = new EventEmitter<Value>();
-
-  @Output() valueClick: EventEmitter<Value> = new EventEmitter<Value>();
-  @Output() valueChange: EventEmitter<Value> = new EventEmitter<Value>();*/
-  
   @Input()
   set values(val: Value[]) {
     this.currentValues = val;
@@ -28,45 +22,11 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
   }
   currentValues: Value[] = [];
 
-  /*@Input()
-  set tooltipConfiguration(val: TooltipConfiguration) {
-    this.currentTooltipConfiguration = val;
-  }
-  currentTooltipConfiguration: TooltipConfiguration = null;*/
-
-  /*@Input()
-  set allowSelect(val: boolean) {
-    this.currentAllowSelect = val;
-  }
-  currentAllowSelect: boolean = true;*/
-
-
   slices: Slice[] = [];
-
-  //currentActiveSlice: Slice;
-
-  //tooltipLeft: number;
-  //tooltipTop: number;
-  //tooltipShow: boolean = false;
-  //tooltipContentItem: Value;
-  //tooltipContentSlice: Slice;
-  //tooltipClass: string = '';
 
   get pie() {
     return this.slices;
   }
-
-  /*get tooltipValue() {
-    if (this.tooltipContentItem) {
-      if (this.tooltipContentItem.tooltipConfig != null) {
-        return Utils.textValue(this.tooltipContentSlice.sourceItem.tooltipConfig, this.tooltipContentSlice.sourceItem, this.tooltipContentSlice.calculatedPercent);
-      } else {
-        // use fallback / default configuration
-        return Utils.textValue(this.currentTooltipConfiguration, this.tooltipContentSlice.sourceItem, this.tooltipContentSlice.calculatedPercent);
-      }
-    }
-    return null;
-  }*/
 
   cssClassSegment(slice: Slice, index: number): string {
     let css: string = '';
@@ -109,39 +69,6 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   }
   
-  /*onClickSegment(event: Slice) {
-    if (event.allowActivate) {
-      if (this.currentAllowSelect) {
-        if (event === this.currentActiveSlice) {
-          this.currentActiveSlice = null;
-          this.valueDeselect.emit(event.sourceItem);
-        } else {
-          this.currentActiveSlice = event;
-          this.valueSelect.emit(event.sourceItem);
-        }
-      }
-      this.valueClick.emit(event.sourceItem);
-    }
-  }
-
-  onHoverSegment(event: any, slice: Slice) {
-    if (slice.allowActivate) {
-      this.tooltipContentChartItem = slice;
-      this.tooltipContentItem = slice.sourceItem;
-      this.tooltipLeft = (event.clientX + 10);
-      this.tooltipTop = (event.clientY + 10);
-      this.tooltipShow = true;
-      this.valueChange.emit(slice.sourceItem);
-    }
-  }
-
-  onLeaveSegment(event: any) {
-    this.tooltipContentChartItem = null;
-    this.tooltipContentItem = null;
-    this.tooltipShow = false;
-    this.valueChange.emit(null);
-  }*/
-
   calculateSlices() {
     let cumulativePercent: number = 0;
     let totalValue: number = 0;
