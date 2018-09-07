@@ -53,14 +53,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   calculateChart() {
-    var items = this.currentValues.sort((a, b) => {
-      if (a.value < b.value) {
-        return 1;
-      }
-      return 0;
-    });
-    var maxItem = items[0];
-    let maxValue: number = maxItem.value;
+    var items = this.currentValues;
+    let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
     var oneS = (maxValue / this.valueSteps)
     var yA: string[] = [];
     for (let index = 0; index < (this.valueSteps + 1); index++) {
