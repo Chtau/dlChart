@@ -1,15 +1,15 @@
 import { Injectable, Input, EventEmitter, Output } from '@angular/core';
-import { ChartItem } from '../models/chartitem.model';
+import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
 
 @Injectable()
 export class ChartItemService {
 
-  values: ServiceItem<ChartItem[]>[] = [];
+  values: ServiceItem<IChartItem[]>[] = [];
 
-  public chartValueChange: EventEmitter<ServiceItem<ChartItem[]>> = new EventEmitter<ServiceItem<ChartItem[]>>();
+  public chartValueChange: EventEmitter<ServiceItem<IChartItem[]>> = new EventEmitter<ServiceItem<IChartItem[]>>();
   
-  public setChartValues(val: ServiceItem<ChartItem[]>) {
+  public setChartValues(val: ServiceItem<IChartItem[]>) {
     var values = this.values.find(item => {
       if (item.chartId === val.chartId) {
         return true;
@@ -24,7 +24,7 @@ export class ChartItemService {
     this.chartValueChange.emit(val);
   }
 
-  public getChartValues(chartId: string):ServiceItem<ChartItem[]> {
+  public getChartValues(chartId: string):ServiceItem<IChartItem[]> {
     return this.values.find(item => {
       if (item.chartId === chartId) {
         return true;

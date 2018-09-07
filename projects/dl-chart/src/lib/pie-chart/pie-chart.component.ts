@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
-import { ChartItem } from '../models/chartitem.model';
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from '../shared/utils';
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
+import { Slice } from '../models/slice.model';
 
 @Component({  
   selector: 'dl-pie-chart',  
@@ -41,15 +41,15 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
   currentAllowSelect: boolean = true;
 
 
-  slices: ChartItem[] = [];
+  slices: Slice[] = [];
 
-  currentActiveSlice: ChartItem;
+  currentActiveSlice: Slice;
 
   tooltipLeft: number;
   tooltipTop: number;
   tooltipShow: boolean = false;
   tooltipContentItem: Value;
-  tooltipContentSlice: ChartItem;
+  tooltipContentSlice: Slice;
   tooltipClass: string = '';
 
   get pie() {
@@ -68,7 +68,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     return null;
   }
 
-  cssClassSegment(slice: ChartItem, index: number): string {
+  cssClassSegment(slice: Slice, index: number): string {
     let css: string = '';
     if (slice.allowActivate) {
       css += 'slice';
@@ -91,8 +91,8 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     return css;
   }
 
-  createElementId(slice: ChartItem, index: number): string {
-    let id: string = 'chart-slice-' + index;
+  createElementId(slice: Slice, index: number): string {
+    let id: string = Utils.createElementId('chart-slice-', index);
     slice.id = id;
     return id;
   } 
@@ -109,7 +109,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   }
   
-  onClickSegment(event: ChartItem) {
+  onClickSegment(event: Slice) {
     if (event.allowActivate) {
       if (this.currentAllowSelect) {
         if (event === this.currentActiveSlice) {
@@ -124,7 +124,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     }
   }
 
-  onHoverSegment(event: any, slice: ChartItem) {
+  onHoverSegment(event: any, slice: Slice) {
     if (slice.allowActivate) {
       this.tooltipContentSlice = slice;
       this.tooltipContentItem = slice.sourceItem;
@@ -153,7 +153,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
       cumulativePercent = this.createSlice(item, totalValue, cumulativePercent, true);
     });
 
-    this.chartItemService.setChartValues(new ServiceItem<ChartItem[]>(this.chartid, this.pie));
+    this.chartItemService.setChartValues(new ServiceItem<Slice[]>(this.chartid, this.pie));
   }
 
   createSlice(item: Value, totalValue: number, cumulativePercent: number, active: boolean) {

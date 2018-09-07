@@ -1,10 +1,10 @@
 import { Value } from "./value.model";
 
-export class ChartItem {
+export interface IChartItem {
   id: string;
-  draw: string;
+  // draw: string;
   color: string;
-  allowActivate: boolean;
+  // allowActivate: boolean;
   sourceItem: Value;
   calculatedPercent: number;
 }

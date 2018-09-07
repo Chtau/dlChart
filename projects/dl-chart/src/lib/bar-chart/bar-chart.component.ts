@@ -1,11 +1,12 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
-import { ChartItem } from '../models/chartitem.model';
 import { Value } from '../models/value.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
+import { Bar } from '../models/bar.model';
+import { Axis } from '../models/axis.model';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -17,8 +18,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   viewBoxWidht: number = 450;
   viewBoxHeight: number = 450;
-  barWidht: number = 31;
   barWidhtOffset: number = 15;
+  valueSteps: number = 6;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -59,10 +60,9 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     });
     var maxItem = items[0];
     let maxValue: number = maxItem.value;
-    let steps: number = 6;
-    var oneS = (maxValue / steps)
+    var oneS = (maxValue / this.valueSteps)
     var yA: string[] = [];
-    for (let index = 0; index < (steps + 1); index++) {
+    for (let index = 0; index < (this.valueSteps + 1); index++) {
       yA.push(Utils.roundScale(oneS * index).toString());
     }
     this.createYAxis(yA);
@@ -83,6 +83,8 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
     this.createXAxis(singleBarWidht, bars);
     this.createBars(maxValue, singleBarWidht, bars);
+
+    this.chartItemService.setChartValues(new ServiceItem<Bar[]>(this.chartid, this.bars))
   }
 
   createXAxis(singleBarWidht: number, items: { val: Value, position: number}[]) {
@@ -112,7 +114,10 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
           width: singleBarWidht,
           height: (oneDisplayPercent * (element.val.value / onePercent)),
           position: element.position,
-          value: element.val
+          sourceItem: element.val,
+          calculatedPercent: (element.val.value / onePercent),
+          color: element.val.color,
+          id: Utils.createElementId('chart-bar-', index)
         }
       );
     }
@@ -139,16 +144,4 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     )
   }
 
-}
-
-export class Axis {
-  position: number;
-  text: string;
-}
-
-export class Bar {
-  height: number;
-  position: number;
-  width: number;
-  value: Value;
 }

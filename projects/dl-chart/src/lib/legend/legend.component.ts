@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
-import { ChartItem } from '../models/chartitem.model';
+import { IChartItem } from '../models/chartitem.interface';
 import { Value } from '../models/value.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
@@ -17,9 +17,9 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
 
   @Output() legendClick: EventEmitter<Value> = new EventEmitter<Value>();
 
-  items: ServiceItem<ChartItem[]> = null;
+  items: ServiceItem<IChartItem[]> = null;
 
-  get chartItems():ChartItem[] {
+  get chartItems():IChartItem[] {
     if (this.items) {
     return this.items.value;
     }
@@ -50,15 +50,15 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
 
   }
 
-  legendTextValue(item: ChartItem) {
+  legendTextValue(item: IChartItem) {
     return Utils.textValue(this.currentLegendConfiguration, item.sourceItem, item.calculatedPercent);
   }
 
-  tooltipTextValue(item: ChartItem) {
+  tooltipTextValue(item: IChartItem) {
     return Utils.textValue(item.sourceItem.tooltipConfig, item.sourceItem, item.calculatedPercent);
   }
 
-  onItemClick(event: any, item: ChartItem) {
+  onItemClick(event: any, item: IChartItem) {
     this.legendClick.emit(item.sourceItem)
   }
 
