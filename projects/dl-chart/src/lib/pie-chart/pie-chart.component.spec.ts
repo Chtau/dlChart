@@ -71,25 +71,25 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
-    component.tooltipContentSlice = component.pie[0];
+    component.tooltipContentChartItem = component.pie[0];
     component.tooltipContentItem = component.pie[0].sourceItem;
 
     let tooltipDefault = component.tooltipValue;
     expect(tooltipDefault).toBe('Blue', 'default Segement Tooltip');
 
-    component.tooltipContentSlice = component.pie[1];
+    component.tooltipContentChartItem = component.pie[1];
     component.tooltipContentItem = component.pie[1].sourceItem;
 
     let tooltipWithValue = component.tooltipValue;
     expect(tooltipWithValue).toBe('Orange 3', 'Segement Tooltip (Name + Value)');
 
-    component.tooltipContentSlice = component.pie[2];
+    component.tooltipContentChartItem = component.pie[2];
     component.tooltipContentItem = component.pie[2].sourceItem;
 
     let tooltipFunc1 = component.tooltipValue;
     expect(tooltipFunc1).toBe('Orange (3)', 'Segement Tooltip function 1');
 
-    component.tooltipContentSlice = component.pie[3];
+    component.tooltipContentChartItem = component.pie[3];
     component.tooltipContentItem = component.pie[3].sourceItem;
 
     let tooltipFunc2 = component.tooltipValue;
@@ -104,26 +104,26 @@ describe('PieChartComponent', () => {
     ];
 
     component.tooltipConfiguration = new TooltipConfiguration(false);
-    component.tooltipContentSlice = component.pie[0];
+    component.tooltipContentChartItem = component.pie[0];
     component.tooltipContentItem = component.pie[0].sourceItem;
 
     let tooltipGlobal = component.tooltipValue;
     expect(tooltipGlobal).toBe('Blue 3', 'global Tooltip (Name + Value)');
 
-    component.tooltipContentSlice = component.pie[1];
+    component.tooltipContentChartItem = component.pie[1];
     component.tooltipContentItem = component.pie[1].sourceItem;
 
     let tooltipSegemntOverride = component.tooltipValue;
     expect(tooltipSegemntOverride).toBe('Orange (3)', 'global Tooltip segment override');
 
     component.tooltipConfiguration = new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' });
-    component.tooltipContentSlice = component.pie[0];
+    component.tooltipContentChartItem = component.pie[0];
     component.tooltipContentItem = component.pie[0].sourceItem;
 
     let tooltipGlobalFunc = component.tooltipValue;
     expect(tooltipGlobalFunc).toBe('Blue (3)', 'global Tooltip function');
 
-    component.tooltipContentSlice = component.pie[2];
+    component.tooltipContentChartItem = component.pie[2];
     component.tooltipContentItem = component.pie[2].sourceItem;
 
     let tooltipFuncSegemntOverride = component.tooltipValue;
