@@ -75,7 +75,7 @@ describe('PieChartComponent', () => {
     component.tooltipContentItem = component.pie[0].sourceItem;
 
     let tooltipDefault = component.tooltipValue;
-    expect(tooltipDefault).toBe('Blue', 'default Segement Tooltip');
+    expect(tooltipDefault).toBe('Blue (3)', 'default Segement Tooltip');
 
     component.tooltipContentChartItem = component.pie[1];
     component.tooltipContentItem = component.pie[1].sourceItem;

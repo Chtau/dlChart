@@ -15,7 +15,7 @@ export class Utils {
         }
       }
     }
-    return item.name;
+    return item.name + ' (' + item.value + ')';
   }
 
   static roundScale(value: number): number {
