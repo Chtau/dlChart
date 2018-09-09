@@ -187,4 +187,6 @@ Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner
 
 ## Version
 
+[Changelog](https://github.com/Chtau/dlChart/blob/master/CHANGELOG.md)
+
 Angular 6+
