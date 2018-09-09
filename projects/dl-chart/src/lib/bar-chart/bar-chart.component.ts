@@ -55,14 +55,20 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   calculateChart() {
     var items = this.currentValues;
+    items.forEach(val => {
+      if (!val.value) {
+        val.value = 0;
+      }
+    })
     let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
     var oneS = (maxValue / this.valueSteps)
     var yA: string[] = [];
     for (let index = 0; index < (this.valueSteps + 1); index++) {
       yA.push(Utils.roundScale(oneS * index).toString());
     }
-    this.createYAxis(yA);
-
+    if (maxValue != 0) {
+      this.createYAxis(yA);
+    }
 
     var singleBarWidht = ((this.viewBoxWidht - (items.length * this.barWidhtOffset)) / items.length);
     let bars: { val: Value, position: number}[] = [];
@@ -77,7 +83,9 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
       index++;
     });
 
-    this.createXAxis(singleBarWidht, bars);
+    if (maxValue != 0) {
+      this.createXAxis(singleBarWidht, bars);
+    }
     this.createBars(maxValue, singleBarWidht, bars);
 
     this.chartItemService.setChartValues(new ServiceItem<Bar[]>(this.chartid, this.bars))
@@ -108,10 +116,10 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
       this.bars.push(
         {
           width: singleBarWidht,
-          height: (oneDisplayPercent * (element.val.value / onePercent)),
+          height: element.val.value === 0 ? 0 : (oneDisplayPercent * (element.val.value / onePercent)),
           position: element.position,
           sourceItem: element.val,
-          calculatedPercent: (element.val.value / onePercent),
+          calculatedPercent: element.val.value === 0 ? 0 : (element.val.value / onePercent),
           color: element.val.color,
           id: Utils.createElementId('chart-bar-', index),
           allowActivate: true
