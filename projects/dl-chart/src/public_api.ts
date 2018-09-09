@@ -14,3 +14,5 @@ export * from './lib/legend/legend.module';
 export * from './lib/models/tooltipconfiguration.model';
 export * from './lib/models/value.model';
 export * from './lib/models/legendconfiguration.model';
+
+export * from './lib/services/chart-item.service';
