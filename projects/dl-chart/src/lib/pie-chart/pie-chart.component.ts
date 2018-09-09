@@ -74,6 +74,9 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     let totalValue: number = 0;
     this.slices = [];
     this.currentValues.forEach(item => {
+      if (item.value === null || item.value === undefined) {
+        item.value = 0;
+      }
       totalValue += item.value;
     });
     this.currentValues.forEach(item => {
