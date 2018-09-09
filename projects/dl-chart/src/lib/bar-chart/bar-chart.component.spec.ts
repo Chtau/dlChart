@@ -4,6 +4,7 @@ import { BarChartComponent } from './bar-chart.component';
 import { DlBarChartModule } from "./bar-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
+import { Utils } from '../shared/utils';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
@@ -128,6 +129,57 @@ describe('BarChartComponent', () => {
 
     expect(component.bars[0].sourceItem.value).toBe(null, 'null input value replaced with 0');
     expect(component.bars[1].sourceItem.value).toBe(undefined, 'undefined input value replaced with 0');
+  });
+
+  it('Bar create Y Axis', () => {
+    component.values = [
+      new Value('Blue', null, 'Blue'),
+      new Value('Orange', undefined, 'Orange'),
+      new Value('Orange', 3, 'Orange', 'test'),
+    ];
+
+    var yA: string[] = [];
+    for (let index = 0; index < (5 + 1); index++) {
+      yA.push(Utils.roundScale(1 * index).toString());
+    }
+    component.createYAxis(yA);
+
+    expect(component.yAxis.length).toBe(6, '6 Y Axis steps');
+    expect(component.yAxis[0].text === '0' 
+    && component.yAxis[1].text === '1'
+    && component.yAxis[2].text === '2'
+    && component.yAxis[3].text === '3'
+    && component.yAxis[4].text === '4'
+    && component.yAxis[5].text === '5'
+    ).toBeTruthy('Y Axis values');
+  });
+
+  it('Bar create X Axis', () => {
+    component.values = [
+      new Value('Blue', null, 'Blue'),
+      new Value('Orange', undefined, 'Orange'),
+      new Value('Orange', 3, 'Orange', 'test'),
+    ];
+
+    let bars: { val: Value, position: number}[] = [];
+    let index: number = 1;
+    component.currentValues.forEach(item => {
+      bars.push(
+        {
+          val: item,
+          position: (5 * index) + (25 * (index - 1))
+        }
+      );
+      index++;
+    });
+
+    component.createXAxis(25, bars);
+
+    expect(component.xAxis.length).toBe(3, '3 X Axis steps');
+    expect(component.xAxis[0].text === 'Blue' 
+    && component.xAxis[1].text === 'Orange'
+    && component.xAxis[2].text === 'Orange'
+    ).toBeTruthy('X Axis values');
   });
 
 });
