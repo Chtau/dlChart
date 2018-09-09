@@ -131,4 +131,37 @@ describe('PieChartComponent', () => {
 
   });
 
+  it('Slice null and undifiend', () => {
+    component.values = [
+      new Value('Blue', null, 'Blue'),
+      new Value('Orange', undefined, 'Orange'),
+      new Value('Orange', 3, 'Orange', 'test'),
+    ];
+
+    expect(component.pie[0].sourceItem.value).toBe(0, 'null input value replaced with 0');
+    expect(component.pie[1].sourceItem.value).toBe(0, 'undefined input value replaced with 0');
+  });
+
+  it('Pie normalized value', () => {
+    component.values = [
+      new Value('Blue', 1, 'Blue'),
+      new Value('Orange', 2, 'Orange'),
+      new Value('Orange', 3, 'Orange', 'test'),
+    ];
+
+    expect(component.getNormalizedValue(10, 1)).toBe(0.1, 'normalize Value');
+  });
+
+  it('Slice percent coordinates', () => {
+    component.values = [
+      new Value('Blue', 1, 'Blue'),
+      new Value('Orange', 2, 'Orange'),
+      new Value('Orange', 3, 'Orange', 'test'),
+    ];
+
+    var cor = component.getCoordinatesForPercent(180);
+    expect(Math.round(cor[0])).toBe(1, 'normalize Value X');
+    expect(Math.round(cor[1])).toBe(-0, 'normalize Value Y');
+  });
+
 });
