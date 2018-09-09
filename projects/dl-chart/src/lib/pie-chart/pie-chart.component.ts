@@ -102,7 +102,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
       `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
       `L 0 0`,
     ].join(' ');
-    if (!startX || !startY || !endX || !endY || !largeArcFlag) {
+    if (normValue === 0) {
       pathData = null;
     }
 
