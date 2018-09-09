@@ -74,7 +74,7 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
     let totalValue: number = 0;
     this.slices = [];
     this.currentValues.forEach(item => {
-      if (item.value === null || item.value === undefined) {
+      if (!item.value) {
         item.value = 0;
       }
       totalValue += item.value;
@@ -89,16 +89,22 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
   createSlice(item: Value, totalValue: number, cumulativePercent: number, active: boolean) {
     const [startX, startY] = this.getCoordinatesForPercent(cumulativePercent);
     let normValue = this.getNormalizedValue(totalValue, item.value);
+    if (!normValue) {
+      normValue = 0;
+    }
     cumulativePercent += normValue;
     const [endX, endY] = this.getCoordinatesForPercent(cumulativePercent);
 
     const largeArcFlag = this.getNormalizedValue(totalValue, item.value) > .5 ? 1 : 0;
   
-    const pathData = [
+    var pathData = [
       `M ${startX} ${startY}`,
       `A 1 1 0 ${largeArcFlag} 1 ${endX} ${endY}`,
       `L 0 0`,
     ].join(' ');
+    if (!startX || !startY || !endX || !endY || !largeArcFlag) {
+      pathData = null;
+    }
 
     this.slices.push({
       color: item.color,
