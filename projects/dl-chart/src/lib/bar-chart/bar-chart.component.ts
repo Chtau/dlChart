@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
@@ -13,8 +13,8 @@ import { Axis } from '../models/axis.model';
   styleUrls: ['./bar-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class BarChartComponent extends BaseChartComponent implements OnInit, AfterViewInit {
-
+export class BarChartComponent extends BaseChartComponent implements OnInit, AfterViewInit, OnChanges {
+  
   viewBoxWidht: number = 450;
   viewBoxHeight: number = 450;
   barWidhtOffset: number = 15;
@@ -29,9 +29,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   @Input()
   set values(val: Value[]) {
-    this.resetActiveElement();
     this.currentValues = val;
-    this.calculateChart();
   }
   currentValues: Value[] = [];
 
@@ -40,6 +38,11 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     this.currentScaleLabel = val;
   }
   currentScaleLabel: string = 'Values';
+
+  @Input()
+  set steps(val: number) {
+    this.valueSteps = val;
+  }
 
   constructor(chartItemService: ChartItemService) {
     super(chartItemService);
@@ -52,6 +55,12 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   ngAfterViewInit(): void {
 
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.resetActiveElement();
+    this.calculateChart();
+  }
+
 
   calculateChart() {
     var items = this.currentValues;
