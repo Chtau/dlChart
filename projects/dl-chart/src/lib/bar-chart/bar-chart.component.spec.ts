@@ -5,6 +5,7 @@ import { DlBarChartModule } from "./bar-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from '../shared/utils';
+import { SimpleChange } from '@angular/core';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
@@ -22,7 +23,7 @@ describe('BarChartComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BarChartComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    //fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -34,8 +35,27 @@ describe('BarChartComponent', () => {
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange'),
     ];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     expect(component.bars.length).toBe(2, 'Bars loaded');
+  });
+
+  it('create Steps', () => {
+    component.values = [
+      new Value('Blue', 3, 'Blue'),
+      new Value('Orange', 3, 'Orange'),
+    ];
+    component.steps = 10;
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false),
+      steps: new SimpleChange(null, component.steps, false)
+    });
+    fixture.detectChanges();
+
+    expect(component.yAxis.length).toBe(11, 'Y Axis created');
   });
 
   it('create Segment css class', () => {
@@ -44,6 +64,11 @@ describe('BarChartComponent', () => {
       new Value('Orange', 3, 'Orange'),
       new Value('Orange', 3, 'Orange', 'test'),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     let css = component.cssClassSegment(component.bars[0]);
     expect(css).toBe('', 'Segement css class even created');
@@ -59,6 +84,11 @@ describe('BarChartComponent', () => {
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     component.tooltipContentChartItem = component.bars[0];
     component.tooltipContentItem = component.bars[0].sourceItem;
@@ -91,6 +121,11 @@ describe('BarChartComponent', () => {
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     component.tooltipConfiguration = new TooltipConfiguration(false);
     component.tooltipContentChartItem = component.bars[0];
@@ -127,8 +162,13 @@ describe('BarChartComponent', () => {
       new Value('Orange', 3, 'Orange', 'test'),
     ];
 
-    expect(component.bars[0].sourceItem.value).toBe(null, 'null input value replaced with 0');
-    expect(component.bars[1].sourceItem.value).toBe(undefined, 'undefined input value replaced with 0');
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    expect(component.bars[0].sourceItem.value).toBe(0, 'null input value replaced with 0');
+    expect(component.bars[1].sourceItem.value).toBe(0, 'undefined input value replaced with 0');
   });
 
   it('Bar create Y Axis', () => {
@@ -137,6 +177,11 @@ describe('BarChartComponent', () => {
       new Value('Orange', undefined, 'Orange'),
       new Value('Orange', 3, 'Orange', 'test'),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     var yA: string[] = [];
     for (let index = 0; index < (5 + 1); index++) {
@@ -160,6 +205,11 @@ describe('BarChartComponent', () => {
       new Value('Orange', undefined, 'Orange'),
       new Value('Orange', 3, 'Orange', 'test'),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     let bars: { val: Value, position: number}[] = [];
     let index: number = 1;
