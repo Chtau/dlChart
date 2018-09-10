@@ -5,7 +5,7 @@
 	margin-top: -10px;
 }
 .legend-items .legend-item {
-	flex: 1 0 calc(25% - 10px);
+  flex: 1 0 auto;
   margin-left: 10px;
   margin-top: 10px;
   text-align: left;
@@ -13,7 +13,7 @@
 }
 
 .legend-items:hover {
-	cursor: pointer;
+  cursor: default;
 }
 
 .legend-color-box {
@@ -35,7 +35,6 @@
   text-align: center;
   padding: 5px 10px;
   border-radius: 6px;
-
   position: absolute;
   z-index: 80;
 }
