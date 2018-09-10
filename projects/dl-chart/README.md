@@ -129,6 +129,12 @@ Property | Type | default
 --- | --- | ---
 `[scaleLabel]` | string | 'Values'
 
+customize the Steps number of the Y Axis (Value scale) 
+
+Property | Type | default
+--- | --- | ---
+`[steps]` | number | 6
+
 #### Legend Properties
 
 configurate the Display Text of the Legend
