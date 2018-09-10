@@ -6,6 +6,9 @@ The goal of this Library is to have an easy to use and small in size Chart Libra
 
 Currently if both Charts and the Legend is imported the `main.js` for Angular in Production build with Webpack is only **~6kb** bigger which makes it perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a full blown Chart Library.
 
+The Charts are created with SVG which makes them responsive for every screen resolution and have no extern Library Dependencies.
+
+
 [Example](https://chtau.github.io/dlChartHost/)
 
 ![Import Assembly in Blazor](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
@@ -174,7 +177,6 @@ Bars in the Bar Chart can be override with the CSS Id `chart-bar-0` (the number 
 
 
 
-
 ## Build
 
 Run `ng build dlChart` to build the library.The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
@@ -187,5 +189,7 @@ Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner
 [MIT](https://github.com/Chtau/dlChart/blob/master/LICENSE) © [Christoph Taucher](https://github.com/Chtau)
 
 ## Version
+
+[Changelog](https://github.com/Chtau/dlChart/blob/master/CHANGELOG.md)
 
 Angular 6+
