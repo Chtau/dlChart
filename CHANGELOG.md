@@ -1,5 +1,15 @@
 # Changelog
 
+
+## 0.4.0
+
+- [[be9b22b]](https://github.com/Chtau/dlChart/commit/be9b22b9b5deb64cc79c1e544a3453b677bd1c69) [[6773fac]](https://github.com/Chtau/dlChart/commit/6773faca2b958de87ffe12a1c5d233d0f0395386) Pie Chart prevent Draw for no or 0 values
+- [[d55c79a2]](https://github.com/Chtau/dlChart/commit/d55c79a53b2f29fc1ceca3840e160343e7c6a5e2) Bar Chart prevent Draw for no or 0 values
+- [[4d902d64]](https://github.com/Chtau/dlChart/commit/4d902d6454f468c2bd8db5b8c0c8ff02396d298d) change Legend cursor and Flex
+- [[f06cb6e8]](https://github.com/Chtau/dlChart/commit/f06cb6e81c790632bea9136bfdec3124062632b3) Bar Chart allow custom Steps 'steps' (default = 6)
+- [[516230b9]](https://github.com/Chtau/dlChart/commit/516230b98d038e93ac9fb52101aa9cc06e775330) update Bar Unit test
+
+
 ## 0.3.0
 
 - [[a9c8597]](https://github.com/Chtau/dlChart/commit/a9c8597705ee0513cd7397c1997be0999ce3f339) Legend vertical Style improved
