@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "test-coverage": "ng test dlChart --code-coverage",
+    "view-coverage": "http-server -c-1 -o -p 9875 ./coverage"
   },
   "private": true,
   "dependencies": {
