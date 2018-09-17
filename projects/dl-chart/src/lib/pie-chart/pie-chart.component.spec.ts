@@ -50,7 +50,7 @@ describe('PieChartComponent', () => {
     component.values = [
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange'),
-      new Value('Orange', 3, 'Orange', 'test'),
+      new Value('Orange', 3, 'Orange', 'test')
     ];
 
     let cssEven = component.cssClassSegment(component.pie[0], 0);
@@ -61,6 +61,15 @@ describe('PieChartComponent', () => {
 
     let cssCustom = component.cssClassSegment(component.pie[2], 2);
     expect(cssCustom).toBe('slice test slice-anim-even', 'Segement custom css class created');
+
+    component.onClickSegment(component.pie[1]);
+    let cssOdd1 = component.cssClassSegment(component.pie[1], 1);
+    expect(cssOdd1).toBe('slice slice-selected slice-anim', 'Segement css class selected');
+
+    component.pie[0].allowActivate = false;
+    component.onClickSegment(component.pie[0]);
+    let cssEven1 = component.cssClassSegment(component.pie[0], 0);
+    expect(cssEven1).toBe('fill slice-anim-even', 'Segement css class not allow activate');
   });
 
   it('Segment Tooltips', () => {
@@ -150,6 +159,8 @@ describe('PieChartComponent', () => {
     ];
 
     expect(component.getNormalizedValue(10, 1)).toBe(0.1, 'normalize Value');
+
+    expect(component.getNormalizedValue(100, -100)).toBe(0.0, 'normalize Value (smaller 0%)');
   });
 
   it('Slice percent coordinates', () => {
