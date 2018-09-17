@@ -6,6 +6,7 @@ import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from '../shared/utils';
 import { SimpleChange } from '@angular/core';
+import { Bar } from 'dlChart/lib/models/bar.model';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
@@ -230,6 +231,46 @@ describe('BarChartComponent', () => {
     && component.xAxis[1].text === 'Orange'
     && component.xAxis[2].text === 'Orange'
     ).toBeTruthy('X Axis values');
+  });
+
+  it('scale label (Y Axis)', () => {
+    expect(component.currentScaleLabel).toBe('Values', 'default scale label');
+    component.scaleLabel = 'Y Axis Text';
+    expect(component.currentScaleLabel).toBe('Y Axis Text', 'new scale label value');
+  });
+
+  it('Bars with all 0 values', () => {
+    component.values = [
+      new Value('Blue', 0, 'Blue'),
+      new Value('Orange', 0, 'Orange'),
+    ];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    expect(component.bars.length).toBe(2, 'Bars loaded');
+  });
+
+  it('select/deselect Bar', () => {
+    var segement: Bar = {
+      allowActivate: true,
+      calculatedPercent: 0,
+      color: 'red',
+      height: 1,
+      id: '0',
+      position: 0,
+      sourceItem: null,
+      width: 1
+    };
+    component.onClickSegment(segement);
+    expect(component.currentActiveBar.id).toBe('0', 'Bar selected');
+
+    var css = component.cssClassSegment(segement);
+    expect(css).toBe(' bar-selected', 'Bar deselected');
+
+    component.onClickSegment(segement);
+    expect(component.currentActiveBar).toBeNull('Bar deselected');
   });
 
 });
