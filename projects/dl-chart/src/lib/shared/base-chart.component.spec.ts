@@ -1,12 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { Value } from '../models/value.model';
-import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
-import { Utils } from '../shared/utils';
-import { SimpleChange } from '@angular/core';
-import { ServiceItem } from '../models/serviceitem.model';
-import { Slice } from '../models/slice.model';
-import { Bar } from '../models/bar.model';
+import { async, TestBed } from '@angular/core/testing';
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { IChartItem } from '../models/chartitem.interface';
