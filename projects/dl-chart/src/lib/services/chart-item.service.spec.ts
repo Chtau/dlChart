@@ -1,17 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 
-import { Value } from '../models/value.model';
-import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
-import { Utils } from '../shared/utils';
-import { SimpleChange } from '@angular/core';
 import { ChartItemService } from './chart-item.service';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
 import { Bar } from '../models/bar.model';
 
 describe('ChartItemService', () => {
-  //let component: ChartItemService;
-  //let fixture: ComponentFixture<ChartItemService>;
   let service: ChartItemService;
 
   beforeEach(async(() => {
@@ -109,6 +103,35 @@ describe('ChartItemService', () => {
 
     var values = service.values;
     expect(values.length).toBe(2, '2 charts')
+  });
+
+  it('update existing Chart values', (done) => {
+    var waitforUpdate: boolean = true;
+    var waitforResult: boolean = false;
+    service.chartValueChange.subscribe((vals: ServiceItem<Slice[]>) => {
+      if (waitforUpdate === true) {
+        waitforUpdate = false;
+        waitforResult = true;
+        service.setChartValues(new ServiceItem<Slice[]>('test', [
+          { id: '123', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
+          { id: '124', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
+        ]));
+        
+      }
+      if (waitforResult === true) {
+        waitforResult = false;
+        expect(vals.value.length).toBe(2, 'chart values')
+        expect(vals.value[0].id).toBe('123', 'chart value id')
+        expect(vals.value[1].id).toBe('124', 'chart value id')
+        done();
+      }
+    });
+
+    service.setChartValues(new ServiceItem<Slice[]>('test', [
+      { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
+      { id: '13', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
+    ]))
+
   });
 
 });
