@@ -7,6 +7,7 @@ import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from '../shared/utils';
 import { SimpleChange } from '@angular/core';
 import { Bar } from 'dlChart/lib/models/bar.model';
+import { ChartOrientation } from '../models/enums';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
@@ -271,6 +272,96 @@ describe('BarChartComponent', () => {
 
     component.onClickSegment(segement);
     expect(component.currentActiveBar).toBeNull('Bar deselected');
+  });
+
+  it('chart orientation [Bottom]', () => {
+    component.rightScaleAxis = true;
+    component.leftScaleAxis = true;
+    component.orientation = ChartOrientation.Bottom;
+
+    expect(component.chartStyle.transform).toBe('rotate(0deg)', 'chart rotate 0deg');
+    expect(component.secondYAxisOrientation).toBe(ChartOrientation.Top, 'second is [Top]');
+    expect(component.yAxisTextStyle["text-anchor"]).toBe('end', 'Y Axis text style');
+    expect(component.yAxisTextStyleSecond["text-anchor"]).toBe('start', 'Y Axis text style second');
+    expect(component.yAxisTextXPositionOffsetSecond).toBe(9, 'Y Axis text x offset');
+    expect(component.yAxisLabelTextStyleSecond["text-anchor"]).toBe('end', 'Y Axis label text second');
+    expect(component.yAxisLabelTextYPositionOffsetSecond).toBe(438, 'Y Axis label text offset');
+    expect(component.yAxisTextYPositionOffsetSecond).toBe(0, 'Y Axis text offset');
+    expect(component.yAxisLabelTextYPositionOffset).toBe(6, 'Y Axis label text offset');
+    expect(component.xAxisTextStyle["text-anchor"]).toBe('middle', 'x Axis text style');
+    expect(component.xAxisTextXPositionOffset).toBe(0, 'x Axis text offset');
+    expect(component.xAxisTextYPositionOffset).toBe(9, 'Y Axis text offset');
+  });
+
+  it('chart orientation [Left]', () => {
+    component.rightScaleAxis = true;
+    component.leftScaleAxis = true;
+    component.orientation = ChartOrientation.Left;
+
+    expect(component.chartStyle.transform).toBe('rotate(90deg)', 'chart rotate 90deg');
+    expect(component.secondYAxisOrientation).toBe(ChartOrientation.Right, 'second is [Right]');
+    expect(component.yAxisTextStyle["text-anchor"]).toBe('middle', 'Y Axis text style');
+    expect(component.yAxisTextStyleSecond["text-anchor"]).toBe('middle', 'Y Axis text style second');
+    expect(component.yAxisTextXPositionOffsetSecond).toBe(0, 'Y Axis text x offset');
+    expect(component.yAxisLabelTextStyleSecond["text-anchor"]).toBe('end', 'Y Axis label text second');
+    expect(component.yAxisLabelTextYPositionOffsetSecond).toBe(438, 'Y Axis label text offset');
+    expect(component.yAxisTextYPositionOffsetSecond).toBe(12, 'Y Axis text offset');
+    expect(component.yAxisLabelTextYPositionOffset).toBe(6, 'Y Axis label text offset');
+    expect(component.xAxisTextStyle["text-anchor"]).toBe('end', 'x Axis text style');
+    expect(component.xAxisTextXPositionOffset).toBe(-9, 'x Axis text offset');
+    expect(component.xAxisTextYPositionOffset).toBe(-3.5, 'Y Axis text offset');
+  });
+
+  it('chart orientation [Right]', () => {
+    component.rightScaleAxis = true;
+    component.leftScaleAxis = true;
+    component.orientation = ChartOrientation.Right;
+
+    expect(component.chartStyle.transform).toBe('rotate(-90deg)', 'chart rotate -90deg');
+    expect(component.secondYAxisOrientation).toBe(ChartOrientation.Left, 'second is [Left]');
+    expect(component.yAxisTextStyle["text-anchor"]).toBe('middle', 'Y Axis text style');
+    expect(component.yAxisTextStyleSecond["text-anchor"]).toBe('middle', 'Y Axis text style second');
+    expect(component.yAxisTextXPositionOffsetSecond).toBe(0, 'Y Axis text x offset');
+    expect(component.yAxisLabelTextStyleSecond["text-anchor"]).toBe('start', 'Y Axis label text second');
+    expect(component.yAxisLabelTextYPositionOffsetSecond).toBe(-445, 'Y Axis label text offset');
+    expect(component.yAxisTextYPositionOffsetSecond).toBe(-12, 'Y Axis text offset');
+    expect(component.yAxisLabelTextYPositionOffset).toBe(-12, 'Y Axis label text offset');
+    expect(component.xAxisTextStyle["text-anchor"]).toBe('start', 'x Axis text style');
+    expect(component.xAxisTextXPositionOffset).toBe(9, 'x Axis text offset');
+    expect(component.xAxisTextYPositionOffset).toBe(-3.5, 'Y Axis text offset');
+  });
+
+  it('chart orientation [Top]', () => {
+    component.rightScaleAxis = true;
+    component.leftScaleAxis = true;
+    component.orientation = ChartOrientation.Top;
+
+    expect(component.chartStyle.transform).toBe('rotate(180deg)', 'chart rotate 180deg');
+    expect(component.secondYAxisOrientation).toBe(ChartOrientation.Bottom, 'second is [Bottom]');
+    expect(component.yAxisTextStyle["text-anchor"]).toBe('start', 'Y Axis text style');
+    expect(component.yAxisTextStyleSecond["text-anchor"]).toBe('end', 'Y Axis text style second');
+    expect(component.yAxisTextXPositionOffsetSecond).toBe(-9, 'Y Axis text x offset');
+    expect(component.yAxisLabelTextStyleSecond["text-anchor"]).toBe('start', 'Y Axis label text second');
+    expect(component.yAxisLabelTextYPositionOffsetSecond).toBe(-445, 'Y Axis label text offset');
+    expect(component.yAxisTextYPositionOffsetSecond).toBe(0, 'Y Axis text offset');
+    expect(component.yAxisLabelTextYPositionOffset).toBe(-12, 'Y Axis label text offset');
+    expect(component.xAxisTextStyle["text-anchor"]).toBe('middle', 'x Axis text style');
+    expect(component.xAxisTextXPositionOffset).toBe(0, 'x Axis text offset');
+    expect(component.xAxisTextYPositionOffset).toBe(-15, 'Y Axis text offset');
+  });
+
+  it('Bar offset', () => {
+    component.values = [
+      new Value('Blue', 0, 'Blue'),
+      new Value('Orange', 0, 'Orange'),
+    ];
+    component.barOffset = 10;
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    expect(component.bars[0].width).toBe(210, 'Bar weight');
   });
 
 });

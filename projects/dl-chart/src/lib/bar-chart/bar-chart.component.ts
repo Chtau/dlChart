@@ -79,14 +79,14 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get secondYAxisOrientation() {
-    if (this.currentOrientation === ChartOrientation.Bottom) {
-      return ChartOrientation.Top;
+    if (this.currentOrientation === ChartOrientation.Top) {
+      return ChartOrientation.Bottom;
     } else if (this.currentOrientation === ChartOrientation.Left) {
       return ChartOrientation.Right;
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return ChartOrientation.Left;
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return ChartOrientation.Bottom;
+    } else {
+      return ChartOrientation.Top;
     }
   }
 
