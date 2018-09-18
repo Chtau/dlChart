@@ -27,6 +27,19 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   currentActiveBar: Bar = null;
   currentOrientation: ChartOrientation = ChartOrientation.Bottom;
+  activeLeftScaleAxis: boolean = true;
+  activeRightScaleAxis: boolean = false;
+
+  @Input()
+  set leftScaleAxis(val: boolean) {
+    this.activeLeftScaleAxis = val;
+  }
+
+  @Input()
+  set rightScaleAxis(val: boolean) {
+    this.activeRightScaleAxis = val;
+  }
+
 
   @Input()
   set orientation(val: ChartOrientation) {
@@ -35,22 +48,50 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
 
   get chartStyle() {
     if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(-90deg)"}; // X Axis is on the right
+      return {"transform" : "rotate(-90deg)"};
     } else if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(90deg)"}; // X Axis is on the left
+      return {"transform" : "rotate(90deg)"};
     } else if (this.currentOrientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)"}; // X Axis is on the top
+      return {"transform" : "rotate(180deg)"};
     } else {
-      return {"transform" : "rotate(0deg)"}; // X Axis is on the bottom
+      return {"transform" : "rotate(0deg)"};
+    }
+  }
+
+  get secondYAxisOrientation() {
+    if (this.currentOrientation === ChartOrientation.Bottom) {
+      return ChartOrientation.Top;
+    } else if (this.currentOrientation === ChartOrientation.Left) {
+      return ChartOrientation.Right;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return ChartOrientation.Left;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return ChartOrientation.Bottom;
     }
   }
 
   get yAxisTextStyle() {
+    return this.onYAxisTextStyle(this.currentOrientation);
+  }
+
+  get yAxisTextStyleSecond() {
     if (this.currentOrientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
     } else if (this.currentOrientation === ChartOrientation.Left) {
       return {"transform" : "rotate(-90deg)", "text-anchor" : "middle"};
     } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg)", "text-anchor" : "end"};
+    } else {
+      return {"transform" : "rotate(0deg)", "text-anchor" : "start"};
+    }
+  }
+
+  onYAxisTextStyle(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
+    } else if (orientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg)", "text-anchor" : "middle"};
+    } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(180deg)", "text-anchor" : "start"};
     } else {
       return {"transform" : "rotate(0deg)", "text-anchor" : "end"};
@@ -58,35 +99,67 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get yAxisTextXPositionOffset() {
-    if (this.currentOrientation === ChartOrientation.Right) {
+    return this.onYAxisTextXPositionOffset(this.currentOrientation);
+  }
+
+  get yAxisTextXPositionOffsetSecond() {
+    return this.onYAxisTextXPositionOffset(this.secondYAxisOrientation);
+  }
+
+  onYAxisTextXPositionOffset(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
       return 0;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return 0; // x="0" y="-12" text-anchor: middle;
-    } else if (this.currentOrientation === ChartOrientation.Top) {
+    } else if (orientation === ChartOrientation.Left) {
+      return 0;
+    } else if (orientation === ChartOrientation.Top) {
       return 9;
     } else {
-      return -9; // X Axis is on the bottom
+      return -9;
     }
   }
 
   get yAxisTextYPositionOffset() {
-    if (this.currentOrientation === ChartOrientation.Right) {
+    return this.onYAxisTextYPositionOffset(this.currentOrientation);
+  }
+
+  get yAxisTextYPositionOffsetSecond() {
+    return this.onYAxisTextYPositionOffset(this.secondYAxisOrientation);
+  }
+
+  onYAxisTextYPositionOffset(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
       return 12;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return -12; // x="2" y="-12"
-    } else if (this.currentOrientation === ChartOrientation.Top) {
+    } else if (orientation === ChartOrientation.Left) {
+      return -12;
+    } else if (orientation === ChartOrientation.Top) {
       return 0;
     } else {
-      return 0; // X Axis is on the bottom
+      return 0;
     }
   }
 
   get yAxisLabelTextStyle() {
+    return this.onYAxisLabelTextStyle(this.currentOrientation);
+  }
+
+  get yAxisLabelTextStyleSecond() {
     if (this.currentOrientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
     } else if (this.currentOrientation === ChartOrientation.Left) {
       return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
     } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
+    }
+  }
+
+  onYAxisLabelTextStyle(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
+    } else if (orientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
+    } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
     } else {
       return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
@@ -94,11 +167,27 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get yAxisLabelTextYPositionOffset() {
+    return this.onYAxisLabelTextYPositionOffset(this.currentOrientation);
+  }
+
+  get yAxisLabelTextYPositionOffsetSecond() {
     if (this.currentOrientation === ChartOrientation.Right) {
-      return -12;
+      return -445;
     } else if (this.currentOrientation === ChartOrientation.Left) {
-      return 6;
+      return 438;
     } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -445;
+    } else {
+      return 438;
+    }
+  }
+
+  onYAxisLabelTextYPositionOffset(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
+      return -12;
+    } else if (orientation === ChartOrientation.Left) {
+      return 6;
+    } else if (orientation === ChartOrientation.Top) {
       return -12;
     } else {
       return 6;
@@ -106,11 +195,15 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get xAxisTextStyle() {
-    if (this.currentOrientation === ChartOrientation.Right) {
+    return this.onXAxisTextStyle(this.currentOrientation);
+  }
+
+  onXAxisTextStyle(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else if (this.currentOrientation === ChartOrientation.Left) {
+    } else if (orientation === ChartOrientation.Left) {
       return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
-    } else if (this.currentOrientation === ChartOrientation.Top) {
+    } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(180deg)", "text-anchor" : "middle"};
     } else {
       return {"transform" : "rotate(0deg)", "text-anchor" : "middle"};
@@ -118,26 +211,34 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get xAxisTextXPositionOffset() {
-    if (this.currentOrientation === ChartOrientation.Right) {
+    return this.onXAxisTextXPositionOffset(this.currentOrientation);
+  }
+
+  onXAxisTextXPositionOffset(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
       return 9;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return -9; // x="-9" y="-3.5" text-anchor: end;
-    } else if (this.currentOrientation === ChartOrientation.Top) {
+    } else if (orientation === ChartOrientation.Left) {
+      return -9;
+    } else if (orientation === ChartOrientation.Top) {
       return 0;
     } else {
-      return 0; // X Axis is on the bottom
+      return 0;
     }
   }
 
   get xAxisTextYPositionOffset() {
-    if (this.currentOrientation === ChartOrientation.Right) {
+    return this.onXAxisTextYPositionOffset(this.currentOrientation);
+  }
+
+  onXAxisTextYPositionOffset(orientation: ChartOrientation) {
+    if (orientation === ChartOrientation.Right) {
       return -3.5;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return -3.5; // x="-9" y="-3.5" text-anchor: end;
-    } else if (this.currentOrientation === ChartOrientation.Top) {
+    } else if (orientation === ChartOrientation.Left) {
+      return -3.5;
+    } else if (orientation === ChartOrientation.Top) {
       return -15;
     } else {
-      return 9; // X Axis is on the bottom
+      return 9;
     }
   }
 
@@ -195,7 +296,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
       this.createYAxis(yA);
     }
 
-    var singleBarWidht = ((this.viewBoxWidht - (items.length * this.barWidhtOffset)) / items.length);
+    var singleBarWidht = (((this.viewBoxWidht - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
     let bars: { val: Value, position: number}[] = [];
     let index: number = 1;
     this.currentValues.forEach(item => {

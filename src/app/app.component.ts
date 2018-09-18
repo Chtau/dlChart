@@ -57,5 +57,6 @@ export class AppComponent {
 
   selectedOrientation: ChartOrientation = ChartOrientation.Bottom;
   currentSteps: number = 10;
-
+  leftScaleAxis: boolean = true;
+  rightScaleAxis: boolean = false;
 }

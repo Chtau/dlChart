@@ -23,8 +23,19 @@
           <option [ngValue]="2">Right</option>
           <option [ngValue]="3">Top</option>
         </select>
+        <br>
+        <label><input [(ngModel)]="leftScaleAxis" type="checkbox"/>Left Scale Axis</label>
+        <label><input [(ngModel)]="rightScaleAxis" type="checkbox" />Right Scale Axis</label>
         <!--TODO: Steps cannot be set dynamic <input [(ngModel)]="currentSteps" placeholder="Filter the Chart ('3' shows only two Values)">-->
-        <dl-bar-chart [orientation]="selectedOrientation" [chartid]="'test-chart-bar'" [scaleLabel]="'Demo Values'" [steps]="10" [values]="filterValuesBar"></dl-bar-chart>    
+        <dl-bar-chart 
+          [orientation]="selectedOrientation" 
+          [chartid]="'test-chart-bar'" 
+          [scaleLabel]="'Demo Values'" 
+          [steps]="10" 
+          [values]="filterValuesBar"
+          [leftScaleAxis]="leftScaleAxis"
+          [rightScaleAxis]="rightScaleAxis"
+        ></dl-bar-chart>    
       </div>
       <div style="width: 100px;display: inline-block;">
         <dl-chart-legend [chartid]="'test-chart-bar'"></dl-chart-legend>
