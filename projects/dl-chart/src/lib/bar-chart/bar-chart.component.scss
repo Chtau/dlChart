@@ -42,12 +42,16 @@
 }
 
 .bar-anim {
-  animation: scaleBar 0.4s reverse;
   -webkit-transform-origin : 100% 90% 0;
   -moz-transform-origin : 100% 90% 0;
   -o-transform-origin : 100% 90% 0;
   -ms-transform-origin : 100% 90% 0;
   transform-origin : 100% 90% 0;
+
+  animation: .4s scaleBar;
+  animation-direction: reverse;
+  animation-delay: 1ms;
+  transform-origin: 100% 90% 0;
 }
 
 .active-stroke {
