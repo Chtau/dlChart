@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0
+
+- [[aa0e25f]](https://github.com/Chtau/dlChart/commit/aa0e25f3c81d172856ede7c4e0d5594146a4b0b5) Bar Chart add function to change the Chart orientation (horizontal, vertical and mirrored)
+- [[041cb9f]](https://github.com/Chtau/dlChart/commit/041cb9fe865655620835c83ba302ff77332956c4) Bar Chart add the function to activate left/right Scale or on both sides
+- [[77e20f5]](https://github.com/Chtau/dlChart/commit/77e20f5cced8ae040b1f2bbbfcc0e7d3e158b27e) Bar Chart allow to change the bar offset
+- [[93e4f0d]](https://github.com/Chtau/dlChart/commit/93e4f0de72d574bd559b7b3a4d9f5fc59763de1c) Bar Chart fix load animation
+- [[070a3c7]](https://github.com/Chtau/dlChart/commit/070a3c79743ae328e61063b18d2bf89badb15af9) [[f1ff427]](https://github.com/Chtau/dlChart/commit/f1ff4271adc1d62fcc8e9041308ac0697e8b5efe) Legend effect based on Chart hover/select
+
 
 ## 0.4.0
 
