@@ -4,6 +4,7 @@ import { ChartItemService } from './chart-item.service';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
 import { Bar } from '../models/bar.model';
+import { IChartItem } from 'dlChart/dl-chart';
 
 describe('ChartItemService', () => {
   let service: ChartItemService;
@@ -131,7 +132,39 @@ describe('ChartItemService', () => {
       { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '13', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
     ]))
+  });
 
+  it('subscribe to hover ChartItem', () => {
+    service.chartValueHover.subscribe((vals: ServiceItem<IChartItem>) => {
+      expect(vals.chartId).toBe('test', 'chart values has changed');
+      expect(vals.value.color).toBe('red', 'chart values has changed')  
+    });
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+  });
+
+  it('subscribe to leave ChartItem', () => {
+    service.chartValueLeave.subscribe((vals: ServiceItem<any>) => {
+      expect(vals.chartId).toBe('test', 'chart values has changed');
+      expect(vals.value).toBe(null, 'chart values has changed')  
+    });
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+    service.leaveChartValue(new ServiceItem<Slice>('test', null));
+  });
+
+  it('select ChartItem', () => {
+    service.chartValueDeselect.subscribe((vals: ServiceItem<IChartItem>) => {
+      expect(vals.chartId).toBe('test', 'chart values has changed');
+      expect(vals.value.id).toBe('12', 'chart values has changed')  
+    });
+    service.selectChartValue(new ServiceItem<Slice>('test', { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+  });
+
+  it('deselect ChartItem', () => {
+    service.chartValueDeselect.subscribe((vals: ServiceItem<IChartItem>) => {
+      expect(vals.chartId).toBe('test', 'chart values has changed');
+      expect(vals.value.id).toBe('12', 'chart values has changed')  
+    });
+    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '12', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
   });
 
 });
