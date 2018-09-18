@@ -60,4 +60,5 @@ export class AppComponent {
   leftScaleAxis: boolean = true;
   rightScaleAxis: boolean = false;
   barOffset: number = 13;
+  hideSelectLine: boolean = false;
 }

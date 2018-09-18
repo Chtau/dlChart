@@ -26,6 +26,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   currentValues: Value[] = [];
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;
+  shouldHideSelectLine: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -44,6 +45,11 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   @Input()
   set steps(val: number) {
     this.valueSteps = val;
+  }
+
+  @Input()
+  set hideSelectLine(val: boolean) {
+    this.shouldHideSelectLine = val;
   }
 
   @Input()

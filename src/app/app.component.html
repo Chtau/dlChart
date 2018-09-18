@@ -33,6 +33,8 @@
         <label>Bar offset <input [(ngModel)]="barOffset" type="number"></label>
         <br>
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
+        <br>
+        <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
         <dl-bar-chart 
           [orientation]="selectedOrientation" 
           [chartid]="'test-chart-bar'" 
@@ -42,6 +44,7 @@
           [leftScaleAxis]="leftScaleAxis"
           [rightScaleAxis]="rightScaleAxis"
           [barOffset]="barOffset"
+          [hideSelectLine]="hideSelectLine"
         ></dl-bar-chart>    
       </div>
       <div style="width: 100px;display: inline-block;">
