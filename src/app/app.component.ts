@@ -59,4 +59,5 @@ export class AppComponent {
   currentSteps: number = 10;
   leftScaleAxis: boolean = true;
   rightScaleAxis: boolean = false;
+  barOffset: number = 13;
 }

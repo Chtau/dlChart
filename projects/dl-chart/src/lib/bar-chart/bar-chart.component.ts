@@ -31,6 +31,11 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   activeRightScaleAxis: boolean = false;
 
   @Input()
+  set barOffset(val: number) {
+    this.barWidhtOffset = val;
+  }
+
+  @Input()
   set leftScaleAxis(val: boolean) {
     this.activeLeftScaleAxis = val;
   }
