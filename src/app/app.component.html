@@ -47,8 +47,16 @@
           [hideSelectLine]="hideSelectLine"
         ></dl-bar-chart>    
       </div>
+      <br>
+      <label><input [(ngModel)]="hideChartHoverEffect" type="checkbox"/>Hide Chart hover effect</label>
+      <label><input [(ngModel)]="hideChartSelectEffect" type="checkbox" />Hide Chart select effect</label>
+      <br>
       <div style="width: 100px;display: inline-block;">
-        <dl-chart-legend [chartid]="'test-chart-bar'"></dl-chart-legend>
+        <dl-chart-legend 
+          [chartid]="'test-chart-bar'"
+          [hideChartHoverEffect]="hideChartHoverEffect"
+          [hideChartSelectEffect]="hideChartSelectEffect"
+        ></dl-chart-legend>
       </div>
     </div>
   </div>

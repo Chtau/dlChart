@@ -61,4 +61,6 @@ export class AppComponent {
   rightScaleAxis: boolean = false;
   barOffset: number = 13;
   hideSelectLine: boolean = false;
+  hideChartHoverEffect: boolean = false;
+  hideChartSelectEffect: boolean = false;
 }

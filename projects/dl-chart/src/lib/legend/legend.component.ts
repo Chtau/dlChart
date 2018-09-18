@@ -20,12 +20,24 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
   items: ServiceItem<IChartItem[]> = null;
   hoverItem: IChartItem = null;
   selectedItem: IChartItem = null;
+  shouldHideChartHoverEffect: boolean = false;
+  shouldHideChartSelectEffect: boolean = false;
 
   get chartItems():IChartItem[] {
     if (this.items) {
     return this.items.value;
     }
     return [];
+  }
+
+  @Input()
+  set hideChartHoverEffect(val: boolean) {
+    this.shouldHideChartHoverEffect = val;
+  }
+
+  @Input()
+  set hideChartSelectEffect(val: boolean) {
+    this.shouldHideChartSelectEffect = val;
   }
 
   @Input()
@@ -86,11 +98,15 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
 
   legendClass(item: IChartItem): string {
     let ret: string = ' ';
-    if (this.selectedItem != null && item.id === this.selectedItem.id) {
-      ret += 'legend-selected ';
+    if (this.shouldHideChartSelectEffect === false) {
+      if (this.selectedItem != null && item.id === this.selectedItem.id) {
+        ret += 'legend-selected ';
+      }
     }
-    if (this.hoverItem != null && item.id === this.hoverItem.id) {
-      ret += 'legend-hover ';
+    if (this.shouldHideChartHoverEffect === false) {
+      if (this.hoverItem != null && item.id === this.hoverItem.id) {
+        ret += 'legend-hover ';
+      }
     }
     return ret;
   }
