@@ -361,7 +361,23 @@ describe('BarChartComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.bars[0].width).toBe(210, 'Bar weight');
+    expect(component.bars[0].width).toBe(210, 'Bar width');
+  });
+
+  it('Bar offset', () => {
+    component.values = [
+      new Value('Blue', 0, 'Blue'),
+      new Value('Orange', 0, 'Orange'),
+    ];
+    component.hideSelectLine = true;
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    component.onClickSegment(component.bars[0]);
+    
+    expect(!(component.currentActiveBar != null && !component.shouldHideSelectLine)).toBeTruthy('Line will not be shown');
   });
 
 });
