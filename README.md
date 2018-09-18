@@ -13,6 +13,23 @@ The Charts are created with SVG which makes them responsive for every screen res
 
 ![Charts](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
 
+
+## Features
+
+  * Pie Chart
+  * Horizontal & Vertical Bar Chart (can also be mirrored)
+  * Legend module & service
+  * minimal package size (<6kb)
+  * no external Libraries
+  * SVG
+  * Autoscaling
+  * customizeable Tooltips
+  * click / select / hover Events with additional Data
+  * AOT
+  * Angular Universal
+  
+
+
 ## Install
 
 `npm i dl-chart` [npm](https://www.npmjs.com/package/dl-chart)
@@ -135,6 +152,37 @@ Property | Type | default
 --- | --- | ---
 `[steps]` | number | 6
 
+change the orientation of the Bars 
+
+Property | Type | default
+--- | --- | ---
+`[orientation]` | number / enum ChartOrientation  | 0
+
+show/hide the left scale Axis 
+
+Property | Type | default
+--- | --- | ---
+`[leftScaleAxis]` | boolean | true
+
+show/hide the right scale Axis 
+
+Property | Type | default
+--- | --- | ---
+`[rightScaleAxis]` | boolean | true
+
+offset between Bars
+
+Property | Type | default
+--- | --- | ---
+`[barOffset]` | number | 13
+
+hide the Line when a Bar is selected
+
+Property | Type | default
+--- | --- | ---
+`[hideSelectLine]` | boolean | false
+
+
 #### Legend Properties
 
 configurate the Display Text of the Legend
@@ -142,6 +190,18 @@ configurate the Display Text of the Legend
 Property | Type | default
 --- | --- | ---
 `[legendConfiguration]` | LegendConfiguration | null
+
+hide the hover effect in the Legend when a Chart element is hovered
+
+Property | Type | default
+--- | --- | ---
+`[hideChartHoverEffect]` | boolean | false
+
+hide the select effect in the Legend when a Chart element is selected
+
+Property | Type | default
+--- | --- | ---
+`[hideChartSelectEffect]` | boolean | false
 
 
 ### Datatypes
@@ -170,6 +230,17 @@ Property | Type | default | description
 --- | --- | --- | ---
 `HideValue` | boolean | false | hides value in the Legend text
 `ValueFunction` | (n: Value, percent: number) => string | null | function to return the Legend text
+
+#### ChartOrientation (enum)
+
+change the orientation of the Chart (Bottom is the default options)
+
+Text | Value 
+--- | --- 
+`Bottom` | 0 
+`Left` | 1 
+`Right` | 2 
+`Top` | 3 
 
 
 ### CSS
