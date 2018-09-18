@@ -117,4 +117,94 @@ describe('LegendComponent', () => {
     ]));
   });
 
+  it('Legend class', () => {
+    let element: Slice = { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null };
+    var class1 = component.legendClass(element)
+    expect(class1).toBe(' ', 'class without selection or hover');
+
+    component.selectedItem = element;
+    var class2 = component.legendClass(element)
+    expect(class2).toBe(' legend-selected ', 'class selected');
+
+    component.hoverItem = element;
+    var class3 = component.legendClass(element)
+    expect(class3).toBe(' legend-selected legend-hover ', 'class selected');
+
+    component.selectedItem = null;
+    var class4 = component.legendClass(element)
+    expect(class4).toBe(' legend-hover ', 'class selected');
+  });
+
+  it('selection changed from Service', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueSelect.subscribe(val => {
+      expect(val).toBeDefined('selected');
+      done();
+    });
+    service.selectChartValue(new ServiceItem<Slice>('test', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('selection from Service (wrong chartId)', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueSelect.subscribe(val => {
+      expect(val).toBeDefined('selected');
+      done();
+    });
+    service.selectChartValue(new ServiceItem<Slice>('test-1', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('deselect changed from Service', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueDeselect.subscribe(val => {
+      expect(val).toBeDefined('deselect');
+      done();
+    });
+    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('deselect changed from Service (wrong chartId)', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueDeselect.subscribe(val => {
+      expect(val).toBeDefined('deselect');
+      done();
+    });
+    service.deselectChartValue(new ServiceItem<Slice>('test-1', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('hover changed from Service', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueHover.subscribe(val => {
+      expect(val).toBeDefined('hover');
+      done();
+    });
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('hover from Service (wrong chartId)', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueHover.subscribe(val => {
+      expect(val).toBeDefined('hover');
+      done();
+    });
+    service.hoverChartValue(new ServiceItem<Slice>('test-1', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('leave changed from Service', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueLeave.subscribe(val => {
+      expect(val).toBeDefined('leave');
+      done();
+    });
+    service.leaveChartValue(new ServiceItem<Slice>('test', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
+  it('leave changed from Service (wrong chartId)', (done) => {
+    component.chartid = 'test'
+    component.chartItemService.chartValueLeave.subscribe(val => {
+      expect(val).toBeDefined('leave');
+      done();
+    });
+    service.leaveChartValue(new ServiceItem<Slice>('test-1', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+  });
+
 });
