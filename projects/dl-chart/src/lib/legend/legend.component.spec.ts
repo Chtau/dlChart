@@ -207,4 +207,23 @@ describe('LegendComponent', () => {
     service.leaveChartValue(new ServiceItem<Slice>('test-1', { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
   });
 
+  it('hide chart hover/select effect', () => {
+    let element: Slice = { id: '0', allowActivate: true, calculatedPercent: 0, color: 'red', draw: null, sourceItem: null };
+    component.hideChartHoverEffect = true;
+    var class1 = component.legendClass(element)
+    expect(class1).toBe(' ', 'class without selection or hover');
+
+    component.hideChartHoverEffect = false;
+    var class1 = component.legendClass(element)
+    expect(class1).toBe(' ', 'class without selection or hover');
+
+    component.hideChartSelectEffect = true;
+    var class1 = component.legendClass(element)
+    expect(class1).toBe(' ', 'class without selection or hover');
+
+    component.hideChartSelectEffect = false;
+    var class1 = component.legendClass(element)
+    expect(class1).toBe(' ', 'class without selection or hover');
+  });
+
 });
