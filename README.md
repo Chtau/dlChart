@@ -11,7 +11,7 @@ The Charts are created with SVG which makes them responsive for every screen res
 
 [Example](https://chtau.github.io/dlChartHost/)
 
-![Import Assembly in Blazor](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
+![Charts](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
 
 ## Install
 
@@ -190,6 +190,8 @@ Run `ng build dlChart` to build the library.The build artifacts will be stored i
 ## Running unit tests
 
 Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+![current Code coverage](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/codecoverage.PNG)
 
 ## License
 [MIT](https://github.com/Chtau/dlChart/blob/master/LICENSE) © [Christoph Taucher](https://github.com/Chtau)
