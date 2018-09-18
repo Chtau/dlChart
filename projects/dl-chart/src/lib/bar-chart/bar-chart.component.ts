@@ -20,15 +20,31 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   viewBoxHeight: number = 450;
   barWidhtOffset: number = 15;
   valueSteps: number = 6;
+  currentActiveBar: Bar = null;
+  currentOrientation: ChartOrientation = ChartOrientation.Bottom;
+  currentScaleLabel: string = 'Values';
+  currentValues: Value[] = [];
+  activeLeftScaleAxis: boolean = true;
+  activeRightScaleAxis: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
 
-  currentActiveBar: Bar = null;
-  currentOrientation: ChartOrientation = ChartOrientation.Bottom;
-  activeLeftScaleAxis: boolean = true;
-  activeRightScaleAxis: boolean = false;
+  @Input()
+  set values(val: Value[]) {
+    this.currentValues = val;
+  }
+
+  @Input()
+  set scaleLabel(val: string) {
+    this.currentScaleLabel = val;
+  }
+
+  @Input()
+  set steps(val: number) {
+    this.valueSteps = val;
+  }
 
   @Input()
   set barOffset(val: number) {
@@ -44,7 +60,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   set rightScaleAxis(val: boolean) {
     this.activeRightScaleAxis = val;
   }
-
 
   @Input()
   set orientation(val: ChartOrientation) {
@@ -80,26 +95,18 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get yAxisTextStyleSecond() {
-    if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "middle"};
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)", "text-anchor" : "end"};
-    } else {
-      return {"transform" : "rotate(0deg)", "text-anchor" : "start"};
-    }
+    return this.onYAxisTextStyle(this.currentOrientation, true);
   }
 
-  onYAxisTextStyle(orientation: ChartOrientation) {
+  onYAxisTextStyle(orientation: ChartOrientation, reverseAnchor: boolean = false) {
     if (orientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
     } else if (orientation === ChartOrientation.Left) {
       return {"transform" : "rotate(-90deg)", "text-anchor" : "middle"};
     } else if (orientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)", "text-anchor" : "start"};
+      return {"transform" : "rotate(180deg)", "text-anchor" : (reverseAnchor ? "end" : "start") };
     } else {
-      return {"transform" : "rotate(0deg)", "text-anchor" : "end"};
+      return {"transform" : "rotate(0deg)", "text-anchor" : (reverseAnchor ? "start" : "end") };
     }
   }
 
@@ -148,15 +155,7 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
   }
 
   get yAxisLabelTextStyleSecond() {
-    if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
-    }
+    return this.onYAxisLabelTextStyle(this.currentOrientation);
   }
 
   onYAxisLabelTextStyle(orientation: ChartOrientation) {
@@ -245,25 +244,6 @@ export class BarChartComponent extends BaseChartComponent implements OnInit, Aft
     } else {
       return 9;
     }
-  }
-
-
-
-  @Input()
-  set values(val: Value[]) {
-    this.currentValues = val;
-  }
-  currentValues: Value[] = [];
-
-  @Input()
-  set scaleLabel(val: string) {
-    this.currentScaleLabel = val;
-  }
-  currentScaleLabel: string = 'Values';
-
-  @Input()
-  set steps(val: number) {
-    this.valueSteps = val;
   }
 
   constructor(chartItemService: ChartItemService) {
