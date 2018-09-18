@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Value, TooltipConfiguration } from '../../projects/dl-chart/src/public_api';
+import { ChartOrientation } from '../../projects/dl-chart/src/public_api';
 
 
 @Component({
@@ -52,5 +54,8 @@ export class AppComponent {
       return false;
     });
   }
+
+  selectedOrientation: ChartOrientation = ChartOrientation.Bottom;
+  currentSteps: number = 10;
 
 }

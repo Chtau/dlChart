@@ -16,5 +16,6 @@ export * from './lib/models/value.model';
 export * from './lib/models/legendconfiguration.model';
 export * from './lib/models/serviceitem.model';
 export * from './lib/models/chartitem.interface';
+export * from './lib/models/enums';
 
 export * from './lib/services/chart-item.service';

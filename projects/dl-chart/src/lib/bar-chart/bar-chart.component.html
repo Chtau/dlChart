@@ -1,10 +1,10 @@
 <ng-container>
-    <svg width="100%" height="100%" viewBox="0 0 500 500" class="bar-chart-svg">
+    <svg width="100%" height="100%" viewBox="0 0 500 500" [ngStyle]="chartStyle" class="bar-chart-svg">
       <g transform="translate(40,20)">
       <g class="x axis" transform="translate(0,450)">
         <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0)'" style="opacity: 1;" *ngFor="let axis of xAxis">
           <line y2="6" x2="0"></line>
-          <text dy=".71em" y="9" x="0" style="text-anchor: middle;">{{ axis.text }}</text>
+          <text dy=".71em" [attr.y]="xAxisTextYPositionOffset" [attr.x]="xAxisTextXPositionOffset" [ngStyle]="xAxisTextStyle">{{ axis.text }}</text>
         </g>
         <path class="domain" d="M0,6V0H900V6"></path>
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
@@ -12,10 +12,10 @@
         <g class="y axis">
         <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
           <line x2="-6" y2="0"></line>
-          <text dy=".32em" x="-9" y="0" style="text-anchor: end;">{{ axis.text }}</text>
+          <text dy=".32em" [attr.x]="yAxisTextXPositionOffset" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle">{{ axis.text }}</text>
         </g>
         <path class="domain" d="M-6,0H0V450H-6"></path>
-        <text transform="rotate(-90)" y="6" dy=".71em" style="text-anchor: end;">{{ currentScaleLabel }}</text>
+        <text [attr.y]="yAxisLabelTextYPositionOffset" dy=".71em" [ngStyle]="yAxisLabelTextStyle">{{ currentScaleLabel }}</text>
       </g>
         <rect 
           (mousemove)="onHoverSegment($event, bar)" 
