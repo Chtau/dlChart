@@ -18,6 +18,8 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
   @Output() legendClick: EventEmitter<Value> = new EventEmitter<Value>();
 
   items: ServiceItem<IChartItem[]> = null;
+  hoverItem: IChartItem = null;
+  selectedItem: IChartItem = null;
 
   get chartItems():IChartItem[] {
     if (this.items) {
@@ -44,6 +46,26 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
         this.items = items;
       }
     });
+    this.chartItemService.chartValueSelect.subscribe((item: ServiceItem<IChartItem>) => {
+      if (item.chartId === this.chartid) {
+        this.selectedItem = item.value;
+      }
+    });
+    this.chartItemService.chartValueDeselect.subscribe((item: ServiceItem<IChartItem>) => {
+      if (item.chartId === this.chartid) {
+        this.selectedItem = null;
+      }
+    });
+    this.chartItemService.chartValueHover.subscribe((item: ServiceItem<IChartItem>) => {
+      if (item.chartId === this.chartid) {
+        this.hoverItem = item.value;
+      }
+    });
+    this.chartItemService.chartValueLeave.subscribe((item: ServiceItem<any>) => {
+      if (item.chartId === this.chartid) {
+        this.hoverItem = null;
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -60,6 +82,17 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
 
   onItemClick(event: any, item: IChartItem) {
     this.legendClick.emit(item.sourceItem)
+  }
+
+  legendClass(item: IChartItem): string {
+    let ret: string = ' ';
+    if (this.selectedItem != null && item.id === this.selectedItem.id) {
+      ret += 'legend-selected ';
+    }
+    if (this.hoverItem != null && item.id === this.hoverItem.id) {
+      ret += 'legend-hover ';
+    }
+    return ret;
   }
 
 }

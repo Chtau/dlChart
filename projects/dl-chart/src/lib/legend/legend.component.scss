@@ -42,3 +42,11 @@
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.legend-hover {
+  opacity: .8;
+}
+
+.legend-selected {
+  font-weight: bold;
+}

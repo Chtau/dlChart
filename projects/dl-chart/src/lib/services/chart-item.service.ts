@@ -8,6 +8,10 @@ export class ChartItemService {
   values: ServiceItem<IChartItem[]>[] = [];
 
   public chartValueChange: EventEmitter<ServiceItem<IChartItem[]>> = new EventEmitter<ServiceItem<IChartItem[]>>();
+  public chartValueHover: EventEmitter<ServiceItem<IChartItem>> = new EventEmitter<ServiceItem<IChartItem>>();
+  public chartValueLeave: EventEmitter<ServiceItem<any>> = new EventEmitter<ServiceItem<any>>();
+  public chartValueSelect: EventEmitter<ServiceItem<IChartItem>> = new EventEmitter<ServiceItem<IChartItem>>();
+  public chartValueDeselect: EventEmitter<ServiceItem<IChartItem>> = new EventEmitter<ServiceItem<IChartItem>>();
   
   public setChartValues(val: ServiceItem<IChartItem[]>) {
     var values = this.values.find(item => {
@@ -32,6 +36,23 @@ export class ChartItemService {
       return false;
     });
   }
+
+  public hoverChartValue(val: ServiceItem<IChartItem>) {
+    this.chartValueHover.emit(val);
+  }
+
+  public leaveChartValue(val: ServiceItem<any>) {
+    this.chartValueLeave.emit(val);
+  }
+
+  public selectChartValue(val: ServiceItem<IChartItem>) {
+    this.chartValueSelect.emit(val);
+  }
+
+  public deselectChartValue(val: ServiceItem<IChartItem>) {
+    this.chartValueDeselect.emit(val);
+  }
+
 
   constructor() { 
 
