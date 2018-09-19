@@ -9,7 +9,7 @@ Currently if both Charts and the Legend is imported the `main.js` for Angular in
 The Charts are created with SVG which makes them responsive for every screen resolution and have no extern Library Dependencies.
 
 
-[Example](https://chtau.github.io/dlChartHost/)
+[Example](https://chtau.github.io/dlChartDoc/)
 
 ![Charts](https://raw.githubusercontent.com/Chtau/dlChartHost/master/assets/charts.PNG)
 
