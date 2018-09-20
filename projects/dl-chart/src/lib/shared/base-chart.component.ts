@@ -5,6 +5,7 @@ import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from './utils';
 import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
+import { IValue } from '../models/value.interface';
 
 export class BaseChartComponent {
 
@@ -17,11 +18,11 @@ export class BaseChartComponent {
 
   currentActiveChartItem: IChartItem;
 
-  @Output() valueSelect: EventEmitter<Value> = new EventEmitter<Value>();
-  @Output() valueDeselect: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() valueSelect: EventEmitter<IValue> = new EventEmitter<IValue>();
+  @Output() valueDeselect: EventEmitter<IValue> = new EventEmitter<IValue>();
 
-  @Output() valueClick: EventEmitter<Value> = new EventEmitter<Value>();
-  @Output() valueChange: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() valueClick: EventEmitter<IValue> = new EventEmitter<IValue>();
+  @Output() valueChange: EventEmitter<IValue> = new EventEmitter<IValue>();
 
 
   @Output() chartidChange: EventEmitter<string> = new EventEmitter<string>();

@@ -1,7 +1,8 @@
 import { TooltipConfiguration } from "./tooltipconfiguration.model";
 import { Point } from "./point.model";
+import { IValue } from "./value.interface";
 
-export class Line {
+export class Line implements IValue {
   name: string;
   points: Point[];
   color: string;

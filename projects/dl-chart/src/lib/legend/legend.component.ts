@@ -6,6 +6,7 @@ import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
+import { IValue } from '../models/value.interface';
 
 @Component({  
   selector: 'dl-chart-legend',  
@@ -15,7 +16,7 @@ import { ServiceItem } from '../models/serviceitem.model';
 })  
 export class LegendComponent extends BaseChartComponent implements OnInit, AfterViewInit {
 
-  @Output() legendClick: EventEmitter<Value> = new EventEmitter<Value>();
+  @Output() legendClick: EventEmitter<IValue> = new EventEmitter<IValue>();
 
   items: ServiceItem<IChartItem[]> = null;
   hoverItem: IChartItem = null;

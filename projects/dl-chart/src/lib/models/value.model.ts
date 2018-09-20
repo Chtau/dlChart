@@ -1,6 +1,7 @@
 import { TooltipConfiguration } from "./tooltipconfiguration.model";
+import { IValue } from "./value.interface";
 
-export class Value {
+export class Value implements IValue {
   name: string;
   value: number;
   color: string;
