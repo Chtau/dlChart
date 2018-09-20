@@ -2,6 +2,9 @@ import { async, TestBed } from '@angular/core/testing';
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { IChartItem } from '../models/chartitem.interface';
+import { Bar } from '../models/bar.model';
+import { Value } from '../models/value.model';
+import { IValue } from '../models/value.interface';
 
 describe('BaseChartComponent', () => {
   let baseChart: BaseChartComponent;
@@ -43,25 +46,27 @@ describe('BaseChartComponent', () => {
   });
 
   it('hover/leave Segement', () => {
+    let bar: Value = {
+      color: 'red',
+      cssClass: null,
+      data: null,
+      name: 'Red',
+      tooltipConfig: null,
+      value: 0
+    };
     baseChart.onHoverSegment({ clientX: 100, clientY: 100 }, 
       { 
         id: '0', 
         color: 'red', 
         allowActivate: true, 
         calculatedPercent: 0, 
-        sourceItem: {  
-          color: 'red',
-          cssClass: null,
-          data: null,
-          name: 'Red',
-          tooltipConfig: null,
-          value: 0
-        } 
+        sourceItem: bar
       }
     );
     
+    let val: Value = baseChart.tooltipContentItem as Value;
     expect(baseChart.tooltipContentChartItem.id).toBe('0', 'tooltip content chart item');
-    expect(baseChart.tooltipContentItem.value).toBe(0, 'tooltip content item');
+    expect(val.value).toBe(0, 'tooltip content item');
     expect(baseChart.tooltipLeft).toBe(110, 'tooltip left position');
     expect(baseChart.tooltipTop).toBe(110, 'tooltip top position');
     expect(baseChart.tooltipShow).toBe(true, 'show tooltip');
@@ -77,14 +82,7 @@ describe('BaseChartComponent', () => {
         color: 'red', 
         allowActivate: false, 
         calculatedPercent: 0, 
-        sourceItem: {  
-          color: 'red',
-          cssClass: null,
-          data: null,
-          name: 'Red',
-          tooltipConfig: null,
-          value: 0
-        } 
+        sourceItem: bar
       }
     );
     expect(baseChart.tooltipContentChartItem).toBeNull('tooltip content chart item (not allowed to activeate)');
@@ -93,19 +91,20 @@ describe('BaseChartComponent', () => {
   });
 
   it('click Segement', () => {
+    let bar: Value = {
+      color: 'red',
+      cssClass: null,
+      data: null,
+      name: 'Red',
+      tooltipConfig: null,
+      value: 0
+    };
     var segement: IChartItem = { 
       id: '0', 
       color: 'red', 
       allowActivate: true, 
       calculatedPercent: 0, 
-      sourceItem: {  
-        color: 'red',
-        cssClass: null,
-        data: null,
-        name: 'Red',
-        tooltipConfig: null,
-        value: 0
-      } 
+      sourceItem: bar
     };
 
     expect(baseChart.currentActiveChartItem).toBeUndefined('no segement selected');
@@ -125,14 +124,7 @@ describe('BaseChartComponent', () => {
       color: 'red', 
       allowActivate: false, 
       calculatedPercent: 0, 
-      sourceItem: {  
-        color: 'red',
-        cssClass: null,
-        data: null,
-        name: 'Red',
-        tooltipConfig: null,
-        value: 0
-      } 
+      sourceItem: bar
     };
 
     baseChart.onClickSegment(segement1);

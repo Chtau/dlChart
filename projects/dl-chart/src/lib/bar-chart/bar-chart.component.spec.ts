@@ -83,7 +83,7 @@ describe('BarChartComponent', () => {
     component.values = [
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(false)),
-      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
@@ -102,7 +102,7 @@ describe('BarChartComponent', () => {
     component.tooltipContentItem = component.bars[1].sourceItem;
 
     let tooltipWithValue = component.tooltipValue;
-    expect(tooltipWithValue).toBe('Orange 3', 'Segement Tooltip (Name + Value)');
+    expect(tooltipWithValue).toBe('Orange (3)', 'Segement Tooltip (Name + Value)');
 
     component.tooltipContentChartItem = component.bars[2];
     component.tooltipContentItem = component.bars[2].sourceItem;
@@ -120,7 +120,7 @@ describe('BarChartComponent', () => {
   it('global Tooltips configuration', () => {
     component.values = [
       new Value('Blue', 3, 'Blue'),
-      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
@@ -134,7 +134,7 @@ describe('BarChartComponent', () => {
     component.tooltipContentItem = component.bars[0].sourceItem;
 
     let tooltipGlobal = component.tooltipValue;
-    expect(tooltipGlobal).toBe('Blue 3', 'global Tooltip (Name + Value)');
+    expect(tooltipGlobal).toBe('Blue (3)', 'global Tooltip (Name + Value)');
 
     component.tooltipContentChartItem = component.bars[1];
     component.tooltipContentItem = component.bars[1].sourceItem;
@@ -142,7 +142,7 @@ describe('BarChartComponent', () => {
     let tooltipSegemntOverride = component.tooltipValue;
     expect(tooltipSegemntOverride).toBe('Orange (3)', 'global Tooltip segment override');
 
-    component.tooltipConfiguration = new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' });
+    component.tooltipConfiguration = new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' });
     component.tooltipContentChartItem = component.bars[0];
     component.tooltipContentItem = component.bars[0].sourceItem;
 
@@ -169,8 +169,10 @@ describe('BarChartComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.bars[0].sourceItem.value).toBe(0, 'null input value replaced with 0');
-    expect(component.bars[1].sourceItem.value).toBe(0, 'undefined input value replaced with 0');
+    var item0 = component.bars[0].sourceItem as Value;
+    var item1 = component.bars[1].sourceItem as Value;
+    expect(item0.value).toBe(0, 'null input value replaced with 0');
+    expect(item1.value).toBe(0, 'undefined input value replaced with 0');
   });
 
   it('Bar create Y Axis', () => {

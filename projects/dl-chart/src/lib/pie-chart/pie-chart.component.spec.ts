@@ -76,7 +76,7 @@ describe('PieChartComponent', () => {
     component.values = [
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(false)),
-      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
@@ -90,7 +90,7 @@ describe('PieChartComponent', () => {
     component.tooltipContentItem = component.pie[1].sourceItem;
 
     let tooltipWithValue = component.tooltipValue;
-    expect(tooltipWithValue).toBe('Orange 3', 'Segement Tooltip (Name + Value)');
+    expect(tooltipWithValue).toBe('Orange (3)', 'Segement Tooltip (Name + Value)');
 
     component.tooltipContentChartItem = component.pie[2];
     component.tooltipContentItem = component.pie[2].sourceItem;
@@ -108,7 +108,7 @@ describe('PieChartComponent', () => {
   it('global Tooltips configuration', () => {
     component.values = [
       new Value('Blue', 3, 'Blue'),
-      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+      new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
@@ -117,7 +117,7 @@ describe('PieChartComponent', () => {
     component.tooltipContentItem = component.pie[0].sourceItem;
 
     let tooltipGlobal = component.tooltipValue;
-    expect(tooltipGlobal).toBe('Blue 3', 'global Tooltip (Name + Value)');
+    expect(tooltipGlobal).toBe('Blue (3)', 'global Tooltip (Name + Value)');
 
     component.tooltipContentChartItem = component.pie[1];
     component.tooltipContentItem = component.pie[1].sourceItem;
@@ -125,7 +125,7 @@ describe('PieChartComponent', () => {
     let tooltipSegemntOverride = component.tooltipValue;
     expect(tooltipSegemntOverride).toBe('Orange (3)', 'global Tooltip segment override');
 
-    component.tooltipConfiguration = new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' });
+    component.tooltipConfiguration = new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' });
     component.tooltipContentChartItem = component.pie[0];
     component.tooltipContentItem = component.pie[0].sourceItem;
 
@@ -147,8 +147,10 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', 'test'),
     ];
 
-    expect(component.pie[0].sourceItem.value).toBe(0, 'null input value replaced with 0');
-    expect(component.pie[1].sourceItem.value).toBe(0, 'undefined input value replaced with 0');
+    var item0 = component.pie[0].sourceItem as Value;
+    var item1 = component.pie[1].sourceItem as Value;
+    expect(item0.value).toBe(0, 'null input value replaced with 0');
+    expect(item1.value).toBe(0, 'undefined input value replaced with 0');
   });
 
   it('Pie normalized value', () => {

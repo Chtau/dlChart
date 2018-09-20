@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Utils } from './utils';
+import { Value } from '../models/value.model';
 
 describe('Utils', () => {
 
@@ -32,7 +33,7 @@ describe('Utils', () => {
         name: 'Test',
         tooltipConfig: null,
 
-      }, 1)).toBe('Test (1)', 'test value 1 created');
+      } as Value, 1)).toBe('Test (1)', 'test value 1 created');
   });
 
   it('generate text Value with config', () => {
@@ -46,7 +47,7 @@ describe('Utils', () => {
         name: 'Test',
         tooltipConfig: null,
 
-      }, 1)).toBe('Test 1', 'test value 1 created');
+      } as Value, 1)).toBe('Test (1)', 'test value 1 created');
   });
 
   it('generate text Value with config (hide value)', () => {
@@ -60,7 +61,7 @@ describe('Utils', () => {
         name: 'Test',
         tooltipConfig: null,
 
-      }, 1)).toBe('Test', 'test value 1 created');
+      } as Value, 1)).toBe('Test', 'test value 1 created');
   });
 
   it('generate text Value with config (function => to upper)', () => {
@@ -74,7 +75,7 @@ describe('Utils', () => {
         name: 'Test',
         tooltipConfig: null,
 
-      }, 1)).toBe('TEST', 'test value 1 created');
+      } as Value, 1)).toBe('TEST', 'test value 1 created');
   });
 
 });
