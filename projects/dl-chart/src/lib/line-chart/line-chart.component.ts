@@ -367,6 +367,8 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
         allowActivate: false
       });
     }
+
+    this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
   }
 
   createAxis(items: string[], length: number) : Axis[] {
