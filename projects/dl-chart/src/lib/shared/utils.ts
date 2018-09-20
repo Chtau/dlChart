@@ -13,7 +13,9 @@ export class Utils {
           return item.name;  
         } else {
           if (item["value"]) {
-            return item.name + ' ' + item["value"];
+            return item.name + ' (' + item["value"] + ')';
+          } else if (item["yValue"]) {
+            return item.name + ' (' + item["yValue"] + ')';
           } else {
             return item.name;
           }
@@ -22,6 +24,8 @@ export class Utils {
     }
     if (item["value"]) {
       return item.name + ' (' + item["value"] + ')';
+    } else if (item["yValue"]) {
+      return item.name + ' (' + item["yValue"] + ')';
     } else {
       return item.name;
     }

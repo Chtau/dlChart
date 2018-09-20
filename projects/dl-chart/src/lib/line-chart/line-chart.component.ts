@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
-import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
