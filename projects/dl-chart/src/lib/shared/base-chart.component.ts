@@ -1,6 +1,5 @@
 import { ChartItemService } from '../services/chart-item.service';
 import { Output, Input, EventEmitter } from '@angular/core';
-import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from './utils';
 import { IChartItem } from '../models/chartitem.interface';
@@ -12,7 +11,7 @@ export class BaseChartComponent {
   tooltipLeft: number;
   tooltipTop: number;
   tooltipShow: boolean = false;
-  tooltipContentItem: Value;
+  tooltipContentItem: IValue;
   tooltipContentChartItem: IChartItem;
   tooltipClass: string = '';
 

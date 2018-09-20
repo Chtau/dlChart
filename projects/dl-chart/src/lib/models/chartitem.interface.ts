@@ -1,9 +1,10 @@
 import { Value } from "./value.model";
+import { IValue } from "dlChart/lib/models/value.interface";
 
 export interface IChartItem {
   id: string;
   color: string;
-  sourceItem: Value;
+  sourceItem: IValue;
   calculatedPercent: number;
   allowActivate: boolean;
 }

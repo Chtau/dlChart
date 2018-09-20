@@ -1,9 +1,10 @@
 import { ITextConfiguration } from "../models/textConfiguration.interface";
 import { Value } from "../models/value.model";
+import { IValue } from "../models/value.interface";
 
 export class Utils {
 
-  static textValue(config: ITextConfiguration, item: Value, percent: number): string {
+  static textValue(config: ITextConfiguration, item: IValue, percent: number): string {
     if (config != null) {
       if (config.ValueFunction != null) {
         return config.ValueFunction(item, percent);
@@ -11,11 +12,19 @@ export class Utils {
         if (config.HideValue) {
           return item.name;  
         } else {
-          return item.name + ' ' + item.value;
+          if (item["value"]) {
+            return item.name + ' ' + item["value"];
+          } else {
+            return item.name;
+          }
         }
       }
     }
-    return item.name + ' (' + item.value + ')';
+    if (item["value"]) {
+      return item.name + ' (' + item["value"] + ')';
+    } else {
+      return item.name;
+    }
   }
 
   static roundScale(value: number): number {

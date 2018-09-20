@@ -16,7 +16,7 @@ export class AppComponent {
   values: Value[] = [
     new Value('Red', 5, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     new Value('Blue', 3, 'Blue'),
-    new Value('Green', 10, 'Green', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+    new Value('Green', 10, 'Green', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val["value"] + ')' })),
     new Value('Orange', 3, 'Orange'),
     new Value('Grey', 7, 'Grey'),
   ];

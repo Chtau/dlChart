@@ -1,10 +1,10 @@
 import { IChartItem } from "./chartitem.interface";
-import { Value } from "./value.model";
+import { IValue } from "./value.interface";
 
 export class Slice implements IChartItem {
   id: string;
   color: string;
-  sourceItem: Value;
+  sourceItem: IValue;
   calculatedPercent: number;
   allowActivate: boolean;
 

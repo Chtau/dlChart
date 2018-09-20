@@ -1,6 +1,6 @@
-import { Value } from "./value.model";
+import { IValue } from "dlChart/lib/models/value.interface";
 
 export interface ITextConfiguration {
   HideValue: boolean;
-  ValueFunction: (n: Value, percent: number) => string;
+  ValueFunction: (n: IValue, percent: number) => string;
 }

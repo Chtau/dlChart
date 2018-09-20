@@ -344,7 +344,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
             x: x,
             y: y,
             size: 8,
-            sourceItem: null,
+            sourceItem: point,
             calculatedPercent: ((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
             id: Utils.createElementId(subItemId + '-', indexPoints),
@@ -356,7 +356,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       this.axisPoint.push({
         drawCoords: draw,
         points: pointAxis,
-        sourceItem: null,
+        sourceItem: element,
         calculatedPercent: null,
         color: element.color,
         id: Utils.createElementId('chart-line-axis-', index),
