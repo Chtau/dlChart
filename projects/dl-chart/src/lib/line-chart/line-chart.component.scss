@@ -1,0 +1,80 @@
+@import '../shared/tooltip.scss';
+
+.line-chart-svg {
+  padding: 5%;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.axis-raster {
+  opacity: .1;
+}
+
+.point {
+  opacity: 1;
+} 
+
+.point:hover {
+  opacity: .8;
+} 
+
+.point-anim {
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.point-selected {
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.line {
+  opacity: .8;
+  stroke-width: 5px;
+}
+
+.line-anim {
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.line-selected {
+  stroke-width: 8px;
+  opacity: .8;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+/*.y-axis-raster {
+  
+}
+
+.x-axis-raster {
+  
+}*/

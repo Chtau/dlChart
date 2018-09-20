@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Value, TooltipConfiguration } from '../../projects/dl-chart/src/public_api';
 import { ChartOrientation } from '../../projects/dl-chart/src/public_api';
+import { Line } from 'projects/dl-chart/src/lib/models/line.model';
+import { Point } from 'projects/dl-chart/src/lib/models/point.model';
 
 
 @Component({
@@ -25,6 +27,48 @@ export class AppComponent {
     // new Value('Green', 10, 'Green', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
     new Value('Orange', 3, 'Orange'),
   ];
+
+  lines: Line[] = [
+    {
+      color: 'red',
+      cssClass: null,
+      data: null,
+      name: 'Red',
+      tooltipConfig: null,
+      points: [
+        new Point(2017, 10),
+        new Point(2018, 15),
+        new Point(2019, 7),
+        new Point(2020, 12),
+      ]
+    },
+    {
+      color: 'blue',
+      cssClass: null,
+      data: null,
+      name: 'Blue',
+      tooltipConfig: null,
+      points: [
+        new Point(2017, 5),
+        new Point(2018, 9),
+        new Point(2019, 22),
+        new Point(2020, 1),
+      ]
+    },
+    {
+      color: 'green',
+      cssClass: null,
+      data: null,
+      name: 'Green',
+      tooltipConfig: null,
+      points: [
+        new Point(2017, 1),
+        new Point(2018, 1),
+        new Point(2019, 12),
+        new Point(2020, 15),
+      ]
+    }
+  ]
 
   filterValues: Value[] = this.values;
   filterValuesBar: Value[] = this.values;

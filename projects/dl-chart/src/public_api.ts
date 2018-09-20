@@ -9,6 +9,7 @@ export * from './lib/dl-chart.module';
 export * from './lib/bar-chart/bar-chart.module';
 export * from './lib/pie-chart/pie-chart.module';
 export * from './lib/legend/legend.module';
+export * from './lib/line-chart/line-chart.module';
 
 // models
 export * from './lib/models/tooltipconfiguration.model';
