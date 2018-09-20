@@ -107,4 +107,9 @@ export class AppComponent {
   hideSelectLine: boolean = false;
   hideChartHoverEffect: boolean = false;
   hideChartSelectEffect: boolean = false;
+
+  selectedOrientationLine: ChartOrientation = ChartOrientation.Bottom;
+  currentStepsLine: number = 22;
+  leftScaleAxisLine: boolean = true;
+  rightScaleAxisLine: boolean = false;
 }

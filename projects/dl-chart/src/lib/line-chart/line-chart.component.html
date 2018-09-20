@@ -7,7 +7,7 @@
           <line class="axis-raster x-axis-raster" x2="0" y2="-450"></line>
           <text dy=".71em" [attr.y]="xAxisTextYPositionOffset" [attr.x]="xAxisTextXPositionOffset" [ngStyle]="xAxisTextStyle">{{ axis.text }}</text>
         </g>
-        <path class="domain" d="M0,6V0H900V6"></path>
+        <path class="domain" d="M0,6V0H450V6"></path>
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
       </g>
       <g class="y axis" *ngIf="activeLeftScaleAxis">

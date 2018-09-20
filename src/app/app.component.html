@@ -62,7 +62,27 @@
   </div>
   <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
-    <dl-line-chart [chartid]="'line-chart'" [values]="lines" [steps]="22"></dl-line-chart>
+    <label>Orientation 
+      <select style="margin-left: 20px;" [(ngModel)]="selectedOrientationLine">
+        <option [ngValue]="0">Bottom</option>
+        <option [ngValue]="1">Left</option>
+        <option [ngValue]="2">Right</option>
+        <option [ngValue]="3">Top</option>
+      </select>
+    </label>
+    <br>
+    <label><input [(ngModel)]="leftScaleAxisLine" type="checkbox"/>Left Scale Axis</label>
+    <label><input [(ngModel)]="rightScaleAxisLine" type="checkbox" />Right Scale Axis</label>
+    <br>
+    <label>Scale steps <input [(ngModel)]="currentStepsLine" type="number"></label>
+    <dl-line-chart 
+      [chartid]="'line-chart'" 
+      [values]="lines" 
+      [orientation]="selectedOrientationLine" 
+      [leftScaleAxis]="leftScaleAxisLine"
+      [rightScaleAxis]="rightScaleAxisLine"
+      [steps]="currentStepsLine"
+    ></dl-line-chart>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
   </div>
 </div>
