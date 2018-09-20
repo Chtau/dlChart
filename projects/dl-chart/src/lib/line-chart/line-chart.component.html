@@ -27,29 +27,30 @@
         <path class="domain" d="M450,0H450V450H450"></path>
         <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
       </g>
-      <circle 
-        (mousemove)="onHoverSegment($event, point)" 
-        (mouseleave)="onLeaveSegment($event)" 
-        (click)="onClickSegmentPoint(point)" 
-        [attr.id]="point.id"
-        [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
-        [attr.fill]="point.color"
-        [attr.cx]="point.x"
-        [attr.cy]="point.y"
-        [attr.r]="pointSize(point)"
-        *ngFor="let point of pointAxis"
-      />
-      <polyline 
-        (mousemove)="onHoverSegment($event, axis)" 
-        (mouseleave)="onLeaveSegment($event)" 
-        (click)="onClickSegmentAxis(axis)" 
-        [attr.id]="axis.id"
-        [attr.class]="'line line-anim ' + cssClassSegmentAxis(axis)" 
-        [attr.stroke]="axis.color" 
-        fill="none"
-        [attr.points]="axis.drawCoords"
-        *ngFor="let axis of axisPoint"
-      />
+      <g *ngFor="let axis of axisPoint">
+        <circle 
+          (mousemove)="onHoverSegment($event, point)" 
+          (mouseleave)="onLeaveSegment($event)" 
+          (click)="onClickSegmentPoint(point)" 
+          [attr.id]="point.id"
+          [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
+          [attr.fill]="point.color"
+          [attr.cx]="point.x"
+          [attr.cy]="point.y"
+          [attr.r]="pointSize(point)"
+          *ngFor="let point of axis.points"
+        />
+        <polyline 
+          (mousemove)="onHoverSegment($event, axis)" 
+          (mouseleave)="onLeaveSegment($event)" 
+          (click)="onClickSegmentAxis(axis)" 
+          [attr.id]="axis.id"
+          [attr.class]="'line line-anim ' + cssClassSegmentAxis(axis)" 
+          [attr.stroke]="axis.color" 
+          fill="none"
+          [attr.points]="axis.drawCoords"
+        />
+      </g>
     </g>
   </svg>
   <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">

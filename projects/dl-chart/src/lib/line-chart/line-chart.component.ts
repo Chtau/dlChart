@@ -32,7 +32,6 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
-  pointAxis: LinePoint[] = [];
   axisPoint: AxisPoint[] = [];
 
   @Input()
@@ -310,7 +309,6 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       return 1;
     });
 
-    //var oneX = (maxCountPoints / uniqueXPoints.length)
     var xA: string[] = [];
     for (let index = 0; index < (uniqueXPoints.length); index++) {
       xA.push(uniqueXPoints[index].toString());
@@ -328,18 +326,17 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
     var oneDisplayPercentY = this.viewBoxHeight / 100;
     let onePercentY: number = (yMaxValue - yMinValue) / 100;
     
-
-    this.pointAxis = [];
     this.axisPoint = [];
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
       let draw: string = '';
+      let pointAxis: LinePoint[] = [];
       element.points.forEach(point => {
         let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
         let y: number = (this.viewBoxHeight - (oneDisplayPercentY * ((point.yValue - yMinValue) / onePercentY)));
         draw += x + ',' + y + ' ';
 
-        this.pointAxis.push(
+        pointAxis.push(
           {
             x: x,
             y: y,
@@ -354,7 +351,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       });
       this.axisPoint.push({
         drawCoords: draw,
-        size: 8,
+        points: pointAxis,
         sourceItem: null,
         calculatedPercent: null,
         color: element.color,
