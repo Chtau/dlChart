@@ -331,6 +331,9 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       const element = items[index];
       let draw: string = '';
       let pointAxis: LinePoint[] = [];
+      let indexPoints: number = 0;
+      let subItemId: string = Utils.createElementId('chart-line-point-', index);
+
       element.points.forEach(point => {
         let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
         let y: number = (this.viewBoxHeight - (oneDisplayPercentY * ((point.yValue - yMinValue) / onePercentY)));
@@ -344,10 +347,11 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
             sourceItem: null,
             calculatedPercent: ((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
-            id: Utils.createElementId('chart-line-point-', index),
+            id: Utils.createElementId(subItemId + '-', indexPoints),
             allowActivate: true
           }
         );
+        indexPoints++;
       });
       this.axisPoint.push({
         drawCoords: draw,
@@ -355,7 +359,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
         sourceItem: null,
         calculatedPercent: null,
         color: element.color,
-        id: Utils.createElementId('chart-line-axis-point-', index),
+        id: Utils.createElementId('chart-line-axis-', index),
         allowActivate: false
       });
     }
