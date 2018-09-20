@@ -24,8 +24,8 @@
 } 
 
 .point:hover {
-  opacity: .8;
-} 
+  opacity: 1;
+}
 
 .point-anim {
   -o-transition:.5s;
@@ -58,23 +58,3 @@
   
   transition:.5s;
 }
-
-.line-selected {
-  stroke-width: 8px;
-  opacity: .8;
-
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  
-  transition:.5s;
-}
-
-/*.y-axis-raster {
-  
-}
-
-.x-axis-raster {
-  
-}*/

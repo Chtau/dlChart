@@ -27,7 +27,14 @@
         <path class="domain" d="M450,0H450V450H450"></path>
         <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
       </g>
-      <g *ngFor="let axis of axisPoint">
+      <g [attr.class]="'line-axis line-axis-anim'"  *ngFor="let axis of axisPoint">
+        <polyline  
+          [attr.id]="axis.id"
+          [attr.class]="'line line-anim'" 
+          [attr.stroke]="axis.color" 
+          fill="none"
+          [attr.points]="axis.drawCoords"
+        />
         <circle 
           (mousemove)="onHoverSegment($event, point)" 
           (mouseleave)="onLeaveSegment($event)" 
@@ -39,16 +46,6 @@
           [attr.cy]="point.y"
           [attr.r]="pointSize(point)"
           *ngFor="let point of axis.points"
-        />
-        <polyline 
-          (mousemove)="onHoverSegment($event, axis)" 
-          (mouseleave)="onLeaveSegment($event)" 
-          (click)="onClickSegmentAxis(axis)" 
-          [attr.id]="axis.id"
-          [attr.class]="'line line-anim ' + cssClassSegmentAxis(axis)" 
-          [attr.stroke]="axis.color" 
-          fill="none"
-          [attr.points]="axis.drawCoords"
         />
       </g>
     </g>

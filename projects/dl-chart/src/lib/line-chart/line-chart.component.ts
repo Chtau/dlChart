@@ -339,6 +339,10 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
         let y: number = (this.viewBoxHeight - (oneDisplayPercentY * ((point.yValue - yMinValue) / onePercentY)));
         draw += x + ',' + y + ' ';
 
+        if (point.name === '' || point.name === null || point.name === undefined) {
+          point.name = element.name;
+        }
+
         pointAxis.push(
           {
             x: x,
@@ -380,16 +384,6 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
     return axis;
   }
 
-  onClickSegmentAxis(axis: LinePoint) {
-    super.onClickSegment(axis);
-
-    if (axis === this.currentActiveLinePoint) {
-      this.currentActiveLinePoint = axis;
-    } else {
-      this.currentActiveLinePoint = null;
-    }
-  }
-
   onClickSegmentPoint(point: AxisPoint) {
     super.onClickSegment(point);
     
@@ -425,20 +419,6 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       return item.size + 2;
     }
     return item.size;
-  }
-
-  cssClassSegmentAxis(item: AxisPoint): string {
-    let css: string = '';
-    
-    if (item === this.currentActiveChartItem) {
-      css += ' line-selected';
-    }
-    if (item.sourceItem) {
-      if (item.sourceItem.cssClass != null) {
-        css += ' ' + item.sourceItem.cssClass;
-      }
-    }
-    return css;
   }
 
 }

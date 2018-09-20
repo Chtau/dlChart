@@ -1,4 +1,3 @@
-import { Value } from "./value.model";
 import { IValue } from "dlChart/lib/models/value.interface";
 
 export interface IChartItem {
