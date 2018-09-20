@@ -292,14 +292,43 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
     if (maxValueY > this.currentScaleMaxValue) {
       this.currentScaleMaxValue = maxValueY;
     }
+    
+    let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
+    let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
+    let oneDisplayPercentX: number = this.viewBoxWidht / 100;
+    let onePercentX: number = (xMaxValue - xMinValue) / 100;
 
-    var oneS = (this.currentScaleMaxValue / this.valueSteps)
-    var yA: string[] = [];
-    for (let index = 1; index <= (this.valueSteps); index++) {
-      yA.push(Utils.roundScale(oneS * index).toString());
+    let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
+    let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
+    var oneDisplayPercentY = this.viewBoxHeight / 100;
+ 
+    var useMaxValueY = (yMaxValue - yMinValue);
+    var singleStepY = (this.viewBoxHeight / this.valueSteps);
+    var singleStepYValue = (useMaxValueY / this.valueSteps);
+
+    this.yAxis = [];
+    this.yAxis.push(
+      {
+        text: yMinValue.toString(),
+        position: this.viewBoxHeight
+      }
+    );
+    for (let index = 1; index <= (this.valueSteps - 1); index++) {
+      var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
+      var step = this.viewBoxHeight - Utils.roundScale(singleStepY * index);
+      this.yAxis.push(
+        {
+          text: currentValue.toString(),
+          position: step
+        }
+      )
     }
-    this.yAxis = this.createAxis(yA, this.viewBoxHeight);
-
+    this.yAxis.push(
+      {
+        text: yMaxValue.toString(),
+        position: 0
+      }
+    );
 
     // sort the uniqueXPoints
     uniqueXPoints = uniqueXPoints.sort((a, b) => {
@@ -314,19 +343,11 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
       xA.push(uniqueXPoints[index].toString());
     }
     this.xAxis = this.createAxis(xA, this.viewBoxWidht);
-
-
-    let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
-    let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
-    let oneDisplayPercentX: number = this.viewBoxWidht / 100;
-    let onePercentX: number = (xMaxValue - xMinValue) / 100;
-
-    let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    var oneDisplayPercentY = this.viewBoxHeight / 100;
-    let onePercentY: number = (yMaxValue - yMinValue) / 100;
     
     this.axisPoint = [];
+
+    var oneValueYPercent = useMaxValueY / 100;
+
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
       let draw: string = '';
@@ -336,7 +357,9 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
 
       element.points.forEach(point => {
         let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
-        let y: number = (this.viewBoxHeight - (oneDisplayPercentY * ((point.yValue - yMinValue) / onePercentY)));
+        var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
+        var displayValueY = Utils.roundScale(percentValueY * oneDisplayPercentY);
+        let y: number = (this.viewBoxHeight - displayValueY)
         draw += x + ',' + y + ' ';
 
         if (point.name === '' || point.name === null || point.name === undefined) {

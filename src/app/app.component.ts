@@ -67,6 +67,19 @@ export class AppComponent {
         new Point(2019, 12),
         new Point(2020, 15),
       ]
+    },
+    {
+      color: 'orange',
+      cssClass: null,
+      data: null,
+      name: 'Orange',
+      tooltipConfig: null,
+      points: [
+        new Point(2017, -6),
+        new Point(2018, 0),
+        new Point(2019, 11),
+        new Point(2020, 16),
+      ]
     }
   ]
 
