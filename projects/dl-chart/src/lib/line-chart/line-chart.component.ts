@@ -22,8 +22,6 @@ export class LineChartComponent extends ScaleBaseChartComponent implements OnIni
   viewBoxHeight: number = 450;
   currentScaleMaxValue: number = 10;
   currentValues: Line[] = [];
-  currentActiveLinePoint: LinePoint = null;
-  currentActiveAxisPoint: AxisPoint = null;
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
 
@@ -52,7 +50,7 @@ export class LineChartComponent extends ScaleBaseChartComponent implements OnIni
   }
 
   constructor(chartItemService: ChartItemService) {
-    super(chartItemService);
+    super(chartItemService)
   }
 
   ngOnInit() {
@@ -211,19 +209,7 @@ export class LineChartComponent extends ScaleBaseChartComponent implements OnIni
     return axis;
   }
 
-  onClickSegmentPoint(point: AxisPoint) {
-    super.onClickSegment(point);
-    
-    if (point === this.currentActiveAxisPoint) {
-      this.currentActiveAxisPoint = point;
-    } else {
-      this.currentActiveAxisPoint = null;
-    }
-  }
-
   resetActiveElement() {
-    this.currentActiveLinePoint = null;
-    this.currentActiveAxisPoint = null;
     super.resetActive();
   }
 
@@ -233,10 +219,8 @@ export class LineChartComponent extends ScaleBaseChartComponent implements OnIni
     if (item === this.currentActiveChartItem) {
       css += ' point-selected';
     }
-    if (item.sourceItem) {
-      if (item.sourceItem.cssClass != null) {
-        css += ' ' + item.sourceItem.cssClass;
-      }
+    if (item.sourceItem.cssClass != null) {
+      css += ' ' + item.sourceItem.cssClass;
     }
     return css;
   }

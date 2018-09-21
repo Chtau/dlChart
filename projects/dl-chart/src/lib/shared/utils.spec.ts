@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Utils } from './utils';
 import { Value } from '../models/value.model';
+import { Point } from '../models/point.model';
 
 describe('Utils', () => {
 
@@ -76,6 +77,34 @@ describe('Utils', () => {
         tooltipConfig: null,
 
       } as Value, 1)).toBe('TEST', 'test value 1 created');
+  });
+
+  it('generate text from Point', () => {
+    expect(Utils.textValue(
+      null,
+      {
+        xValue: 1,
+        yValue: 2,
+        color: '',
+        cssClass: null,
+        data: null,
+        name: 'Test',
+        tooltipConfig: null,
+
+      } as Point, 1)).toBe('Test (2)', 'test value 1 created');
+  });
+
+  it('generate text', () => {
+    expect(Utils.textValue(
+      null,
+      {
+        color: '',
+        cssClass: null,
+        data: null,
+        name: 'Test',
+        tooltipConfig: null,
+
+      }, 1)).toBe('Test', 'test value 1 created');
   });
 
 });

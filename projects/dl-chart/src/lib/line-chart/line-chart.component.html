@@ -39,7 +39,7 @@
         <circle 
           (mousemove)="onHoverSegment($event, point)" 
           (mouseleave)="onLeaveSegment($event)" 
-          (click)="onClickSegmentPoint(point)" 
+          (click)="onClickSegment(point)" 
           [attr.id]="point.id"
           [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
           [attr.fill]="point.color"
