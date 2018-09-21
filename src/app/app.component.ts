@@ -125,4 +125,5 @@ export class AppComponent {
   currentStepsLine: number = 22;
   leftScaleAxisLine: boolean = true;
   rightScaleAxisLine: boolean = false;
+  hideRaster: boolean = false;
 }

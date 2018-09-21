@@ -28,6 +28,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
   activeRightScaleAxis: boolean = false;
   currentActiveLinePoint: LinePoint = null;
   currentActiveAxisPoint: AxisPoint = null;
+  activeHideRaster: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -51,6 +52,11 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
   @Input()
   set scaleMaxValue(val: number) {
     this.currentScaleMaxValue = val;
+  }
+
+  @Input()
+  set hideRaster(val: boolean) {
+    this.activeHideRaster = val;
   }
 
   @Input()

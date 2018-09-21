@@ -4,7 +4,7 @@
       <g class="x axis" transform="translate(0,450)">
         <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0)'" style="opacity: 1;" *ngFor="let axis of xAxis">
           <line y2="6" x2="0"></line>
-          <line class="axis-raster x-axis-raster" x2="0" y2="-450"></line>
+          <line *ngIf="!activeHideRaster" class="axis-raster x-axis-raster" x2="0" y2="-450"></line>
           <text dy=".71em" [attr.y]="xAxisTextYPositionOffset" [attr.x]="xAxisTextXPositionOffset" [ngStyle]="xAxisTextStyle">{{ axis.text }}</text>
         </g>
         <path class="domain" d="M0,6V0H450V6"></path>
@@ -13,7 +13,7 @@
       <g class="y axis" *ngIf="activeLeftScaleAxis">
         <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
           <line x2="-6" y2="0"></line>
-          <line class="axis-raster y-axis-raster" x2="450" y2="0"></line>
+          <line *ngIf="!activeHideRaster" class="axis-raster y-axis-raster" x2="450" y2="0"></line>
           <text dy=".32em" [attr.x]="yAxisTextXPositionOffset" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle">{{ axis.text }}</text>
         </g>
         <path class="domain" d="M-6,0H0V450H-6"></path>
