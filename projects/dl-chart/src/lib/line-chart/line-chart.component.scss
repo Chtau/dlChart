@@ -34,6 +34,9 @@
   -webkit-transition:.5s;
   
   transition:.5s;
+
+  animation: .4s showPoint;
+  animation-direction: reverse;
 }
 
 .point-selected {
@@ -57,4 +60,23 @@
   -webkit-transition:.5s;
   
   transition:.5s;
+
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash .5s linear forwards;
+}
+
+@keyframes showPoint {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
