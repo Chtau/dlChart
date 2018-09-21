@@ -4,6 +4,7 @@ import { PieChartComponent } from './pie-chart.component';
 import { DlPieChartModule } from "./pie-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
+import { SimpleChange } from '@angular/core';
 
 describe('PieChartComponent', () => {
   let component: PieChartComponent;
@@ -34,6 +35,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange'),
     ];
 
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
     expect(component.pie.length).toBe(2, 'pie slices loaded');
   });
 
@@ -42,6 +48,11 @@ describe('PieChartComponent', () => {
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange'),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     expect(component.createElementId(component.pie[0], 0)).toBe('chart-slice-0', 'Slice Element Id created');
   });
@@ -52,6 +63,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange'),
       new Value('Orange', 3, 'Orange', 'test')
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
 
     let cssEven = component.cssClassSegment(component.pie[0], 0);
     expect(cssEven).toBe('slice slice-anim-even', 'Segement css class even created');
@@ -80,14 +96,21 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
 
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
     component.tooltipContentChartItem = component.pie[0];
     component.tooltipContentItem = component.pie[0].sourceItem;
+
 
     let tooltipDefault = component.tooltipValue;
     expect(tooltipDefault).toBe('Blue (3)', 'default Segement Tooltip');
 
     component.tooltipContentChartItem = component.pie[1];
     component.tooltipContentItem = component.pie[1].sourceItem;
+
 
     let tooltipWithValue = component.tooltipValue;
     expect(tooltipWithValue).toBe('Orange (3)', 'Segement Tooltip (Name + Value)');
@@ -111,6 +134,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val: Value, perc) => { return val.name + ' (' + val.value + ')' })),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false),
+    });
+    fixture.detectChanges();
 
     component.tooltipConfiguration = new TooltipConfiguration(false);
     component.tooltipContentChartItem = component.pie[0];
@@ -147,6 +175,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', 'test'),
     ];
 
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false),
+    });
+    fixture.detectChanges();
+
     var item0 = component.pie[0].sourceItem as Value;
     var item1 = component.pie[1].sourceItem as Value;
     expect(item0.value).toBe(0, 'null input value replaced with 0');
@@ -160,6 +193,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 3, 'Orange', 'test'),
     ];
 
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false),
+    });
+    fixture.detectChanges();
+
     expect(component.getNormalizedValue(10, 1)).toBe(0.1, 'normalize Value');
 
     expect(component.getNormalizedValue(100, -100)).toBe(0.0, 'normalize Value (smaller 0%)');
@@ -171,6 +209,11 @@ describe('PieChartComponent', () => {
       new Value('Orange', 2, 'Orange'),
       new Value('Orange', 3, 'Orange', 'test'),
     ];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false),
+    });
+    fixture.detectChanges();
 
     var cor = component.getCoordinatesForPercent(180);
     expect(Math.round(cor[0])).toBe(1, 'normalize Value X');
