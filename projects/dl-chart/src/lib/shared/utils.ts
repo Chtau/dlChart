@@ -1,6 +1,7 @@
 import { ITextConfiguration } from "../models/textConfiguration.interface";
 import { Value } from "../models/value.model";
 import { IValue } from "../models/value.interface";
+import { Point } from "../models/point.model";
 
 export class Utils {
 
@@ -12,23 +13,23 @@ export class Utils {
         if (config.HideValue) {
           return item.name;  
         } else {
-          if (item["value"]) {
-            return item.name + ' (' + item["value"] + ')';
-          } else if (item["yValue"]) {
-            return item.name + ' (' + item["yValue"] + ')';
-          } else {
-            return item.name;
-          }
+          return this.getTextValue(item);
         }
       }
     }
-    if (item["value"]) {
-      return item.name + ' (' + item["value"] + ')';
-    } else if (item["yValue"]) {
-      return item.name + ' (' + item["yValue"] + ')';
-    } else {
-      return item.name;
+    return this.getTextValue(item);
+  }
+
+  private static getTextValue(item: IValue): string {
+    var valueItem = item as Value;
+    if (valueItem.value != undefined) {
+      return item.name + ' (' + valueItem.value + ')';
     }
+    var pointItem = item as Point;
+    if (pointItem.yValue != undefined) {
+      return item.name + ' (' + pointItem.yValue + ')';
+    } 
+    return item.name;
   }
 
   static roundScale(value: number): number {
