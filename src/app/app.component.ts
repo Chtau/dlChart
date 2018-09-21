@@ -63,7 +63,7 @@ export class AppComponent {
       tooltipConfig: null,
       points: [
         new Point(2017, 1),
-        new Point(2018, 1),
+        //new Point(2018, 1),
         new Point(2019, 12),
         new Point(2020, 15),
       ]
@@ -122,8 +122,9 @@ export class AppComponent {
   hideChartSelectEffect: boolean = false;
 
   selectedOrientationLine: ChartOrientation = ChartOrientation.Bottom;
-  currentStepsLine: number = 22;
+  currentStepsLine: number = 28;
   leftScaleAxisLine: boolean = true;
   rightScaleAxisLine: boolean = false;
   hideRaster: boolean = false;
+  hideLines: boolean = false;
 }

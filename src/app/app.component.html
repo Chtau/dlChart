@@ -76,6 +76,8 @@
     <br>
     <label>Scale steps <input [(ngModel)]="currentStepsLine" type="number"></label>
     <label><input [(ngModel)]="hideRaster" type="checkbox" />Hide Raster</label>
+    <br>
+    <label><input [(ngModel)]="hideLines" type="checkbox" />Hide Lines</label>
     <dl-line-chart 
       [chartid]="'line-chart'" 
       [values]="lines" 
@@ -84,6 +86,7 @@
       [rightScaleAxis]="rightScaleAxisLine"
       [steps]="currentStepsLine"
       [hideRaster]="hideRaster"
+      [hideLines]="hideLines"
     ></dl-line-chart>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
   </div>

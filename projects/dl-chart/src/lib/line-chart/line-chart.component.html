@@ -28,7 +28,8 @@
         <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
       </g>
       <g [attr.class]="'line-axis line-axis-anim'"  *ngFor="let axis of axisPoint">
-        <polyline  
+        <polyline
+          *ngIf="!activeHideLines"
           [attr.id]="axis.id"
           [attr.class]="'line line-anim'" 
           [attr.stroke]="axis.color" 

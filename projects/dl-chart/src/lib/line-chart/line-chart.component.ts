@@ -29,6 +29,7 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
   currentActiveLinePoint: LinePoint = null;
   currentActiveAxisPoint: AxisPoint = null;
   activeHideRaster: boolean = false;
+  activeHideLines: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -57,6 +58,11 @@ export class LineChartComponent extends BaseChartComponent implements OnInit, Af
   @Input()
   set hideRaster(val: boolean) {
     this.activeHideRaster = val;
+  }
+
+  @Input()
+  set hideLines(val: boolean) {
+    this.activeHideLines = val;
   }
 
   @Input()
