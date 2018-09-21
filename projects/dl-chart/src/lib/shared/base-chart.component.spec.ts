@@ -7,7 +7,7 @@ import { Value } from '../models/value.model';
 import { IValue } from '../models/value.interface';
 
 describe('BaseChartComponent', () => {
-  let baseChart: BaseChartComponent;
+  let baseChart: BaseChartComponent<IValue>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

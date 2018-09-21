@@ -6,7 +6,12 @@ import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
 import { IValue } from '../models/value.interface';
 
-export class BaseChartComponent {
+export class BaseChartComponent<T> {
+
+  viewBoxWidht: number = 450;
+  viewBoxHeight: number = 450;
+
+  currentValues: T[] = [];
 
   tooltipLeft: number;
   tooltipTop: number;
@@ -16,6 +21,11 @@ export class BaseChartComponent {
   tooltipClass: string = '';
 
   currentActiveChartItem: IChartItem;
+
+  @Input()
+  set values(val: T[]) {
+    this.currentValues = val;
+  }
 
   @Output() valueSelect: EventEmitter<IValue> = new EventEmitter<IValue>();
   @Output() valueDeselect: EventEmitter<IValue> = new EventEmitter<IValue>();

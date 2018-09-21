@@ -3,7 +3,7 @@ import { BaseChartComponent } from './base-chart.component';
 import { ChartOrientation } from '../models/enums';
 import { Input } from '@angular/core';
 
-export class ScaleBaseChartComponent extends BaseChartComponent {
+export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   currentScaleLabel: string = 'Values';
   valueSteps: number = 6;

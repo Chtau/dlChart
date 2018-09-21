@@ -1,10 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { IChartItem } from '../models/chartitem.interface';
-import { Value } from '../models/value.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
 import { Utils } from "../shared/utils";
-import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
 import { IValue } from '../models/value.interface';
 
@@ -14,7 +12,7 @@ import { IValue } from '../models/value.interface';
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LegendComponent extends BaseChartComponent implements OnInit, AfterViewInit {
+export class LegendComponent implements OnInit, AfterViewInit {
 
   @Output() legendClick: EventEmitter<IValue> = new EventEmitter<IValue>();
 
@@ -23,6 +21,18 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
   selectedItem: IChartItem = null;
   shouldHideChartHoverEffect: boolean = false;
   shouldHideChartSelectEffect: boolean = false;
+
+  @Output() chartidChange: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  get chartid() {
+    return this.currentChartid;
+  }
+  
+  set chartid(val) {
+    this.currentChartid = val;
+    this.chartidChange.emit(this.currentChartid);
+  }
+  currentChartid: string = 'dl-chart-1';
 
   get chartItems():IChartItem[] {
     if (this.items) {
@@ -47,8 +57,7 @@ export class LegendComponent extends BaseChartComponent implements OnInit, After
   }
   currentLegendConfiguration: LegendConfiguration = null;
 
-  constructor(chartItemService: ChartItemService) {
-    super(chartItemService);
+  constructor(public chartItemService: ChartItemService) {
   }
 
   ngOnInit() {

@@ -1,10 +1,8 @@
 import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
-//import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Axis } from '../models/axis.model';
-//import { ChartOrientation } from '../models/enums';
 import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
@@ -16,23 +14,15 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
   styleUrls: ['./line-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LineChartComponent extends ScaleBaseChartComponent implements OnInit, AfterViewInit, OnChanges {
+export class LineChartComponent extends ScaleBaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
   
-  viewBoxWidht: number = 450;
-  viewBoxHeight: number = 450;
   currentScaleMaxValue: number = 10;
-  currentValues: Line[] = [];
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   axisPoint: AxisPoint[] = [];
-
-  @Input()
-  set values(val: Line[]) {
-    this.currentValues = val;
-  }
 
   @Input()
   set scaleMaxValue(val: number) {

@@ -1,9 +1,10 @@
 import { async, TestBed } from '@angular/core/testing';
 import { ChartItemService } from '../services/chart-item.service';
 import { ScaleBaseChartComponent } from './scale-base-chart.component';
+import { IValue } from '../models/value.interface';
 
 describe('ScaleBaseChartComponent', () => {
-  let baseChart: ScaleBaseChartComponent;
+  let baseChart: ScaleBaseChartComponent<IValue>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

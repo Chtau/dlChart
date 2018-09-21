@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { Value } from '../models/value.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from '../shared/utils';
@@ -12,15 +12,7 @@ import { Slice } from '../models/slice.model';
   styleUrls: ['./pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class PieChartComponent extends BaseChartComponent implements OnInit, AfterViewInit {
-
-  @Input()
-  set values(val: Value[]) {
-    this.resetActiveElement();
-    this.currentValues = val;
-    this.calculateSlices();
-  }
-  currentValues: Value[] = [];
+export class PieChartComponent extends BaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
 
   slices: Slice[] = [];
 
@@ -67,6 +59,11 @@ export class PieChartComponent extends BaseChartComponent implements OnInit, Aft
 
   ngAfterViewInit(): void {
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.resetActiveElement();
+    this.calculateSlices();
   }
   
   calculateSlices() {

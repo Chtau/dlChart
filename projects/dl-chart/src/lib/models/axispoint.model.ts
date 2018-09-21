@@ -1,5 +1,4 @@
 import { IChartItem } from "./chartitem.interface";
-import { Value } from "./value.model";
 import { LinePoint } from "dlChart/lib/models/linepoint.model";
 import { IValue } from "dlChart/lib/models/value.interface";
 

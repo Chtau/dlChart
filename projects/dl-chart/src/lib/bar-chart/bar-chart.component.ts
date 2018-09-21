@@ -2,11 +2,9 @@ import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, 
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
-import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
-import { ChartOrientation } from '../models/enums';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
 
 @Component({  
@@ -15,23 +13,15 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
   styleUrls: ['./bar-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class BarChartComponent extends ScaleBaseChartComponent implements OnInit, AfterViewInit, OnChanges {
+export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
   
-  viewBoxWidht: number = 450;
-  viewBoxHeight: number = 450;
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
-  currentValues: Value[] = [];
   shouldHideSelectLine: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
-
-  @Input()
-  set values(val: Value[]) {
-    this.currentValues = val;
-  }
 
   @Input()
   set hideSelectLine(val: boolean) {

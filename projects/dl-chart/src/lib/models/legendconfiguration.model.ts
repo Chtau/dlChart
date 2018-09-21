@@ -1,4 +1,3 @@
-import { Value } from "./value.model";
 import { ITextConfiguration } from "./textConfiguration.interface";
 import { IValue } from "dlChart/lib/models/value.interface";
 
