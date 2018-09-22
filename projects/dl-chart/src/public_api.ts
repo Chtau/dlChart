@@ -20,5 +20,6 @@ export * from './lib/models/chartitem.interface';
 export * from './lib/models/enums';
 export * from './lib/models/donutconfiguration.model';
 export * from './lib/models/point.model';
+export * from './lib/models/line.model';
 
 export * from './lib/services/chart-item.service';
