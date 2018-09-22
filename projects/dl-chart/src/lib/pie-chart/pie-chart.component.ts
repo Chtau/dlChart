@@ -5,6 +5,7 @@ import { Utils } from '../shared/utils';
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
+import { DonutConfiguration } from '../models/donutconfiguration.model';
 
 @Component({  
   selector: 'dl-pie-chart',  
@@ -13,6 +14,14 @@ import { Slice } from '../models/slice.model';
   encapsulation: ViewEncapsulation.Emulated
 })  
 export class PieChartComponent extends BaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
+
+  currentDonutConfiguration: DonutConfiguration = null;
+
+  @Input()
+  set donutConfiguration(val: DonutConfiguration) {
+    this.currentDonutConfiguration = val;
+  }
+  
 
   slices: Slice[] = [];
 

@@ -8,7 +8,12 @@
   <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Pie Chart</h2>
     <input (keyup)="onKey($event)" placeholder="Filter the Chart ('3' shows only two Values)">
-    <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues"></dl-pie-chart>
+    <br>
+    <label><input [(ngModel)]="useDonutStyle" (ngModelChange)="onChangeUseDonut($event)"  type="checkbox"/>use Donut style</label>
+    <br>
+    <label>Size <input [(ngModel)]="donutSize" (ngModelChange)="onChangeDonutSize($event)" type="number"></label>
+    <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>
+    <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues" [donutConfiguration]="donutConfig"></dl-pie-chart>
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>
 

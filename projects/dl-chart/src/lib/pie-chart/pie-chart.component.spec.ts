@@ -215,6 +215,10 @@ describe('PieChartComponent', () => {
     });
     fixture.detectChanges();
 
+    component.donutConfiguration = {
+      color: 'white',
+      size: 0.5
+    };
     var cor = component.getCoordinatesForPercent(180);
     expect(Math.round(cor[0])).toBe(1, 'normalize Value X');
     expect(Math.round(cor[1])).toBe(-0, 'normalize Value Y');
