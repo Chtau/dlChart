@@ -36,18 +36,20 @@
           fill="none"
           [attr.points]="axis.drawCoords"
         />
-        <circle 
-          (mousemove)="onHoverSegment($event, point)" 
-          (mouseleave)="onLeaveSegment($event)" 
-          (click)="onClickSegment(point)" 
-          [attr.id]="point.id"
-          [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
-          [attr.fill]="point.color"
-          [attr.cx]="point.x"
-          [attr.cy]="point.y"
-          [attr.r]="pointSize(point)"
-          *ngFor="let point of axis.points"
-        />
+        <g *ngIf="!activeHidePoints">
+          <circle
+            (mousemove)="onHoverSegment($event, point)" 
+            (mouseleave)="onLeaveSegment($event)" 
+            (click)="onClickSegment(point)" 
+            [attr.id]="point.id"
+            [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
+            [attr.fill]="point.color"
+            [attr.cx]="point.x"
+            [attr.cy]="point.y"
+            [attr.r]="pointSize(point)"
+            *ngFor="let point of axis.points"
+          />
+        </g>
       </g>
     </g>
   </svg>

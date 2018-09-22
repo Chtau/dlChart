@@ -127,4 +127,5 @@ export class AppComponent {
   rightScaleAxisLine: boolean = false;
   hideRaster: boolean = false;
   hideLines: boolean = false;
+  hidePoints: boolean = false;
 }

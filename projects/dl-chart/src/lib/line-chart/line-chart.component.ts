@@ -19,6 +19,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   currentScaleMaxValue: number = 10;
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
+  activeHidePoints: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -37,6 +38,11 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   @Input()
   set hideLines(val: boolean) {
     this.activeHideLines = val;
+  }
+
+  @Input()
+  set hidePoints(val: boolean) {
+    this.activeHidePoints = val;
   }
 
   constructor(chartItemService: ChartItemService) {

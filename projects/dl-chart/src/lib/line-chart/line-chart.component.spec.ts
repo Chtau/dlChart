@@ -96,6 +96,7 @@ describe('LineChartComponent', () => {
     component.steps = 10;
     component.scaleMaxValue = 30;
     component.hideLines = true;
+    component.hidePoints = true;
     component.hideRaster = true;
     component.ngOnChanges({
       values: new SimpleChange(null, component.values, false),
