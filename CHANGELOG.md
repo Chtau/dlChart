@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1
+
+- [[4584ff2]](https://github.com/Chtau/dlChart/commit/4584ff274ce2ba5200290d8b6447ad79628b3700) missing export Point model
+
 ## 0.6.0
 
 - [[f145abb]](https://github.com/Chtau/dlChart/commit/f145abbc8427ee52deb3bc03f1877a439e9b16e7) [[54a0ccb]](https://github.com/Chtau/dlChart/commit/54a0ccb30abc111182bf46c3b9c72f1aaa39ce02) [[87961a0]](https://github.com/Chtau/dlChart/commit/87961a04ccced11d6ff67909b0962d2fd183dc53) [[a75146c]](https://github.com/Chtau/dlChart/commit/a75146cfe3fa0c9bd78755f0a17fc2fc640adf2d) [[5ca3253]](https://github.com/Chtau/dlChart/commit/5ca32532efc3bf777307ad2da689fcb65233f3eb) [[59f5130]](https://github.com/Chtau/dlChart/commit/59f5130fcd3617da96304c58601bce43c3f464de) [[89b6f6b]](https://github.com/Chtau/dlChart/commit/89b6f6b23db8e5dca3f2b08ef79d9e430a5620bb) [[907477c]](https://github.com/Chtau/dlChart/commit/907477c81d68d269234ca55661201adeeaee78f3) [[2c806d4]](https://github.com/Chtau/dlChart/commit/2c806d43f92a741166740e506cf6812ff5bd0400) [[9175090]](https://github.com/Chtau/dlChart/commit/91750900f97a80b035fb05318107ffe0e00384c5) [[310d980]](https://github.com/Chtau/dlChart/commit/310d98006fc8dc21ec649f4c75044aae6f1e1960) [[1a88e0b]](https://github.com/Chtau/dlChart/commit/1a88e0b755355eb146acc2408aa1f2299c93575b) new Line Chart
