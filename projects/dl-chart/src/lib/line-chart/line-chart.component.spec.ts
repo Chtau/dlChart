@@ -98,6 +98,7 @@ describe('LineChartComponent', () => {
     component.hideLines = true;
     component.hidePoints = true;
     component.hideRaster = true;
+    component.hideSelectionLines = true;
     component.ngOnChanges({
       values: new SimpleChange(null, component.values, false),
       steps: new SimpleChange(null, component.steps, false),
@@ -151,7 +152,7 @@ describe('LineChartComponent', () => {
     expect(cssCustom).toBe(' test', 'Segement custom css Point class created');
   });
 
-  it('select/deselect Bar', () => {
+  it('select/deselect Line', () => {
     let pointName: string;
     component.values = [
       {
@@ -186,7 +187,6 @@ describe('LineChartComponent', () => {
     });
     fixture.detectChanges();
 
-
     component.onClickSegment(component.axisPoint[0].points[0]);
     expect(component.currentActiveChartItem).toBeDefined('Axis Point selected');
 
@@ -195,6 +195,9 @@ describe('LineChartComponent', () => {
 
     var size = component.pointSize(component.axisPoint[0].points[0]);
     expect(size).toBe(10, 'Line Point size changed');
+
+    var lpoint = component.currentActivePoint;
+    expect(lpoint.color).toBe('red', 'Line Point size changed');
 
     component.onClickSegment(component.axisPoint[0].points[0]);
     expect(component.currentActiveChartItem).toBeNull('Line Point deselected');
