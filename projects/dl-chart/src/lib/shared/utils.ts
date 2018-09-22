@@ -27,7 +27,7 @@ export class Utils {
     }
     var pointItem = item as Point;
     if (pointItem.yValue != undefined) {
-      return item.name + ' (' + pointItem.yValue + ')';
+      return item.name + ' (' + pointItem.yValue + ', ' + pointItem.xValue + ')';
     } 
     return item.name;
   }

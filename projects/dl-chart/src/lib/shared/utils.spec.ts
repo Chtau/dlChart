@@ -91,7 +91,7 @@ describe('Utils', () => {
         name: 'Test',
         tooltipConfig: null,
 
-      } as Point, 1)).toBe('Test (2)', 'test value 1 created');
+      } as Point, 1)).toBe('Test (2, 1)', 'test value 1 created');
   });
 
   it('generate text', () => {
