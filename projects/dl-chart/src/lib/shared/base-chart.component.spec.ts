@@ -2,7 +2,6 @@ import { async, TestBed } from '@angular/core/testing';
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { IChartItem } from '../models/chartitem.interface';
-import { Bar } from '../models/bar.model';
 import { Value } from '../models/value.model';
 import { IValue } from '../models/value.interface';
 

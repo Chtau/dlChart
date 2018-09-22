@@ -1,5 +1,5 @@
 import { IChartItem } from "./chartitem.interface";
-import { IValue } from "dlChart/lib/models/value.interface";
+import { IValue } from "./value.interface";
 
 export class Bar implements IChartItem {
   id: string;

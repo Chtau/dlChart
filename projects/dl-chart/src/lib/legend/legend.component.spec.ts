@@ -7,7 +7,6 @@ import { ChartItemService } from '../services/chart-item.service';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
-import { IChartItem } from '../models/chartitem.interface';
 
 describe('LegendComponent', () => {
   let component: LegendComponent;

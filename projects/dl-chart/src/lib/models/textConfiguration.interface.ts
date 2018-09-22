@@ -1,4 +1,4 @@
-import { IValue } from "dlChart/lib/models/value.interface";
+import { IValue } from "./value.interface";
 
 export interface ITextConfiguration {
   HideValue: boolean;

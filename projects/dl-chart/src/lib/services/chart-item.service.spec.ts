@@ -4,7 +4,7 @@ import { ChartItemService } from './chart-item.service';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
 import { Bar } from '../models/bar.model';
-import { IChartItem } from 'dlChart/dl-chart';
+import { IChartItem } from '../models/chartitem.interface';
 
 describe('ChartItemService', () => {
   let service: ChartItemService;

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { Utils } from './utils';
 import { Value } from '../models/value.model';
 import { Point } from '../models/point.model';

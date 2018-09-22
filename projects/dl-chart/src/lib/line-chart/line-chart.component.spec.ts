@@ -1,7 +1,5 @@
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { ChartItemService } from '../services/chart-item.service';
 import { LineChartComponent } from './line-chart.component';
-import { DlBarChartModule } from '../bar-chart/bar-chart.module';
 import { Point } from '../models/point.model';
 import { SimpleChange } from '@angular/core';
 import { DlLineChartModule } from './line-chart.module';

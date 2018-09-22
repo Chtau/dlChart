@@ -1,5 +1,5 @@
 import { ITextConfiguration } from "./textConfiguration.interface";
-import { IValue } from "dlChart/lib/models/value.interface";
+import { IValue } from "./value.interface";
 
 export class LegendConfiguration implements ITextConfiguration {
   HideValue: boolean = false;

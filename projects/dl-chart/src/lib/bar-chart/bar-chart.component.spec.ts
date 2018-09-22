@@ -6,8 +6,8 @@ import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { Utils } from '../shared/utils';
 import { SimpleChange } from '@angular/core';
-import { Bar } from 'dlChart/lib/models/bar.model';
 import { ChartOrientation } from '../models/enums';
+import { Bar } from '../models/bar.model';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
