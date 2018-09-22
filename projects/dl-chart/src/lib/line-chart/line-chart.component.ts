@@ -20,6 +20,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
   activeHidePoints: boolean = false;
+  activeHideSelectionLines: boolean = false;
 
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
@@ -43,6 +44,11 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   @Input()
   set hidePoints(val: boolean) {
     this.activeHidePoints = val;
+  }
+
+  @Input()
+  set hideSelectionLines(val: boolean) {
+    this.activeHideSelectionLines = val;
   }
 
   constructor(chartItemService: ChartItemService) {
@@ -226,6 +232,16 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
       return item.size + 2;
     }
     return item.size;
+  }
+
+  get currentActivePoint() : LinePoint {
+    if (this.currentActiveChartItem != null) {
+      let point: LinePoint = this.currentActiveChartItem as LinePoint;
+      if (point != undefined && point.x != undefined) {
+        return point;
+      }
+    }
+    return null;
   }
 
 }

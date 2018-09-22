@@ -27,6 +27,24 @@
         <path class="domain" d="M450,0H450V450H450"></path>
         <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
       </g>
+      <g *ngIf="!activeHideSelectionLines">
+        <line 
+          *ngIf="currentActivePoint != null" 
+          class="point-selected x-point-selected" 
+          x2="0" 
+          [attr.y2]="currentActivePoint.y"
+          [attr.x2]="currentActivePoint.x"
+          [attr.y1]="viewBoxHeight"
+          [attr.x1]="currentActivePoint.x"
+        ></line>
+        <line 
+          *ngIf="currentActivePoint != null" 
+          class="point-selected y-point-selected" 
+          [attr.x2]="currentActivePoint.x" 
+          [attr.y2]="currentActivePoint.y" 
+          [attr.y1]="currentActivePoint.y"
+        ></line>
+      </g>
       <g [attr.class]="'line-axis line-axis-anim'"  *ngFor="let axis of axisPoint">
         <polyline
           *ngIf="!activeHideLines"

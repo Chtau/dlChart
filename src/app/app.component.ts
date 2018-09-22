@@ -128,4 +128,5 @@ export class AppComponent {
   hideRaster: boolean = false;
   hideLines: boolean = false;
   hidePoints: boolean = false;
+  hideSelectionLines: boolean = false;
 }

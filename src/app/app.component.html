@@ -79,6 +79,8 @@
     <br>
     <label><input [(ngModel)]="hideLines" type="checkbox" />Hide Lines</label>
     <label><input [(ngModel)]="hidePoints" type="checkbox" />Hide Points</label>
+    <br>
+    <label><input [(ngModel)]="hideSelectionLines" type="checkbox" />Hide selection lines</label>
     <dl-line-chart 
       [chartid]="'line-chart'" 
       [values]="lines" 
@@ -89,6 +91,7 @@
       [hideRaster]="hideRaster"
       [hideLines]="hideLines"
       [hidePoints]="hidePoints"
+      [hideSelectionLines]="hideSelectionLines"
     ></dl-line-chart>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
   </div>

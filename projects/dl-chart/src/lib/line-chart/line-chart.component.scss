@@ -12,7 +12,7 @@
 .axis line {
   fill: none;
   stroke: #000;
-  shape-rendering: crispEdges;
+  //shape-rendering: crispEdges;
 }
 
 .axis-raster {
@@ -64,6 +64,11 @@
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   animation: dash .5s linear forwards;
+}
+
+.point-selected {
+  stroke: #000;
+  stroke-width: 3px;
 }
 
 @keyframes showPoint {
