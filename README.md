@@ -17,6 +17,7 @@ The Charts are created with SVG which makes them responsive for every screen res
 ## Features
 
   * Pie Chart
+  * Line Chart
   * Horizontal & Vertical Bar Chart (can also be mirrored)
   * Legend module & service
   * minimal package size (<6kb)
