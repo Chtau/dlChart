@@ -1,46 +1,57 @@
-<ng-container>
-    <svg width="100%" height="100%" viewBox="0 0 500 500" [ngStyle]="chartStyle" class="bar-chart-svg">
-      <g transform="translate(40,20)">
-        <g class="x axis" transform="translate(0,450)">
-          <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0)'" style="opacity: 1;" *ngFor="let axis of xAxis">
-            <line y2="6" x2="0"></line>
-            <text dy=".71em" [attr.y]="xAxisTextYPositionOffset" [attr.x]="xAxisTextXPositionOffset" [ngStyle]="xAxisTextStyle">{{ axis.text }}</text>
-          </g>
-          <path class="domain" d="M0,6V0H900V6"></path>
-          <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
+<ng-container> 
+  <!-- TODO: fix. chart rotation -->
+  <svg #svgContainer [ngStyle]="chartStyle" class="bar-chart-svg" width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="none">
+    <symbol id="yaxis" viewBox="0 0 20 400">
+      <g class="y axis" *ngIf="activeLeftScaleAxis">
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
+            <line x2="20" x1="14" y2="0"></line>
+            <text dy=".32em" x="12" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle(scaleY)">{{ axis.text }}</text>
         </g>
-        <g class="y axis" *ngIf="activeLeftScaleAxis">
-          <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
-            <line x2="-6" y2="0"></line>
-            <text dy=".32em" [attr.x]="yAxisTextXPositionOffset" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle">{{ axis.text }}</text>
-          </g>
-          <path class="domain" d="M-6,0H0V450H-6"></path>
-          <text [attr.y]="yAxisLabelTextYPositionOffset" dy=".71em" [ngStyle]="yAxisLabelTextStyle">{{ currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="10" x1="100%" y2="390" x2="100%" class="x-stroke" />
+        <text y="22" x="-10" dy=".71em" [ngStyle]="yAxisLabelTextStyle(scaleY)">{{ currentScaleLabel }}</text>
+      </g>
+    </symbol>
+    <symbol id="yaxis2" viewBox="0 0 20 400">
+      <g class="y axis" *ngIf="activeRightScaleAxis">
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
+            <line x2="6" x1="0" y2="0"></line>
+            <text dy=".32em" x="8" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyleSecond(scaleY)">{{ axis.text }}</text>
         </g>
-        <g class="y-second axis" *ngIf="activeRightScaleAxis">
-          <g class="tick" [attr.transform]="'translate(450, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
-            <line x2="6" y2="0"></line>
-            <text dy=".32em" [attr.x]="yAxisTextXPositionOffsetSecond" [attr.y]="yAxisTextYPositionOffsetSecond" [ngStyle]="yAxisTextStyleSecond">{{ axis.text }}</text>
-          </g>
-          <path class="domain" d="M450,0H450V450H450"></path>
-          <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="10" x1="0" y2="390" x2="0" class="x-stroke" />
+        <text y="-9" x="-10" dy=".71em" [ngStyle]="yAxisLabelTextStyle(scaleY)">{{ currentScaleLabel }}</text>
+      </g>
+    </symbol>
+
+    <svg width="82.8%" height="85%" x="10%" viewBox="0 0 400 400" preserveAspectRatio="none">
+      <rect 
+        (mousemove)="onHoverSegment($event, bar)" 
+        (mouseleave)="onLeaveSegment($event)" 
+        (click)="onClickSegment(bar)" 
+        [attr.id]="bar.id" 
+        [attr.class]="'bar bar-anim ' + cssClassSegment(bar)" 
+        [attr.fill]="bar.color" 
+        [attr.x]="bar.position" 
+        [attr.width]="bar.width" 
+        [attr.y]="viewBoxHeight - bar.height" 
+        [attr.height]="bar.height" 
+        *ngFor="let bar of bars">
+      </rect>
+      <line id="dlChartBarSelectLineIndicator" *ngIf="currentActiveBar != null && !shouldHideSelectLine" [attr.y1]="(viewBoxHeight - currentActiveBar.height)" x1="0" [attr.y2]="(viewBoxHeight - currentActiveBar.height)" [attr.x2]="viewBoxWidht" class="active-stroke" />
+    </svg>
+    <svg  width="82.8%" height="15%" viewBox="0 0 400 20" preserveAspectRatio="none" y="85%" x="10%">
+      <g class="x axis" transform="translate(0,0)">
+        <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0) scale(' + scaleXWidth + ', ' + scaleX + ')'" style="opacity: 1;" *ngFor="let axis of xAxis">
+          <line y2="4" x2="0"></line>
+          <text dy=".71em" [attr.y]="6" [attr.x]="xAxisTextXPositionOffset"  [ngStyle]="xAxisTextStyle(1)">{{ axis.text }}</text>
         </g>
-        <rect 
-          (mousemove)="onHoverSegment($event, bar)" 
-          (mouseleave)="onLeaveSegment($event)" 
-          (click)="onClickSegment(bar)" 
-          [attr.id]="bar.id" 
-          [attr.class]="'bar bar-anim ' + cssClassSegment(bar)" 
-          [attr.fill]="bar.color" 
-          [attr.x]="bar.position" 
-          [attr.width]="bar.width" 
-          [attr.y]="viewBoxHeight - bar.height" 
-          [attr.height]="bar.height" 
-          *ngFor="let bar of bars">
-        </rect>
-        <line id="dlChartBarSelectLineIndicator" *ngIf="currentActiveBar != null && !shouldHideSelectLine" [attr.y1]="(viewBoxHeight - currentActiveBar.height)" x1="0" [attr.y2]="(viewBoxHeight - currentActiveBar.height)" [attr.x2]="viewBoxWidht" class="active-stroke" />
+        <path class="domain" d="M0,6V0H900V6"></path>
+        <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
       </g>
     </svg>
+    <use xlink:href="#yaxis" x="2.8%" y="8.5" width="10%" height="85%"/>
+    <use xlink:href="#yaxis2" x="90%" y="8.5" width="10%" height="85%"/>
+  </svg>
+
     <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">
         <span>{{ tooltipValue }}</span>
     </div>

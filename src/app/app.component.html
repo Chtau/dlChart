@@ -5,7 +5,7 @@
 </div>
 <div style="text-align: center;">
   <div>
-  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Pie Chart</h2>
     <input (keyup)="onKey($event)" placeholder="Filter the Chart ('3' shows only two Values)">
     <br>
@@ -15,8 +15,8 @@
     <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>
     <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues" [donutConfiguration]="donutConfig"></dl-pie-chart>
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
-  </div>
-
+  </div>-->
+<br>
   <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <div>
@@ -40,32 +40,39 @@
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
         <br>
         <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
-        <dl-bar-chart 
-          [orientation]="selectedOrientation" 
-          [chartid]="'test-chart-bar'" 
-          [scaleLabel]="'Demo Values'" 
-          [steps]="currentSteps" 
-          [values]="filterValuesBar"
-          [leftScaleAxis]="leftScaleAxis"
-          [rightScaleAxis]="rightScaleAxis"
-          [barOffset]="barOffset"
-          [hideSelectLine]="hideSelectLine"
-        ></dl-bar-chart>    
+        <div style="width: 550px;height: 450px;">
+          <dl-bar-chart 
+            [orientation]="selectedOrientation" 
+            [chartid]="'test-chart-bar'" 
+            [scaleLabel]="'Demo Values'" 
+            [steps]="currentSteps" 
+            [values]="filterValuesBar"
+            [leftScaleAxis]="leftScaleAxis"
+            [rightScaleAxis]="true"
+            [barOffset]="barOffset"
+            [hideSelectLine]="hideSelectLine"
+          ></dl-bar-chart>    
+        </div>
       </div>
+      <!--<br>
+      <br>
+      <br>
+      <br>
       <br>
       <label><input [(ngModel)]="hideChartHoverEffect" type="checkbox"/>Hide Chart hover effect</label>
       <label><input [(ngModel)]="hideChartSelectEffect" type="checkbox" />Hide Chart select effect</label>
       <br>
-      <div style="width: 100px;display: inline-block;">
+      <div >
         <dl-chart-legend 
           [chartid]="'test-chart-bar'"
           [hideChartHoverEffect]="hideChartHoverEffect"
           [hideChartSelectEffect]="hideChartSelectEffect"
         ></dl-chart-legend>
-      </div>
+      </div>-->
     </div>
   </div>
-  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <br>
+  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
     <label>Orientation 
       <select style="margin-left: 20px;" [(ngModel)]="selectedOrientationLine">
@@ -99,7 +106,7 @@
       [hideSelectionLines]="hideSelectionLines"
     ></dl-line-chart>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>
+  </div>-->
 </div>
 </div>
 

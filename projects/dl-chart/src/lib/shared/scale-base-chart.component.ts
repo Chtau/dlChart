@@ -60,15 +60,15 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     }
   }
 
-  get yAxisTextStyle() {
-    return this.onYAxisTextStyle(this.currentOrientation);
+  yAxisTextStyle(scale: number = 1.4) {
+    return this.onYAxisTextStyle(this.currentOrientation, scale);
   }
 
-  get yAxisTextStyleSecond() {
-    return this.onYAxisTextStyle(this.currentOrientation, true);
+  yAxisTextStyleSecond(scale: number = 1.4) {
+    return this.onYAxisTextStyle(this.currentOrientation, scale, true);
   }
 
-  onYAxisTextStyle(orientation: ChartOrientation, reverseAnchor: boolean = false) {
+  onYAxisTextStyle(orientation: ChartOrientation, scale: number, reverseAnchor: boolean = false) {
     if (orientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
     } else if (orientation === ChartOrientation.Left) {
@@ -76,7 +76,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(180deg)", "text-anchor" : (reverseAnchor ? "end" : "start") };
     } else {
-      return {"transform" : "rotate(0deg)", "text-anchor" : (reverseAnchor ? "start" : "end") };
+      return {"transform" : "rotate(0deg) scale(1, " + scale + ")", "text-anchor" : (reverseAnchor ? "start" : "end") };
     }
   }
 
@@ -120,15 +120,15 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     }
   }
 
-  get yAxisLabelTextStyle() {
-    return this.onYAxisLabelTextStyle(this.currentOrientation);
+  yAxisLabelTextStyle(scale: number) {
+    return this.onYAxisLabelTextStyle(this.currentOrientation, scale);
   }
 
   get yAxisLabelTextStyleSecond() {
     return this.onYAxisLabelTextStyle(this.currentOrientation);
   }
 
-  onYAxisLabelTextStyle(orientation: ChartOrientation) {
+  onYAxisLabelTextStyle(orientation: ChartOrientation, scale: number = 1) {
     if (orientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
     } else if (orientation === ChartOrientation.Left) {
@@ -136,7 +136,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
     } else {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
+      return {"transform" : "rotate(-90deg) scale(" + scale + ", 1)", "text-anchor" : "end"};
     }
   }
 
@@ -168,11 +168,11 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     }
   }
 
-  get xAxisTextStyle() {
-    return this.onXAxisTextStyle(this.currentOrientation);
+  xAxisTextStyle(scale: number = 0.6) {
+    return this.onXAxisTextStyle(this.currentOrientation, scale);
   }
 
-  onXAxisTextStyle(orientation: ChartOrientation) {
+  onXAxisTextStyle(orientation: ChartOrientation, scale: number) {
     if (orientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
     } else if (orientation === ChartOrientation.Left) {
@@ -180,7 +180,11 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (orientation === ChartOrientation.Top) {
       return {"transform" : "rotate(180deg)", "text-anchor" : "middle"};
     } else {
-      return {"transform" : "rotate(0deg)", "text-anchor" : "middle"};
+      /*return JSON.parse(`{ "transform" : "rotate(0deg)",
+      "text-anchor" : "middle",
+      "transform" : "scale(1, .6)",
+        }`);*/
+      return {"transform" : "rotate(0deg) scale(1 , " + scale + ")", "text-anchor" : "middle" };
     }
   }
 
