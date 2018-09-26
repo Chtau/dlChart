@@ -97,7 +97,7 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     } else if (this.currentOrientation === ChartOrientation.Top) {
       return -13;
     } else {
-      return 8;
+      return 12;
     }
   }
 
@@ -125,9 +125,9 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
 
   get yAxisDescriptionYOffset() {
     if (this.currentOrientation === ChartOrientation.Left) {
-      return 22;
+      return 16;
     } else if (this.currentOrientation === ChartOrientation.Right) {
-      return -30;
+      return -24;
     } else {
       return 22;
     }
@@ -217,11 +217,39 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     }
   }
 
-
+  svgWidth: string = '100%';
+  svgHeight: string = '100%';
   ngAfterViewInit(): void {
     // TODO: size change enable / disable
     if (this.svgContainer && this.svgContainer.nativeElement) {
+      this.orientationCheck();
+      this.orientationChange.subscribe((value: { oldValue: ChartOrientation, newValue: ChartOrientation })=> {
+        if (value.oldValue != value.newValue) {
+          if (value.newValue === ChartOrientation.Left || value.newValue === ChartOrientation.Right) {
+            if (value.oldValue === ChartOrientation.Bottom || value.oldValue === ChartOrientation.Top) {
+              this.svgWidth = this.svgContainer.nativeElement.clientHeight + 'px';
+              this.svgHeight = this.svgContainer.nativeElement.clientWidth + 'px';
+            }
+          } else if (value.newValue === ChartOrientation.Bottom || value.newValue === ChartOrientation.Top) {
+            if (value.oldValue === ChartOrientation.Left || value.oldValue === ChartOrientation.Right) {
+              this.svgWidth = "100%";
+              this.svgHeight = "100%";
+            }
+          }
+        }
+      })
+      
       this.sizeChange();
+    }
+  }
+
+  orientationCheck() {
+    if (this.currentOrientation === ChartOrientation.Left || this.currentOrientation === ChartOrientation.Right) {
+      this.svgWidth = this.svgContainer.nativeElement.clientHeight + 'px';
+      this.svgHeight = this.svgContainer.nativeElement.clientWidth + 'px';
+    } else {
+      this.svgWidth = '100%';
+      this.svgHeight = '100%';
     }
   }
 

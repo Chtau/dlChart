@@ -1,9 +1,11 @@
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { ChartOrientation } from '../models/enums';
-import { Input } from '@angular/core';
+import { Input, Output, EventEmitter } from '@angular/core';
 
 export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
+
+  @Output() orientationChange: EventEmitter<{ oldValue: ChartOrientation, newValue: ChartOrientation }> = new EventEmitter<{ oldValue: ChartOrientation, newValue: ChartOrientation }>();
 
   currentScaleLabel: string = 'Values';
   valueSteps: number = 6;
@@ -33,6 +35,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   @Input()
   set orientation(val: ChartOrientation) {
+    this.orientationChange.emit({ oldValue: this.currentOrientation, newValue: val });
     this.currentOrientation = val;
   }
 
