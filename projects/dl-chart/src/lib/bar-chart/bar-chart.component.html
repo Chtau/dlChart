@@ -1,24 +1,23 @@
 <ng-container> 
-  <!-- TODO: fix. chart rotation -->
   <svg #svgContainer [ngStyle]="chartStyle" class="bar-chart-svg" width="100%" height="100%" viewBox="0 0 400 400" preserveAspectRatio="none">
     <symbol id="yaxis" viewBox="0 0 20 400">
       <g class="y axis" *ngIf="activeLeftScaleAxis">
-        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
             <line x2="20" x1="14" y2="0"></line>
-            <text dy=".32em" [attr.x]="scaleYWidthOffset" [attr.y]="0" [ngStyle]="{'transform' : 'rotate(0deg) scale(' + scaleYWidth + ', ' + scaleY + ')', 'text-anchor' : 'end'}">{{ axis.text }}</text>
+            <text dy=".32em" [attr.x]="yAxisTextXOffset" [attr.y]="yAxisTextYOffset" [ngStyle]="yAxisStyleText">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarYLine" y1="10" x1="100%" y2="390" x2="100%" class="x-stroke" />
-        <text [attr.y]="scaleYTextOffset" x="-10" dy=".71em" [ngStyle]="{'transform' : 'rotate(-90deg) scale(' + scaleY + ', ' + scaleYWidth + ')', 'text-anchor' : 'end'}">{{ currentScaleLabel }}</text><!--[ngStyle]="yAxisLabelTextStyle(scaleY)"-->
+        <text [attr.y]="yAxisDescriptionYOffset" [attr.x]="yAxisDescriptionXOffset" dy=".71em" [ngStyle]="yAxisStyleDescription">{{ currentScaleLabel }}</text>
       </g>
     </symbol>
     <symbol id="yaxis2" viewBox="0 0 20 400">
       <g class="y axis" *ngIf="activeRightScaleAxis">
-        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
             <line x2="6" x1="0" y2="0"></line>
-            <text dy=".32em" x="8" [attr.y]="0" [ngStyle]="{'transform' : 'rotate(0deg) scale(' + scaleYWidth + ', ' + scaleY + ')', 'text-anchor' : 'start'}">{{ axis.text }}</text>
+            <text dy=".32em" [attr.x]="y2AxisTextXOffset" [attr.y]="y2AxisTextYOffset" [ngStyle]="y2AxisStyleText">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarYLine" y1="10" x1="0" y2="390" x2="0" class="x-stroke" />
-        <text y="-9" x="-10" dy=".71em" [ngStyle]="{'transform' : 'rotate(-90deg) scale(' + scaleY + ', ' + scaleYWidth + ')', 'text-anchor' : 'end'}">{{ currentScaleLabel }}</text>
+        <text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{ currentScaleLabel }}</text>
       </g>
     </symbol>
 
@@ -42,7 +41,7 @@
       <g class="x axis" transform="translate(0,0)">
         <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0) scale(' + scaleXWidth + ', ' + scaleX + ')'" style="opacity: 1;" *ngFor="let axis of xAxis">
           <line y2="4" x2="0"></line>
-          <text dy=".71em" [attr.y]="6" [attr.x]="xAxisTextXPositionOffset"  [ngStyle]="xAxisTextStyle(1)">{{ axis.text }}</text>
+          <text dy=".71em" [attr.y]="xAxisTextYOffset" [attr.x]="xAxisTextXOffset"  [ngStyle]="xAxisStyleText">{{ axis.text }}</text>
         </g>
         <path class="domain" d="M0,6V0H900V6"></path>
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />

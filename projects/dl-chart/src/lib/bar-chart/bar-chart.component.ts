@@ -6,6 +6,7 @@ import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
+import { ChartOrientation } from '../models/enums';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -53,6 +54,170 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
   scaleYWidth: number = 1;
   scaleYWidthOffset: number = 12;
   scaleYTextOffset: number = 22;
+
+  get xAxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -5;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 5;
+    } else {
+      return 0;
+    }
+  }
+
+  get xAxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -14;
+    } else {
+      return 6;
+    }
+  }
+
+  get xAxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) ", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) ", "text-anchor" : "start"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) ", "text-anchor" : "middle"};
+    } else {
+      return {"transform" : "rotate(0deg) ", "text-anchor" : "middle"};
+    }
+  }
+
+  get yAxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -13;
+    } else {
+      return 8;
+    }
+  }
+
+  get yAxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 4;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -4;
+    } else {
+      return 0;
+    }
+  }
+
+  get yAxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(0deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "end"};
+    }
+  }
+
+  get yAxisDescriptionYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 22;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -30;
+    } else {
+      return 22;
+    }
+  }
+
+  get yAxisDescriptionXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -10;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 6;
+    } else {
+      return -10;
+    }
+  }
+
+  get yAxisStyleDescription() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    }
+  }
+
+  get y2AxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -8;
+    } else {
+      return 8;
+    }
+  }
+
+  get y2AxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 10;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -9;
+    } else {
+      return 0;
+    }
+  }
+
+  get y2AxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "end"};
+    } else {
+      return {"transform" : "rotate(0deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "start"};
+    }
+  }
+
+  get y2AxisDescriptionYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -9;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 3;
+    } else {
+      return -9;
+    }
+  }
+
+  get y2AxisDescriptionXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -10;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 7;
+    } else {
+      return -10;
+    }
+  }
+
+  get y2AxisStyleDescription() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    }
+  }
+
+
   ngAfterViewInit(): void {
     // TODO: size change enable / disable
     if (this.svgContainer && this.svgContainer.nativeElement) {
