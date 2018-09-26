@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Value, TooltipConfiguration } from '../../projects/dl-chart/src/public_api';
 import { ChartOrientation } from '../../projects/dl-chart/src/public_api';
@@ -12,8 +12,10 @@ import { DonutConfiguration } from 'projects/dl-chart/src/lib/models/donutconfig
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   
+  @ViewChild('barchartWrapper') barchartWrapper: ElementRef;
+
   values: Value[] = [
     new Value('Red', 5, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
     new Value('Blue', 3, 'Blue'),
@@ -157,5 +159,21 @@ export class AppComponent {
     } else {
       this.donutConfig = null;
     }
+  }
+
+  wrapperWidth: number = 550;
+  wrapperHeight: number = 450;
+
+  ngAfterViewInit(): void {
+    //this.wrapperHeight = this.barchartWrapper.nativeElement.clientHeight;
+    //this.wrapperWidth = this.barchartWrapper.nativeElement.clientWidth;
+  }
+
+  changeWidth() {
+    //this.barchartWrapper.nativeElement.clientWidth = this.wrapperWidth;
+  }
+
+  changeHeight() {
+    //this.barchartWrapper.nativeElement.clientHeight = this.wrapperHeight;
   }
 }

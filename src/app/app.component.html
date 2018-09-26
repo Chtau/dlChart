@@ -21,6 +21,8 @@
     <h2>Bar Chart</h2>
     <div>
       <div>
+        <input [(ngModel)]="wrapperWidth" (ngModelChange)="changeWidth()">
+        <input [(ngModel)]="wrapperHeight" (ngModelChange)="changeHeight()">
         <input (keyup)="onKeyBar($event)" placeholder="Filter the Chart ('3' shows only two Values)">
         <br>
         <label>Orientation 
@@ -40,7 +42,7 @@
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
         <br>
         <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
-        <div style="width: 550px;height: 450px;">
+        <div #barchartWrapper style="width: 550px;height: 450px;" [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"><!-- [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"-->
           <dl-bar-chart 
             [orientation]="selectedOrientation" 
             [chartid]="'test-chart-bar'" 

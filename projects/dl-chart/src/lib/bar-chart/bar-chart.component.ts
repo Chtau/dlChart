@@ -50,6 +50,9 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
   scaleX: number = 0.6;
   scaleXWidth: number = 1;
   scaleY: number = 1.4;
+  scaleYWidth: number = 1;
+  scaleYWidthOffset: number = 12;
+  scaleYTextOffset: number = 22;
   ngAfterViewInit(): void {
     // TODO: size change enable / disable
     if (this.svgContainer && this.svgContainer.nativeElement) {
@@ -62,6 +65,7 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
       var newH = this.svgContainer.nativeElement.clientHeight;
       var newW = this.svgContainer.nativeElement.clientWidth;
       if (newH != this.cHeight || newW != this.cWidth) {
+        console.log('changed wrapper size width:' + newW + ' height:' + newH);
         this.cHeight = newH;
         this.cWidth = newW;
         this.getScaleFromClientSize();
@@ -106,19 +110,43 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
       }
       if (this.cWidth <= 150) {
         this.scaleXWidth = 2.5;
+        this.scaleYWidth = 2.5;
+        this.scaleYWidthOffset = 5;
+        this.scaleYTextOffset = 16;
       } else if (this.cWidth <= 250) {
         this.scaleXWidth = 2;
+        this.scaleYWidth = 1.6;
+        this.scaleYWidthOffset = 5;
+        this.scaleYTextOffset = 16;
       } else if (this.cWidth <= 450) {
+        if (this.cWidth <= 350) {
+          this.scaleYWidth = 1.6;
+          this.scaleYWidthOffset = 5;
+          this.scaleYTextOffset = 14;
+        } else {
+          this.scaleYWidth = 1.4;
+          this.scaleYWidthOffset = 8;
+          this.scaleYTextOffset = 16;
+        }
         this.scaleXWidth = 1.5;
       } else if (this.cWidth <= 550) {
         this.scaleXWidth = 1;
+        this.scaleYWidth = 1;
+        this.scaleYWidthOffset = 12;
+        this.scaleYTextOffset = 22;
       } else {
         this.scaleXWidth = 1;
+        this.scaleYWidth = 1;
+        this.scaleYWidthOffset = 12;
+        this.scaleYTextOffset = 22;
       }
     } else {
       this.scaleX = 0.6;
       this.scaleY = 1.4;
       this.scaleXWidth = 1;
+      this.scaleYWidth = 1;
+      this.scaleYWidthOffset = 12;
+      this.scaleYTextOffset = 22;
     }
   }
 

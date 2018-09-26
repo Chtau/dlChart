@@ -5,20 +5,20 @@
       <g class="y axis" *ngIf="activeLeftScaleAxis">
         <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
             <line x2="20" x1="14" y2="0"></line>
-            <text dy=".32em" x="12" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle(scaleY)">{{ axis.text }}</text>
+            <text dy=".32em" [attr.x]="scaleYWidthOffset" [attr.y]="0" [ngStyle]="{'transform' : 'rotate(0deg) scale(' + scaleYWidth + ', ' + scaleY + ')', 'text-anchor' : 'end'}">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarYLine" y1="10" x1="100%" y2="390" x2="100%" class="x-stroke" />
-        <text y="22" x="-10" dy=".71em" [ngStyle]="yAxisLabelTextStyle(scaleY)">{{ currentScaleLabel }}</text>
+        <text [attr.y]="scaleYTextOffset" x="-10" dy=".71em" [ngStyle]="{'transform' : 'rotate(-90deg) scale(' + scaleY + ', ' + scaleYWidth + ')', 'text-anchor' : 'end'}">{{ currentScaleLabel }}</text><!--[ngStyle]="yAxisLabelTextStyle(scaleY)"-->
       </g>
     </symbol>
     <symbol id="yaxis2" viewBox="0 0 20 400">
       <g class="y axis" *ngIf="activeRightScaleAxis">
         <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ') scale(1, 1)'" style="opacity: 1;" *ngFor="let axis of yAxis">
             <line x2="6" x1="0" y2="0"></line>
-            <text dy=".32em" x="8" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyleSecond(scaleY)">{{ axis.text }}</text>
+            <text dy=".32em" x="8" [attr.y]="0" [ngStyle]="{'transform' : 'rotate(0deg) scale(' + scaleYWidth + ', ' + scaleY + ')', 'text-anchor' : 'start'}">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarYLine" y1="10" x1="0" y2="390" x2="0" class="x-stroke" />
-        <text y="-9" x="-10" dy=".71em" [ngStyle]="yAxisLabelTextStyle(scaleY)">{{ currentScaleLabel }}</text>
+        <text y="-9" x="-10" dy=".71em" [ngStyle]="{'transform' : 'rotate(-90deg) scale(' + scaleY + ', ' + scaleYWidth + ')', 'text-anchor' : 'end'}">{{ currentScaleLabel }}</text>
       </g>
     </symbol>
 
