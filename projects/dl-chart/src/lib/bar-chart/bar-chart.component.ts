@@ -220,45 +220,17 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
 
   svgMarginTop: number = 0;
   chartRotation: number = 0;
-
-  get barChartStyle() {
-    if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(-90deg)", "margin-top" : "-" + this.svgMarginTop + "px" };
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(90deg)", "margin-top" : "-" + this.svgMarginTop + "px" };
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)", "margin-top" : "0px"};
-    } else {
-      return {"transform" : "rotate(0deg)", "margin-top" : "0px"};
-    }
-  }
-
   svgWidth: string = '100%';
   svgHeight: string = '100%';
   
   ngAfterViewInit(): void {
+    this.chartRotationCheck(this.currentOrientation);
     if (this.svgContainer && this.svgContainer.nativeElement) {
-      if (this.currentOrientation === ChartOrientation.Right) {
-        this.chartRotation = -90;
-      } else if (this.currentOrientation === ChartOrientation.Left) {
-        this.chartRotation = 90;
-      } else if (this.currentOrientation === ChartOrientation.Top) {
-        this.chartRotation = 180;
-      } else {
-        this.chartRotation = 0;
-      }
       this.orientationCheck();
       this.orientationChange.subscribe((value: { oldValue: ChartOrientation, newValue: ChartOrientation })=> {
         if (value.oldValue != value.newValue) {
-          if (value.newValue === ChartOrientation.Right) {
-            this.chartRotation = -90;
-          } else if (value.newValue === ChartOrientation.Left) {
-            this.chartRotation = 90;
-          } else if (value.newValue === ChartOrientation.Top) {
-            this.chartRotation = 180;
-          } else {
-            this.chartRotation = 0;
-          }
+          this.chartRotationCheck(value.newValue);
+          
           if (value.newValue === ChartOrientation.Left || value.newValue === ChartOrientation.Right) {
             if (value.oldValue === ChartOrientation.Bottom || value.oldValue === ChartOrientation.Top) {
               this.svgWidth = this.svgContainer.nativeElement.parentElement.parentElement.clientHeight + 'px';
@@ -276,8 +248,19 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
           }
         }
       })
-      
       this.sizeChange();
+    }
+  }
+
+  chartRotationCheck(chartRotation: ChartOrientation) {
+    if (chartRotation === ChartOrientation.Right) {
+      this.chartRotation = -90;
+    } else if (chartRotation === ChartOrientation.Left) {
+      this.chartRotation = 90;
+    } else if (chartRotation === ChartOrientation.Top) {
+      this.chartRotation = 180;
+    } else {
+      this.chartRotation = 0;
     }
   }
 
@@ -288,7 +271,6 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     } else {
       this.svgMarginTop = 0;
     }
-    this.cd.detectChanges();
   }
 
   orientationCheck() {
