@@ -42,7 +42,7 @@
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
         <br>
         <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
-        <div #barchartWrapper style="width: 550px;height: 450px;" [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"><!-- [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"-->
+        <div #barchartWrapper style="width: 550px;height: 450px;" [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"><!--wrapperWidth [style.width.px]="wrapperWidth" [style.height.px]="wrapperHeight"-->
           <dl-bar-chart 
             [orientation]="selectedOrientation" 
             [chartid]="'test-chart-bar'" 

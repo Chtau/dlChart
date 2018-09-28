@@ -115,7 +115,7 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  selectedOrientation: ChartOrientation = ChartOrientation.Bottom;
+  selectedOrientation: ChartOrientation = ChartOrientation.Left;
   currentSteps: number = 10;
   leftScaleAxis: boolean = true;
   rightScaleAxis: boolean = false;
@@ -161,7 +161,7 @@ export class AppComponent implements AfterViewInit {
     }
   }
 
-  wrapperWidth: number = 550;
+  wrapperWidth: number = 750;
   wrapperHeight: number = 450;
 
   ngAfterViewInit(): void {
