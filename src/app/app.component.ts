@@ -164,6 +164,9 @@ export class AppComponent implements AfterViewInit {
   wrapperWidth: number = 750;
   wrapperHeight: number = 450;
 
+  wrapperWidthLine: number = 450;
+  wrapperHeightLine: number = 450;
+
   ngAfterViewInit(): void {
     //this.wrapperHeight = this.barchartWrapper.nativeElement.clientHeight;
     //this.wrapperWidth = this.barchartWrapper.nativeElement.clientWidth;
@@ -175,5 +178,13 @@ export class AppComponent implements AfterViewInit {
 
   changeHeight() {
     //this.barchartWrapper.nativeElement.clientHeight = this.wrapperHeight;
+  }
+
+  changeWidthLine() {
+    
+  }
+
+  changeHeightLine() {
+    
   }
 }

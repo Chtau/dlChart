@@ -1,7 +1,7 @@
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { ChartOrientation } from '../models/enums';
-import { Input, Output, EventEmitter } from '@angular/core';
+import { Input, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
 
 export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
@@ -39,192 +39,392 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     this.currentOrientation = val;
   }
 
-  get chartStyle() {
-    if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(-90deg)"};
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(90deg)"};
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)"};
-    } else {
-      return {"transform" : "rotate(0deg)"};
-    }
-  }
-
-  get secondYAxisOrientation() {
-    if (this.currentOrientation === ChartOrientation.Top) {
-      return ChartOrientation.Bottom;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return ChartOrientation.Right;
-    } else if (this.currentOrientation === ChartOrientation.Right) {
-      return ChartOrientation.Left;
-    } else {
-      return ChartOrientation.Top;
-    }
-  }
-
-  yAxisTextStyle(scale: number = 1.4) {
-    return this.onYAxisTextStyle(this.currentOrientation, scale);
-  }
-
-  yAxisTextStyleSecond(scale: number = 1.4) {
-    return this.onYAxisTextStyle(this.currentOrientation, scale, true);
-  }
-
-  onYAxisTextStyle(orientation: ChartOrientation, scale: number, reverseAnchor: boolean = false) {
-    if (orientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "middle"};
-    } else if (orientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "middle"};
-    } else if (orientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)", "text-anchor" : (reverseAnchor ? "end" : "start") };
-    } else {
-      return {"transform" : "rotate(0deg) scale(1, " + scale + ")", "text-anchor" : (reverseAnchor ? "start" : "end") };
-    }
-  }
-
-  get yAxisTextXPositionOffset() {
-    return this.onYAxisTextXPositionOffset(this.currentOrientation);
-  }
-
-  get yAxisTextXPositionOffsetSecond() {
-    return this.onYAxisTextXPositionOffset(this.secondYAxisOrientation);
-  }
-
-  onYAxisTextXPositionOffset(orientation: ChartOrientation) {
-    if (orientation === ChartOrientation.Right) {
-      return 0;
-    } else if (orientation === ChartOrientation.Left) {
-      return 0;
-    } else if (orientation === ChartOrientation.Top) {
-      return 9;
-    } else {
-      return -9;
-    }
-  }
-
-  get yAxisTextYPositionOffset() {
-    return this.onYAxisTextYPositionOffset(this.currentOrientation);
-  }
-
-  get yAxisTextYPositionOffsetSecond() {
-    return this.onYAxisTextYPositionOffset(this.secondYAxisOrientation);
-  }
-
-  onYAxisTextYPositionOffset(orientation: ChartOrientation) {
-    if (orientation === ChartOrientation.Right) {
-      return 12;
-    } else if (orientation === ChartOrientation.Left) {
-      return -12;
-    } else if (orientation === ChartOrientation.Top) {
-      return 0;
-    } else {
-      return 0;
-    }
-  }
-
-  yAxisLabelTextStyle(scale: number) {
-    return this.onYAxisLabelTextStyle(this.currentOrientation, scale);
-  }
-
-  get yAxisLabelTextStyleSecond() {
-    return this.onYAxisLabelTextStyle(this.currentOrientation);
-  }
-
-  onYAxisLabelTextStyle(orientation: ChartOrientation, scale: number = 1) {
-    if (orientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else if (orientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
-    } else if (orientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else {
-      return {"transform" : "rotate(-90deg) scale(" + scale + ", 1)", "text-anchor" : "end"};
-    }
-  }
-
-  get yAxisLabelTextYPositionOffset() {
-    return this.onYAxisLabelTextYPositionOffset(this.currentOrientation);
-  }
-
-  get yAxisLabelTextYPositionOffsetSecond() {
-    if (this.currentOrientation === ChartOrientation.Right) {
-      return -445;
-    } else if (this.currentOrientation === ChartOrientation.Left) {
-      return 438;
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      return -445;
-    } else {
-      return 438;
-    }
-  }
-
-  onYAxisLabelTextYPositionOffset(orientation: ChartOrientation) {
-    if (orientation === ChartOrientation.Right) {
-      return -12;
-    } else if (orientation === ChartOrientation.Left) {
-      return 6;
-    } else if (orientation === ChartOrientation.Top) {
-      return -12;
-    } else {
-      return 6;
-    }
-  }
-
-  xAxisTextStyle(scale: number = 0.6) {
-    return this.onXAxisTextStyle(this.currentOrientation, scale);
-  }
-
-  onXAxisTextStyle(orientation: ChartOrientation, scale: number) {
-    if (orientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg)", "text-anchor" : "start"};
-    } else if (orientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg)", "text-anchor" : "end"};
-    } else if (orientation === ChartOrientation.Top) {
-      return {"transform" : "rotate(180deg)", "text-anchor" : "middle"};
-    } else {
-      /*return JSON.parse(`{ "transform" : "rotate(0deg)",
-      "text-anchor" : "middle",
-      "transform" : "scale(1, .6)",
-        }`);*/
-      return {"transform" : "rotate(0deg) scale(1 , " + scale + ")", "text-anchor" : "middle" };
-    }
-  }
-
-  get xAxisTextXPositionOffset() {
-    return this.onXAxisTextXPositionOffset(this.currentOrientation);
-  }
-
-  onXAxisTextXPositionOffset(orientation: ChartOrientation) {
-    if (orientation === ChartOrientation.Right) {
-      return 9;
-    } else if (orientation === ChartOrientation.Left) {
-      return -9;
-    } else if (orientation === ChartOrientation.Top) {
-      return 0;
-    } else {
-      return 0;
-    }
-  }
-
-  get xAxisTextYPositionOffset() {
-    return this.onXAxisTextYPositionOffset(this.currentOrientation);
-  }
-
-  onXAxisTextYPositionOffset(orientation: ChartOrientation) {
-    if (orientation === ChartOrientation.Right) {
-      return -3.5;
-    } else if (orientation === ChartOrientation.Left) {
-      return -3.5;
-    } else if (orientation === ChartOrientation.Top) {
-      return -15;
-    } else {
-      return 9;
-    }
-  }
-  
-  constructor(public chartItemService: ChartItemService) {
+  constructor(public chartItemService: ChartItemService, public cd: ChangeDetectorRef) {
     super(chartItemService);
   }
+
+
+
+  cHeight: number = 0;
+  cWidth: number = 0;
+  scaleX: number = 0.6;
+  scaleXWidth: number = 1;
+  scaleY: number = 1.4;
+  scaleYWidth: number = 1;
+  scaleYWidthOffset: number = 12;
+  scaleYTextOffset: number = 22;
+  svgMarginTop: number = 0;
+  chartRotation: number = 0;
+  svgWidth: string = '100%';
+  svgHeight: string = '100%';
+
+  svg: ElementRef
+
+
+  ngAfterViewInit(_svg: ElementRef): void {
+    this.svg = _svg;
+    this.chartRotationCheck(this.currentOrientation);
+    if (this.svg && this.svg.nativeElement) {
+      this.orientationCheck();
+      this.orientationChange.subscribe((value: { oldValue: ChartOrientation, newValue: ChartOrientation })=> {
+        if (value.oldValue != value.newValue) {
+          this.chartRotationCheck(value.newValue);
+          
+          if (value.newValue === ChartOrientation.Left || value.newValue === ChartOrientation.Right) {
+            if (value.oldValue === ChartOrientation.Bottom || value.oldValue === ChartOrientation.Top) {
+              this.svgWidth = this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px';
+              this.svgHeight = this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px';
+              this.marginOffsetCheck(value.newValue);
+              this.cd.detectChanges();
+            }
+          } else if (value.newValue === ChartOrientation.Bottom || value.newValue === ChartOrientation.Top) {
+            if (value.oldValue === ChartOrientation.Left || value.oldValue === ChartOrientation.Right) {
+              this.svgWidth = "100%";
+              this.svgHeight = "100%";
+              this.marginOffsetCheck(value.newValue);
+              this.cd.detectChanges();
+            }
+          }
+        }
+      })
+      this.sizeChange();
+    }
+  }
+
+  get xAxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -5;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 5;
+    } else {
+      return 0;
+    }
+  }
+
+  get xAxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -14;
+    } else {
+      return 6;
+    }
+  }
+
+  xAxisTextYOffsetStartEnd(index: number, length: number) {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      if (index === 0) {
+        return -8;
+      } else if (index === length - 1) {
+        return 1;
+      }
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      if (index === 0) {
+        return 1;
+      } else if (index === length - 1) {
+        return -8;
+      }
+      return -4;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -14;
+    } else {
+      return 6;
+    }
+  }
+
+  get xAxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) ", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) ", "text-anchor" : "start"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) ", "text-anchor" : "middle"};
+    } else {
+      return {"transform" : "rotate(0deg) ", "text-anchor" : "middle"};
+    }
+  }
+
+  xAxisStyleTextStartEnd(index: number, length: number) {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) ", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) ", "text-anchor" : "start"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      let anchor: string = 'middle'
+      if (index === 0) {
+        anchor = 'start'
+      } else if (index === length - 1) {
+        anchor = 'end'
+      }
+      return {"transform" : "rotate(180deg) ", "text-anchor" : anchor};
+    } else {
+      let anchor: string = 'middle'
+      if (index === 0) {
+        anchor = 'end'
+      } else if (index === length - 1) {
+        anchor = 'start'
+      }
+      return {"transform" : "rotate(0deg) ", "text-anchor" : anchor};
+    }
+  }
+
+  get yAxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -13;
+    } else {
+      return 12;
+    }
+  }
+
+  get yAxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 4;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -4;
+    } else {
+      return 0;
+    }
+  }
+
+  get yAxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(0deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "end"};
+    }
+  }
+
+  get yAxisDescriptionYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 16;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -24;
+    } else {
+      return 22;
+    }
+  }
+
+  get yAxisDescriptionXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -10;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 6;
+    } else {
+      return -10;
+    }
+  }
+
+  get yAxisStyleDescription() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    }
+  }
+
+  get y2AxisTextXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 0;
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return -8;
+    } else {
+      return 8;
+    }
+  }
+
+  get y2AxisTextYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return 14;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return -13;
+    } else {
+      return 0;
+    }
+  }
+
+  get y2AxisStyleText() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "middle"};
+    } else if (this.currentOrientation === ChartOrientation.Top) {
+      return {"transform" : "rotate(180deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "end"};
+    } else {
+      return {"transform" : "rotate(0deg) scale(" + this.scaleYWidth + ", " + this.scaleY + ")", "text-anchor" : "start"};
+    }
+  }
+
+  get y2AxisDescriptionYOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -9;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 3;
+    } else {
+      return -9;
+    }
+  }
+
+  get y2AxisDescriptionXOffset() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return -10;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return 7;
+    } else {
+      return -10;
+    }
+  }
+
+  get y2AxisStyleDescription() {
+    if (this.currentOrientation === ChartOrientation.Left) {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return {"transform" : "rotate(90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "start"};
+    } else {
+      return {"transform" : "rotate(-90deg) scale(" + this.scaleY + ", " + this.scaleYWidth + ")", "text-anchor" : "end"};
+    }
+  }
+
+  chartRotationCheck(chartRotation: ChartOrientation) {
+    if (chartRotation === ChartOrientation.Right) {
+      this.chartRotation = -90;
+    } else if (chartRotation === ChartOrientation.Left) {
+      this.chartRotation = 90;
+    } else if (chartRotation === ChartOrientation.Top) {
+      this.chartRotation = 180;
+    } else {
+      this.chartRotation = 0;
+    }
+  }
+
+  marginOffsetCheck(chartRotation: ChartOrientation) {
+    if (chartRotation === ChartOrientation.Left || chartRotation === ChartOrientation.Right) {
+      var marginCalc = ((this.svg.nativeElement.parentElement.parentElement.clientHeight - this.svg.nativeElement.parentElement.parentElement.clientWidth) / 2);
+      this.svgMarginTop = marginCalc;
+    } else {
+      this.svgMarginTop = 0;
+    }
+  }
+
+  orientationCheck() {
+    if (this.currentOrientation === ChartOrientation.Left || this.currentOrientation === ChartOrientation.Right) {
+      if ((this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px') != this.svgWidth 
+        || this.svgHeight != (this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px')) {
+        this.svgWidth = this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px';
+        this.svgHeight = this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px';
+        this.marginOffsetCheck(this.currentOrientation);
+        this.cd.detectChanges();
+      }
+    } else {
+      this.svgWidth = '100%';
+      this.svgHeight = '100%';
+      this.cd.detectChanges();
+    }
+  }
+
+  sizeChange() {
+    setTimeout(() => {
+      this.orientationCheck();
+      var newH = this.svg.nativeElement.clientHeight;
+      var newW = this.svg.nativeElement.clientWidth;
+      if (newH != this.cHeight || newW != this.cWidth) {
+        this.cHeight = newH;
+        this.cWidth = newW;
+        this.getScaleFromClientSize();
+      }
+      this.sizeChange();
+    }, 1000/60);
+  } 
+
+  private getScaleFromClientSize() {
+    if (this.cHeight != 0 && this.cWidth != 0) {
+      if (this.cHeight <= 150) {
+        this.scaleX = 1.1;
+        this.scaleY = 2.5;
+      } else if (this.cHeight <= 175) {
+        this.scaleX = 1.0;
+        this.scaleY = 2.4;
+      } else if (this.cHeight <= 200) {
+        this.scaleX = 0.8;
+        this.scaleY = 2.3;
+      } else if (this.cHeight <= 250) {
+        this.scaleX = 0.7;
+        this.scaleY = 2.0;
+      } else if (this.cHeight <= 350) {
+        this.scaleX = 0.6;
+        this.scaleY = 1.8;
+      } else if (this.cHeight <= 450) {
+        this.scaleX = 0.5;
+        this.scaleY = 1.4;
+      } else if (this.cHeight <= 550) {
+        this.scaleX = 0.4;
+        this.scaleY = 1.2;
+      } else if (this.cHeight <= 750) {
+        if (this.cHeight <= 650) {
+          this.scaleY = 1.2;
+        } else {
+          this.scaleY = 1;
+        }
+        this.scaleX = 0.3;
+      } else {
+        this.scaleX = 0.3;
+        this.scaleY = 0.8;
+      }
+      if (this.cWidth <= 150) {
+        this.scaleXWidth = 2.5;
+        this.scaleYWidth = 2.5;
+        this.scaleYWidthOffset = 5;
+        this.scaleYTextOffset = 16;
+      } else if (this.cWidth <= 250) {
+        this.scaleXWidth = 2;
+        this.scaleYWidth = 1.6;
+        this.scaleYWidthOffset = 5;
+        this.scaleYTextOffset = 16;
+      } else if (this.cWidth <= 450) {
+        if (this.cWidth <= 350) {
+          this.scaleYWidth = 1.6;
+          this.scaleYWidthOffset = 5;
+          this.scaleYTextOffset = 14;
+        } else {
+          this.scaleYWidth = 1.4;
+          this.scaleYWidthOffset = 8;
+          this.scaleYTextOffset = 16;
+        }
+        this.scaleXWidth = 1.5;
+      } else if (this.cWidth <= 550) {
+        this.scaleXWidth = 1;
+        this.scaleYWidth = 1;
+        this.scaleYWidthOffset = 12;
+        this.scaleYTextOffset = 22;
+      } else {
+        this.scaleXWidth = 1;
+        this.scaleYWidth = 1;
+        this.scaleYWidthOffset = 12;
+        this.scaleYTextOffset = 22;
+      }
+    } else {
+      this.scaleX = 0.6;
+      this.scaleY = 1.4;
+      this.scaleXWidth = 1;
+      this.scaleYWidth = 1;
+      this.scaleYWidthOffset = 12;
+      this.scaleYTextOffset = 22;
+    }
+  }
+
 
 }

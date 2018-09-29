@@ -1,77 +1,61 @@
 <ng-container>
-  <svg width="100%" height="100%" viewBox="0 0 500 500" [ngStyle]="chartStyle" class="line-chart-svg">
-    <g transform="translate(40,20)">
-      <g class="x axis" transform="translate(0,450)">
-        <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0)'" style="opacity: 1;" *ngFor="let axis of xAxis">
-          <line y2="6" x2="0"></line>
-          <line *ngIf="!activeHideRaster" class="axis-raster x-axis-raster" x2="0" y2="-450"></line>
-          <text dy=".71em" [attr.y]="xAxisTextYPositionOffset" [attr.x]="xAxisTextXPositionOffset" [ngStyle]="xAxisTextStyle()">{{ axis.text }}</text>
+  <svg #svgContainer [ngStyle]="{'transform' : 'rotate(' + chartRotation + 'deg)', 'margin-top' : this.svgMarginTop + 'px' }"
+    class="line-chart-svg" [attr.width]="svgWidth" [attr.height]="svgHeight" viewBox="0 0 400 400" preserveAspectRatio="none">
+    <svg width="82.8%" height="85%" x="10%" viewBox="0 0 400 400" preserveAspectRatio="none">
+      <g *ngIf="!activeHideSelectionLines">
+        <line *ngIf="currentActivePoint != null" class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y"
+          [attr.x2]="currentActivePoint.x" [attr.y1]="400" [attr.x1]="currentActivePoint.x"></line>
+        <line *ngIf="currentActivePoint != null" class="point-selected y-point-selected" [attr.x2]="currentActivePoint.x"
+          [attr.y2]="currentActivePoint.y" [attr.y1]="currentActivePoint.y"></line>
+      </g>
+      <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
+        <polyline *ngIf="!activeHideLines" [attr.id]="axis.id" [attr.class]="'line line-anim'" [attr.stroke]="axis.color"
+          fill="none" [attr.points]="axis.drawCoords" />
+        <g *ngIf="!activeHidePoints">
+          <circle (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(point)"
+            [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" [attr.fill]="point.color"
+            [attr.cx]="point.x" [attr.cy]="point.y" [attr.r]="pointSize(point)" *ngFor="let point of axis.points" />
         </g>
-        <path class="domain" d="M0,6V0H450V6"></path>
+      </g>
+    </svg>
+    <svg width="82.8%" height="15%" viewBox="0 0 400 20" preserveAspectRatio="none" y="85%" x="10%">
+      <g class="x axis xaxis-text" transform="translate(0,0)">
+        <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0) scale(' + scaleXWidth + ', ' + scaleX + ')'"
+          style="opacity: 1;" *ngFor="let axis of xAxis; let i=index">
+          <line y2="4" x2="0"></line>
+          <text dy=".71em" [attr.y]="xAxisTextYOffsetStartEnd(i, xAxis.length)" [attr.x]="xAxisTextXOffset" [ngStyle]="xAxisStyleTextStartEnd(i, xAxis.length)">{{
+            axis.text }}</text>
+        </g>
+        <path class="domain" d="M0,6V0H900V6"></path>
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
       </g>
+    </svg>
+    <svg id="yaxis" x="2.8%" y="8.5" width="10%" height="85%" viewBox="0 0 20 400">
       <g class="y axis" *ngIf="activeLeftScaleAxis">
-        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
-          <line x2="-6" y2="0"></line>
-          <line *ngIf="!activeHideRaster" class="axis-raster y-axis-raster" x2="450" y2="0"></line>
-          <text dy=".32em" [attr.x]="yAxisTextXPositionOffset" [attr.y]="yAxisTextYPositionOffset" [ngStyle]="yAxisTextStyle(1)">{{ axis.text }}</text>
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
+          <line x2="20" x1="14" y2="0"></line>
+          <text dy=".32em" [attr.x]="yAxisTextXOffset" [attr.y]="yAxisTextYOffset" [ngStyle]="yAxisStyleText">{{
+            axis.text }}</text>
         </g>
-        <path class="domain" d="M-6,0H0V450H-6"></path>
-        <text [attr.y]="yAxisLabelTextYPositionOffset" dy=".71em" [ngStyle]="yAxisLabelTextStyle(1)">{{ currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="10" x1="100%" y2="390" x2="100%" class="x-stroke" />
+        <text [attr.y]="yAxisDescriptionYOffset" [attr.x]="yAxisDescriptionXOffset" dy=".71em" [ngStyle]="yAxisStyleDescription">{{
+          currentScaleLabel }}</text>
       </g>
-      <g class="y-second axis" *ngIf="activeRightScaleAxis">
-        <g class="tick" [attr.transform]="'translate(450, ' + axis.position + ')'" style="opacity: 1;" *ngFor="let axis of yAxis">
-          <line x2="6" y2="0"></line>
-          <text dy=".32em" [attr.x]="yAxisTextXPositionOffsetSecond" [attr.y]="yAxisTextYPositionOffsetSecond" [ngStyle]="yAxisTextStyleSecond(1)">{{ axis.text }}</text>
+    </svg>
+    <svg id="yaxis2" x="90%" y="8.5" width="10%" height="85%" viewBox="0 0 20 400">
+      <g class="y axis" *ngIf="activeRightScaleAxis">
+        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
+          <line x2="6" x1="0" y2="0"></line>
+          <text dy=".32em" [attr.x]="y2AxisTextXOffset" [attr.y]="y2AxisTextYOffset" [ngStyle]="y2AxisStyleText">{{
+            axis.text }}</text>
         </g>
-        <path class="domain" d="M450,0H450V450H450"></path>
-        <text [attr.y]="yAxisLabelTextYPositionOffsetSecond" dy=".71em" [ngStyle]="yAxisLabelTextStyleSecond">{{ currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="10" x1="0" y2="390" x2="0" class="x-stroke" />
+        <text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{
+          currentScaleLabel }}</text>
       </g>
-      <g *ngIf="!activeHideSelectionLines">
-        <line 
-          *ngIf="currentActivePoint != null" 
-          class="point-selected x-point-selected" 
-          x2="0" 
-          [attr.y2]="currentActivePoint.y"
-          [attr.x2]="currentActivePoint.x"
-          [attr.y1]="viewBoxHeight"
-          [attr.x1]="currentActivePoint.x"
-        ></line>
-        <line 
-          *ngIf="currentActivePoint != null" 
-          class="point-selected y-point-selected" 
-          [attr.x2]="currentActivePoint.x" 
-          [attr.y2]="currentActivePoint.y" 
-          [attr.y1]="currentActivePoint.y"
-        ></line>
-      </g>
-      <g [attr.class]="'line-axis line-axis-anim'"  *ngFor="let axis of axisPoint">
-        <polyline
-          *ngIf="!activeHideLines"
-          [attr.id]="axis.id"
-          [attr.class]="'line line-anim'" 
-          [attr.stroke]="axis.color" 
-          fill="none"
-          [attr.points]="axis.drawCoords"
-        />
-        <g *ngIf="!activeHidePoints">
-          <circle
-            (mousemove)="onHoverSegment($event, point)" 
-            (mouseleave)="onLeaveSegment($event)" 
-            (click)="onClickSegment(point)" 
-            [attr.id]="point.id"
-            [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" 
-            [attr.fill]="point.color"
-            [attr.cx]="point.x"
-            [attr.cy]="point.y"
-            [attr.r]="pointSize(point)"
-            *ngFor="let point of axis.points"
-          />
-        </g>
-      </g>
-    </g>
+    </svg>
   </svg>
-  <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">
-      <span>{{ tooltipValue }}</span>
+  <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
+    <span>{{ tooltipValue }}</span>
   </div>
 </ng-container>

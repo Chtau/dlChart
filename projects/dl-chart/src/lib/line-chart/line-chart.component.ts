@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -16,6 +16,8 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
 })  
 export class LineChartComponent extends ScaleBaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
   
+  @ViewChild('svgContainer') svgContainer: ElementRef;
+
   currentScaleMaxValue: number = 10;
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
@@ -51,8 +53,10 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     this.activeHideSelectionLines = val;
   }
 
-  constructor(chartItemService: ChartItemService) {
-    super(chartItemService)
+  constructor(chartItemService: ChartItemService, cd: ChangeDetectorRef) {
+    super(chartItemService, cd)
+    this.viewBoxHeight = 400;
+    this.viewBoxWidht = 400;
   }
 
   ngOnInit() {
@@ -60,7 +64,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   }
 
   ngAfterViewInit(): void {
-
+    super.ngAfterViewInit(this.svgContainer);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -102,22 +106,22 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
 
     let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
     let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    var oneDisplayPercentY = this.viewBoxHeight / 100;
+    var oneDisplayPercentY = 380 / 100;
  
     var useMaxValueY = (yMaxValue - yMinValue);
-    var singleStepY = (this.viewBoxHeight / this.valueSteps);
+    var singleStepY = (380 / this.valueSteps);
     var singleStepYValue = (useMaxValueY / this.valueSteps);
 
     this.yAxis = [];
     this.yAxis.push(
       {
         text: yMinValue.toString(),
-        position: this.viewBoxHeight
+        position: 380 + 10
       }
     );
     for (let index = 1; index <= (this.valueSteps - 1); index++) {
       var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
-      var step = this.viewBoxHeight - Utils.roundScale(singleStepY * index);
+      var step = 380 - Utils.roundScale(singleStepY * index) + 10;
       this.yAxis.push(
         {
           text: currentValue.toString(),
@@ -128,7 +132,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     this.yAxis.push(
       {
         text: yMaxValue.toString(),
-        position: 0
+        position: 10
       }
     );
 
@@ -161,7 +165,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
         let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
         var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
         var displayValueY = Utils.roundScale(percentValueY * oneDisplayPercentY);
-        let y: number = (this.viewBoxHeight - displayValueY)
+        let y: number = (390 - displayValueY) + 10
         draw += x + ',' + y + ' ';
 
         if (point.name === '' || point.name === null || point.name === undefined) {
