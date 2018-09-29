@@ -207,9 +207,9 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   get yAxisDescriptionYOffset() {
     if (this.currentOrientation === ChartOrientation.Left) {
-      return 16;
+      return (16 + this.yAxisDescriptionYOffsetOrientationLeftRightScale);
     } else if (this.currentOrientation === ChartOrientation.Right) {
-      return -24;
+      return (-22.5 - this.yAxisDescriptionYOffsetOrientationLeftRightScale);
     } else {
       return (22 + this.yAxisDescriptionYOffsetScale);
     }
@@ -273,7 +273,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     if (this.currentOrientation === ChartOrientation.Left) {
       return -9;
     } else if (this.currentOrientation === ChartOrientation.Right) {
-      return 3;
+      return 1.5;
     } else {
       return -9;
     }
@@ -352,8 +352,12 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   yAxisTextXOffsetScale: number = 0;
   yAxisDescriptionYOffsetScale: number = 0;
+  yAxisDescriptionYOffsetOrientationLeftRightScale: number = 0;
+  currentClientWidth: number = 450;
+  
   private getScaleFromClientSize() {
     if (this.cHeight != 0 && this.cWidth != 0) {
+      this.currentClientWidth = this.cWidth;
       if (this.cHeight <= 150) {
         this.scaleX = 1.1;
         this.scaleY = 2.5;
@@ -392,6 +396,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
         this.scaleYWidthOffset = 5;
         this.scaleYTextOffset = 16;
         this.yAxisDescriptionYOffsetScale = -8;
+        this.yAxisDescriptionYOffsetOrientationLeftRightScale = -2;
         this.yAxisTextXOffsetScale = 0;
       } else if (this.cWidth <= 250) {
         this.scaleXWidth = 2;
@@ -399,6 +404,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
         this.scaleYWidthOffset = 5;
         this.scaleYTextOffset = 16;
         this.yAxisDescriptionYOffsetScale = -8;
+        this.yAxisDescriptionYOffsetOrientationLeftRightScale = -2;
         this.yAxisTextXOffsetScale = 0;
       } else if (this.cWidth <= 450) {
         if (this.cWidth <= 350) {
@@ -406,11 +412,13 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
           this.scaleYWidthOffset = 5;
           this.scaleYTextOffset = 14;
           this.yAxisDescriptionYOffsetScale = -8;
+          this.yAxisDescriptionYOffsetOrientationLeftRightScale = -2;
         } else {
           this.scaleYWidth = 1.4;
           this.scaleYWidthOffset = 8;
           this.scaleYTextOffset = 16;
           this.yAxisDescriptionYOffsetScale = -6;
+          this.yAxisDescriptionYOffsetOrientationLeftRightScale = 0;
         }
         this.scaleXWidth = 1.5;
         this.yAxisTextXOffsetScale = 0;
@@ -420,6 +428,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
         this.scaleYWidthOffset = 12;
         this.scaleYTextOffset = 22;
         this.yAxisDescriptionYOffsetScale = 0;
+        this.yAxisDescriptionYOffsetOrientationLeftRightScale = 6;
         this.yAxisTextXOffsetScale = 4;
       } else {
         this.scaleXWidth = 1;
@@ -427,6 +436,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
         this.scaleYWidthOffset = 12;
         this.scaleYTextOffset = 22;
         this.yAxisDescriptionYOffsetScale = 0;
+        this.yAxisDescriptionYOffsetOrientationLeftRightScale = 6;
         this.yAxisTextXOffsetScale = 4;
       }
     } else {
@@ -436,6 +446,8 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
       this.scaleYWidth = 1;
       this.scaleYWidthOffset = 12;
       this.scaleYTextOffset = 22;
+      this.currentClientWidth = 450;
+      this.yAxisDescriptionYOffsetOrientationLeftRightScale = 0;
     }
   }
 

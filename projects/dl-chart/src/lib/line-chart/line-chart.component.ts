@@ -7,6 +7,7 @@ import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
+import { ChartOrientation } from '../models/enums';
 
 @Component({  
   selector: 'dl-line-chart',  
@@ -246,6 +247,20 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
       }
     }
     return null;
+  }
+
+  pointScale: number = 1;
+  getPointScale(yPos: number) {
+    if (this.currentClientWidth >= 600) {
+      if (this.currentClientWidth >= 750) {
+        this.pointScale = 1.6;
+      } else  if (this.currentClientWidth >= 850) {
+        this.pointScale = 1.8;
+      }
+      return {"transform" : "scaleY(" + this.pointScale + ") translateY(-" +  (yPos - (yPos / this.pointScale)) + "px)" };
+    } else {
+      return {"transform" : "scaleY(1) translateY(0px)" };
+    }
   }
 
 }

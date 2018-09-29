@@ -12,9 +12,11 @@
         <polyline *ngIf="!activeHideLines" [attr.id]="axis.id" [attr.class]="'line line-anim'" [attr.stroke]="axis.color"
           fill="none" [attr.points]="axis.drawCoords" />
         <g *ngIf="!activeHidePoints">
+          <g *ngFor="let point of axis.points">
           <circle (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(point)"
             [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" [attr.fill]="point.color"
-            [attr.cx]="point.x" [attr.cy]="point.y" [attr.r]="pointSize(point)" *ngFor="let point of axis.points" />
+            [attr.cx]="point.x" [attr.cy]="point.y" [attr.r]="pointSize(point)" [ngStyle]="getPointScale(point.y)" />
+          </g>
         </g>
       </g>
     </svg>
@@ -26,7 +28,6 @@
           <text dy=".71em" [attr.y]="xAxisTextYOffsetStartEnd(i, xAxis.length)" [attr.x]="xAxisTextXOffset" [ngStyle]="xAxisStyleTextStartEnd(i, xAxis.length)">{{
             axis.text }}</text>
         </g>
-        <!--<path class="domain" d="M0,6V0H900V6"></path>-->
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
       </g>
     </svg>
