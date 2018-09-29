@@ -177,9 +177,9 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return 0;
     } else if (this.currentOrientation === ChartOrientation.Top) {
-      return -13;
+      return (-8 - this.yAxisTextXOffsetScale);
     } else {
-      return 12;
+      return (8 + this.yAxisTextXOffsetScale);
     }
   }
 
@@ -211,7 +211,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return -24;
     } else {
-      return 22;
+      return (22 + this.yAxisDescriptionYOffsetScale);
     }
   }
 
@@ -221,7 +221,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return 6;
     } else {
-      return -10;
+      return -6;
     }
   }
 
@@ -285,7 +285,7 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return 7;
     } else {
-      return -10;
+      return -6;
     }
   }
 
@@ -350,6 +350,8 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
     }, 1000/60);
   } 
 
+  yAxisTextXOffsetScale: number = 0;
+  yAxisDescriptionYOffsetScale: number = 0;
   private getScaleFromClientSize() {
     if (this.cHeight != 0 && this.cWidth != 0) {
       if (this.cHeight <= 150) {
@@ -389,32 +391,43 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
         this.scaleYWidth = 2.5;
         this.scaleYWidthOffset = 5;
         this.scaleYTextOffset = 16;
+        this.yAxisDescriptionYOffsetScale = -8;
+        this.yAxisTextXOffsetScale = 0;
       } else if (this.cWidth <= 250) {
         this.scaleXWidth = 2;
         this.scaleYWidth = 1.6;
         this.scaleYWidthOffset = 5;
         this.scaleYTextOffset = 16;
+        this.yAxisDescriptionYOffsetScale = -8;
+        this.yAxisTextXOffsetScale = 0;
       } else if (this.cWidth <= 450) {
         if (this.cWidth <= 350) {
           this.scaleYWidth = 1.6;
           this.scaleYWidthOffset = 5;
           this.scaleYTextOffset = 14;
+          this.yAxisDescriptionYOffsetScale = -8;
         } else {
           this.scaleYWidth = 1.4;
           this.scaleYWidthOffset = 8;
           this.scaleYTextOffset = 16;
+          this.yAxisDescriptionYOffsetScale = -6;
         }
         this.scaleXWidth = 1.5;
+        this.yAxisTextXOffsetScale = 0;
       } else if (this.cWidth <= 550) {
         this.scaleXWidth = 1;
         this.scaleYWidth = 1;
         this.scaleYWidthOffset = 12;
         this.scaleYTextOffset = 22;
+        this.yAxisDescriptionYOffsetScale = 0;
+        this.yAxisTextXOffsetScale = 4;
       } else {
         this.scaleXWidth = 1;
         this.scaleYWidth = 1;
         this.scaleYWidthOffset = 12;
         this.scaleYTextOffset = 22;
+        this.yAxisDescriptionYOffsetScale = 0;
+        this.yAxisTextXOffsetScale = 4;
       }
     } else {
       this.scaleX = 0.6;
