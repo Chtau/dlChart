@@ -3,6 +3,7 @@ import { ChartItemService } from '../services/chart-item.service';
 import { ScaleBaseChartComponent } from './scale-base-chart.component';
 import { IValue } from '../models/value.interface';
 
+
 describe('ScaleBaseChartComponent', () => {
   let baseChart: ScaleBaseChartComponent<IValue>;
 
@@ -19,7 +20,7 @@ describe('ScaleBaseChartComponent', () => {
 
   beforeEach(() => {
     var service = TestBed.get(ChartItemService);
-    baseChart = new ScaleBaseChartComponent(service);
+    baseChart = new ScaleBaseChartComponent(service, null);
   });
 
   it('should create', () => {
