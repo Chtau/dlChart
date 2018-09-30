@@ -89,10 +89,6 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
       });
     });
 
-    /*if (maxValueY > this.currentScaleMaxValue) {
-      this.currentScaleMaxValue = maxValueY;
-    }*/
-    
     let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
     let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
     let oneDisplayPercentX: number = this.viewBoxWidht / 100;

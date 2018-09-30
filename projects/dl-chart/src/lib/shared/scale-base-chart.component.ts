@@ -12,6 +12,25 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;
   currentOrientation: ChartOrientation = ChartOrientation.Bottom;
+  yAxisTextXOffsetScale: number = 0;
+  yAxisDescriptionYOffsetScale: number = 0;
+  yAxisDescriptionYOffsetOrientationLeftRightScale: number = 0;
+  currentClientWidth: number = 450;
+
+  cHeight: number = 0;
+  cWidth: number = 0;
+  scaleX: number = 0.6;
+  scaleXWidth: number = 1;
+  scaleY: number = 1.4;
+  scaleYWidth: number = 1;
+  scaleYWidthOffset: number = 12;
+  scaleYTextOffset: number = 22;
+  svgMarginTop: number = 0;
+  chartRotation: number = 0;
+  svgWidth: string = '100%';
+  svgHeight: string = '100%';
+
+  svg: any
 
   @Input()
   set scaleLabel(val: string) {
@@ -42,24 +61,6 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
   constructor(public chartItemService: ChartItemService, public cd: ChangeDetectorRef) {
     super(chartItemService);
   }
-
-
-
-  cHeight: number = 0;
-  cWidth: number = 0;
-  scaleX: number = 0.6;
-  scaleXWidth: number = 1;
-  scaleY: number = 1.4;
-  scaleYWidth: number = 1;
-  scaleYWidthOffset: number = 12;
-  scaleYTextOffset: number = 22;
-  svgMarginTop: number = 0;
-  chartRotation: number = 0;
-  svgWidth: string = '100%';
-  svgHeight: string = '100%';
-
-  svg: any
-
 
   ngAfterViewInit(_svg: any): void {
     this.svg = _svg;
@@ -348,11 +349,6 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
       this.sizeChange();
     }, 1000/60);
   } 
-
-  yAxisTextXOffsetScale: number = 0;
-  yAxisDescriptionYOffsetScale: number = 0;
-  yAxisDescriptionYOffsetOrientationLeftRightScale: number = 0;
-  currentClientWidth: number = 450;
   
   private getScaleFromClientSize() {
     if (this.cHeight != 0 && this.cWidth != 0) {
@@ -449,6 +445,4 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
       this.yAxisDescriptionYOffsetOrientationLeftRightScale = 0;
     }
   }
-
-
 }
