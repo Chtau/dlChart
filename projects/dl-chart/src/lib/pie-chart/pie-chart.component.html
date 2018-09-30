@@ -1,24 +1,12 @@
 <ng-container>
-    <svg viewBox="-1 -1 2 2" style="transform: rotate(-90deg); width: 100%;height: 100%;" class="pie-chart-svg">
-        <path 
-        *ngFor="let slice of pie; let i = index"
-        [attr.id]="createElementId(slice, i)"
-        (mousemove)="onHoverSegment($event, slice)" 
-        (mouseleave)="onLeaveSegment($event)" 
-        (click)="onClickSegment(slice)" 
-        [attr.class]="cssClassSegment(slice, i)" 
-        [attr.d]="slice.draw" 
-        [attr.fill]="slice.color"
-        ></path>
-        <circle *ngIf="currentDonutConfiguration != null"
-            class="inner-circle" 
-            cx="0"
-            cy="0"
-            [attr.r]="currentDonutConfiguration.size"
-            [attr.fill]="currentDonutConfiguration.color"
-          />
-    </svg>
-    <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop"  [style.left.px]="tooltipLeft" class="tooltiptext">
-        <span>{{ tooltipValue }}</span>
-    </div>
+  <svg viewBox="-1 -1 2 2" style="transform: rotate(-90deg); width: 100%;height: 100%;" class="pie-chart-svg">
+    <path *ngFor="let slice of pie; let i = index" [attr.id]="createElementId(slice, i)" (mousemove)="onHoverSegment($event, slice)"
+      (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(slice)" [attr.class]="cssClassSegment(slice, i)"
+      [attr.d]="slice.draw" [attr.fill]="slice.color"></path>
+    <circle *ngIf="currentDonutConfiguration != null" class="inner-circle" cx="0" cy="0" [attr.r]="currentDonutConfiguration.size"
+      [attr.fill]="currentDonutConfiguration.color" />
+  </svg>
+  <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
+    <span>{{ tooltipValue }}</span>
+  </div>
 </ng-container>
