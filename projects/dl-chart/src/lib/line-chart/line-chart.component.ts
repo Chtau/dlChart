@@ -19,7 +19,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   
   @ViewChild('svgContainer') svgContainer: ElementRef;
 
-  currentScaleMaxValue: number = 10;
+  //currentScaleMaxValue: number = 10;
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
   activeHidePoints: boolean = false;
@@ -29,10 +29,10 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   yAxis: Axis[] = [];
   axisPoint: AxisPoint[] = [];
 
-  @Input()
+  /*@Input()
   set scaleMaxValue(val: number) {
     this.currentScaleMaxValue = val;
-  }
+  }*/
 
   @Input()
   set hideRaster(val: boolean) {
@@ -96,9 +96,9 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
       });
     });
 
-    if (maxValueY > this.currentScaleMaxValue) {
+    /*if (maxValueY > this.currentScaleMaxValue) {
       this.currentScaleMaxValue = maxValueY;
-    }
+    }*/
     
     let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
     let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
@@ -249,15 +249,15 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     return null;
   }
 
-  pointScale: number = 1;
   getPointScale(yPos: number) {
     if (this.currentClientWidth >= 600) {
+      var pointScale: number = 1;
       if (this.currentClientWidth >= 750) {
-        this.pointScale = 1.6;
+        pointScale = 1.6;
       } else  if (this.currentClientWidth >= 850) {
-        this.pointScale = 1.8;
+        pointScale = 1.8;
       }
-      return {"transform" : "scaleY(" + this.pointScale + ") translateY(-" +  (yPos - (yPos / this.pointScale)) + "px)" };
+      return {"transform" : "scaleY(" + pointScale + ") translateY(-" +  (yPos - (yPos / pointScale)) + "px)" };
     } else {
       return {"transform" : "scaleY(1) translateY(0px)" };
     }
