@@ -113,7 +113,8 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
         position: 380 + 10
       }
     );
-    for (let index = 1; index <= (this.valueSteps - 1); index++) {
+    let index = 1;
+    for (index = 1; index <= (this.valueSteps - 1); index++) {
       var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
       var step = 380 - Utils.roundScale(singleStepY * index) + 10;
       this.yAxis.push(
@@ -139,7 +140,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     });
 
     var xA: string[] = [];
-    for (let index = 0; index < (uniqueXPoints.length); index++) {
+    for (index = 0; index < (uniqueXPoints.length); index++) {
       xA.push(uniqueXPoints[index].toString());
     }
     this.xAxis = this.createAxis(xA, this.viewBoxWidht);
@@ -148,7 +149,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
 
     var oneValueYPercent = useMaxValueY / 100;
 
-    for (let index = 0; index < items.length; index++) {
+    for (index = 0; index < items.length; index++) {
       const element = items[index];
       let draw: string = '';
       let pointAxis: LinePoint[] = [];

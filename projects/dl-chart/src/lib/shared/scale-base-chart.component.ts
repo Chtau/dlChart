@@ -148,12 +148,12 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
   }
 
   xAxisStyleTextStartEnd(index: number, length: number) {
+    let anchor: string = 'middle';
     if (this.currentOrientation === ChartOrientation.Left) {
       return {"transform" : "rotate(-90deg) ", "text-anchor" : "end"};
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return {"transform" : "rotate(90deg) ", "text-anchor" : "start"};
     } else if (this.currentOrientation === ChartOrientation.Top) {
-      let anchor: string = 'middle'
       if (index === 0) {
         anchor = 'start'
       } else if (index === length - 1) {
@@ -161,7 +161,6 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
       }
       return {"transform" : "rotate(180deg) ", "text-anchor" : anchor};
     } else {
-      let anchor: string = 'middle'
       if (index === 0) {
         anchor = 'end'
       } else if (index === length - 1) {
