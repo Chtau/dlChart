@@ -1,7 +1,7 @@
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from './base-chart.component';
 import { ChartOrientation } from '../models/enums';
-import { Input, Output, EventEmitter, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
@@ -58,10 +58,10 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
   svgWidth: string = '100%';
   svgHeight: string = '100%';
 
-  svg: ElementRef
+  svg: any
 
 
-  ngAfterViewInit(_svg: ElementRef): void {
+  ngAfterViewInit(_svg: any): void {
     this.svg = _svg;
     this.chartRotationCheck(this.currentOrientation);
     if (this.svg && this.svg.nativeElement) {

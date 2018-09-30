@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ElementRef, Renderer2, ChangeDetectorRef } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
@@ -15,7 +15,7 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
 })  
 export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
   
-  @ViewChild('svgContainer') svgContainer: ElementRef;
+  @ViewChild('svgContainer') svgContainer: any;
 
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;

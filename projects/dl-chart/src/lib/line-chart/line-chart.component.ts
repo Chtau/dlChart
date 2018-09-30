@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef, ViewChild } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -7,7 +7,6 @@ import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
-import { ChartOrientation } from '../models/enums';
 
 @Component({  
   selector: 'dl-line-chart',  
@@ -17,9 +16,8 @@ import { ChartOrientation } from '../models/enums';
 })  
 export class LineChartComponent extends ScaleBaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
   
-  @ViewChild('svgContainer') svgContainer: ElementRef;
+  @ViewChild('svgContainer') svgContainer: any;
 
-  //currentScaleMaxValue: number = 10;
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
   activeHidePoints: boolean = false;
@@ -28,11 +26,6 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   axisPoint: AxisPoint[] = [];
-
-  /*@Input()
-  set scaleMaxValue(val: number) {
-    this.currentScaleMaxValue = val;
-  }*/
 
   @Input()
   set hideRaster(val: boolean) {
