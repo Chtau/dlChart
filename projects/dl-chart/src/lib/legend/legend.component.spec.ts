@@ -225,4 +225,9 @@ describe('LegendComponent', () => {
     expect(class1).toBe(' ', 'class without selection or hover');
   });
 
+  it('legend config', () => {
+    component.legendConfiguration = new LegendConfiguration();
+    expect(component.currentLegendConfiguration.HideValue).toBe(false, 'Hide value false')
+  });
+
 });

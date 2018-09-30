@@ -3,6 +3,7 @@ import { LineChartComponent } from './line-chart.component';
 import { Point } from '../models/point.model';
 import { SimpleChange } from '@angular/core';
 import { DlLineChartModule } from './line-chart.module';
+import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 
 describe('LineChartComponent', () => {
   let component: LineChartComponent;
@@ -92,7 +93,6 @@ describe('LineChartComponent', () => {
         ]
       }];
     component.steps = 10;
-    //component.scaleMaxValue = 30;
     component.hideLines = true;
     component.hidePoints = true;
     component.hideRaster = true;
@@ -100,7 +100,6 @@ describe('LineChartComponent', () => {
     component.ngOnChanges({
       values: new SimpleChange(null, component.values, false),
       steps: new SimpleChange(null, component.steps, false),
-      //scaleMaxValue: new SimpleChange(null, component.scaleMaxValue, false),
       hideLines: new SimpleChange(null, component.hideLines, false),
       hideRaster: new SimpleChange(null, component.hideRaster, false),
     });
@@ -199,6 +198,53 @@ describe('LineChartComponent', () => {
 
     component.onClickSegment(component.axisPoint[0].points[0]);
     expect(component.currentActiveChartItem).toBeNull('Line Point deselected');
+  });
+
+  it('scale test', () => {
+    let pointName: string;
+    component.values = [
+      {
+        color: 'red',
+        cssClass: null,
+        data: null,
+        name: 'Red',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 10),
+          new Point(2018, 15),
+          new Point(2019, 7),
+          new Point(2020, 12),
+        ]
+      },
+      {
+        color: 'blue',
+        cssClass: null,
+        data: null,
+        name: 'Blue',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 5, null, null, 'test'),
+          new Point(2018, 9, pointName),
+          new Point(2019, 22),
+          new Point(2020, 1, 'test', 'grey', 'point-test-1', new TooltipConfiguration(), {test: 1}),
+        ]
+      }];
+
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    component.currentClientWidth = 650;
+    expect(component.getPointScale(150).transform).toBe('scaleY(1) translateY(-0px)', '650 Client width');
+
+    component.currentClientWidth = 750;
+    expect(component.getPointScale(150).transform).toBe('scaleY(1.6) translateY(-56.25px)', '750 Client width');
+    
+    component.currentClientWidth = 850;
+    expect(component.getPointScale(150).transform).toBe('scaleY(1.8) translateY(-66.66666666666667px)', '850 Client width');
+
+    expect(component.currentActivePoint).toBeNull('no active point');
   });
 
 });

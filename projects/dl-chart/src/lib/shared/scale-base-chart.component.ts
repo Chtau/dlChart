@@ -313,8 +313,12 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   marginOffsetCheck(chartRotation: ChartOrientation) {
     if (chartRotation === ChartOrientation.Left || chartRotation === ChartOrientation.Right) {
+      if (this.svg) {
       var marginCalc = ((this.svg.nativeElement.parentElement.parentElement.clientHeight - this.svg.nativeElement.parentElement.parentElement.clientWidth) / 2);
       this.svgMarginTop = marginCalc;
+      } else {
+        this.svgMarginTop = 0;  
+      }
     } else {
       this.svgMarginTop = 0;
     }
@@ -322,12 +326,18 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
 
   orientationCheck() {
     if (this.currentOrientation === ChartOrientation.Left || this.currentOrientation === ChartOrientation.Right) {
-      if ((this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px') != this.svgWidth 
-        || this.svgHeight != (this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px')) {
-        this.svgWidth = this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px';
-        this.svgHeight = this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px';
-        this.marginOffsetCheck(this.currentOrientation);
-        this.cd.detectChanges();
+      if (this.svg) {
+        if ((this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px') != this.svgWidth 
+          || this.svgHeight != (this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px')) {
+          this.svgWidth = this.svg.nativeElement.parentElement.parentElement.clientHeight + 'px';
+          this.svgHeight = this.svg.nativeElement.parentElement.parentElement.clientWidth + 'px';
+          this.marginOffsetCheck(this.currentOrientation);
+          this.cd.detectChanges();
+        }
+      } else {
+        this.svgWidth = '100%';
+        this.svgHeight = '100%';
+        this.cd.detectChanges();  
       }
     } else {
       this.svgWidth = '100%';
@@ -339,18 +349,20 @@ export class ScaleBaseChartComponent<T> extends BaseChartComponent<T> {
   sizeChange() {
     setTimeout(() => {
       this.orientationCheck();
-      var newH = this.svg.nativeElement.clientHeight;
-      var newW = this.svg.nativeElement.clientWidth;
-      if (newH != this.cHeight || newW != this.cWidth) {
-        this.cHeight = newH;
-        this.cWidth = newW;
-        this.getScaleFromClientSize();
+      if (this.svg) {
+        var newH = this.svg.nativeElement.clientHeight;
+        var newW = this.svg.nativeElement.clientWidth;
+        if (newH != this.cHeight || newW != this.cWidth) {
+          this.cHeight = newH;
+          this.cWidth = newW;
+          this.getScaleFromClientSize();
+        }
       }
       this.sizeChange();
     }, 1000/60);
   } 
   
-  private getScaleFromClientSize() {
+  getScaleFromClientSize() {
     if (this.cHeight != 0 && this.cWidth != 0) {
       this.currentClientWidth = this.cWidth;
       if (this.cHeight <= 150) {

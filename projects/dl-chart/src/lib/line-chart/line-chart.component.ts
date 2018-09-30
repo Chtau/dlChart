@@ -242,11 +242,11 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   getPointScale(yPos: number) {
     if (this.currentClientWidth >= 600) {
       var pointScale: number = 1;
-      if (this.currentClientWidth >= 750) {
-        pointScale = 1.6;
-      } else  if (this.currentClientWidth >= 850) {
+      if (this.currentClientWidth >= 850) {
         pointScale = 1.8;
-      }
+      } else if (this.currentClientWidth >= 750) {
+        pointScale = 1.6;
+      } 
       return {"transform" : "scaleY(" + pointScale + ") translateY(-" +  (yPos - (yPos / pointScale)) + "px)" };
     } else {
       return {"transform" : "scaleY(1) translateY(0px)" };
