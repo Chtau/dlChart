@@ -127,7 +127,7 @@ export class AppComponent implements AfterViewInit {
   selectedOrientationLine: ChartOrientation = ChartOrientation.Bottom;
   currentStepsLine: number = 28;
   leftScaleAxisLine: boolean = true;
-  rightScaleAxisLine: boolean = false;
+  rightScaleAxisLine: boolean = true;
   hideRaster: boolean = false;
   hideLines: boolean = false;
   hidePoints: boolean = false;

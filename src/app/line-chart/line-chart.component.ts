@@ -278,27 +278,22 @@ export class LineChart1Component extends ScaleBaseChartComponent<Line> implement
     }
   }
 
-  /*startEndStyle(index: number, length: number) {
-    let anchor: string = 'middle';
-    if (this.currentOrientation === ChartOrientation.Left) {
-      return {"transform" : "rotate(-90deg) ", "text-anchor" : "end"};
-    } else if (this.currentOrientation === ChartOrientation.Right) {
-      return {"transform" : "rotate(90deg) ", "text-anchor" : "start"};
-    } else if (this.currentOrientation === ChartOrientation.Top) {
-      if (index === 0) {
-        anchor = 'start'
-      } else if (index === length - 1) {
-        anchor = 'end'
+  get selectionXEndPoint() {
+    if (this.currentActivePoint != null) {
+      if (this.currentActivePoint.x > 50) {
+        if (this.activeRightScaleAxis === true) {
+          return 100;
+        } else {
+          return 0;
+        }
+      } else {
+        if (this.activeLeftScaleAxis === true) {
+          return 0;
+        } else {
+          return 100;
+        }
       }
-      return {"transform" : "rotate(180deg) ", "text-anchor" : anchor};
-    } else {
-      if (index === 0) {
-        anchor = 'end'
-      } else if (index === length - 1) {
-        anchor = 'start'
-      }
-      return {"transform" : "rotate(0deg) ", "text-anchor" : anchor};
     }
-  }*/
+  }
 
 }
