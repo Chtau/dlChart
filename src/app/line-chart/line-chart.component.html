@@ -2,6 +2,10 @@
   <svg #svgContainer [ngStyle]="{'transform' : 'rotate(' + chartRotation + 'deg)', 'margin-top' : this.svgMarginTop + 'px' }"
     class="line-chart-svg" width="100%" height="100%">
     <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
+      <g *ngIf="!activeHideRaster">
+        <line class="background-raster" [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y1="0" y2="100%" *ngFor="let axis of xAxis"></line>
+        <line class="background-raster" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'" x1="0" x2="100%" *ngFor="let axis of yAxis"></line>
+      </g>
       <g *ngIf="!activeHideSelectionLines"><!-- TODO: check what Y Axis is the closed and visible -->
         <line *ngIf="currentActivePoint != null" class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y + '%'"
           [attr.x2]="currentActivePoint.x + '%'" [attr.y1]="'100%'" [attr.x1]="currentActivePoint.x + '%'"></line>
@@ -27,8 +31,7 @@
       <g class="x axis xaxis-text">
         <g class="tick" *ngFor="let axis of xAxis; let i=index">
           <line [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y2="4" ></line>
-          <text dy=".71em" [attr.y]="xAxisTextYOffsetStartEnd(i, xAxis.length)" [attr.x]="axis.position + '%'" [ngStyle]="xAxisStyleTextStartEnd(i, xAxis.length)">{{
-            axis.text }}</text>
+          <text dy=".71em" [attr.y]="xAxisTextYOffsetStartEnd(i, xAxis.length)" [attr.x]="axis.position + '%'" [ngStyle]="xAxisStyleTextStartEnd(i, xAxis.length)">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="'100%'" class="x-stroke" />
       </g>
