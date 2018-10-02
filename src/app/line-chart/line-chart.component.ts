@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef, ViewChild } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -17,8 +17,6 @@ import { AxisLine } from '../models/axisline.model';
 })  
 export class LineChart1Component extends ScaleBaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
   
-  @ViewChild('svgContainer') svgContainer: any;
-
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
   activeHidePoints: boolean = false;
@@ -264,20 +262,6 @@ export class LineChart1Component extends ScaleBaseChartComponent<Line> implement
     return null;
   }
 
-  getPointScale(yPos: number) {
-    if (this.currentClientWidth >= 600) {
-      var pointScale: number = 1;
-      if (this.currentClientWidth >= 850) {
-        pointScale = 1.8;
-      } else if (this.currentClientWidth >= 750) {
-        pointScale = 1.6;
-      } 
-      return {"transform" : "scaleY(" + pointScale + ") translateY(-" +  (yPos - (yPos / pointScale)) + "px)" };
-    } else {
-      return {"transform" : "scaleY(1) translateY(0px)" };
-    }
-  }
-
   get selectionXEndPoint() {
     if (this.currentActivePoint != null) {
       if (this.currentActivePoint.x > 50) {
@@ -294,6 +278,16 @@ export class LineChart1Component extends ScaleBaseChartComponent<Line> implement
         }
       }
     }
+  }
+
+  xStartEndTextAnchor(index: number, length: number) {
+    let anchor: string = 'middle';
+    if (index === 0) {
+      anchor = 'end'
+    } else if (index === length - 1) {
+      anchor = 'start'
+    }
+    return {"text-anchor" : anchor};
   }
 
 }
