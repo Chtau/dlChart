@@ -9,8 +9,10 @@
           [attr.y2]="currentActivePoint.y+ '%'" [attr.y1]="currentActivePoint.y+ '%'"></line>
       </g>
       <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
-        <g *ngFor="let line of axis.lines">
-            <line [attr.class]="'line line-anim'" [attr.x1]="line.x1 + '%'" [attr.y1]="line.y1 + '%'" [attr.x2]="line.x2 + '%'" [attr.y2]="line.y2 + '%'" [attr.stroke]="line.color" />
+        <g *ngIf="!activeHideLines">
+          <g *ngFor="let line of axis.lines">
+              <line [attr.class]="'line line-anim'" [attr.x1]="line.x1 + '%'" [attr.y1]="line.y1 + '%'" [attr.x2]="line.x2 + '%'" [attr.y2]="line.y2 + '%'" [attr.stroke]="line.color" />
+          </g>
         </g>
         <g *ngIf="!activeHidePoints">
           <g *ngFor="let point of axis.points">
@@ -38,9 +40,11 @@
           <text dy=".32em" [attr.x]="'75%'" [attr.y]="axis.position + '%'" style="text-anchor:end">{{ axis.text }}</text>
         </g>
         <line id="dlChartBarYLine" y1="0%" x1="100%" y2="100%" x2="100%" class="x-stroke" />
-        <!--<text [attr.y]="yAxisDescriptionYOffset" [attr.x]="yAxisDescriptionXOffset" dy=".71em" [ngStyle]="yAxisStyleDescription">{{
-          currentScaleLabel }}</text>-->
+        <!--<text [attr.y]="'0%'" [attr.x]="'100%'" dy=".71em" [ngStyle]="yAxisStyleDescription">{{ currentScaleLabel }}</text>-->
       </g>
+    </svg>
+    <svg *ngIf="activeLeftScaleAxis" x="31px">
+      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
     </svg>
     <svg id="yaxis2" x="calc(100% - 30px)" y="0" width="30px" height="calc(100% - 40px)"><!--height="85%" viewBox="0 0 20 400"-->
       <g class="y axis" *ngIf="activeRightScaleAxis">
@@ -59,9 +63,11 @@
             axis.text }}</text>
         </g>-->
         <line id="dlChartBarYLine" y1="0%" x1="0" y2="100%" x2="0" class="x-stroke" />
-        <!--<text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{
-          currentScaleLabel }}</text>-->
+        <text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{ currentScaleLabel }}</text>
       </g>
+    </svg>
+    <svg *ngIf="activeRightScaleAxis" x="calc(100% - 43px)" y="0">
+      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
     </svg>
   </svg>
   <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
