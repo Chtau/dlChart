@@ -1,7 +1,7 @@
 <ng-container>
   <svg #svgContainer [ngStyle]="{'transform' : 'rotate(' + chartRotation + 'deg)', 'margin-top' : this.svgMarginTop + 'px' }"
     class="line-chart-svg" width="100%" height="100%">
-    <svg width="calc(100% - 60px)" height="calc(100% - 40px)" x="30px">
+    <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
       <g *ngIf="!activeHideSelectionLines"><!-- TODO: check what Y Axis is the closed and visible -->
         <line *ngIf="currentActivePoint != null" class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y + '%'"
           [attr.x2]="currentActivePoint.x + '%'" [attr.y1]="'100%'" [attr.x1]="currentActivePoint.x + '%'"></line>
@@ -23,7 +23,7 @@
         </g>
       </g>
     </svg>
-    <svg width="calc(100% - 60px)" height="40px" y="calc(100% - 40px)" x="30px">
+    <svg width="calc(100% - 60px)" height="30px" y="calc(100% - 30px)" x="30px">
       <g class="x axis xaxis-text">
         <g class="tick" *ngFor="let axis of xAxis; let i=index">
           <line [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y2="4" ></line>
@@ -33,20 +33,25 @@
         <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="'100%'" class="x-stroke" />
       </g>
     </svg>
-    <svg id="yaxis" x="0%" y="0" width="30px" height="calc(100% - 40px)"><!-- viewBox="0 0 20 400"-->
+    <svg id="yaxis" x="0%" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;"><!-- viewBox="0 0 20 400"-->
       <g class="y axis" *ngIf="activeLeftScaleAxis">
         <g class="tick" *ngFor="let axis of yAxis">
           <line x2="100%" x1="calc(100% - 6px)" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
-          <text dy=".32em" [attr.x]="'75%'" [attr.y]="axis.position + '%'" style="text-anchor:end">{{ axis.text }}</text>
+          <text dy=".32em" [attr.x]="'75%'" [attr.y]="axis.position + '%'" style="text-anchor:end" >{{ axis.text }}</text><!--style="text-anchor:end"-->
         </g>
         <line id="dlChartBarYLine" y1="0%" x1="100%" y2="100%" x2="100%" class="x-stroke" />
         <!--<text [attr.y]="'0%'" [attr.x]="'100%'" dy=".71em" [ngStyle]="yAxisStyleDescription">{{ currentScaleLabel }}</text>-->
       </g>
     </svg>
-    <svg *ngIf="activeLeftScaleAxis" x="31px">
+    <!--<svg x="0" y="0" style="overflow: visible;">
+      <g>
+        <text dy=".32em" [attr.x]="'0'" [attr.y]="'0'" style="text-anchor:end" >{{ yAxis[0].text }}</text>
+      </g>
+    </svg>-->
+    <svg *ngIf="activeLeftScaleAxis" x="31px" y="30px">
       <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
     </svg>
-    <svg id="yaxis2" x="calc(100% - 30px)" y="0" width="30px" height="calc(100% - 40px)"><!--height="85%" viewBox="0 0 20 400"-->
+    <svg id="yaxis2" x="calc(100% - 30px)" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;"><!--height="85%" viewBox="0 0 20 400"-->
       <g class="y axis" *ngIf="activeRightScaleAxis">
         <g class="tick" *ngFor="let axis of yAxis">
           <line x2="6" x1="0" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
@@ -63,10 +68,10 @@
             axis.text }}</text>
         </g>-->
         <line id="dlChartBarYLine" y1="0%" x1="0" y2="100%" x2="0" class="x-stroke" />
-        <text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{ currentScaleLabel }}</text>
+        <!--<text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{ currentScaleLabel }}</text>-->
       </g>
     </svg>
-    <svg *ngIf="activeRightScaleAxis" x="calc(100% - 43px)" y="0">
+    <svg *ngIf="activeRightScaleAxis" x="calc(100% - 43px)"  y="30px">
       <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
     </svg>
   </svg>
