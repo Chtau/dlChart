@@ -21,6 +21,7 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
   currentActiveBar: Bar = null;
   shouldHideSelectLine: boolean = false;
 
+  barGroundLineY: number = 100;
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
@@ -64,16 +65,57 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
         val.value = 0;
       }
     })
-    let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
-    var oneS = (maxValue / this.valueSteps)
+
+    let minValueCalc: number = Math.min.apply(Math, items.map(function(o) { return o.value; }));
+    if (minValueCalc > 0) {
+      minValueCalc = 0;
+    }
+    let maxValueCalc: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
+
+    let maxValue: number = (maxValueCalc - minValueCalc);
+    var singleStepValue = (maxValue / this.valueSteps);
+    var singleStepY = (100 / this.valueSteps);
+    //let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
+    /*var oneS = (maxValue / this.valueSteps)
     var yA: string[] = [];
     for (let index = 0; index < (this.valueSteps + 1); index++) {
-      yA.push(Utils.roundScale(oneS * index).toString());
+      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
+      yA.push(currentValue.toString());
+      //yA.push(Utils.roundScale(oneS * index).toString());
     }
     if (maxValue != 0) {
       this.createYAxis(yA);
+    }*/
+    this.yAxis = [];
+    this.yAxis.push(
+      {
+        text: minValueCalc.toString(),
+        position: 100 //380 + 10
+      }
+    );
+    for (let index = 1; index <= (this.valueSteps - 1); index++) {
+      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
+      //var step = 380 - Utils.roundScale(singleStepY * index) + 10;
+      var step = 100 - Utils.roundScale(singleStepY * index);
+      this.yAxis.push(
+        {
+          text: currentValue.toString(),
+          position: step
+        }
+      )
     }
+    this.yAxis.push(
+      {
+        text: maxValueCalc.toString(),
+        position: 0
+      }
+    );
 
+    this.barGroundLineY = 100; // 100% is the default (equals "0" values)
+    if (minValueCalc < 0) {
+      this.barGroundLineY = (100 - (100 / maxValue) * (minValueCalc * -1));
+    }
+    // We use "0" value for the bar start
     //var singleBarWidht = (((this.viewBoxWidht - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
     var singleBarWidht = (((100 - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
     let bars: { val: Value, position: number}[] = [];
@@ -118,22 +160,34 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
     this.bars = [];
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
+      var height = element.val.value === 0 ? 0 : (1 * (element.val.value / onePercent));
+      var y = element.val.value === 0 ? 0 : (this.barGroundLineY - (1 * (element.val.value / onePercent)));
+      let isMinusValue: boolean = false;
+      if (height < 0) {
+        isMinusValue = true;
+        height = height * -1;
+        y = this.barGroundLineY;
+      }
+
       this.bars.push(
         {
           width: singleBarWidht,
-          height: element.val.value === 0 ? 0 : (1 * (element.val.value / onePercent)),
+          height: height,
           //height: element.val.value === 0 ? 0 : (oneDisplayPercent * (element.val.value / onePercent)),
-          y:  element.val.value === 0 ? 0 : (100 - (1 * (element.val.value / onePercent))),
+          //y:  element.val.value === 0 ? 0 : (100 - (1 * (element.val.value / onePercent))),
+          y:  y,
           x: element.position,
           sourceItem: element.val,
           calculatedPercent: element.val.value === 0 ? 0 : (element.val.value / onePercent),
           color: element.val.color,
           id: Utils.createElementId('chart-bar-', index),
-          allowActivate: true
+          allowActivate: true,
+          isMinusValue: isMinusValue
         }
       );
     }
   }
+
 
   createYAxis(items: string[]) {
     this.yAxis = [];

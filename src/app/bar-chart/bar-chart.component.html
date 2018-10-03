@@ -6,8 +6,10 @@
         [attr.x]="bar.x + '%'" [attr.width]="bar.width + '%'" 
         [attr.y]="bar.y + '%'" [attr.height]="bar.height + '%'" *ngFor="let bar of bars">
       </rect>
-      <line id="dlChartBarSelectLineIndicator" *ngIf="currentActiveBar != null && !shouldHideSelectLine" [attr.y1]="(100 - currentActiveBar.height) + '%'"
-        x1="0" [attr.y2]="(100 - currentActiveBar.height) + '%'" [attr.x2]="'100%'" class="active-stroke" />
+      <line id="dlChartBarSelectLineIndicator" *ngIf="currentActiveBar != null && !shouldHideSelectLine" 
+      [attr.y1]="(currentActiveBar.isMinusValue === false ?  (barGroundLineY - currentActiveBar.height) : (barGroundLineY + currentActiveBar.height)) + '%'"
+        x1="0" [attr.y2]="(currentActiveBar.isMinusValue === false ?  (barGroundLineY - currentActiveBar.height) : (barGroundLineY + currentActiveBar.height)) + '%'" [attr.x2]="'100%'" class="active-stroke" />
+      <line id="dlChartBarNormalizedLine" [attr.y1]="barGroundLineY + '%'" x1="0" [attr.y2]="barGroundLineY + '%'" [attr.x2]="'100%'" class="x-stroke" />
     </svg>
     <svg id="xaxis" width="calc(100% - 60px)" height="30px" y="calc(100% - 30px)" x="30px">
       <g class="x axis xaxis-text">

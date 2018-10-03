@@ -12,5 +12,5 @@ export class Bar implements IChartItem {
   x: number;
   y: number;
   width: number;
-
+  isMinusValue: boolean;
 }
