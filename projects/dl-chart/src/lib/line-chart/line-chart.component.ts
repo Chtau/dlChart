@@ -7,6 +7,8 @@ import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
+import { BaseChartComponent } from '../shared/base-chart.component';
+import { AxisLine } from '../models/axisline.model';
 
 @Component({  
   selector: 'dl-line-chart',  
@@ -14,9 +16,12 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
   styleUrls: ['./line-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LineChartComponent extends ScaleBaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
+export class LineChartComponent extends BaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
   
-  @ViewChild('svgContainer') svgContainer: any;
+  currentScaleLabel: string = 'Values';
+  valueSteps: number = 6;
+  activeLeftScaleAxis: boolean = true;
+  activeRightScaleAxis: boolean = false;
 
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
@@ -26,6 +31,26 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   axisPoint: AxisPoint[] = [];
+
+  @Input()
+  set scaleLabel(val: string) {
+    this.currentScaleLabel = val;
+  }
+
+  @Input()
+  set steps(val: number) {
+    this.valueSteps = val;
+  }
+
+  @Input()
+  set leftScaleAxis(val: boolean) {
+    this.activeLeftScaleAxis = val;
+  }
+
+  @Input()
+  set rightScaleAxis(val: boolean) {
+    this.activeRightScaleAxis = val;
+  }
 
   @Input()
   set hideRaster(val: boolean) {
@@ -48,9 +73,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   }
 
   constructor(chartItemService: ChartItemService, cd: ChangeDetectorRef) {
-    super(chartItemService, cd)
-    this.viewBoxHeight = 400;
-    this.viewBoxWidht = 400;
+    super(chartItemService)
   }
 
   ngOnInit() {
@@ -58,7 +81,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
   }
 
   ngAfterViewInit(): void {
-    super.ngAfterViewInit(this.svgContainer);
+    //super.ngAfterViewInit(this.svgContainer);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -96,23 +119,26 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
 
     let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
     let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    var oneDisplayPercentY = 380 / 100;
+    //var oneDisplayPercentY = 380 / 100;
+    var oneDisplayPercentY = 80 / 100;
  
     var useMaxValueY = (yMaxValue - yMinValue);
-    var singleStepY = (380 / this.valueSteps);
+    //var singleStepY = (380 / this.valueSteps);
+    var singleStepY = (100 / this.valueSteps);
     var singleStepYValue = (useMaxValueY / this.valueSteps);
 
     this.yAxis = [];
     this.yAxis.push(
       {
         text: yMinValue.toString(),
-        position: 380 + 10
+        position: 100 //380 + 10
       }
     );
     let index = 1;
     for (index = 1; index <= (this.valueSteps - 1); index++) {
       var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
-      var step = 380 - Utils.roundScale(singleStepY * index) + 10;
+      //var step = 380 - Utils.roundScale(singleStepY * index) + 10;
+      var step = 100 - Utils.roundScale(singleStepY * index);
       this.yAxis.push(
         {
           text: currentValue.toString(),
@@ -123,7 +149,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     this.yAxis.push(
       {
         text: yMaxValue.toString(),
-        position: 10
+        position: 0
       }
     );
 
@@ -139,7 +165,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     for (index = 0; index < (uniqueXPoints.length); index++) {
       xA.push(uniqueXPoints[index].toString());
     }
-    this.xAxis = this.createAxis(xA, this.viewBoxWidht);
+    this.xAxis = this.createAxis(xA, 100);
     
     this.axisPoint = [];
 
@@ -148,16 +174,20 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     for (index = 0; index < items.length; index++) {
       const element = items[index];
       let draw: string = '';
+      let lineAxis: AxisLine[] = [];
       let pointAxis: LinePoint[] = [];
       let indexPoints: number = 0;
       let subItemId: string = Utils.createElementId('chart-line-point-', index);
 
       element.points.forEach(point => {
-        let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
+        //let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
+        let x: number = ((point.xValue - xMinValue) / onePercentX);
         var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
-        var displayValueY = Utils.roundScale(percentValueY * oneDisplayPercentY);
-        let y: number = (390 - displayValueY) + 10
-        draw += x + ',' + y + ' ';
+        //var displayValueY = Utils.roundScale(percentValueY * oneDisplayPercentY);
+        var displayValueY = Utils.roundScale(percentValueY * 1);
+        //let y: number = (390 - displayValueY) + 10
+        let y: number = 100 - displayValueY
+        draw += x + '% ,' + y + '% ';
 
         if (point.name === '' || point.name === null || point.name === undefined) {
           point.name = element.name;
@@ -167,7 +197,7 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
           {
             x: x,
             y: y,
-            size: 8,
+            size: 5,
             sourceItem: point,
             calculatedPercent: ((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
@@ -175,6 +205,22 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
             allowActivate: true
           }
         );
+
+        // we create a new line unless this is the last index
+        if (indexPoints != 0) {
+          var prevLine = lineAxis[lineAxis.length -1];
+          prevLine.x2 = x;
+          prevLine.y2 = y;
+        }
+        if (indexPoints != (element.points.length - 1)) {
+          lineAxis.push({
+            color: element.color,
+            x1: x,
+            y1: y,
+            x2: -1,
+            y2: -1
+          });
+        }
         indexPoints++;
       });
       this.axisPoint.push({
@@ -184,7 +230,8 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
         calculatedPercent: null,
         color: element.color,
         id: Utils.createElementId('chart-line-axis-', index),
-        allowActivate: false
+        allowActivate: false,
+        lines: lineAxis
       });
     }
 
@@ -239,18 +286,32 @@ export class LineChartComponent extends ScaleBaseChartComponent<Line> implements
     return null;
   }
 
-  getPointScale(yPos: number) {
-    if (this.currentClientWidth >= 600) {
-      var pointScale: number = 1;
-      if (this.currentClientWidth >= 850) {
-        pointScale = 1.8;
-      } else if (this.currentClientWidth >= 750) {
-        pointScale = 1.6;
-      } 
-      return {"transform" : "scaleY(" + pointScale + ") translateY(-" +  (yPos - (yPos / pointScale)) + "px)" };
-    } else {
-      return {"transform" : "scaleY(1) translateY(0px)" };
+  get selectionXEndPoint() {
+    if (this.currentActivePoint != null) {
+      if (this.currentActivePoint.x > 50) {
+        if (this.activeRightScaleAxis === true) {
+          return 100;
+        } else {
+          return 0;
+        }
+      } else {
+        if (this.activeLeftScaleAxis === true) {
+          return 0;
+        } else {
+          return 100;
+        }
+      }
     }
+  }
+
+  xStartEndTextAnchor(index: number, length: number) {
+    let anchor: string = 'middle';
+    if (index === 0) {
+      anchor = 'end'
+    } else if (index === length - 1) {
+      anchor = 'start'
+    }
+    return {"text-anchor" : anchor};
   }
 
 }

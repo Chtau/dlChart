@@ -74,7 +74,7 @@
     </div>
   </div>
   <br>-->
-  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
@@ -102,7 +102,6 @@
       <dl-line-chart 
         [chartid]="'line-chart'" 
         [values]="lines" 
-        [orientation]="selectedOrientationLine" 
         [leftScaleAxis]="leftScaleAxisLine"
         [rightScaleAxis]="true"
         [steps]="currentStepsLine"
@@ -113,8 +112,8 @@
       ></dl-line-chart>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>-->
-  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
+  </div>
+  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
@@ -153,7 +152,7 @@
       ></dl-line-chart1>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>
+  </div>-->
 </div>
 </div>
 

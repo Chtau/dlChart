@@ -1,59 +1,66 @@
 <ng-container>
-  <svg #svgContainer [ngStyle]="{'transform' : 'rotate(' + chartRotation + 'deg)', 'margin-top' : this.svgMarginTop + 'px' }"
-    class="line-chart-svg" [attr.width]="svgWidth" [attr.height]="svgHeight" viewBox="0 0 400 400" preserveAspectRatio="none">
-    <svg width="82.8%" height="85%" x="10%" viewBox="0 0 400 400" preserveAspectRatio="none">
-      <g *ngIf="!activeHideSelectionLines">
-        <line *ngIf="currentActivePoint != null" class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y"
-          [attr.x2]="currentActivePoint.x" [attr.y1]="400" [attr.x1]="currentActivePoint.x"></line>
-        <line *ngIf="currentActivePoint != null" class="point-selected y-point-selected" [attr.x2]="currentActivePoint.x"
-          [attr.y2]="currentActivePoint.y" [attr.y1]="currentActivePoint.y"></line>
+  <svg class="line-chart-svg" width="100%" height="100%">
+    <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
+      <g *ngIf="!activeHideRaster">
+        <line class="background-raster" [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y1="0" y2="100%"
+          *ngFor="let axis of xAxis"></line>
+        <line class="background-raster" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'" x1="0" x2="100%"
+          *ngFor="let axis of yAxis"></line>
+      </g>
+      <g *ngIf="!activeHideSelectionLines && currentActivePoint != null">
+        <line class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y + '%'" [attr.x2]="currentActivePoint.x + '%'"
+          [attr.y1]="'100%'" [attr.x1]="currentActivePoint.x + '%'"></line>
+        <line class="point-selected y-point-selected" [attr.x1]="selectionXEndPoint + '%'" [attr.x2]="currentActivePoint.x+ '%'"
+          [attr.y2]="currentActivePoint.y+ '%'" [attr.y1]="currentActivePoint.y+ '%'"></line>
       </g>
       <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
-        <polyline *ngIf="!activeHideLines" [attr.id]="axis.id" [attr.class]="'line line-anim'" [attr.stroke]="axis.color"
-          fill="none" [attr.points]="axis.drawCoords" />
+        <g *ngIf="!activeHideLines">
+          <g *ngFor="let line of axis.lines">
+            <line [attr.class]="'line line-anim'" [attr.x1]="line.x1 + '%'" [attr.y1]="line.y1 + '%'" [attr.x2]="line.x2 + '%'"
+              [attr.y2]="line.y2 + '%'" [attr.stroke]="line.color" />
+          </g>
+        </g>
         <g *ngIf="!activeHidePoints">
           <g *ngFor="let point of axis.points">
-          <circle (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(point)"
-            [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" [attr.fill]="point.color"
-            [attr.cx]="point.x" [attr.cy]="point.y" [attr.r]="pointSize(point)" [ngStyle]="getPointScale(point.y)" />
+            <circle (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(point)"
+              [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" [attr.fill]="point.color"
+              [attr.cx]="point.x + '%'" [attr.cy]="point.y + '%'" [attr.r]="pointSize(point)" />
           </g>
         </g>
       </g>
     </svg>
-    <svg width="82.8%" height="15%" viewBox="0 0 400 20" preserveAspectRatio="none" y="85%" x="10%">
-      <g class="x axis xaxis-text" transform="translate(0,0)">
-        <g class="tick" [attr.transform]="'translate(' + axis.position + ', 0) scale(' + scaleXWidth + ', ' + scaleX + ')'"
-          style="opacity: 1;" *ngFor="let axis of xAxis; let i=index">
-          <line y2="4" x2="0"></line>
-          <text dy=".71em" [attr.y]="xAxisTextYOffsetStartEnd(i, xAxis.length)" [attr.x]="xAxisTextXOffset" [ngStyle]="xAxisStyleTextStartEnd(i, xAxis.length)">{{
-            axis.text }}</text>
+    <svg width="calc(100% - 60px)" height="30px" y="calc(100% - 30px)" x="30px">
+      <g class="x axis xaxis-text">
+        <g class="tick" *ngFor="let axis of xAxis; let i=index">
+          <line [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y2="4"></line>
+          <text dy=".71em" [attr.y]="'6'" [attr.x]="axis.position + '%'" [ngStyle]="xStartEndTextAnchor(i, xAxis.length)">{{ axis.text }}</text>
         </g>
-        <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="viewBoxWidht" class="x-stroke" />
+        <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="'100%'" class="x-stroke" />
       </g>
     </svg>
-    <svg id="yaxis" x="2.8%" y="8.5" width="10%" height="85%" viewBox="0 0 20 400">
+    <svg id="yaxis" x="0%" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;">
       <g class="y axis" *ngIf="activeLeftScaleAxis">
-        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
-          <line x2="20" x1="14" y2="0"></line>
-          <text dy=".32em" [attr.x]="yAxisTextXOffset" [attr.y]="yAxisTextYOffset" [ngStyle]="yAxisStyleText">{{
-            axis.text }}</text>
+        <g class="tick" *ngFor="let axis of yAxis">
+          <line x2="100%" x1="calc(100% - 6px)" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
+          <text dy=".32em" [attr.x]="'75%'" [attr.y]="axis.position + '%'" style="text-anchor:end">{{ axis.text }}</text>
         </g>
-        <line id="dlChartBarYLine" y1="10" x1="100%" y2="390" x2="100%" class="x-stroke" />
-        <text [attr.y]="yAxisDescriptionYOffset" [attr.x]="yAxisDescriptionXOffset" dy=".71em" [ngStyle]="yAxisStyleDescription">{{
-          currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="0%" x1="100%" y2="100%" x2="100%" class="x-stroke" />
       </g>
     </svg>
-    <svg id="yaxis2" x="90%" y="8.5" width="10%" height="85%" viewBox="0 0 20 400">
+    <svg *ngIf="activeLeftScaleAxis" x="31px" y="30px">
+      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
+    </svg>
+    <svg id="yaxis2" x="calc(100% - 30px)" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;">
       <g class="y axis" *ngIf="activeRightScaleAxis">
-        <g class="tick" [attr.transform]="'translate(0, ' + axis.position + ')'" *ngFor="let axis of yAxis">
-          <line x2="6" x1="0" y2="0"></line>
-          <text dy=".32em" [attr.x]="y2AxisTextXOffset" [attr.y]="y2AxisTextYOffset" [ngStyle]="y2AxisStyleText">{{
-            axis.text }}</text>
+        <g class="tick" *ngFor="let axis of yAxis">
+          <line x2="6" x1="0" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
+          <text dy=".32em" [attr.x]="'8'" [attr.y]="axis.position + '%'" style="text-anchor:start">{{ axis.text }}</text>
         </g>
-        <line id="dlChartBarYLine" y1="10" x1="0" y2="390" x2="0" class="x-stroke" />
-        <text [attr.y]="y2AxisDescriptionYOffset" [attr.x]="y2AxisDescriptionXOffset" dy=".71em" [ngStyle]="y2AxisStyleDescription">{{
-          currentScaleLabel }}</text>
+        <line id="dlChartBarYLine" y1="0%" x1="0" y2="100%" x2="0" class="x-stroke" />
       </g>
+    </svg>
+    <svg *ngIf="activeRightScaleAxis" x="calc(100% - 43px)" y="30px">
+      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
     </svg>
   </svg>
   <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
