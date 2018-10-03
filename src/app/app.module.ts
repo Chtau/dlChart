@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { DlChartModule } from "dlChart";
 import { DlLineChart1Module } from './line-chart/line-chart.module';
+import { DlBarChartModule1 } from './bar-chart/bar-chart.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { DlLineChart1Module } from './line-chart/line-chart.module';
     FormsModule,
     BrowserModule,
     DlChartModule,
-    DlLineChart1Module
+    DlLineChart1Module,
+    DlBarChartModule1
   ],
   providers: [],
   bootstrap: [AppComponent]

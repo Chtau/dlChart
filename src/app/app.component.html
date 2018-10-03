@@ -74,7 +74,7 @@
     </div>
   </div>
   <br>-->
-  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
@@ -112,7 +112,7 @@
       ></dl-line-chart>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>
+  </div>-->
   <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
@@ -153,6 +153,43 @@
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
   </div>-->
+  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
+    <h2>Bar Chart</h2>
+    <input [(ngModel)]="wrapperWidth" (ngModelChange)="changeWidth()">
+    <input [(ngModel)]="wrapperHeight" (ngModelChange)="changeHeight()">
+    <input (keyup)="onKeyBar($event)" placeholder="Filter the Chart ('3' shows only two Values)">
+    <br>
+    <label>Orientation 
+      <select style="margin-left: 20px;" [(ngModel)]="selectedOrientation">
+        <option [ngValue]="0">Bottom</option>
+        <option [ngValue]="1">Left</option>
+        <option [ngValue]="2">Right</option>
+        <option [ngValue]="3">Top</option>
+      </select>
+    </label>
+    <br>
+    <label><input [(ngModel)]="leftScaleAxis" type="checkbox"/>Left Scale Axis</label>
+    <label><input [(ngModel)]="rightScaleAxis" type="checkbox" />Right Scale Axis</label>
+    <br>
+    <label>Bar offset <input [(ngModel)]="barOffset" type="number"></label>
+    <br>
+    <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
+    <br>
+    <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
+    <div style="margin-left: 15%;margin-right: 15%;height: 400px;">
+      <dl-bar-chart1 
+        [orientation]="selectedOrientation" 
+        [chartid]="'test-chart-bar'" 
+        [scaleLabel]="'Demo Values'" 
+        [steps]="currentSteps" 
+        [values]="filterValuesBar"
+        [leftScaleAxis]="leftScaleAxis"
+        [rightScaleAxis]="rightScaleAxis"
+        [barOffset]="barOffset"
+        [hideSelectLine]="hideSelectLine"
+      ></dl-bar-chart1>    
+    </div>
+  </div>
 </div>
 </div>
 

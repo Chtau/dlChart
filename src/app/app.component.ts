@@ -115,11 +115,11 @@ export class AppComponent implements AfterViewInit {
     });
   }
 
-  selectedOrientation: ChartOrientation = ChartOrientation.Left;
+  selectedOrientation: ChartOrientation = ChartOrientation.Bottom;
   currentSteps: number = 10;
   leftScaleAxis: boolean = true;
-  rightScaleAxis: boolean = false;
-  barOffset: number = 13;
+  rightScaleAxis: boolean = true;
+  barOffset: number = 5;
   hideSelectLine: boolean = false;
   hideChartHoverEffect: boolean = false;
   hideChartSelectEffect: boolean = false;

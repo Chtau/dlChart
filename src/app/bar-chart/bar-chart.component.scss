@@ -1,0 +1,72 @@
+@import '../shared/tooltip.scss';
+
+.bar-chart-svg {
+  /*padding: 5%;*/
+}
+
+.bar:hover {
+  opacity: .8;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.bar-selected {
+  opacity: .8;
+
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  
+  transition:.5s;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.bar-anim {
+  -webkit-transform-origin : 100% 90% 0;
+  -moz-transform-origin : 100% 90% 0;
+  -o-transform-origin : 100% 90% 0;
+  -ms-transform-origin : 100% 90% 0;
+  transform-origin : 100% 90% 0;
+
+  animation: .4s scaleBar;
+  animation-direction: reverse;
+  animation-delay: 1ms;
+  transform-origin: 100% 90% 0;
+}
+
+.active-stroke {
+  stroke: rgb(0, 0, 0);
+  stroke-width: 1;
+  stroke-dasharray: 5;
+}
+
+.x-stroke {
+  stroke: rgb(0, 0, 0);
+  /*stroke-width:2*/
+}
+
+@keyframes scaleBar {
+  100% {
+    transform: scaleY(0);
+  }
+}
