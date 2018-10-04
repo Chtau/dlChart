@@ -6,6 +6,7 @@ import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
+import { ChartOrientation } from '../models/enums';
 
 @Component({  
   selector: 'dl-bar-chart1',  
@@ -238,6 +239,14 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
       }
     }
     return css;
+  }
+
+  normOrientation(defaultValue: string, rotateValue: string) {
+    if (this.currentOrientation === ChartOrientation.Bottom) {
+      return defaultValue;
+    } else {
+      return rotateValue;
+    }
   }
 
 }
