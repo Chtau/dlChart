@@ -10,7 +10,7 @@ export class AxisPoint implements IChartItem {
   calculatedPercent: number;
   allowActivate: boolean;
 
-  drawCoords: string;
+  //drawCoords: string;
   points: LinePoint[];
   lines: AxisLine[];
 }

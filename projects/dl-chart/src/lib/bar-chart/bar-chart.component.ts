@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
@@ -14,7 +14,7 @@ import { ChartOrientation } from '../models/enums';
   styleUrls: ['./bar-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
+export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnChanges {
 
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
@@ -41,21 +41,11 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     this.viewBoxHeight = 400;
     this.viewBoxWidht = 400;
   }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit(): void {
-    
-  }
-  
-
+ 
   ngOnChanges(changes: SimpleChanges): void {
     this.resetActiveElement();
     this.calculateChart();
   }
-
 
   calculateChart() {
     var items = this.currentValues;

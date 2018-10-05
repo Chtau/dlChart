@@ -200,7 +200,7 @@ export class LineChart1Component extends ScaleBaseChartComponent<Line> implement
         indexPoints++;
       });
       this.axisPoint.push({
-        drawCoords: draw,
+        //drawCoords: draw,
         points: pointAxis,
         sourceItem: element,
         calculatedPercent: null,

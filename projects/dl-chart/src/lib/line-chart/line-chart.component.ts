@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -15,7 +15,7 @@ import { AxisLine } from '../models/axisline.model';
   styleUrls: ['./line-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LineChartComponent extends BaseChartComponent<Line> implements OnInit, AfterViewInit, OnChanges {
+export class LineChartComponent extends BaseChartComponent<Line> implements OnChanges {
   
   currentScaleLabel: string = 'Values';
   valueSteps: number = 6;
@@ -75,23 +75,13 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
     super(chartItemService)
   }
 
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit(): void {
-    
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     this.resetActiveElement();
     this.calculateChart();
   }
 
-
   calculateChart() {
     var items = this.currentValues;
-    let maxValueY: number = 0;
     let uniqueXPoints: number[] = [];
     let uniqueYPoints: number[] = [];
 
@@ -102,9 +92,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
         }
         if (!uniqueYPoints.some(e => e === point.yValue)) {
           uniqueYPoints.push(point.yValue);
-        }
-        if (point.yValue > maxValueY) {
-          maxValueY = point.yValue;
         }
       });
     });
@@ -165,7 +152,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
 
     for (index = 0; index < items.length; index++) {
       const element = items[index];
-      let draw: string = '';
       let lineAxis: AxisLine[] = [];
       let pointAxis: LinePoint[] = [];
       let indexPoints: number = 0;
@@ -176,7 +162,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
         var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
         var displayValueY = Utils.roundScale(percentValueY * 1);
         let y: number = 100 - displayValueY
-        draw += x + '% ,' + y + '% ';
 
         if (point.name === '' || point.name === null || point.name === undefined) {
           point.name = element.name;
@@ -194,7 +179,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
           }
         );
 
-        // we create a new line unless this is the last index
         if (indexPoints != 0) {
           var prevLine = lineAxis[lineAxis.length -1];
           prevLine.x2 = x;
@@ -212,7 +196,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
         indexPoints++;
       });
       this.axisPoint.push({
-        drawCoords: draw,
         points: pointAxis,
         sourceItem: element,
         calculatedPercent: null,
