@@ -16,7 +16,7 @@ import { BaseChartComponent } from '../shared/base-chart.component';
 })  
 export class BarChartComponent extends BaseChartComponent<Value> implements OnChanges {
 
-  barWidhtOffset: number = 15;
+  barWidhtOffset: number = 5;
   currentActiveBar: Bar = null;
   shouldHideSelectLine: boolean = false;
   currentScaleLabel: string = '';
