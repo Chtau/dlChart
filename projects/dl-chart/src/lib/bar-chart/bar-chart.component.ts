@@ -1,12 +1,12 @@
-import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
-import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
 import { ChartOrientation } from '../models/enums';
+import { BaseChartComponent } from '../shared/base-chart.component';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -14,11 +14,16 @@ import { ChartOrientation } from '../models/enums';
   styleUrls: ['./bar-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnChanges {
+export class BarChartComponent extends BaseChartComponent<Value> implements OnChanges {
 
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
   shouldHideSelectLine: boolean = false;
+  currentScaleLabel: string = 'Values';
+  valueSteps: number = 6;
+  activeLeftScaleAxis: boolean = true;
+  activeRightScaleAxis: boolean = false;
+  currentOrientation: ChartOrientation = ChartOrientation.Bottom;
 
   barGroundLineY: number = 100;
   xAxis: Axis[] = [];
@@ -35,11 +40,33 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     this.barWidhtOffset = val;
   }
 
-  constructor(chartItemService: ChartItemService,
-    cd: ChangeDetectorRef) {
-    super(chartItemService, cd);
-    this.viewBoxHeight = 400;
-    this.viewBoxWidht = 400;
+  @Input()
+  set scaleLabel(val: string) {
+    this.currentScaleLabel = val;
+  }
+
+  @Input()
+  set steps(val: number) {
+    this.valueSteps = val;
+  }
+
+  @Input()
+  set leftScaleAxis(val: boolean) {
+    this.activeLeftScaleAxis = val;
+  }
+
+  @Input()
+  set rightScaleAxis(val: boolean) {
+    this.activeRightScaleAxis = val;
+  }
+
+  @Input()
+  set orientation(val: ChartOrientation) {
+    this.currentOrientation = val;
+  }
+
+  constructor(chartItemService: ChartItemService) {
+    super(chartItemService);
   }
  
   ngOnChanges(changes: SimpleChanges): void {

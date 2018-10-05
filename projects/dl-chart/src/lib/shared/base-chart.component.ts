@@ -8,9 +8,6 @@ import { IValue } from '../models/value.interface';
 
 export class BaseChartComponent<T> {
 
-  viewBoxWidht: number = 450;
-  viewBoxHeight: number = 450;
-
   currentValues: T[] = [];
 
   tooltipLeft: number;
