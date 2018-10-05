@@ -19,7 +19,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
   shouldHideSelectLine: boolean = false;
-  currentScaleLabel: string = 'Values';
+  currentScaleLabel: string = '';
   valueSteps: number = 6;
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;

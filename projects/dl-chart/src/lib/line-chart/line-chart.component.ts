@@ -17,7 +17,7 @@ import { AxisLine } from '../models/axisline.model';
 })  
 export class LineChartComponent extends BaseChartComponent<Line> implements OnChanges {
   
-  currentScaleLabel: string = 'Values';
+  currentScaleLabel: string = '';
   valueSteps: number = 6;
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;
