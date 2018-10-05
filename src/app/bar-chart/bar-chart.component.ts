@@ -241,16 +241,18 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
     return css;
   }
 
-  normOrientation(defaultValue: string, rightValue: string, leftValue: string) {
+  normOrientation(defaultValue: string, rightValue: string, leftValue: string, topValue: string) {
     if (this.currentOrientation === ChartOrientation.Bottom) {
       return defaultValue;
     } else if (this.currentOrientation === ChartOrientation.Right) {
       return rightValue;
+    } else if (this.currentOrientation === ChartOrientation.Left){
+      return leftValue;
     } else {
-      if (leftValue === undefined) {
+      if (topValue === undefined) {
         return defaultValue;
       }
-      return leftValue;
+      return topValue;
     }
   }
 
