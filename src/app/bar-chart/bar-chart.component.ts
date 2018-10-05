@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
@@ -15,8 +15,6 @@ import { ChartOrientation } from '../models/enums';
   encapsulation: ViewEncapsulation.Emulated
 })  
 export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
-  
-  //@ViewChild('svgContainer') svgContainer: any;
 
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
@@ -49,7 +47,7 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
   }
 
   ngAfterViewInit(): void {
-    //super.ngAfterViewInit(this.svgContainer);
+    
   }
   
 
@@ -76,27 +74,16 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
     let maxValue: number = (maxValueCalc - minValueCalc);
     var singleStepValue = (maxValue / this.valueSteps);
     var singleStepY = (100 / this.valueSteps);
-    //let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
-    /*var oneS = (maxValue / this.valueSteps)
-    var yA: string[] = [];
-    for (let index = 0; index < (this.valueSteps + 1); index++) {
-      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
-      yA.push(currentValue.toString());
-      //yA.push(Utils.roundScale(oneS * index).toString());
-    }
-    if (maxValue != 0) {
-      this.createYAxis(yA);
-    }*/
+
     this.yAxis = [];
     this.yAxis.push(
       {
         text: minValueCalc.toString(),
-        position: 100 //380 + 10
+        position: 100
       }
     );
     for (let index = 1; index <= (this.valueSteps - 1); index++) {
       var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
-      //var step = 380 - Utils.roundScale(singleStepY * index) + 10;
       var step = 100 - Utils.roundScale(singleStepY * index);
       this.yAxis.push(
         {
@@ -112,12 +99,11 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
       }
     );
 
-    this.barGroundLineY = 100; // 100% is the default (equals "0" values)
+    this.barGroundLineY = 100;
     if (minValueCalc < 0) {
       this.barGroundLineY = (100 - (100 / maxValue) * (minValueCalc * -1));
     }
-    // We use "0" value for the bar start
-    //var singleBarWidht = (((this.viewBoxWidht - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
+
     var singleBarWidht = (((100 - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
     let bars: { val: Value, position: number}[] = [];
     let index: number = 1;
@@ -156,7 +142,6 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
 
   createBars(maxValue: number, singleBarWidht: number, items: { val: Value, position: number}[]) {
     var onePercent = maxValue / 100;
-    //var oneDisplayPercent = 380 / 100;
 
     this.bars = [];
     for (let index = 0; index < items.length; index++) {
@@ -174,8 +159,6 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
         {
           width: singleBarWidht,
           height: height,
-          //height: element.val.value === 0 ? 0 : (oneDisplayPercent * (element.val.value / onePercent)),
-          //y:  element.val.value === 0 ? 0 : (100 - (1 * (element.val.value / onePercent))),
           y:  y,
           x: element.position,
           sourceItem: element.val,
@@ -192,7 +175,6 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
 
   createYAxis(items: string[]) {
     this.yAxis = [];
-    //var step = (380 / (items.length - 1));
     var step = (100 / (items.length - 1));
     for (let index = 0; index < (items.length - 1); index++) {
       const element = items[index];
