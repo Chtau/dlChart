@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { Value } from '../models/value.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from '../shared/utils';
@@ -13,7 +13,7 @@ import { DonutConfiguration } from '../models/donutconfiguration.model';
   styleUrls: ['./pie-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class PieChartComponent extends BaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
+export class PieChartComponent extends BaseChartComponent<Value> implements OnChanges {
 
   currentDonutConfiguration: DonutConfiguration = null;
 
@@ -56,14 +56,6 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnIn
 
   constructor(chartItemService: ChartItemService) {
       super(chartItemService);
-  }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   ngOnChanges(changes: SimpleChanges): void {
