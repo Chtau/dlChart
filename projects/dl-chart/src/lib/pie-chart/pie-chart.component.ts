@@ -31,11 +31,7 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnIn
 
   cssClassSegment(slice: Slice, index: number): string {
     let css: string = '';
-    if (slice.allowActivate) {
-      css += 'slice';
-    } else {
-      css += 'fill';
-    }
+    css += 'slice';
     if (slice === this.currentActiveChartItem) {
       css += ' slice-selected';
     }
@@ -86,13 +82,13 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnIn
       totalValue += item.value;
     });
     this.currentValues.forEach(item => {
-      cumulativePercent = this.createSlice(item, totalValue, cumulativePercent, true);
+      cumulativePercent = this.createSlice(item, totalValue, cumulativePercent);
     });
 
     this.chartItemService.setChartValues(new ServiceItem<Slice[]>(this.chartid, this.pie));
   }
 
-  createSlice(item: Value, totalValue: number, cumulativePercent: number, active: boolean) {
+  createSlice(item: Value, totalValue: number, cumulativePercent: number) {
     const [startX, startY] = this.getCoordinatesForPercent(cumulativePercent);
     let normValue = this.getNormalizedValue(totalValue, item.value);
     if (!normValue) {
@@ -115,7 +111,6 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnIn
     this.slices.push({
       color: item.color,
       draw: pathData,
-      allowActivate: active,
       sourceItem: item,
       id: null,
       calculatedPercent: (normValue * 100)

@@ -74,32 +74,28 @@ export class BaseChartComponent<T> {
   }
 
   onClickSegment(event: IChartItem) {
-    if (event.allowActivate) {
-      if (this.currentAllowSelect) {
-        if (event === this.currentActiveChartItem) {
-          this.currentActiveChartItem = null;
-          this.valueDeselect.emit(event.sourceItem);
-          this.chartItemService.chartValueDeselect.emit(new ServiceItem(this.chartid, event));
-        } else {
-          this.currentActiveChartItem = event;
-          this.valueSelect.emit(event.sourceItem);
-          this.chartItemService.chartValueSelect.emit(new ServiceItem(this.chartid, event));
-        }
+    if (this.currentAllowSelect) {
+      if (event === this.currentActiveChartItem) {
+        this.currentActiveChartItem = null;
+        this.valueDeselect.emit(event.sourceItem);
+        this.chartItemService.chartValueDeselect.emit(new ServiceItem(this.chartid, event));
+      } else {
+        this.currentActiveChartItem = event;
+        this.valueSelect.emit(event.sourceItem);
+        this.chartItemService.chartValueSelect.emit(new ServiceItem(this.chartid, event));
       }
-      this.valueClick.emit(event.sourceItem);
     }
+    this.valueClick.emit(event.sourceItem);
   }
 
   onHoverSegment(event: any, item: IChartItem) {
-    if (item.allowActivate) {
-      this.tooltipContentChartItem = item;
-      this.tooltipContentItem = item.sourceItem;
-      this.tooltipLeft = (event.clientX + 10);
-      this.tooltipTop = (event.clientY + 10);
-      this.tooltipShow = true;
-      this.valueChange.emit(item.sourceItem);
-      this.chartItemService.chartValueHover.emit(new ServiceItem(this.chartid, item));
-    }
+    this.tooltipContentChartItem = item;
+    this.tooltipContentItem = item.sourceItem;
+    this.tooltipLeft = (event.clientX + 10);
+    this.tooltipTop = (event.clientY + 10);
+    this.tooltipShow = true;
+    this.valueChange.emit(item.sourceItem);
+    this.chartItemService.chartValueHover.emit(new ServiceItem(this.chartid, item));
   }
 
   onLeaveSegment(event: any) {

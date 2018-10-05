@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef, ViewChild } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -6,7 +6,6 @@ import { Axis } from '../models/axis.model';
 import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
-import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { AxisLine } from '../models/axisline.model';
 
@@ -81,7 +80,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
   }
 
   ngAfterViewInit(): void {
-    //super.ngAfterViewInit(this.svgContainer);
+    
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -97,8 +96,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
     let uniqueYPoints: number[] = [];
 
     items.forEach(val => {
-      // get the max Value for X and Y axis
-      // get unique x points
       val.points.forEach(point => {
         if (!uniqueXPoints.some(e => e === point.xValue)) {
           uniqueXPoints.push(point.xValue);
@@ -114,16 +111,12 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
 
     let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
     let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
-    let oneDisplayPercentX: number = this.viewBoxWidht / 100;
     let onePercentX: number = (xMaxValue - xMinValue) / 100;
 
     let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
     let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    //var oneDisplayPercentY = 380 / 100;
-    var oneDisplayPercentY = 80 / 100;
  
     var useMaxValueY = (yMaxValue - yMinValue);
-    //var singleStepY = (380 / this.valueSteps);
     var singleStepY = (100 / this.valueSteps);
     var singleStepYValue = (useMaxValueY / this.valueSteps);
 
@@ -131,13 +124,12 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
     this.yAxis.push(
       {
         text: yMinValue.toString(),
-        position: 100 //380 + 10
+        position: 100
       }
     );
     let index = 1;
     for (index = 1; index <= (this.valueSteps - 1); index++) {
       var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
-      //var step = 380 - Utils.roundScale(singleStepY * index) + 10;
       var step = 100 - Utils.roundScale(singleStepY * index);
       this.yAxis.push(
         {
@@ -180,12 +172,9 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
       let subItemId: string = Utils.createElementId('chart-line-point-', index);
 
       element.points.forEach(point => {
-        //let x: number = (oneDisplayPercentX * ((point.xValue - xMinValue) / onePercentX));
         let x: number = ((point.xValue - xMinValue) / onePercentX);
         var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
-        //var displayValueY = Utils.roundScale(percentValueY * oneDisplayPercentY);
         var displayValueY = Utils.roundScale(percentValueY * 1);
-        //let y: number = (390 - displayValueY) + 10
         let y: number = 100 - displayValueY
         draw += x + '% ,' + y + '% ';
 
@@ -202,7 +191,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
             calculatedPercent: ((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
             id: Utils.createElementId(subItemId + '-', indexPoints),
-            allowActivate: true
           }
         );
 
@@ -230,7 +218,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnIn
         calculatedPercent: null,
         color: element.color,
         id: Utils.createElementId('chart-line-axis-', index),
-        allowActivate: false,
         lines: lineAxis
       });
     }

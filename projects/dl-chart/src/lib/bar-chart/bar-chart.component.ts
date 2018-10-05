@@ -165,7 +165,6 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
           calculatedPercent: element.val.value === 0 ? 0 : (element.val.value / onePercent),
           color: element.val.color,
           id: Utils.createElementId('chart-bar-', index),
-          allowActivate: true,
           isMinusValue: isMinusValue
         }
       );

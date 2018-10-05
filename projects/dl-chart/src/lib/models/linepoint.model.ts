@@ -6,7 +6,6 @@ export class LinePoint implements IChartItem {
   color: string;
   sourceItem: IValue;
   calculatedPercent: number;
-  allowActivate: boolean;
 
   x: number;
   y: number;
