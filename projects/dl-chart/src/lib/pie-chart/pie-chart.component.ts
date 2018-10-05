@@ -113,7 +113,7 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnIn
       draw: pathData,
       sourceItem: item,
       id: null,
-      calculatedPercent: (normValue * 100)
+      calculatedPercent: Utils.roundScale((normValue * 100))
     });
 
     return cumulativePercent;

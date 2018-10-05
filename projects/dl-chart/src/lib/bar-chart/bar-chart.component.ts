@@ -179,7 +179,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
           y:  y,
           x: element.position,
           sourceItem: element.val,
-          calculatedPercent: element.val.value === 0 ? 0 : (element.val.value / onePercent),
+          calculatedPercent: element.val.value === 0 ? 0 : Utils.roundScale(element.val.value / onePercent),
           color: element.val.color,
           id: Utils.createElementId('chart-bar-', index),
           isMinusValue: isMinusValue

@@ -173,7 +173,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
             y: y,
             size: 5,
             sourceItem: point,
-            calculatedPercent: ((point.xValue - xMinValue) / onePercentX),
+            calculatedPercent: Utils.roundScale((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
             id: Utils.createElementId(subItemId + '-', indexPoints),
           }
