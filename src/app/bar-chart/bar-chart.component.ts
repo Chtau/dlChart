@@ -212,6 +212,12 @@ export class BarChartComponent1 extends ScaleBaseChartComponent<Value> implement
   cssClassSegment(item: Bar): string {
     let css: string = '';
     
+    if (this.currentOrientation === ChartOrientation.Bottom || this.currentOrientation === ChartOrientation.Top) {
+      css += ' bar-anim-top-bottom';
+    } else {
+      css += ' bar-anim-left-right';
+    }
+
     if (item === this.currentActiveChartItem) {
       css += ' bar-selected';
     }

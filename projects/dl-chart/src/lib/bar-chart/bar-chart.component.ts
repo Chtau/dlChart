@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ChangeDetectorRef } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { Utils } from "../shared/utils";
@@ -6,6 +6,7 @@ import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
 import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
+import { ChartOrientation } from '../models/enums';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -14,13 +15,12 @@ import { ScaleBaseChartComponent } from '../shared/scale-base-chart.component';
   encapsulation: ViewEncapsulation.Emulated
 })  
 export class BarChartComponent extends ScaleBaseChartComponent<Value> implements OnInit, AfterViewInit, OnChanges {
-  
-  @ViewChild('svgContainer') svgContainer: any;
 
   barWidhtOffset: number = 15;
   currentActiveBar: Bar = null;
   shouldHideSelectLine: boolean = false;
 
+  barGroundLineY: number = 100;
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
@@ -47,7 +47,7 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
   }
 
   ngAfterViewInit(): void {
-    super.ngAfterViewInit(this.svgContainer);
+    
   }
   
 
@@ -64,17 +64,47 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
         val.value = 0;
       }
     })
-    let maxValue: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
-    var oneS = (maxValue / this.valueSteps)
-    var yA: string[] = [];
-    for (let index = 0; index < (this.valueSteps + 1); index++) {
-      yA.push(Utils.roundScale(oneS * index).toString());
+
+    let minValueCalc: number = Math.min.apply(Math, items.map(function(o) { return o.value; }));
+    if (minValueCalc > 0) {
+      minValueCalc = 0;
     }
-    if (maxValue != 0) {
-      this.createYAxis(yA);
+    let maxValueCalc: number = Math.max.apply(Math, items.map(function(o) { return o.value; }));
+
+    let maxValue: number = (maxValueCalc - minValueCalc);
+    var singleStepValue = (maxValue / this.valueSteps);
+    var singleStepY = (100 / this.valueSteps);
+
+    this.yAxis = [];
+    this.yAxis.push(
+      {
+        text: minValueCalc.toString(),
+        position: 100
+      }
+    );
+    for (let index = 1; index <= (this.valueSteps - 1); index++) {
+      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
+      var step = 100 - Utils.roundScale(singleStepY * index);
+      this.yAxis.push(
+        {
+          text: currentValue.toString(),
+          position: step
+        }
+      )
+    }
+    this.yAxis.push(
+      {
+        text: maxValueCalc.toString(),
+        position: 0
+      }
+    );
+
+    this.barGroundLineY = 100;
+    if (minValueCalc < 0) {
+      this.barGroundLineY = (100 - (100 / maxValue) * (minValueCalc * -1));
     }
 
-    var singleBarWidht = (((this.viewBoxWidht - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
+    var singleBarWidht = (((100 - this.barWidhtOffset) - (items.length * this.barWidhtOffset)) / items.length);
     let bars: { val: Value, position: number}[] = [];
     let index: number = 1;
     this.currentValues.forEach(item => {
@@ -112,35 +142,46 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
 
   createBars(maxValue: number, singleBarWidht: number, items: { val: Value, position: number}[]) {
     var onePercent = maxValue / 100;
-    var oneDisplayPercent = 380 / 100;
 
     this.bars = [];
     for (let index = 0; index < items.length; index++) {
       const element = items[index];
+      var height = element.val.value === 0 ? 0 : (1 * (element.val.value / onePercent));
+      var y = element.val.value === 0 ? 0 : (this.barGroundLineY - (1 * (element.val.value / onePercent)));
+      let isMinusValue: boolean = false;
+      if (height < 0) {
+        isMinusValue = true;
+        height = height * -1;
+        y = this.barGroundLineY;
+      }
+
       this.bars.push(
         {
           width: singleBarWidht,
-          height: element.val.value === 0 ? 0 : (oneDisplayPercent * (element.val.value / onePercent)),
-          position: element.position,
+          height: height,
+          y:  y,
+          x: element.position,
           sourceItem: element.val,
           calculatedPercent: element.val.value === 0 ? 0 : (element.val.value / onePercent),
           color: element.val.color,
           id: Utils.createElementId('chart-bar-', index),
-          allowActivate: true
+          allowActivate: true,
+          isMinusValue: isMinusValue
         }
       );
     }
   }
 
+
   createYAxis(items: string[]) {
     this.yAxis = [];
-    var step = (380 / (items.length - 1));
+    var step = (100 / (items.length - 1));
     for (let index = 0; index < (items.length - 1); index++) {
       const element = items[index];
       this.yAxis.push(
         {
           text: element,
-          position: 380 - (step * index) + 10,
+          position: 100 - (step * index),
         }
       )
     }
@@ -148,7 +189,7 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
     this.yAxis.push(
       {
         text: items[items.length - 1],
-        position: 10,
+        position: 0,
       }
     )
   }
@@ -171,6 +212,12 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
   cssClassSegment(item: Bar): string {
     let css: string = '';
     
+    if (this.currentOrientation === ChartOrientation.Bottom || this.currentOrientation === ChartOrientation.Top) {
+      css += ' bar-anim-top-bottom';
+    } else {
+      css += ' bar-anim-left-right';
+    }
+
     if (item === this.currentActiveChartItem) {
       css += ' bar-selected';
     }
@@ -180,6 +227,21 @@ export class BarChartComponent extends ScaleBaseChartComponent<Value> implements
       }
     }
     return css;
+  }
+
+  normOrientation(defaultValue: any, rightValue: any, leftValue: any, topValue: any) {
+    if (this.currentOrientation === ChartOrientation.Bottom) {
+      return defaultValue;
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      return rightValue;
+    } else if (this.currentOrientation === ChartOrientation.Left){
+      return leftValue;
+    } else {
+      if (topValue === undefined) {
+        return defaultValue;
+      }
+      return topValue;
+    }
   }
 
 }

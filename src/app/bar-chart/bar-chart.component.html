@@ -2,7 +2,7 @@
   <svg class="bar-chart-svg" width="100%" height="100%">
     <svg id="bars" x="30px" y="30px" width="calc(100% - 60px)" height="calc(100% - 60px)" >
       <rect (mousemove)="onHoverSegment($event, bar)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(bar)"
-        [attr.id]="bar.id" [attr.class]="'bar bar-anim ' + cssClassSegment(bar)" [attr.fill]="bar.color" 
+        [attr.id]="bar.id" [attr.class]="'bar ' + cssClassSegment(bar)" [attr.fill]="bar.color" 
         [attr.x]="normOrientation(bar.x, bar.y, (bar.isMinusValue === false ? (100 - barGroundLineY) : ((100 - barGroundLineY) - bar.height)), bar.x) + '%'" 
         [attr.width]="normOrientation(bar.width, bar.height, bar.height, bar.width) + '%'" 
         [attr.y]="normOrientation(bar.y, bar.x, bar.x, (bar.isMinusValue === false ? (100 - barGroundLineY) : ((100 - barGroundLineY) - bar.height))) + '%'" 

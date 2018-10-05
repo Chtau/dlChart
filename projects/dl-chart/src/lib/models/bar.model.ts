@@ -9,6 +9,8 @@ export class Bar implements IChartItem {
   allowActivate: boolean;
 
   height: number;
-  position: number;
+  x: number;
+  y: number;
   width: number;
+  isMinusValue: boolean;
 }
