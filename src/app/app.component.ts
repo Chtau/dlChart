@@ -26,9 +26,8 @@ export class AppComponent implements AfterViewInit {
   ];
 
   values1: Value[] = [
-    new Value('Red', null, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
-    new Value('Blue', undefined, 'Blue'),
-    // new Value('Green', 10, 'Green', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' (' + val.value + ')' })),
+    new Value('Red', 6, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
+    new Value('Blue', 8, 'Blue'),
     new Value('Orange', 3, 'Orange'),
   ];
 

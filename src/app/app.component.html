@@ -5,7 +5,7 @@
 </div>
 <div style="text-align: center;">
   <div>
-  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Pie Chart</h2>
     <input (keyup)="onKey($event)" placeholder="Filter the Chart ('3' shows only two Values)">
     <br>
@@ -13,11 +13,11 @@
     <br>
     <label>Size <input [(ngModel)]="donutSize" (ngModelChange)="onChangeDonutSize($event)" type="number"></label>
     <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>
-    <dl-pie-chart [chartid]="'test-chart'" [values]="filterValues" [donutConfiguration]="donutConfig"></dl-pie-chart>
+    <dl-pie-chart [chartid]="'test-chart'" [values]="values1" [donutConfiguration]="donutConfig"></dl-pie-chart>
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>
-<br>-->
-  <div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <br>
+  <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <div>
       <div>
@@ -42,7 +42,7 @@
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
         <br>
         <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
-        <div #barchartWrapper>
+        <div #barchartWrapper style="height: 250px;">
           <dl-bar-chart 
             [orientation]="selectedOrientation" 
             [chartid]="'test-chart-bar'" 
@@ -74,7 +74,7 @@
     </div>
   </div>
   <br>
-  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
@@ -98,7 +98,7 @@
     <label><input [(ngModel)]="hidePoints" type="checkbox" />Hide Points</label>
     <br>
     <label><input [(ngModel)]="hideSelectionLines" type="checkbox" />Hide selection lines</label>
-    <div [style.width.px]="wrapperWidthLine" [style.height.px]="wrapperHeightLine">
+    <div style="height: 250px;width: 450px;">
       <dl-line-chart 
         [chartid]="'line-chart'" 
         [values]="lines" 
@@ -112,7 +112,7 @@
       ></dl-line-chart>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>-->
+  </div>
   <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
