@@ -253,9 +253,6 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     } else if (this.currentOrientation === ChartOrientation.Left){
       return leftValue;
     } else {
-      if (topValue === undefined) {
-        return defaultValue;
-      }
       return topValue;
     }
   }

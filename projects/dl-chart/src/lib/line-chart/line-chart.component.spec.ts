@@ -196,8 +196,38 @@ describe('LineChartComponent', () => {
     var lpoint = component.currentActivePoint;
     expect(lpoint.color).toBe('red', 'Line Point size changed');
 
+    expect(component.selectionXEndPoint).toBe(0, 'Selection endpoint default');
+
     component.onClickSegment(component.axisPoint[0].points[0]);
     expect(component.currentActiveChartItem).toBeNull('Line Point deselected');
+
+    component.onClickSegment(component.axisPoint[1].points[0]);
+    component.leftScaleAxis = false;
+    component.rightScaleAxis = true;
+    expect(component.selectionXEndPoint).toBe(100, 'Selection endpoint right Axis');
+
+    component.onClickSegment(component.axisPoint[1].points[1]);
+    component.leftScaleAxis = true;
+    component.rightScaleAxis = false;
+    expect(component.selectionXEndPoint).toBe(0, 'Selection endpoint leftAxis');
+
+    component.onClickSegment(component.axisPoint[1].points[1]);
+    component.leftScaleAxis = true;
+    component.rightScaleAxis = false;
+    expect(component.selectionXEndPoint).toBeUndefined('deselect endpoint leftAxis');
+
+    component.onClickSegment(component.axisPoint[1].points[1]);
+    component.leftScaleAxis = false;
+    component.rightScaleAxis = true;
+    component.currentActivePoint.x = 51;
+    expect(component.selectionXEndPoint).toBe(100, 'Selection endpoint right axis X > 50');
+
+    component.onClickSegment(component.axisPoint[1].points[2]);
+    component.leftScaleAxis = true;
+    component.rightScaleAxis = false;
+    component.currentActivePoint.x = 51;
+    expect(component.selectionXEndPoint).toBe(0, 'Selection endpoint left axis X > 50');
+
   });
 
   it('scale test', () => {
@@ -236,6 +266,45 @@ describe('LineChartComponent', () => {
     fixture.detectChanges();
 
     expect(component.currentActivePoint).toBeNull('no active point');
+  });
+
+  it('scale lines', () => {
+    component.values = [
+      {
+        color: 'red',
+        cssClass: null,
+        data: null,
+        name: 'Red',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 10),
+          new Point(2018, 15),
+          new Point(2019, 7),
+          new Point(2020, 12),
+        ]
+      },
+      {
+        color: 'blue',
+        cssClass: null,
+        data: null,
+        name: 'Blue',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 5),
+          new Point(2018, 9),
+          new Point(2019, 22),
+          new Point(2020, 1),
+        ]
+      }];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+    component.scaleLabel = 'Test';
+    component.leftScaleAxis = true;
+    component.rightScaleAxis = true;
+
+    expect(component.currentScaleLabel).toBe('Test', 'Scale label value');
   });
 
 });

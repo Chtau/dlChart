@@ -255,6 +255,20 @@ describe('BarChartComponent', () => {
     expect(component.bars.length).toBe(2, 'Bars loaded');
   });
 
+  it('Bars with all - values', () => {
+    component.values = [
+      new Value('Blue', -5, 'Blue'),
+      new Value('Orange', 0, 'Orange'),
+      new Value('Red', 3, 'Red'),
+    ];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+
+    expect(component.barGroundLineY).toBe(37.5, 'Bar ground line Y calculated');
+  });
+
   it('select/deselect Bar', () => {
     var segement: Bar = {
       calculatedPercent: 0,
@@ -278,27 +292,79 @@ describe('BarChartComponent', () => {
   });
 
   it('chart orientation [Bottom]', () => {
+    var segement: Bar = {
+      calculatedPercent: 0,
+      color: 'red',
+      height: 1,
+      id: '0',
+      sourceItem: null,
+      width: 1,
+      isMinusValue: false,
+      x: 0,
+      y: 0
+    };
     component.rightScaleAxis = true;
     component.leftScaleAxis = true;
     component.orientation = ChartOrientation.Bottom;
+    expect(component.cssClassSegment(segement)).toBe(' bar-anim-top-bottom', 'CSS class');
+    expect(component.normOrientation(1, 2, 3, 4)).toBe(1, 'Normnalized orientation Value')
   });
 
   it('chart orientation [Left]', () => {
+    var segement: Bar = {
+      calculatedPercent: 0,
+      color: 'red',
+      height: 1,
+      id: '0',
+      sourceItem: null,
+      width: 1,
+      isMinusValue: false,
+      x: 0,
+      y: 0
+    };
     component.rightScaleAxis = true;
     component.leftScaleAxis = true;
     component.orientation = ChartOrientation.Left;
+    expect(component.cssClassSegment(segement)).toBe(' bar-anim-left-right', 'CSS class');
+    expect(component.normOrientation(1, 2, 3, 4)).toBe(3, 'Normnalized orientation Value')
   });
 
   it('chart orientation [Right]', () => {
+    var segement: Bar = {
+      calculatedPercent: 0,
+      color: 'red',
+      height: 1,
+      id: '0',
+      sourceItem: null,
+      width: 1,
+      isMinusValue: false,
+      x: 0,
+      y: 0
+    };
     component.rightScaleAxis = true;
     component.leftScaleAxis = true;
     component.orientation = ChartOrientation.Right;
+    expect(component.cssClassSegment(segement)).toBe(' bar-anim-left-right', 'CSS class');
+    expect(component.normOrientation(1, 2, 3, 4)).toBe(2, 'Normnalized orientation Value')
   });
 
   it('chart orientation [Top]', () => {
+    var segement: Bar = {
+      calculatedPercent: 0,
+      color: 'red',
+      height: 1,
+      id: '0',
+      sourceItem: null,
+      width: 1,
+      isMinusValue: false,
+      x: 0,
+      y: 0
+    };
     component.rightScaleAxis = true;
     component.leftScaleAxis = true;
     component.orientation = ChartOrientation.Top;
+    expect(component.cssClassSegment(segement)).toBe(' bar-anim-top-bottom', 'CSS class');
+    expect(component.normOrientation(1, 2, 3, 4)).toBe(4, 'Normnalized orientation Value')
   });
 
   it('Bar offset', () => {
