@@ -57,7 +57,6 @@ describe('BaseChartComponent', () => {
       { 
         id: '0', 
         color: 'red', 
-        allowActivate: true, 
         calculatedPercent: 0, 
         sourceItem: bar
       }
@@ -79,14 +78,10 @@ describe('BaseChartComponent', () => {
       { 
         id: '0', 
         color: 'red', 
-        allowActivate: false, 
         calculatedPercent: 0, 
         sourceItem: bar
       }
     );
-    expect(baseChart.tooltipContentChartItem).toBeNull('tooltip content chart item (not allowed to activeate)');
-    expect(baseChart.tooltipContentItem).toBeNull('tooltip content item (not allowed to activeate)');
-    expect(baseChart.tooltipShow).toBe(false, 'show tooltip (not allowed to activeate)');
   });
 
   it('click Segement', () => {
@@ -101,7 +96,6 @@ describe('BaseChartComponent', () => {
     var segement: IChartItem = { 
       id: '0', 
       color: 'red', 
-      allowActivate: true, 
       calculatedPercent: 0, 
       sourceItem: bar
     };
@@ -121,7 +115,6 @@ describe('BaseChartComponent', () => {
     var segement1: IChartItem = { 
       id: '0', 
       color: 'red', 
-      allowActivate: false, 
       calculatedPercent: 0, 
       sourceItem: bar
     };

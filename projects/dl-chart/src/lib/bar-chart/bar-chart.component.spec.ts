@@ -73,10 +73,10 @@ describe('BarChartComponent', () => {
     fixture.detectChanges();
 
     let css = component.cssClassSegment(component.bars[0]);
-    expect(css).toBe('', 'Segement css class even created');
+    expect(css).toBe(' bar-anim-top-bottom', 'Segement css class even created');
 
     let cssCustom = component.cssClassSegment(component.bars[2]);
-    expect(cssCustom).toBe(' test', 'Segement custom css class created');
+    expect(cssCustom).toBe(' bar-anim-top-bottom test', 'Segement custom css class created');
   });
 
   it('Segment Tooltips', () => {
@@ -237,7 +237,7 @@ describe('BarChartComponent', () => {
   });
 
   it('scale label (Y Axis)', () => {
-    expect(component.currentScaleLabel).toBe('Values', 'default scale label');
+    expect(component.currentScaleLabel).toBe('', 'default scale label');
     component.scaleLabel = 'Y Axis Text';
     expect(component.currentScaleLabel).toBe('Y Axis Text', 'new scale label value');
   });
@@ -257,20 +257,21 @@ describe('BarChartComponent', () => {
 
   it('select/deselect Bar', () => {
     var segement: Bar = {
-      allowActivate: true,
       calculatedPercent: 0,
       color: 'red',
       height: 1,
       id: '0',
-      position: 0,
       sourceItem: null,
-      width: 1
+      width: 1,
+      isMinusValue: false,
+      x: 0,
+      y: 0
     };
     component.onClickSegment(segement);
     expect(component.currentActiveBar.id).toBe('0', 'Bar selected');
 
     var css = component.cssClassSegment(segement);
-    expect(css).toBe(' bar-selected', 'Bar deselected');
+    expect(css).toBe(' bar-anim-top-bottom bar-selected', 'Bar deselected');
 
     component.onClickSegment(segement);
     expect(component.currentActiveBar).toBeNull('Bar deselected');
@@ -311,7 +312,7 @@ describe('BarChartComponent', () => {
     });
     fixture.detectChanges();
 
-    expect(component.bars[0].width).toBe(185, 'Bar width');
+    expect(component.bars[0].width).toBe(35, 'Bar width');
   });
 
   it('Bar offset', () => {

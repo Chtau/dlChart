@@ -191,7 +191,7 @@ describe('LineChartComponent', () => {
     expect(css).toBe(' point-selected', 'Line Point deselected');
 
     var size = component.pointSize(component.axisPoint[0].points[0]);
-    expect(size).toBe(10, 'Line Point size changed');
+    expect(size).toBe(7, 'Line Point size changed');
 
     var lpoint = component.currentActivePoint;
     expect(lpoint.color).toBe('red', 'Line Point size changed');
@@ -234,15 +234,6 @@ describe('LineChartComponent', () => {
       values: new SimpleChange(null, component.values, false)
     });
     fixture.detectChanges();
-
-    component.currentClientWidth = 650;
-    expect(component.getPointScale(150).transform).toBe('scaleY(1) translateY(-0px)', '650 Client width');
-
-    component.currentClientWidth = 750;
-    expect(component.getPointScale(150).transform).toBe('scaleY(1.6) translateY(-56.25px)', '750 Client width');
-    
-    component.currentClientWidth = 850;
-    expect(component.getPointScale(150).transform).toBe('scaleY(1.8) translateY(-66.66666666666667px)', '850 Client width');
 
     expect(component.currentActivePoint).toBeNull('no active point');
   });

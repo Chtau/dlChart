@@ -82,11 +82,6 @@ describe('PieChartComponent', () => {
     component.onClickSegment(component.pie[1]);
     let cssOdd1 = component.cssClassSegment(component.pie[1], 1);
     expect(cssOdd1).toBe('slice slice-selected slice-anim', 'Segement css class selected');
-
-    component.pie[0].allowActivate = false;
-    component.onClickSegment(component.pie[0]);
-    let cssEven1 = component.cssClassSegment(component.pie[0], 0);
-    expect(cssEven1).toBe('fill slice-anim-even', 'Segement css class not allow activate');
   });
 
   it('Segment Tooltips', () => {
@@ -165,7 +160,7 @@ describe('PieChartComponent', () => {
     component.tooltipContentItem = component.pie[2].sourceItem;
 
     let tooltipFuncSegemntOverride = component.tooltipValue;
-    expect(tooltipFuncSegemntOverride).toBe('Orange ( 33.333333333333336% )', 'global Tooltip segment override');
+    expect(tooltipFuncSegemntOverride).toBe('Orange ( 33.33% )', 'global Tooltip segment override');
 
   });
 
