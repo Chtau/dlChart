@@ -1,6 +1,6 @@
 <ng-container>
   <svg class="bar-chart-svg" width="100%" height="100%">
-    <svg id="bars" x="30px" y="30px" width="calc(100% - 60px)" height="calc(100% - 60px)" >
+    <svg id="bars" class="bars" x="30px" y="30px" width="calc(100% - 60px)" height="calc(100% - 60px)" >
       <rect (mousemove)="onHoverSegment($event, bar)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(bar)"
         [attr.id]="bar.id" [attr.class]="'bar ' + cssClassSegment(bar)" [attr.fill]="bar.color" 
         [attr.x]="normOrientation(bar.x, bar.y, (bar.isMinusValue === false ? (100 - barGroundLineY) : ((100 - barGroundLineY) - bar.height)), bar.x) + '%'" 
@@ -21,7 +21,7 @@
         [attr.x1]="normOrientation(0, barGroundLineY, (100 - barGroundLineY), 0) + '%'" 
         [attr.y2]="normOrientation(barGroundLineY, 100, 100, (100 - barGroundLineY)) + '%'" 
         [attr.x2]="normOrientation(100, barGroundLineY, (100 - barGroundLineY), 100) + '%'" 
-      class="x-stroke" />
+      class="" />
     </svg>
     <svg id="xaxis" 
       [attr.x]="normOrientation('30px', 'calc(100% - 30px)', '0%', '30px')" 

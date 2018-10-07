@@ -1,9 +1,5 @@
 @import '../shared/tooltip.scss';
 
-.bar-chart-svg {
-  /*padding: 5%;*/
-}
-
 .bar:hover {
   opacity: .8;
 
@@ -31,14 +27,11 @@
 }
 
 .axis path,
-.axis line {
+.axis line,
+.bars line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
 }
 
 .bar-anim-top-bottom {
@@ -56,14 +49,8 @@
 }
 
 .active-stroke {
-  stroke: rgb(0, 0, 0);
   stroke-width: 1;
   stroke-dasharray: 5;
-}
-
-.x-stroke {
-  stroke: rgb(0, 0, 0);
-  /*stroke-width:2*/
 }
 
 @keyframes scaleBar {
