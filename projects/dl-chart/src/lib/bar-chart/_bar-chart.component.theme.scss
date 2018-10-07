@@ -1,0 +1,51 @@
+
+@function light-bar-chart-theme() {
+  @return bar-theme(#000, #000, #000, #000, 1, 5);
+}
+
+@function dark-bar-chart-theme() {
+  @return bar-theme(#fff, #fff, #fff, #fff, 1, 5);
+}
+
+@function bar-theme($line-color, $text-color, $ground-line-color, $selection-line-color, $select-stroke-width, $selection-stroke-dasharray) {
+  @return (
+    line-color: $line-color,
+    text-color: $text-color,
+    ground-line-color: $ground-line-color,
+    selection: (
+      line-color: $selection-line-color,
+      stroke-width: $select-stroke-width,
+      stroke-dasharray: $selection-stroke-dasharray
+    )
+  );
+}
+
+
+@mixin bar-chart-theme($theme) {
+
+  .axis path,
+  .axis line,
+  .bars line {
+    stroke: map-get($theme, line-color);
+  }
+
+  .axis text {
+    fill: map-get($theme, text-color);
+  }
+
+  .scale-label text {
+    fill: map-get($theme, text-color);
+  }
+
+  .selection-line {
+    fill: map-get(map-get($theme, selection), line-color);
+    stroke-width: map-get(map-get($theme, selection), stroke-width);
+    stroke-dasharray: map-get(map-get($theme, selection), stroke-dasharray);
+  }
+
+  .ground-line {
+    fill: map-get($theme, ground-line-color);
+  }
+
+}
+

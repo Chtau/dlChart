@@ -14,14 +14,14 @@
         [attr.x1]="(currentActiveBar.isMinusValue === false ?  normOrientation(0, (barGroundLineY - currentActiveBar.height), ((100 - barGroundLineY) + currentActiveBar.height), 0) : normOrientation(0, (barGroundLineY + currentActiveBar.height), ((100 - barGroundLineY) - currentActiveBar.height), 0)) + '%'" 
         [attr.y2]="(currentActiveBar.isMinusValue === false ?  normOrientation((barGroundLineY - currentActiveBar.height), 100, 100, ((100 - barGroundLineY) + currentActiveBar.height)) : normOrientation((barGroundLineY + currentActiveBar.height), 100, 100, ((100 - barGroundLineY) - currentActiveBar.height))) + '%'" 
         [attr.x2]="(currentActiveBar.isMinusValue === false ?  normOrientation(100, (barGroundLineY - currentActiveBar.height), ((100 - barGroundLineY) + currentActiveBar.height), 100) : normOrientation(100, (barGroundLineY + currentActiveBar.height), ((100 - barGroundLineY) - currentActiveBar.height), 100)) + '%'" 
-        class="active-stroke"
+        class="selection-line active-stroke"
       />
       <line id="dlChartBarNormalizedLine" 
         [attr.y1]="normOrientation(barGroundLineY, 0, 0, (100 - barGroundLineY)) + '%'" 
         [attr.x1]="normOrientation(0, barGroundLineY, (100 - barGroundLineY), 0) + '%'" 
         [attr.y2]="normOrientation(barGroundLineY, 100, 100, (100 - barGroundLineY)) + '%'" 
         [attr.x2]="normOrientation(100, barGroundLineY, (100 - barGroundLineY), 100) + '%'" 
-      class="" />
+      class="ground-line" />
     </svg>
     <svg id="xaxis" 
       [attr.x]="normOrientation('30px', 'calc(100% - 30px)', '0%', '30px')" 
@@ -82,7 +82,7 @@
     <svg *ngIf="activeLeftScaleAxis" 
       [attr.x]="normOrientation('31px', '30px', 'calc(100% - 30px)', 'calc(100% - 43px)')" 
       [attr.y]="normOrientation('30px', 'calc(100% - 43px)', '31px', 'calc(100% - 31px)')"
-      style="overflow: visible;"
+      class="scale-label"
     >
       <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" 
         [ngStyle]="{'transform': normOrientation('rotate(-90deg)', 'rotate(0deg)', 'rotate(0deg)', 'rotate(-90deg)'), 'text-anchor': normOrientation('end', 'start', 'end', 'start')}"
@@ -117,9 +117,9 @@
       </g>
     </svg>
     <svg *ngIf="activeRightScaleAxis" 
-    style="overflow: visible;"
       [attr.x]="normOrientation('calc(100% - 43px)', '30px', 'calc(100% - 31px)', '31px')"  
       [attr.y]="normOrientation('30px', '31px', 'calc(100% - 43px)', 'calc(100% - 31px)')"
+      class="scale-label"
     >
       <text 
         [attr.y]="'0'" 

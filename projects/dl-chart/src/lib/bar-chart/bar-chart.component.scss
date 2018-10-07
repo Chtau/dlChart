@@ -30,7 +30,6 @@
 .axis line,
 .bars line {
   fill: none;
-  stroke: #000;
   shape-rendering: crispEdges;
 }
 
@@ -48,9 +47,8 @@
   transform-origin: 100% 90% 0;
 }
 
-.active-stroke {
-  stroke-width: 1;
-  stroke-dasharray: 5;
+.scale-label {
+  overflow: visible;
 }
 
 @keyframes scaleBar {
