@@ -1,35 +1,18 @@
 @import '../shared/tooltip.scss';
 
-.line-chart-svg {
-  /*padding: 5%;*/
-}
-
 .axis {
   font: 10px sans-serif;
 }
 
 .axis path,
-.axis line {
+.axis line,
+.raster line {
   fill: none;
   stroke: #000;
 }
 
 .background-raster {
-  fill: none;
-  stroke: #000;
   opacity: .1;
-}
-
-.axis-raster {
-  opacity: .1;
-}
-
-.point {
-  opacity: 1;
-} 
-
-.point:hover {
-  opacity: 1;
 }
 
 .point-anim {
@@ -75,14 +58,6 @@
   stroke: #000;
   stroke-width: 3px;
 }
-
-/*.xaxis-text > g > text:first-child {
-  text-anchor: start !important;
-}
-
-.xaxis-text > g > text:last-child {
-  text-anchor: end !important;
-}*/
 
 @keyframes showPoint {
   100% {

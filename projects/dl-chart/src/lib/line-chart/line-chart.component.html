@@ -1,7 +1,7 @@
 <ng-container>
   <svg class="line-chart-svg" width="100%" height="100%">
     <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
-      <g *ngIf="!activeHideRaster">
+      <g *ngIf="!activeHideRaster" class="raster">
         <line class="background-raster" [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y1="0" y2="100%"
           *ngFor="let axis of xAxis"></line>
         <line class="background-raster" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'" x1="0" x2="100%"
