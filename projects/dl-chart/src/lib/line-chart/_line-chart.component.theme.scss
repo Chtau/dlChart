@@ -1,0 +1,43 @@
+
+@function light-line-chart-theme() {
+  @return line-theme(#000, #000, #000, #000);
+}
+
+@function dark-line-chart-theme() {
+  @return line-theme(#fff, #fff, #fff, #fff);
+}
+
+@function line-theme($line-color, $text-color, $raster-line-color, $selection-line-color) {
+  @return (
+    line-color: $line-color,
+    text-color: $text-color,
+    raster-line-color: $raster-line-color,
+    selection-line-color: $selection-line-color,
+  );
+}
+
+
+@mixin line-chart-theme($theme) {
+
+  .axis path,
+  .axis line {
+    stroke: map-get($theme, line-color);
+  }
+
+  .axis text {
+    fill: map-get($theme, text-color);
+  }
+
+  .scale-label text {
+    fill: map-get($theme, text-color);
+  }
+
+  .raster line {
+    stroke: map-get($theme, raster-line-color);
+  }
+
+  .point-selected {
+    stroke: map-get($theme, selection-line-color);
+  }
+}
+

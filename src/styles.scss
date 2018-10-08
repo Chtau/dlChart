@@ -17,3 +17,8 @@ $app-theme: bar-theme($line-color, $line-color, $line-color, $line-color, 1, 5);
 $tooltip-theme: light-tooltip-chart-theme();
 //$tooltip-theme: dark-tooltip-chart-theme();
 @include tooltip-chart-theme($tooltip-theme);
+
+@import 'projects/dl-chart/src/lib/line-chart/line-chart.component.theme.scss';
+$line-theme: line-theme($line-color, $line-color, $line-color, $line-color);
+//$line-theme: light-line-chart-theme();
+@include line-chart-theme($line-theme);
