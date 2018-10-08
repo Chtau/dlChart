@@ -8,7 +8,7 @@
 
 $line-color: #64c470;
 /*
-@import 'projects/dl-chart/src/lib/bar-chart/bar-chart.component.theme.scss';
+@import 'projects/dl-chart/src/lib/bar-chart/bar-chart.theme.scss';
 $app-theme: bar-theme($line-color, $line-color, $line-color, $line-color, 1, 5);
 //$app-theme: light-bar-chart-theme();
 @include bar-chart-theme($app-theme);
@@ -18,17 +18,17 @@ $tooltip-theme: light-tooltip-chart-theme();
 //$tooltip-theme: dark-tooltip-chart-theme();
 @include tooltip-chart-theme($tooltip-theme);
 
-@import 'projects/dl-chart/src/lib/line-chart/line-chart.component.theme.scss';
+@import 'projects/dl-chart/src/lib/line-chart/line-chart.theme.scss';
 $line-theme: line-theme($line-color, $line-color, $line-color, $line-color);
 //$line-theme: light-line-chart-theme();
 @include line-chart-theme($line-theme);
 
-@import 'projects/dl-chart/src/lib/pie-chart/pie-chart.component.theme.scss';
+@import 'projects/dl-chart/src/lib/pie-chart/pie-chart.theme.scss';
 $pie-theme: pie-theme($line-color, 0);
 //$pie-theme: light-pie-chart-theme();
 @include pie-chart-theme($pie-theme);
 
-@import 'projects/dl-chart/src/lib/legend/legend.component.theme.scss';
+@import 'projects/dl-chart/src/lib/legend/legend.theme.scss';
 $legend-theme: legend-theme($line-color, 1px, solid);
 //$legend-theme: light-legend-chart-theme();
 @include legend-chart-theme($legend-theme);

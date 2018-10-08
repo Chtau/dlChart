@@ -1,7 +1,7 @@
-@import './bar-chart/bar-chart.component.theme';
-@import './legend/legend.component.theme';
-@import './line-chart/line-chart.component.theme';
-@import './pie-chart/pie-chart.component.theme';
+@import './bar-chart/bar-chart.theme';
+@import './legend/legend.theme';
+@import './line-chart/line-chart.theme';
+@import './pie-chart/pie-chart.theme';
 @import './shared/tooltip.theme';
 
 @function light-chart-theme() {
