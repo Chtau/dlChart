@@ -6,21 +6,21 @@
 
 @function light-chart-theme() {
   @return (
-    legend-chart: legend-theme(black, 1px, solid),
-    bar-chart: bar-theme(#000, #000, #000, #000, 1, 5),
-    line-chart: line-theme(#000, #000, #000, #000),
-    pie-chart: pie-theme(#fff, .5),
-    tooltip: tooltip-theme(#555, #fff)
+    legend-chart: light-legend-chart-theme(),
+    bar-chart: light-bar-chart-theme(),
+    line-chart: light-line-chart-theme(),
+    pie-chart: light-pie-chart-theme(),
+    tooltip: light-tooltip-chart-theme()
   );
 }
 
 @function dark-chart-theme() {
   @return (
-    legend-chart: legend-theme(black, 1px, solid),
-    bar-chart: bar-theme(#000, #000, #000, #000, 1, 5),
-    line-chart: line-theme(#000, #000, #000, #000),
-    pie-chart: pie-theme(#fff, .5),
-    tooltip: tooltip-theme(#fff, #555)
+    legend-chart: dark-legend-chart-theme(),
+    bar-chart: dark-bar-chart-theme(),
+    line-chart: dark-line-chart-theme(),
+    pie-chart: dark-pie-chart-theme(),
+    tooltip: dark-tooltip-chart-theme()
   );
 }
 
