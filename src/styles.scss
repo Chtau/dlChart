@@ -28,3 +28,8 @@ $pie-theme: pie-theme($line-color, 0);
 //$pie-theme: light-pie-chart-theme();
 //$pie-theme: light-donut-chart-theme();
 @include pie-chart-theme($pie-theme);
+
+@import 'projects/dl-chart/src/lib/legend/legend.component.theme.scss';
+$legend-theme: legend-theme($line-color, 1px, solid);
+//$legend-theme: light-legend-chart-theme();
+@include legend-chart-theme($legend-theme);

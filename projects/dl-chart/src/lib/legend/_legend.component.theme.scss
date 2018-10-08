@@ -1,0 +1,26 @@
+
+@function light-legend-chart-theme() {
+  @return legend-theme(black, 1px, solid);
+}
+
+@function dark-legend-chart-theme() {
+  @return legend-theme(white, 1px, solid);
+}
+
+@function legend-theme($border-color, $border-width, $border-style) {
+  @return (
+    border-color: $border-color,
+    border-width: $border-width,
+    border-style: $border-style
+  );
+}
+
+@mixin legend-chart-theme($theme) {
+
+  .legend-color-box {
+    border-color: map-get($theme, border-color);
+    border-width: map-get($theme, border-width);
+    border-style: map-get($theme, border-style);
+  }
+}
+

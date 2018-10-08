@@ -20,7 +20,6 @@
   min-height: 15px;
   min-width: 15px;
   display: inline-block;
-  border: 1px solid black;
 }
 
 .legend-text-content {
@@ -28,10 +27,8 @@
   vertical-align: top;
 }
 
-.tooltip .tooltiptext {
+.tooltip .legend-tooltip {
   visibility: hidden;
-  background-color: #555;
-  color: #fff;
   text-align: center;
   padding: 5px 10px;
   border-radius: 6px;
@@ -39,7 +36,7 @@
   z-index: 80;
 }
 
-.tooltip:hover .tooltiptext {
+.tooltip:hover .legend-tooltip {
   visibility: visible;
 }
 
