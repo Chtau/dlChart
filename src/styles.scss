@@ -22,3 +22,9 @@ $tooltip-theme: light-tooltip-chart-theme();
 $line-theme: line-theme($line-color, $line-color, $line-color, $line-color);
 //$line-theme: light-line-chart-theme();
 @include line-chart-theme($line-theme);
+
+@import 'projects/dl-chart/src/lib/pie-chart/pie-chart.component.theme.scss';
+$pie-theme: pie-theme($line-color, 0);
+//$pie-theme: light-pie-chart-theme();
+//$pie-theme: light-donut-chart-theme();
+@include pie-chart-theme($pie-theme);

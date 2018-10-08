@@ -1,0 +1,33 @@
+
+@function light-pie-chart-theme() {
+  @return pie-theme(#fff, 0);
+}
+
+@function dark-pie-chart-theme() {
+  @return pie-theme(#000, 0);
+}
+
+@function light-donut-chart-theme() {
+  @return pie-theme(#fff, .5);
+}
+
+@function dark-donut-chart-theme() {
+  @return pie-theme(#000, .5);
+}
+
+@function pie-theme($donut-color, $donut-radius) {
+  @return (
+    donut-color: $donut-color,
+    donut-radius: $donut-radius
+  );
+}
+
+
+@mixin pie-chart-theme($theme) {
+
+  .inner-circle {
+    fill: map-get($theme, donut-color);
+    r: map-get($theme, donut-radius);
+  }
+}
+
