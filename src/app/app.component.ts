@@ -4,7 +4,6 @@ import { Value, TooltipConfiguration } from '../../projects/dl-chart/src/public_
 import { ChartOrientation } from '../../projects/dl-chart/src/public_api';
 import { Line } from 'projects/dl-chart/src/lib/models/line.model';
 import { Point } from 'projects/dl-chart/src/lib/models/point.model';
-import { DonutConfiguration } from 'projects/dl-chart/src/lib/models/donutconfiguration.model';
 
 
 @Component({
@@ -136,30 +135,6 @@ export class AppComponent implements AfterViewInit {
   useDonutStyle: boolean = false;
   donutSize: number = null;
   donutColor: string = null;
-  donutConfig: DonutConfiguration = null;
-
-  onChangeUseDonut(event: any) {
-    this.recreateDonutConfig();
-  }
-
-  onChangeDonutSize(event: any) {
-    this.recreateDonutConfig();
-  }
-
-  onChangeDonutColor(event: any) {
-    this.recreateDonutConfig();
-  }
-
-  recreateDonutConfig() {
-    if (this.useDonutStyle) {
-      this.donutConfig = {
-        color: this.donutColor,
-        size: this.donutSize
-      }
-    } else {
-      this.donutConfig = null;
-    }
-  }
 
   wrapperWidth: number = 750;
   wrapperHeight: number = 450;

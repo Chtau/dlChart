@@ -13,7 +13,7 @@
     <br>
     <label>Size <input [(ngModel)]="donutSize" (ngModelChange)="onChangeDonutSize($event)" type="number"></label>
     <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>
-    <dl-pie-chart [chartid]="'test-chart'" [values]="values1" [donutConfiguration]="donutConfig"></dl-pie-chart>
+    <dl-pie-chart [chartid]="'test-chart'" [values]="values1"></dl-pie-chart>
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>
   <br>
