@@ -1,0 +1,45 @@
+@import './bar-chart/bar-chart.component.theme';
+@import './legend/legend.component.theme';
+@import './line-chart/line-chart.component.theme';
+@import './pie-chart/pie-chart.component.theme';
+@import './shared/tooltip.theme';
+
+@function light-chart-theme() {
+  @return (
+    legend-chart: legend-theme(black, 1px, solid),
+    bar-chart: bar-theme(#000, #000, #000, #000, 1, 5),
+    line-chart: line-theme(#000, #000, #000, #000),
+    pie-chart: pie-theme(#fff, .5),
+    tooltip: tooltip-theme(#555, #fff)
+  );
+}
+
+@function dark-chart-theme() {
+  @return (
+    legend-chart: legend-theme(black, 1px, solid),
+    bar-chart: bar-theme(#000, #000, #000, #000, 1, 5),
+    line-chart: line-theme(#000, #000, #000, #000),
+    pie-chart: pie-theme(#fff, .5),
+    tooltip: tooltip-theme(#fff, #555)
+  );
+}
+
+@function theme($border-color, $border-width, $border-style, $bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray, $line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color, $donut-color, $donut-radius, $background-color, $foreground-color) {
+  @return (
+    legend-chart: legend-theme($border-color, $border-width, $border-style),
+    bar-chart: bar-theme($bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray),
+    line-chart: line-theme(line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color),
+    pie-chart: pie-theme($donut-color, $donut-radius),
+    tooltip: tooltip-theme($background-color, $foreground-color)
+  );
+}
+
+@mixin chart-theme($theme) {
+
+  @include legend-chart-theme(map-get($theme, legend-chart));
+  @include bar-chart-theme(map-get($theme, bar-chart));
+  @include line-chart-theme(map-get($theme, line-chart));
+  @include pie-chart-theme(map-get($theme, pie-chart));
+  @include tooltip-chart-theme(map-get($theme, tooltip));
+}
+

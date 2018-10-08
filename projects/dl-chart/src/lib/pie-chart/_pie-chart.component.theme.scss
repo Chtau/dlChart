@@ -1,17 +1,9 @@
 
 @function light-pie-chart-theme() {
-  @return pie-theme(#fff, 0);
-}
-
-@function dark-pie-chart-theme() {
-  @return pie-theme(#000, 0);
-}
-
-@function light-donut-chart-theme() {
   @return pie-theme(#fff, .5);
 }
 
-@function dark-donut-chart-theme() {
+@function dark-pie-chart-theme() {
   @return pie-theme(#000, .5);
 }
 
@@ -21,7 +13,6 @@
     donut-radius: $donut-radius
   );
 }
-
 
 @mixin pie-chart-theme($theme) {
 

@@ -14,6 +14,13 @@ import { Slice } from '../models/slice.model';
 })  
 export class PieChartComponent extends BaseChartComponent<Value> implements OnChanges {
 
+  isDonutChart: boolean = false;
+
+  @Input()
+  set donut(val: boolean) {
+    this.isDonutChart = val;
+  }
+
   slices: Slice[] = [];
 
   get pie() {
