@@ -150,7 +150,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
       var pos = ((element.position + singleBarWidht) - (singleBarWidht / 2));
       this.xAxis.push(
         {
-          text: element.val.name,
+          text: element.val.shortName != null ? element.val.shortName : element.val.name,
           position: pos,
         }
       )
