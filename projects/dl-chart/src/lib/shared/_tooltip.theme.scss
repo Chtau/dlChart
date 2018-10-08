@@ -1,0 +1,25 @@
+
+@function light-tooltip-chart-theme() {
+  @return tooltip-theme(#555, #fff);
+}
+
+@function dark-tooltip-chart-theme() {
+  @return tooltip-theme(#fff, #555);
+}
+
+@function tooltip-theme($background-color, $foreground-color) {
+  @return (
+    background-color: $background-color,
+    foreground-color: $foreground-color,
+  );
+}
+
+
+@mixin tooltip-chart-theme($theme) {
+
+  .tooltiptext {
+    background-color: map-get($theme, background-color);
+    color: map-get($theme, foreground-color);
+  }
+}
+
