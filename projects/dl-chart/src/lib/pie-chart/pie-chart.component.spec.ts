@@ -5,7 +5,6 @@ import { DlPieChartModule } from "./pie-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { SimpleChange } from '@angular/core';
-import { DonutConfiguration } from '../models/donutconfiguration.model';
 
 describe('PieChartComponent', () => {
   let component: PieChartComponent;
@@ -211,10 +210,7 @@ describe('PieChartComponent', () => {
     });
     fixture.detectChanges();
 
-    component.donutConfiguration = {
-      color: 'white',
-      size: 0.5
-    };
+    component.donut = true
     var cor = component.getCoordinatesForPercent(180);
     expect(Math.round(cor[0])).toBe(1, 'normalize Value X');
     expect(Math.round(cor[1])).toBe(-0, 'normalize Value Y');
@@ -225,7 +221,7 @@ describe('PieChartComponent', () => {
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(), { test: 1}),
     ];
-    component.donutConfiguration = new DonutConfiguration(3, 'white');
+    component.donut = true;
     component.tooltipConfiguration = new TooltipConfiguration();
 
     component.ngOnChanges({

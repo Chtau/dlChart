@@ -33,10 +33,8 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
     if (slice === this.currentActiveChartItem) {
       css += ' slice-selected';
     }
-    if (slice.sourceItem) {
-      if (slice.sourceItem.cssClass != null) {
-        css += ' ' + slice.sourceItem.cssClass;
-      }
+    if (slice.sourceItem.cssClass != null) {
+      css += ' ' + slice.sourceItem.cssClass;
     }
     if (index % 2 == 0) {
       css += ' ' + 'slice-anim-even';
