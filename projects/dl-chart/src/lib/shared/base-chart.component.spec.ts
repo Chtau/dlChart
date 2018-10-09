@@ -51,7 +51,8 @@ describe('BaseChartComponent', () => {
       data: null,
       name: 'Red',
       tooltipConfig: null,
-      value: 0
+      value: 0,
+      shortName: null,
     };
     baseChart.onHoverSegment({ clientX: 100, clientY: 100 }, 
       { 
@@ -91,7 +92,8 @@ describe('BaseChartComponent', () => {
       data: null,
       name: 'Red',
       tooltipConfig: null,
-      value: 0
+      value: 0,
+      shortName: 'R',
     };
     var segement: IChartItem = { 
       id: '0', 

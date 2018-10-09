@@ -210,7 +210,7 @@ describe('PieChartComponent', () => {
     });
     fixture.detectChanges();
 
-    component.donut = true
+    component.donut = .5;
     var cor = component.getCoordinatesForPercent(180);
     expect(Math.round(cor[0])).toBe(1, 'normalize Value X');
     expect(Math.round(cor[1])).toBe(-0, 'normalize Value Y');
@@ -221,7 +221,7 @@ describe('PieChartComponent', () => {
       new Value('Blue', 3, 'Blue'),
       new Value('Orange', 3, 'Orange', null, new TooltipConfiguration(), { test: 1}),
     ];
-    component.donut = true;
+    component.donut = .5;
     component.tooltipConfiguration = new TooltipConfiguration();
 
     component.ngOnChanges({
