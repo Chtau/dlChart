@@ -1,16 +1,15 @@
 
 @function light-pie-chart-theme() {
-  @return pie-theme(#fff, .5);
+  @return pie-theme(#fff);
 }
 
 @function dark-pie-chart-theme() {
-  @return pie-theme(#000, .5);
+  @return pie-theme(#000);
 }
 
-@function pie-theme($donut-color, $donut-radius) {
+@function pie-theme($donut-color) {
   @return (
-    donut-color: $donut-color,
-    donut-radius: $donut-radius
+    donut-color: $donut-color
   );
 }
 
@@ -18,7 +17,6 @@
 
   .inner-circle {
     fill: map-get($theme, donut-color);
-    r: map-get($theme, donut-radius);
   }
 }
 

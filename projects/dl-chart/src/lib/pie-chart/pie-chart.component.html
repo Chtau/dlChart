@@ -3,7 +3,7 @@
     <path *ngFor="let slice of pie; let i = index" [attr.id]="createElementId(slice, i)" (mousemove)="onHoverSegment($event, slice)"
       (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(slice)" [attr.class]="cssClassSegment(slice, i)"
       [attr.d]="slice.draw" [attr.fill]="slice.color"></path>
-    <circle *ngIf="isDonutChart" class="inner-circle" cx="0" cy="0" />
+    <circle *ngIf="donutRadius > 0" class="inner-circle" [attr.r]="donutRadius" cx="0" cy="0" />
   </svg>
   <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
     <span>{{ tooltipValue }}</span>
