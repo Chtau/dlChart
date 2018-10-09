@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.1
+
+- refactor Responsive Design for Bar and Line Chart
+- add Theming for all Modules
+- reduce Production bundle size
+
 ## 0.6.2
 
 - [[2763616]](https://github.com/Chtau/dlChart/commit/2763616473fbbc05dd38daf30c6c461f8f7eb265) expose Line model
