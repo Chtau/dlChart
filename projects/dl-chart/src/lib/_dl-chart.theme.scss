@@ -24,12 +24,12 @@
   );
 }
 
-@function theme($border-color, $border-width, $border-style, $bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray, $line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color, $donut-color, $donut-radius, $background-color, $foreground-color) {
+@function theme($border-color, $border-width, $border-style, $bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray, $line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color, $donut-color, $background-color, $foreground-color) {
   @return (
     legend-chart: legend-theme($border-color, $border-width, $border-style),
     bar-chart: bar-theme($bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray),
     line-chart: line-theme(line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color),
-    pie-chart: pie-theme($donut-color, $donut-radius),
+    pie-chart: pie-theme($donut-color),
     tooltip: tooltip-theme($background-color, $foreground-color)
   );
 }
