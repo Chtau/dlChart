@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- update to Angular ^7.0.0
+- fix overflow on Pie Chart hover/click
+
 ## 0.7.1
 
 - refactor Responsive Design for Bar and Line Chart
