@@ -1,7 +1,8 @@
 @import '../shared/tooltip.scss';
 
 .pie-chart-svg {
-  padding: 5%;
+  //padding: 5%;
+  overflow: visible;
 }
 
 .slice {
