@@ -7,7 +7,6 @@ import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { BaseChartComponent } from '../shared/base-chart.component';
-import { AxisLine } from '../models/axisline.model';
 
 @Component({  
   selector: 'dl-line-chart',  
@@ -158,7 +157,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
 
     for (index = 0; index < items.length; index++) {
       const element = items[index];
-      //let lineAxis: AxisLine[] = [];
       let pointAxis: LinePoint[] = [];
       let indexPoints: number = 0;
       let subItemId: string = Utils.createElementId('chart-line-point-', index);
@@ -185,20 +183,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
           }
         );
 
-        /*if (indexPoints != 0) {
-          var prevLine = lineAxis[lineAxis.length -1];
-          prevLine.x2 = x;
-          prevLine.y2 = y;
-        }
-        if (indexPoints != (element.points.length - 1)) {
-          lineAxis.push({
-            color: element.color,
-            x1: x,
-            y1: y,
-            x2: -1,
-            y2: -1
-          });
-        }*/
         indexPoints++;
       });
       this.axisPoint.push({
@@ -207,7 +191,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
         calculatedPercent: null,
         color: element.color,
         id: Utils.createElementId('chart-line-axis-', index),
-        //lines: lineAxis
       });
     }
 

@@ -1,7 +1,6 @@
 import { IChartItem } from "./chartitem.interface";
 import { IValue } from "./value.interface";
 import { LinePoint } from "./linepoint.model";
-import { AxisLine } from "./axisline.model";
 
 export class AxisPoint implements IChartItem {
   id: string;
@@ -10,5 +9,4 @@ export class AxisPoint implements IChartItem {
   calculatedPercent: number;
 
   points: LinePoint[];
-  //lines: AxisLine[];
 }
