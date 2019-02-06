@@ -24,6 +24,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
 
   activeHideRaster: boolean = false;
   activeHideLines: boolean = false;
+  activeHideLinesFiller: boolean = false;
   activeHidePoints: boolean = false;
   activeHideSelectionLines: boolean = false;
 
@@ -59,6 +60,11 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
   @Input()
   set hideLines(val: boolean) {
     this.activeHideLines = val;
+  }
+
+  @Input()
+  set hideLinesFiller(val: boolean) {
+    this.activeHideLinesFiller = val;
   }
 
   @Input()
