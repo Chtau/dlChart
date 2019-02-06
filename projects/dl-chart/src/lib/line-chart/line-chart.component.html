@@ -58,11 +58,9 @@
       </g>
       <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
         <g *ngIf="!activeHidePoints">
-          <g *ngFor="let point of axis.points">
-            <circle (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)" (click)="onClickSegment(point)"
-              [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)" [attr.fill]="point.color"
-              [attr.cx]="point.x + '%'" [attr.cy]="point.y + '%'" [attr.r]="pointSize(point)" />
-          </g>
+          <circle *ngFor="let point of axis.points" (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)"
+            (click)="onClickSegment(point)" [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)"
+            [attr.fill]="point.color" [attr.cx]="point.x + '%'" [attr.cy]="point.y + '%'" [attr.r]="pointSize(point)" />
         </g>
       </g>
     </svg>
