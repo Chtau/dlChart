@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Line Chart general improvement
+- Line Chart has now a filler element per Line (with option to turn it of)
+
 ## 1.0.1
 
 - update to Angular ^7.0.0
