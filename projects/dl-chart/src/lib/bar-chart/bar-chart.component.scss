@@ -31,6 +31,25 @@
 .bars line {
   fill: none;
   shape-rendering: crispEdges;
+  stroke: #000;
+}
+
+.axis text {
+  fill: #000;
+}
+
+.scale-label text {
+  fill: #000;
+}
+
+.selection-line {
+  fill: #000;
+  stroke-width: 1;
+  stroke-dasharray: 5;
+}
+
+.ground-line {
+  fill: #000;
 }
 
 .bar-anim-top-bottom {
