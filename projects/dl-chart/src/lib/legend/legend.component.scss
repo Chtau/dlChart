@@ -1,3 +1,5 @@
+@import '../shared/tooltip.scss';
+
 .legend-items {
 	display: flex;
 	flex-wrap: wrap;
@@ -20,6 +22,9 @@
   min-height: 15px;
   min-width: 15px;
   display: inline-block;
+  border-color: #000;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .legend-text-content {

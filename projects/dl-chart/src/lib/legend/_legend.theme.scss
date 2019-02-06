@@ -18,9 +18,9 @@
 @mixin legend-chart-theme($theme) {
 
   .legend-color-box {
-    border-color: map-get($theme, border-color);
-    border-width: map-get($theme, border-width);
-    border-style: map-get($theme, border-style);
+    border-color: map-get($theme, border-color) !important;
+    border-width: map-get($theme, border-width) !important;
+    border-style: map-get($theme, border-style) !important;
   }
 }
 
