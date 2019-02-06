@@ -17,7 +17,7 @@
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>-->
   <br>
-  <!--<div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <div>
       <div>
@@ -72,9 +72,9 @@
         ></dl-chart-legend>
       </div>
     </div>
-  </div>-->
+  </div>
   <br>
-  <div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
+  <!--<div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
@@ -112,46 +112,6 @@
         [hidePoints]="hidePoints"
         [hideSelectionLines]="hideSelectionLines"
       ></dl-line-chart>
-    </div>
-    <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>
-  <!--<div style="display: inline-block; width: 400px; height: 400px;text-align:center;margin: 50px;width: 100%">
-    <h2>Line Chart</h2>
-    <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
-    <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
-    <br>
-    <label>Orientation 
-      <select style="margin-left: 20px;" [(ngModel)]="selectedOrientationLine">
-        <option [ngValue]="0">Bottom</option>
-        <option [ngValue]="1">Left</option>
-        <option [ngValue]="2">Right</option>
-        <option [ngValue]="3">Top</option>
-      </select>
-    </label>
-    <br>
-    <label><input [(ngModel)]="leftScaleAxisLine" type="checkbox"/>Left Scale Axis</label>
-    <label><input [(ngModel)]="rightScaleAxisLine" type="checkbox" />Right Scale Axis</label>
-    <br>
-    <label>Scale steps <input [(ngModel)]="currentStepsLine" type="number"></label>
-    <label><input [(ngModel)]="hideRaster" type="checkbox" />Hide Raster</label>
-    <br>
-    <label><input [(ngModel)]="hideLines" type="checkbox" />Hide Lines</label>
-    <label><input [(ngModel)]="hidePoints" type="checkbox" />Hide Points</label>
-    <br>
-    <label><input [(ngModel)]="hideSelectionLines" type="checkbox" />Hide selection lines</label>
-    <div style="margin-left: 15%;margin-right: 15%;height: 400px;">
-      <dl-line-chart1
-        [chartid]="'line-chart'" 
-        [values]="lines" 
-        [orientation]="selectedOrientationLine" 
-        [leftScaleAxis]="leftScaleAxisLine"
-        [rightScaleAxis]="rightScaleAxisLine"
-        [steps]="currentStepsLine"
-        [hideRaster]="hideRaster"
-        [hideLines]="hideLines"
-        [hidePoints]="hidePoints"
-        [hideSelectionLines]="hideSelectionLines"
-      ></dl-line-chart1>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
   </div>-->
