@@ -208,6 +208,17 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
   }
 
+  getPathFromAxisLine(points: LinePoint[]) {
+    let path: string = "";
+    points.forEach(line => {
+      if (path != "") {
+        path += " ";
+      }
+      path += line.x + "," + line.y;
+    });
+    return path;
+  }
+
   createAxis(items: string[], length: number) : Axis[] {
     let axis:Axis[]  = [];
     var step = (length / (items.length - 1));
