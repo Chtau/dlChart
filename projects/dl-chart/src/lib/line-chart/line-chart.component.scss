@@ -8,6 +8,15 @@
 .axis line,
 .raster line {
   fill: none;
+  stroke: #000;
+}
+
+.axis text {
+  fill: #000;
+}
+
+.scale-label text {
+  fill: #000;
 }
 
 .background-raster {
@@ -58,6 +67,7 @@
 
 .point-selected {
   stroke-width: 3px;
+  stroke: #000;
 }
 
 @keyframes showPoint {

@@ -47,6 +47,10 @@
   animation: scaleSlice 0.5s reverse;
 }
 
+.inner-circle {
+  fill: #fff;
+}
+
 @keyframes scaleSlice {
   100% {
     transform: scale(0, 0);
