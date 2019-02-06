@@ -158,7 +158,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
 
     for (index = 0; index < items.length; index++) {
       const element = items[index];
-      let lineAxis: AxisLine[] = [];
+      //let lineAxis: AxisLine[] = [];
       let pointAxis: LinePoint[] = [];
       let indexPoints: number = 0;
       let subItemId: string = Utils.createElementId('chart-line-point-', index);
@@ -185,7 +185,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
           }
         );
 
-        if (indexPoints != 0) {
+        /*if (indexPoints != 0) {
           var prevLine = lineAxis[lineAxis.length -1];
           prevLine.x2 = x;
           prevLine.y2 = y;
@@ -198,7 +198,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
             x2: -1,
             y2: -1
           });
-        }
+        }*/
         indexPoints++;
       });
       this.axisPoint.push({
@@ -207,7 +207,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
         calculatedPercent: null,
         color: element.color,
         id: Utils.createElementId('chart-line-axis-', index),
-        lines: lineAxis
+        //lines: lineAxis
       });
     }
 
