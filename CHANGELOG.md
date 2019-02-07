@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+
+- Bar Chart change style
+- default Colors when no Theme is imported
+- reduce Pie Chart animation size
+
 ## 1.1.0
 
 - Line Chart general improvement
