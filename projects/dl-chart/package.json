@@ -1,6 +1,6 @@
 {
   "name": "dl-chart",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Lightweight Angular Chart Library",
   "keywords": ["angular", "chart", "lightweight", "angular7", "typescript", "svg"],
   "author": "Christoph Taucher",
