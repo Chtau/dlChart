@@ -98,29 +98,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     var singleStepValue = (maxValue / this.valueSteps);
     var singleStepY = (100 / this.valueSteps);
 
-    this.yAxis = [];
-    this.yAxis.push(
-      {
-        text: minValueCalc.toString(),
-        position: 100
-      }
-    );
-    for (let index = 1; index <= (this.valueSteps - 1); index++) {
-      var currentValue = this.utilsService.roundScale(minValueCalc + (singleStepValue * index));
-      var step = 100 - this.utilsService.roundScale(singleStepY * index);
-      this.yAxis.push(
-        {
-          text: currentValue.toString(),
-          position: step
-        }
-      )
-    }
-    this.yAxis.push(
-      {
-        text: maxValueCalc.toString(),
-        position: 0
-      }
-    );
+    this.yAxis = this.utilsService.createYAxis(minValueCalc, this.valueSteps, singleStepValue, singleStepY, maxValueCalc);
 
     this.barGroundLineY = 100;
     if (minValueCalc < 0) {
@@ -192,28 +170,6 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
         }
       );
     }
-  }
-
-
-  createYAxis(items: string[]) {
-    this.yAxis = [];
-    var step = (100 / (items.length - 1));
-    for (let index = 0; index < (items.length - 1); index++) {
-      const element = items[index];
-      this.yAxis.push(
-        {
-          text: element,
-          position: 100 - (step * index),
-        }
-      )
-    }
-
-    this.yAxis.push(
-      {
-        text: items[items.length - 1],
-        position: 0,
-      }
-    )
   }
 
   onClickSegment(event: Bar) {

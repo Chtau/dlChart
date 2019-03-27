@@ -135,30 +135,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     var singleStepY = (100 / this.valueSteps);
     var singleStepYValue = (useMaxValueY / this.valueSteps);
 
-    this.yAxis = [];
-    this.yAxis.push(
-      {
-        text: this.onFormatUnkownAxisValue(yMinValue),
-        position: 100
-      }
-    );
-    let index = 1;
-    for (index = 1; index <= (this.valueSteps - 1); index++) {
-      var currentValue = this.utilsService.roundScale(yMinValue + (singleStepYValue * index));
-      var step = 100 - this.utilsService.roundScale(singleStepY * index);
-      this.yAxis.push(
-        {
-          text: this.onFormatUnkownAxisValue(currentValue),
-          position: step
-        }
-      )
-    }
-    this.yAxis.push(
-      {
-        text: this.onFormatUnkownAxisValue(yMaxValue),
-        position: 0
-      }
-    );
+    this.yAxis = this.utilsService.createYAxis(yMinValue, this.valueSteps, singleStepYValue, singleStepY, yMaxValue);
 
     // sort the uniqueXPoints
     uniqueXPoints = uniqueXPoints.sort((a, b) => {
@@ -169,6 +146,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     });
 
     var xA: string[] = [];
+    let index = 0
     for (index = 0; index < (uniqueXPoints.length); index++) {
       xA.push(uniqueXPoints[index].toString());
     }
@@ -220,13 +198,13 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
   }
 
-  onFormatUnkownAxisValue(value: any): string {
+  /*onFormatUnkownAxisValue(value: any): string {
     if (value != undefined && value != null && !isNaN(value) && value != Infinity && value != -Infinity) {
       return value.toString();
     } else {
       return "";
     }
-  }
+  }*/
 
   getPathFromAxisLine(points: LinePoint[]) {
     let path: string = "";
