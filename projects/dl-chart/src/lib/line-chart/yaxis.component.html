@@ -1,0 +1,9 @@
+<svg id="yaxis" [attr.x]="currentSVGX" [attr.y]="currentSVGY" width="30px" height="calc(100% - 60px)" style="overflow: visible;">
+  <g class="y axis" *ngIf="currentActiveScaleAxis">
+    <g class="tick" *ngFor="let axis of currentYAxis">
+      <line [attr.x2]="innerLineX2" [attr.x1]="innerLineX1" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
+      <text dy=".32em" [attr.x]="innerTextX" [attr.y]="axis.position + '%'" [style.text-anchor]="innerTextStyle">{{ axis.text }}</text>
+    </g>
+    <line id="dlChartBarYLine" y1="0%" [attr.x1]="lineX1" y2="100%" [attr.x2]="lineX2" class="x-stroke" />
+  </g>
+</svg>
