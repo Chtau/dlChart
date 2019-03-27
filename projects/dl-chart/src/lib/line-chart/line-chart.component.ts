@@ -138,7 +138,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.yAxis = [];
     this.yAxis.push(
       {
-        text: yMinValue.toString(),
+        text: this.onFormatUnkownAxisValue(yMinValue),
         position: 100
       }
     );
@@ -148,14 +148,14 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       var step = 100 - Utils.roundScale(singleStepY * index);
       this.yAxis.push(
         {
-          text: currentValue.toString(),
+          text: this.onFormatUnkownAxisValue(currentValue),
           position: step
         }
       )
     }
     this.yAxis.push(
       {
-        text: yMaxValue.toString(),
+        text: this.onFormatUnkownAxisValue(yMaxValue),
         position: 0
       }
     );
@@ -218,6 +218,14 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     }
 
     this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
+  }
+
+  onFormatUnkownAxisValue(value: any): string {
+    if (value != undefined && value != null && !isNaN(value) && value != Infinity && value != -Infinity) {
+      return value.toString();
+    } else {
+      return "";
+    }
   }
 
   getPathFromAxisLine(points: LinePoint[]) {
