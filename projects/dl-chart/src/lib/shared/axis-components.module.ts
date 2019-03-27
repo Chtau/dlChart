@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { YAxisComponent } from '../shared/yaxis.component';
+import { YAxisComponent } from './yaxis.component';
 import { CommonModule } from '@angular/common';
 import { XAxisComponent } from './xaxis.component';
 
@@ -21,4 +21,4 @@ import { XAxisComponent } from './xaxis.component';
     XAxisComponent
   ]
 })
-export class ComponentsModule { }
+export class AxisComponentsModule { }

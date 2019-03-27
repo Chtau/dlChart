@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BarChartComponent } from './bar-chart.component';
 import { CommonModule } from '@angular/common';
 import { ChartItemService } from '../services/chart-item.service';
-import { ComponentsModule } from '../shared/components.module';
+import { AxisComponentsModule } from '../shared/axis-components.module';
 
 
 @NgModule({
   imports: [
-    ComponentsModule,
+    AxisComponentsModule,
     CommonModule
   ],
   declarations: [
