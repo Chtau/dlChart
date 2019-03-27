@@ -4,25 +4,29 @@ import { BarChartComponent } from './bar-chart.component';
 import { DlBarChartModule } from "./bar-chart.module";
 import { Value } from '../models/value.model';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
-import { Utils } from '../shared/utils';
 import { SimpleChange } from '@angular/core';
 import { ChartOrientation } from '../models/enums';
 import { Bar } from '../models/bar.model';
+import { UtilsService } from '../services/utils.service';
 
 describe('BarChartComponent', () => {
   let component: BarChartComponent;
   let fixture: ComponentFixture<BarChartComponent>;
+  let utils: UtilsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         DlBarChartModule
-      ]
+      ], providers: [
+        UtilsService
+      ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
+    utils = TestBed.get(UtilsService);
     fixture = TestBed.createComponent(BarChartComponent);
     component = fixture.componentInstance;
     //fixture.detectChanges();
@@ -189,9 +193,11 @@ describe('BarChartComponent', () => {
 
     var yA: string[] = [];
     for (let index = 0; index < (5 + 1); index++) {
-      yA.push(Utils.roundScale(1 * index).toString());
+      yA.push(utils.roundScale(1 * index).toString());
     }
-    component.createYAxis(yA);
+
+    component.yAxis = utils.createYAxis(0, 5, 1, 1, 5);
+    //component.createYAxis(yA);
 
     expect(component.yAxis.length).toBe(6, '6 Y Axis steps');
     expect(component.yAxis[0].text === '0' 
