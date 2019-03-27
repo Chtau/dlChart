@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Axis } from '../models/axis.model';
+import { ChartOrientation } from '../models/enums';
 
 @Component({
   selector: '[yaxis]',
@@ -8,18 +9,16 @@ import { Axis } from '../models/axis.model';
 })
 export class YAxisComponent {
 
-  currentSVGX: string = '';
-  currentSVGY: string = '';
+  currentOrientation: ChartOrientation = ChartOrientation.Bottom;
   currentActiveScaleAxis: boolean = true;
   currentYAxis: Axis[] = [];
+  currentScaleLabel: string = '';
   currentIsLeft: boolean = true;
 
-  innerLineX2: string = '';
-  innerLineX1: string = '';
-  innerTextX: string = '';
-  innerTextStyle: string = '';
-  lineX1: string = '';
-  lineX2: string = '';
+  @Input()
+  set orientation(val: ChartOrientation) {
+    this.currentOrientation = val;
+  }
 
   @Input()
   set yAxis(val: Axis[]) {
@@ -32,53 +31,41 @@ export class YAxisComponent {
   }
 
   @Input()
-  set svgX(val: string) {
-    this.currentSVGX = val;
-  }
-
-  @Input()
-  set svgY(val: string) {
-    this.currentSVGY = val;
-  }
-
-  @Input()
   set isLeft(val: boolean) {
     this.currentIsLeft = val;
-    if (this.currentIsLeft) {
-      this.innerLineX1 = 'calc(100% - 6px)';
-      this.innerLineX2 = '100%';
-      this.innerTextX = '75%';
-      this.innerTextStyle = 'end';
-      //this.innerTextStyle = 'text-anchor:end';
-      this.lineX1 = '100%';
-      this.lineX2 = '100%';
-    } else {
-      this.innerLineX1 = '0';
-      this.innerLineX2 = '6';
-      this.innerTextX = '8';
-      this.innerTextStyle = 'start';
-      //this.innerTextStyle = 'text-anchor:start';
-      this.lineX1 = '0';
-      this.lineX2 = '0';
-    }
   }
-
-  currentSVGXLabel: string = '';
-  currentSVGYLabel: string = '';
-  currentScaleLabel: string = '';
 
   @Input()
   set scaleLabel(val: string) {
     this.currentScaleLabel = val;
   }
 
-  @Input()
-  set svgXLabel(val: string) {
-    this.currentSVGXLabel = val;
-  }
-
-  @Input()
-  set svgYLabel(val: string) {
-    this.currentSVGYLabel = val;
+  normOrientation(defaultValue: any, rightValue: any, leftValue: any, topValue: any,
+    defaultValueRight: any, rightValueRight: any, leftValueRight: any, topValueRight: any) {
+    if (this.currentOrientation === ChartOrientation.Bottom) {
+      if (this.currentIsLeft) {
+        return defaultValue;
+      } else {
+        return defaultValueRight;
+      }
+    } else if (this.currentOrientation === ChartOrientation.Right) {
+      if (this.currentIsLeft) {
+        return rightValue;
+      } else {
+        return rightValueRight;
+      }
+    } else if (this.currentOrientation === ChartOrientation.Left){
+      if (this.currentIsLeft) {
+        return leftValue;
+      } else {
+        return leftValueRight;
+      }
+    } else {
+      if (this.currentIsLeft) {
+        return topValue;
+      } else {
+        return topValueRight;
+      }
+    }
   }
 }
