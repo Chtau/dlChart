@@ -24,11 +24,17 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;
   currentOrientation: ChartOrientation = ChartOrientation.Bottom;
+  currentBarFullFilled: boolean = false;
 
   barGroundLineY: number = 100;
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
+
+  @Input()
+  set barFullFilled(val: boolean) {
+    this.currentBarFullFilled = val;
+  }
 
   @Input()
   set hideSelectLine(val: boolean) {
@@ -243,6 +249,13 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
       }
     }
     return css;
+  }
+
+  get barFillOpacity() : string {
+    if (this.currentBarFullFilled === true) {
+      return "1";
+    }
+    return ".5";
   }
 
   normOrientation(defaultValue: any, rightValue: any, leftValue: any, topValue: any) {

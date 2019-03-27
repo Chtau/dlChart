@@ -160,6 +160,7 @@ export class AppComponent implements AfterViewInit {
   hideLines: boolean = false;
   hidePoints: boolean = false;
   hideSelectionLines: boolean = false;
+  barFullFilled: boolean = false;
 
   useDonutStyle: boolean = false;
   donutSize: number = null;
