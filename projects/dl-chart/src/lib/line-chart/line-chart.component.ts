@@ -247,7 +247,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       axis.push(
         {
           text: element,
-          position: length - (step * index),
+          position: (100 - (length - (step * index))),
         }
       )
     }
