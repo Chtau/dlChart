@@ -198,14 +198,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
   }
 
-  /*onFormatUnkownAxisValue(value: any): string {
-    if (value != undefined && value != null && !isNaN(value) && value != Infinity && value != -Infinity) {
-      return value.toString();
-    } else {
-      return "";
-    }
-  }*/
-
   getPathFromAxisLine(points: LinePoint[]) {
     let path: string = "";
     points.forEach(line => {
@@ -281,16 +273,6 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
         }
       }
     }
-  }
-
-  xStartEndTextAnchor(index: number, length: number) {
-    let anchor: string = 'middle';
-    if (index === 0) {
-      anchor = 'end'
-    } else if (index === length - 1) {
-      anchor = 'start'
-    }
-    return { "text-anchor": anchor };
   }
 
 }
