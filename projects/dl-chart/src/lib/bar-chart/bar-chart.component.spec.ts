@@ -387,7 +387,7 @@ describe('BarChartComponent', () => {
     expect(component.bars[0].width).toBe(35, 'Bar width');
   });
 
-  it('Bar offset', () => {
+  it('Bar hide selection line', () => {
     component.values = [
       new Value('Blue', 0, 'Blue'),
       new Value('Orange', 0, 'Orange'),
@@ -401,6 +401,19 @@ describe('BarChartComponent', () => {
     component.onClickSegment(component.bars[0]);
     
     expect(!(component.currentActiveBar != null && !component.shouldHideSelectLine)).toBeTruthy('Line will not be shown');
+  });
+
+  it('Bar change to full filled bar', () => {
+    component.values = [
+      new Value('Blue', 0, 'Blue'),
+      new Value('Orange', 0, 'Orange'),
+    ];
+    component.barFullFilled = true;
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+    expect(component.barFillOpacity).toBe("1", 'Bars will have full opacity');
   });
 
 });

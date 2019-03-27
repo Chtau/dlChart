@@ -1,30 +1,36 @@
-/*import { async, TestBed } from '@angular/core/testing';
-import { Utils } from './utils';
+import { async, TestBed } from '@angular/core/testing';
 import { Value } from '../models/value.model';
 import { Point } from '../models/point.model';
+import { UtilsService } from './utils.service';
 
-describe('Utils', () => {
+describe('UtilsService', () => {
+  let service: UtilsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         
-      ]
+      ], providers: [
+        UtilsService
+      ],
     })
     .compileComponents();
   }));
 
+  beforeEach(() => {
+    service = TestBed.get(UtilsService);
+  });
 
   it('Math round with scale 2 decimal', () => {
-    expect(Utils.roundScale(0.109)).toBe(0.11, 'decimal round');
+    expect(service.roundScale(0.109)).toBe(0.11, 'decimal round');
   });
 
   it('create Element Id', () => {
-    expect(Utils.createElementId('test-', 1)).toBe('test-1', 'element id created');
+    expect(service.createElementId('test-', 1)).toBe('test-1', 'element id created');
   });
 
   it('generate text Value no config', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       null,
       {
         value: 1,
@@ -38,7 +44,7 @@ describe('Utils', () => {
   });
 
   it('generate text Value with config', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       { HideValue: false, ValueFunction: null },
       {
         value: 1,
@@ -52,7 +58,7 @@ describe('Utils', () => {
   });
 
   it('generate text Value with config (hide value)', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       { HideValue: true, ValueFunction: null },
       {
         value: 1,
@@ -66,7 +72,7 @@ describe('Utils', () => {
   });
 
   it('generate text Value with config (function => to upper)', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       { HideValue: false, ValueFunction: (n) => { return n.name.toLocaleUpperCase() } },
       {
         value: 1,
@@ -80,7 +86,7 @@ describe('Utils', () => {
   });
 
   it('generate text from Point', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       null,
       {
         xValue: 1,
@@ -95,7 +101,7 @@ describe('Utils', () => {
   });
 
   it('generate text', () => {
-    expect(Utils.textValue(
+    expect(service.textValue(
       null,
       {
         color: '',
@@ -108,4 +114,3 @@ describe('Utils', () => {
   });
 
 });
-*/
