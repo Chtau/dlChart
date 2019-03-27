@@ -76,7 +76,7 @@
   <br>
   <div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
-    <input (keyup)="onKeyLine($event)" placeholder="Filter the Chart ('3' shows only two Values)">
+    <input  placeholder="Filter the Chart ('3' shows only two Values)" [(ngModel)]="filterValueLine"><!--(keyup)="onKeyLine($event)"-->
     <br>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">

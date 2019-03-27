@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ChartItemService } from '../services/chart-item.service';
 import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
@@ -8,14 +8,14 @@ import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { BaseChartComponent } from '../shared/base-chart.component';
 
-@Component({  
-  selector: 'dl-line-chart',  
-  templateUrl: './line-chart.component.html',  
+@Component({
+  selector: 'dl-line-chart',
+  templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
-})  
+})
 export class LineChartComponent extends BaseChartComponent<Line> implements OnChanges {
-  
+
   currentScaleLabel: string = '';
   valueSteps: number = 6;
   activeLeftScaleAxis: boolean = true;
@@ -81,8 +81,26 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.resetActiveElement();
-    this.calculateChart();
+    if (!this.compare(changes.values.currentValue, changes.values.previousValue)) {
+      this.resetActiveElement();
+      this.calculateChart();
+    }
+  }
+
+  compare(arr1, arr2): boolean {
+    if (!arr1 || !arr2) return;
+    let result: boolean = false;
+    arr1.forEach((e1, i) => arr2.forEach(e2 => {
+      if (e1.length > 1 && e2.length) {
+        result = this.compare(e1, e2);
+      } else if (e1 !== e2) {
+        result = false
+      } else {
+        result = true
+      }
+    })
+    );
+    return result
   }
 
   calculateChart() {
@@ -101,13 +119,13 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       });
     });
 
-    let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function(o) { return o; }));
-    let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function(o) { return o; }));
+    let xMinValue: number = Math.min.apply(Math, uniqueXPoints.map(function (o) { return o; }));
+    let xMaxValue: number = Math.max.apply(Math, uniqueXPoints.map(function (o) { return o; }));
     let onePercentX: number = (xMaxValue - xMinValue) / 100;
 
-    let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function(o) { return o; }));
-    let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function(o) { return o; }));
- 
+    let yMinValue: number = Math.min.apply(Math, uniqueYPoints.map(function (o) { return o; }));
+    let yMaxValue: number = Math.max.apply(Math, uniqueYPoints.map(function (o) { return o; }));
+
     var useMaxValueY = (yMaxValue - yMinValue);
     var singleStepY = (100 / this.valueSteps);
     var singleStepYValue = (useMaxValueY / this.valueSteps);
@@ -150,7 +168,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       xA.push(uniqueXPoints[index].toString());
     }
     this.xAxis = this.createAxis(xA, 100);
-    
+
     this.axisPoint = [];
 
     var oneValueYPercent = useMaxValueY / 100;
@@ -208,8 +226,8 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     return path;
   }
 
-  createAxis(items: string[], length: number) : Axis[] {
-    let axis:Axis[]  = [];
+  createAxis(items: string[], length: number): Axis[] {
+    let axis: Axis[] = [];
     var step = (length / (items.length - 1));
     for (let index = 0; index < (items.length); index++) {
       const element = items[index];
@@ -229,7 +247,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
 
   cssClassSegmentPoint(item: LinePoint): string {
     let css: string = '';
-    
+
     if (item === this.currentActiveChartItem) {
       css += ' point-selected';
     }
@@ -246,7 +264,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     return item.size;
   }
 
-  get currentActivePoint() : LinePoint {
+  get currentActivePoint(): LinePoint {
     if (this.currentActiveChartItem != null) {
       let point: LinePoint = this.currentActiveChartItem as LinePoint;
       if (point != undefined && point.x != undefined) {
@@ -281,7 +299,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     } else if (index === length - 1) {
       anchor = 'start'
     }
-    return {"text-anchor" : anchor};
+    return { "text-anchor": anchor };
   }
 
 }
