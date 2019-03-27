@@ -31,50 +31,8 @@
           class="x-stroke" />
       </g>
     </svg>
-    <svg id="yaxis" [attr.x]="normOrientation('0%', '30px', '30px', 'calc(100% - 30px)')" [attr.y]="normOrientation('30px', 'calc(100% - 30px)', '0px', '30px')"
-      [attr.width]="normOrientation('30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px')" [attr.height]="normOrientation('calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)')"
-      style="overflow: visible;">
-      <g class="y axis" *ngIf="activeLeftScaleAxis">
-        <g class="tick" *ngFor="let axis of yAxis">
-          <line [attr.x1]="normOrientation('calc(100% - 6px)', axis.position + '%', (100 - axis.position) + '%', 0)"
-            [attr.y1]="normOrientation(axis.position + '%', '0', '30px', (100 - axis.position) + '%')" [attr.x2]="normOrientation('100%', axis.position + '%', (100 - axis.position) + '%', 6)"
-            [attr.y2]="normOrientation(axis.position + '%', '6', '24px', (100 - axis.position) + '%')"></line>
-          <text dy=".32em" [attr.x]="normOrientation('75%', axis.position + '%', (100 - axis.position) + '%', '8')"
-            [attr.y]="normOrientation(axis.position + '%', '12px', '18px', (100 - axis.position) + '%')" [ngStyle]="{'text-anchor': normOrientation('end', 'middle', 'middle', 'start')}">{{
-            axis.text }}</text>
-        </g>
-        <line id="dlChartBarYLine" [attr.x1]="normOrientation('100%', '0', '0', 0)" [attr.y1]="normOrientation('0%', '0', '30px', '0%')"
-          [attr.x2]="normOrientation('100%', '100%', '100%', 0)" [attr.y2]="normOrientation('100%', '0', '30px', '100%')"
-          class="x-stroke" />
-      </g>
-    </svg>
-    <svg *ngIf="activeLeftScaleAxis" [attr.x]="normOrientation('31px', '30px', 'calc(100% - 30px)', 'calc(100% - 43px)')"
-      [attr.y]="normOrientation('30px', 'calc(100% - 43px)', '31px', 'calc(100% - 31px)')" class="scale-label">
-      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" [ngStyle]="{'transform': normOrientation('rotate(-90deg)', 'rotate(0deg)', 'rotate(0deg)', 'rotate(-90deg)'), 'text-anchor': normOrientation('end', 'start', 'end', 'start')}">{{
-        currentScaleLabel }}</text>
-    </svg>
-    <svg id="yaxis2" [attr.x]="normOrientation('calc(100% - 30px)', '30px', '30px', '0%')" [attr.y]="normOrientation('30px', '0px', 'calc(100% - 30px)', '30px')"
-      [attr.width]="normOrientation('30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px')" [attr.height]="normOrientation('calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)')"
-      style="overflow: visible;">
-      <g class="y axis" *ngIf="activeRightScaleAxis">
-        <g class="tick" *ngFor="let axis of yAxis">
-          <line [attr.x1]="normOrientation(0, axis.position + '%', (100 - axis.position) + '%', 'calc(100% - 6px)')"
-            [attr.y1]="normOrientation(axis.position + '%', '30px', 0, (100 - axis.position) + '%')" [attr.x2]="normOrientation(6, axis.position + '%', (100 - axis.position) + '%', '100%')"
-            [attr.y2]="normOrientation(axis.position + '%', '24px', 6, (100 - axis.position) + '%')"></line>
-          <text dy=".32em" [attr.x]="normOrientation('8', axis.position + '%', (100 - axis.position) + '%', '75%')"
-            [attr.y]="normOrientation(axis.position + '%', '18px', '12px', (100 - axis.position) + '%')" [ngStyle]="{'text-anchor': normOrientation('start', 'middle', 'middle', 'end')}">{{
-            axis.text }}</text>
-        </g>
-        <line id="dlChartBarYLine" [attr.x1]="normOrientation(0, '0', 0, '100%')" [attr.y1]="normOrientation('0%', '30px', 0, '0%')"
-          [attr.x2]="normOrientation(0, '100%', '100%', '100%')" [attr.y2]="normOrientation('100%', '30px', 0, '100%')"
-          class="x-stroke" />
-      </g>
-    </svg>
-    <svg *ngIf="activeRightScaleAxis" [attr.x]="normOrientation('calc(100% - 43px)', '30px', 'calc(100% - 31px)', '31px')"
-      [attr.y]="normOrientation('30px', '31px', 'calc(100% - 43px)', 'calc(100% - 31px)')" class="scale-label">
-      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" [ngStyle]="{'transform': normOrientation('rotate(-90deg)', 'rotate(0deg)', 'rotate(0deg)', 'rotate(-90deg)'), 'text-anchor': normOrientation('end', 'start', 'end', 'start')}">{{
-        currentScaleLabel }}</text>
-    </svg>
+    <svg yaxis [activeScaleAxis]="activeLeftScaleAxis" [orientation]="currentOrientation" [yAxis]="yAxis" [scaleLabel]="currentScaleLabel"></svg>
+    <svg yaxis [activeScaleAxis]="activeRightScaleAxis" [orientation]="currentOrientation" [yAxis]="yAxis" [isLeft]="false" [scaleLabel]="currentScaleLabel"></svg>
   </svg>
   <div id="dlChartTooltip" *ngIf="tooltipShow" [style.top.px]="tooltipTop" [style.left.px]="tooltipLeft" class="tooltiptext">
     <span>{{ tooltipValue }}</span>

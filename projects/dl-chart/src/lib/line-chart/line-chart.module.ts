@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { LineChartComponent } from './line-chart.component';
 import { CommonModule } from '@angular/common';
 import { ChartItemService } from '../services/chart-item.service';
-import { YAxisComponent } from '../shared/yaxis.component';
+import { ComponentsModule } from '../shared/components.module';
 
 
 @NgModule({
   imports: [
+    ComponentsModule,
     CommonModule
   ],
   declarations: [
-    YAxisComponent,
     LineChartComponent
   ],
   providers: [
