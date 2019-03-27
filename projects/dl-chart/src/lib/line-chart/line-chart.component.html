@@ -1,41 +1,8 @@
 <ng-container>
   <svg class="line-chart-svg" width="100%" height="100%">
-    <svg width="calc(100% - 60px)" height="30px" y="calc(100% - 30px)" x="30px">
-      <g class="x axis xaxis-text">
-        <g class="tick" *ngFor="let axis of xAxis; let i=index">
-          <line [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y2="4"></line>
-          <text dy=".71em" [attr.y]="'6'" [attr.x]="axis.position + '%'" [ngStyle]="xStartEndTextAnchor(i, xAxis.length)">{{
-            axis.text }}</text>
-        </g>
-        <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="'100%'" class="x-stroke" />
-      </g>
-    </svg>
-    <svg id="yaxis" x="0%" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;">
-      <g class="y axis" *ngIf="activeLeftScaleAxis">
-        <g class="tick" *ngFor="let axis of yAxis">
-          <line x2="100%" x1="calc(100% - 6px)" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
-          <text dy=".32em" [attr.x]="'75%'" [attr.y]="axis.position + '%'" style="text-anchor:end">{{ axis.text }}</text>
-        </g>
-        <line id="dlChartBarYLine" y1="0%" x1="100%" y2="100%" x2="100%" class="x-stroke" />
-      </g>
-    </svg>
-    <svg *ngIf="activeLeftScaleAxis" x="31px" y="30px">
-      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{
-        currentScaleLabel }}</text>
-    </svg>
-    <svg id="yaxis2" x="calc(100% - 30px)" y="30px" width="30px" height="calc(100% - 60px)" style="overflow: visible;">
-      <g class="y axis" *ngIf="activeRightScaleAxis">
-        <g class="tick" *ngFor="let axis of yAxis">
-          <line x2="6" x1="0" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'"></line>
-          <text dy=".32em" [attr.x]="'8'" [attr.y]="axis.position + '%'" style="text-anchor:start">{{ axis.text }}</text>
-        </g>
-        <line id="dlChartBarYLine" y1="0%" x1="0" y2="100%" x2="0" class="x-stroke" />
-      </g>
-    </svg>
-    <svg *ngIf="activeRightScaleAxis" x="calc(100% - 43px)" y="30px">
-      <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{
-        currentScaleLabel }}</text>
-    </svg>
+    <svg xaxis [orientation]="0" [xAxis]="xAxis"></svg>
+    <svg yaxis [activeScaleAxis]="activeLeftScaleAxis" [orientation]="0" [yAxis]="yAxis" [scaleLabel]="currentScaleLabel"></svg>
+    <svg yaxis [activeScaleAxis]="activeRightScaleAxis" [orientation]="0" [yAxis]="yAxis" [isLeft]="false" [scaleLabel]="currentScaleLabel"></svg>
     <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
       <g *ngIf="!activeHideRaster" class="raster">
         <line class="background-raster" [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y1="0" y2="100%"

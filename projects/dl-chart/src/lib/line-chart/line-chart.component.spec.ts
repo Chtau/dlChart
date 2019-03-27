@@ -4,6 +4,7 @@ import { Point } from '../models/point.model';
 import { SimpleChange } from '@angular/core';
 import { DlLineChartModule } from './line-chart.module';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
+import { Line } from '../models/line.model';
 
 describe('LineChartComponent', () => {
   let component: LineChartComponent;
@@ -305,6 +306,166 @@ describe('LineChartComponent', () => {
     component.rightScaleAxis = true;
 
     expect(component.currentScaleLabel).toBe('Test', 'Scale label value');
+  });
+
+  it('Hide lines Filler', () => {
+    component.values = [
+      {
+        color: 'red',
+        cssClass: null,
+        data: null,
+        name: 'Red',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 10),
+          new Point(2018, 15),
+          new Point(2019, 7),
+          new Point(2020, 12),
+        ]
+      },
+      {
+        color: 'blue',
+        cssClass: null,
+        data: null,
+        name: 'Blue',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 5),
+          new Point(2018, 9),
+          new Point(2019, 22),
+          new Point(2020, 1),
+        ]
+      }];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+    component.hideLinesFiller = true;
+
+    expect(component.activeHideLinesFiller).toBe(true, 'Lines should not have a fill effect');
+  });
+
+  it('Update Values', () => {
+    component.values = [
+      {
+        color: 'red',
+        cssClass: null,
+        data: null,
+        name: 'Red',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 10),
+          new Point(2018, 15),
+          new Point(2019, 7),
+          new Point(2020, 12),
+        ]
+      },
+      {
+        color: 'blue',
+        cssClass: null,
+        data: null,
+        name: 'Blue',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 5),
+          new Point(2018, 9),
+          new Point(2019, 22),
+          new Point(2020, 1),
+        ]
+      }];
+    component.ngOnChanges({
+      values: new SimpleChange(null, component.values, false)
+    });
+    fixture.detectChanges();
+    
+    var values1: Line[] = [
+      {
+        color: 'red',
+        cssClass: null,
+        data: null,
+        name: 'Red',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 10),
+          new Point(2018, 15),
+          new Point(2019, 7),
+          new Point(2020, 12),
+        ]
+      },
+      {
+        color: 'blue',
+        cssClass: null,
+        data: null,
+        name: 'Blue',
+        tooltipConfig: null,
+        points: [
+          new Point(2017, 5),
+          new Point(2018, 9),
+          new Point(2019, 22),
+          new Point(2020, 1),
+        ]
+      }];
+      component.ngOnChanges({
+        steps: undefined,
+        values: {
+          currentValue: values1,
+          previousValue: component.values,
+          firstChange: false,
+          isFirstChange: () => {return false }
+        }
+        //values: new SimpleChange(values1, component.values, false)
+      });
+      fixture.detectChanges();
+
+      var values2: Line[] = [
+        {
+          color: 'blue',
+          cssClass: null,
+          data: null,
+          name: 'Blue',
+          tooltipConfig: null,
+          points: [
+            new Point(2017, 5),
+            new Point(2018, 9),
+            new Point(2019, 22),
+            new Point(2020, 1),
+          ]
+        }];
+        component.ngOnChanges({
+          steps: undefined,
+          values: {
+            currentValue: values1,
+            previousValue: values2,
+            firstChange: false,
+            isFirstChange: () => {return false }
+          }
+          //values: new SimpleChange(component.values, values2, false)
+        });
+        fixture.detectChanges();
+
+        component.ngOnChanges({
+          steps: undefined,
+          values: {
+            currentValue: values1,
+            previousValue: null,
+            firstChange: false,
+            isFirstChange: () => {return false }
+          }
+        });
+        fixture.detectChanges();
+
+        component.ngOnChanges({
+          steps: undefined,
+          values: {
+            currentValue: values2,
+            previousValue: values1,
+            firstChange: false,
+            isFirstChange: () => {return false }
+          }
+        });
+        fixture.detectChanges();
+
+    expect(component).toBeDefined('Changed values');
   });
 
 });

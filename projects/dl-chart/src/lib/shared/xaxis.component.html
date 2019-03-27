@@ -1,0 +1,21 @@
+<svg id="xaxis" [attr.x]="normOrientation('30px', 'calc(100% - 30px)', '0%', '30px')"
+  [attr.y]="normOrientation('calc(100% - 30px)', '30px', '30px', '0px')"
+  [attr.width]="normOrientation('calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)')"
+  [attr.height]="normOrientation( '30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px')" style="overflow: visible;">
+  <g class="x axis xaxis-text">
+    <g class="tick" *ngFor="let axis of currentXAxis">
+      <line [attr.x1]="normOrientation(axis.position + '%', '0', 'calc(100% - 6px)', (100 - axis.position) + '%')"
+        [attr.x2]="normOrientation(axis.position + '%', 4, '100%', (100 - axis.position) + '%')"
+        [attr.y1]="normOrientation(0, axis.position + '%', (100 - axis.position) + '%', '30px')"
+        [attr.y2]="normOrientation(4, axis.position + '%', (100 - axis.position) + '%', '24px')"></line>
+      <text [attr.dy]="normOrientation('.71em', '.31em', '.32em', '.32em')"
+        [attr.x]="normOrientation(axis.position + '%', '6', '75%', (100 - axis.position) + '%')"
+        [attr.y]="normOrientation('6', axis.position + '%', axis.position + '%', '18px')"
+        [ngStyle]="{'text-anchor': normOrientation('middle', 'start', 'end', 'middle')}">{{
+            axis.text }}</text>
+    </g>
+    <line id="dlChartBarXLine" [attr.x1]="normOrientation(0, 0, '100%', '0')"
+      [attr.y1]="normOrientation(0, 0, '0%', '30px')" [attr.x2]="normOrientation('100%', 0, '100%', '100%')"
+      [attr.y2]="normOrientation(0, '100%', '100%', '30px')" class="x-stroke" />
+  </g>
+</svg>

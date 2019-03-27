@@ -1,10 +1,10 @@
 import { ChartItemService } from '../services/chart-item.service';
 import { Output, Input, EventEmitter } from '@angular/core';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
-import { Utils } from './utils';
 import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
 import { IValue } from '../models/value.interface';
+import { UtilsService } from '../services/utils.service';
 
 export class BaseChartComponent<T> {
 
@@ -58,15 +58,15 @@ export class BaseChartComponent<T> {
   get tooltipValue() {
     if (this.tooltipContentItem) {
       if (this.tooltipContentItem.tooltipConfig != null) {
-        return Utils.textValue(this.tooltipContentItem.tooltipConfig, this.tooltipContentItem, this.tooltipContentChartItem.calculatedPercent);
+        return this.utilsService.textValue(this.tooltipContentItem.tooltipConfig, this.tooltipContentItem, this.tooltipContentChartItem.calculatedPercent);
       } else {
-        return Utils.textValue(this.currentTooltipConfiguration, this.tooltipContentItem, this.tooltipContentChartItem.calculatedPercent);
+        return this.utilsService.textValue(this.currentTooltipConfiguration, this.tooltipContentItem, this.tooltipContentChartItem.calculatedPercent);
       }
     }
     return null;
   }
 
-  constructor(public chartItemService: ChartItemService) {
+  constructor(public chartItemService: ChartItemService, public utilsService: UtilsService) {
     
   }
 

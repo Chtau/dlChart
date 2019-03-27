@@ -1,0 +1,32 @@
+<svg id="yaxis" 
+[attr.x]="normOrientation('0%', '30px', '30px', 'calc(100% - 30px)', 'calc(100% - 30px)', '30px', '30px', '0%')" 
+[attr.y]="normOrientation('30px', 'calc(100% - 30px)', '0px', '30px', '30px', '0px', 'calc(100% - 30px)', '30px')" 
+[attr.width]="normOrientation('30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px')" 
+[attr.height]="normOrientation('calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)', 'calc(100% - 60px)', '30px', '30px', 'calc(100% - 60px)')" style="overflow: visible;">
+  <g class="y axis" *ngIf="currentActiveScaleAxis">
+    <g class="tick" *ngFor="let axis of currentYAxis">
+      <line [attr.x1]="normOrientation('calc(100% - 6px)', axis.position + '%', (100 - axis.position) + '%', 0, 0, axis.position + '%', (100 - axis.position) + '%', 'calc(100% - 6px)')" 
+      [attr.x2]="normOrientation('100%', axis.position + '%', (100 - axis.position) + '%', 6, 6, axis.position + '%', (100 - axis.position) + '%', '100%')" 
+      [attr.y1]="normOrientation(axis.position + '%', '0', '30px', (100 - axis.position) + '%', axis.position + '%', '30px', 0, (100 - axis.position) + '%')" 
+      [attr.y2]="normOrientation(axis.position + '%', '6', '24px', (100 - axis.position) + '%', axis.position + '%', '24px', 6, (100 - axis.position) + '%')"></line>
+      <text dy=".32em" 
+      [attr.x]="normOrientation('75%', axis.position + '%', (100 - axis.position) + '%', '8', '8', axis.position + '%', (100 - axis.position) + '%', '75%')" 
+      [attr.y]="normOrientation(axis.position + '%', '12px', '18px', (100 - axis.position) + '%', axis.position + '%', '18px', '12px', (100 - axis.position) + '%')" 
+      [style.text-anchor]="normOrientation('end', 'middle', 'middle', 'start', 'start', 'middle', 'middle', 'end')">{{ axis.text }}</text>
+    </g>
+    <line
+    [attr.x1]="normOrientation('100%', '0', '0', 0, 0, '0', 0, '100%')" 
+    [attr.x2]="normOrientation('100%', '100%', '100%', 0, 0, '100%', '100%', '100%')" 
+    [attr.y1]="normOrientation('0%', '0', '30px', '0%', '0%', '30px', 0, '0%')" 
+    [attr.y2]="normOrientation('100%', '0', '30px', '100%', '100%', '30px', 0, '100%')" 
+    class="x-stroke" />
+  </g>
+</svg>
+<svg *ngIf="currentActiveScaleAxis" 
+[attr.x]="normOrientation('31px', '30px', 'calc(100% - 30px)', 'calc(100% - 43px)', 'calc(100% - 43px)', '30px', 'calc(100% - 31px)', '31px')" 
+[attr.y]="normOrientation('30px', 'calc(100% - 43px)', '31px', 'calc(100% - 31px)', '30px', '31px', 'calc(100% - 43px)', 'calc(100% - 31px)')">
+  <text dy=".71em" 
+  [attr.x]="'0'" 
+  [attr.y]="'0'" 
+  [ngStyle]="{'transform': normOrientation('rotate(-90deg)', 'rotate(0deg)', 'rotate(0deg)', 'rotate(-90deg)', 'rotate(-90deg)', 'rotate(0deg)', 'rotate(0deg)', 'rotate(-90deg)'), 'text-anchor': normOrientation('end', 'start', 'end', 'start', 'end', 'start', 'end', 'start')}">{{ currentScaleLabel }}</text>
+</svg>

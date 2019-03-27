@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PieChartComponent } from './pie-chart.component';
 import { CommonModule } from '@angular/common';
 import { ChartItemService } from '../services/chart-item.service';
+import { UtilsService } from '../services/utils.service';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ChartItemService } from '../services/chart-item.service';
     PieChartComponent
   ],
   providers: [
-    ChartItemService
+    ChartItemService,
+    UtilsService
   ],
   entryComponents: [ 
     PieChartComponent

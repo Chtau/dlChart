@@ -17,7 +17,7 @@
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>
   <br>-->
-  <!--<div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <div>
       <div>
@@ -42,6 +42,7 @@
         <label>Scale steps <input [(ngModel)]="currentSteps" type="number"></label>
         <br>
         <label><input [(ngModel)]="hideSelectLine" type="checkbox" />Hide select Line</label>
+        <label><input [(ngModel)]="barFullFilled" type="checkbox" />Bar full filled</label>
         <div #barchartWrapper style="height: 250px;">
           <dl-bar-chart 
             [orientation]="selectedOrientation" 
@@ -53,6 +54,7 @@
             [rightScaleAxis]="rightScaleAxis"
             [barOffset]="barOffset"
             [hideSelectLine]="hideSelectLine"
+            [barFullFilled]="barFullFilled"
           ></dl-bar-chart>    
         </div>
       </div>
@@ -72,7 +74,7 @@
         ></dl-chart-legend>
       </div>
     </div>
-  </div>-->
+  </div>
   <br>
   <div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
@@ -113,6 +115,7 @@
         [hideLinesFiller]="hideLinesFiller"
         [hidePoints]="hidePoints"
         [hideSelectionLines]="hideSelectionLines"
+        [scaleLabel]="'Test'"
       ></dl-line-chart>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>

@@ -1,12 +1,12 @@
 import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
-import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
 import { ChartOrientation } from '../models/enums';
 import { BaseChartComponent } from '../shared/base-chart.component';
+import { UtilsService } from '../services/utils.service';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -24,11 +24,17 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
   activeLeftScaleAxis: boolean = true;
   activeRightScaleAxis: boolean = false;
   currentOrientation: ChartOrientation = ChartOrientation.Bottom;
+  currentBarFullFilled: boolean = false;
 
   barGroundLineY: number = 100;
   xAxis: Axis[] = [];
   yAxis: Axis[] = [];
   bars: Bar[] = [];
+
+  @Input()
+  set barFullFilled(val: boolean) {
+    this.currentBarFullFilled = val;
+  }
 
   @Input()
   set hideSelectLine(val: boolean) {
@@ -65,8 +71,8 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     this.currentOrientation = val;
   }
 
-  constructor(chartItemService: ChartItemService) {
-    super(chartItemService);
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService) {
+    super(chartItemService, utilsService);
   }
  
   ngOnChanges(changes: SimpleChanges): void {
@@ -92,29 +98,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     var singleStepValue = (maxValue / this.valueSteps);
     var singleStepY = (100 / this.valueSteps);
 
-    this.yAxis = [];
-    this.yAxis.push(
-      {
-        text: minValueCalc.toString(),
-        position: 100
-      }
-    );
-    for (let index = 1; index <= (this.valueSteps - 1); index++) {
-      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
-      var step = 100 - Utils.roundScale(singleStepY * index);
-      this.yAxis.push(
-        {
-          text: currentValue.toString(),
-          position: step
-        }
-      )
-    }
-    this.yAxis.push(
-      {
-        text: maxValueCalc.toString(),
-        position: 0
-      }
-    );
+    this.yAxis = this.utilsService.createYAxis(minValueCalc, this.valueSteps, singleStepValue, singleStepY, maxValueCalc);
 
     this.barGroundLineY = 100;
     if (minValueCalc < 0) {
@@ -179,35 +163,13 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
           y:  y,
           x: element.position,
           sourceItem: element.val,
-          calculatedPercent: element.val.value === 0 ? 0 : Utils.roundScale(element.val.value / onePercent),
+          calculatedPercent: element.val.value === 0 ? 0 : this.utilsService.roundScale(element.val.value / onePercent),
           color: element.val.color,
-          id: Utils.createElementId('chart-bar-', index),
+          id: this.utilsService.createElementId('chart-bar-', index),
           isMinusValue: isMinusValue
         }
       );
     }
-  }
-
-
-  createYAxis(items: string[]) {
-    this.yAxis = [];
-    var step = (100 / (items.length - 1));
-    for (let index = 0; index < (items.length - 1); index++) {
-      const element = items[index];
-      this.yAxis.push(
-        {
-          text: element,
-          position: 100 - (step * index),
-        }
-      )
-    }
-
-    this.yAxis.push(
-      {
-        text: items[items.length - 1],
-        position: 0,
-      }
-    )
   }
 
   onClickSegment(event: Bar) {
@@ -243,6 +205,13 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
       }
     }
     return css;
+  }
+
+  get barFillOpacity() : string {
+    if (this.currentBarFullFilled === true) {
+      return "1";
+    }
+    return ".5";
   }
 
   normOrientation(defaultValue: any, rightValue: any, leftValue: any, topValue: any) {

@@ -4,16 +4,19 @@ import { BaseChartComponent } from './base-chart.component';
 import { IChartItem } from '../models/chartitem.interface';
 import { Value } from '../models/value.model';
 import { IValue } from '../models/value.interface';
+import { UtilsService } from '../services/utils.service';
 
 describe('BaseChartComponent', () => {
   let baseChart: BaseChartComponent<IValue>;
+  let utils: UtilsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
       ],
       providers: [
-        ChartItemService
+        ChartItemService,
+        UtilsService
       ],
     })
     .compileComponents();
@@ -21,7 +24,7 @@ describe('BaseChartComponent', () => {
 
   beforeEach(() => {
     var service = TestBed.get(ChartItemService);
-    baseChart = new BaseChartComponent(service);
+    baseChart = new BaseChartComponent(service, utils);
   });
 
   it('should create', () => {
