@@ -1,15 +1,6 @@
 <ng-container>
   <svg class="line-chart-svg" width="100%" height="100%">
-    <svg width="calc(100% - 60px)" height="30px" y="calc(100% - 30px)" x="30px">
-      <g class="x axis xaxis-text">
-        <g class="tick" *ngFor="let axis of xAxis; let i=index">
-          <line [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y2="4"></line>
-          <text dy=".71em" [attr.y]="'6'" [attr.x]="axis.position + '%'" [ngStyle]="xStartEndTextAnchor(i, xAxis.length)">{{
-            axis.text }}</text>
-        </g>
-        <line id="dlChartBarXLine" [attr.y1]="0" x1="0" [attr.y2]="0" [attr.x2]="'100%'" class="x-stroke" />
-      </g>
-    </svg>
+    <svg xaxis [orientation]="0" [xAxis]="xAxis"></svg>
     <svg yaxis [activeScaleAxis]="activeLeftScaleAxis" [orientation]="0" [yAxis]="yAxis" [scaleLabel]="currentScaleLabel"></svg>
     <svg yaxis [activeScaleAxis]="activeRightScaleAxis" [orientation]="0" [yAxis]="yAxis" [isLeft]="false" [scaleLabel]="currentScaleLabel"></svg>
     <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
