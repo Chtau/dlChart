@@ -1,10 +1,10 @@
 import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { Value } from '../models/value.model';
 import { ChartItemService } from '../services/chart-item.service';
-import { Utils } from '../shared/utils';
 import { BaseChartComponent } from '../shared/base-chart.component';
 import { ServiceItem } from '../models/serviceitem.model';
 import { Slice } from '../models/slice.model';
+import { UtilsService } from '../services/utils.service';
 
 @Component({  
   selector: 'dl-pie-chart',  
@@ -45,13 +45,13 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
   }
 
   createElementId(slice: Slice, index: number): string {
-    let id: string = Utils.createElementId('chart-slice-', index);
+    let id: string = this.utilsService.createElementId('chart-slice-', index);
     slice.id = id;
     return id;
   } 
 
-  constructor(chartItemService: ChartItemService) {
-      super(chartItemService);
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService) {
+      super(chartItemService, utilsService);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -101,7 +101,7 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
       draw: pathData,
       sourceItem: item,
       id: null,
-      calculatedPercent: Utils.roundScale((normValue * 100))
+      calculatedPercent: this.utilsService.roundScale((normValue * 100))
     });
 
     return cumulativePercent;

@@ -3,6 +3,7 @@ import { BarChartComponent } from './bar-chart.component';
 import { CommonModule } from '@angular/common';
 import { ChartItemService } from '../services/chart-item.service';
 import { AxisComponentsModule } from '../shared/axis-components.module';
+import { UtilsService } from '../services/utils.service';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AxisComponentsModule } from '../shared/axis-components.module';
     BarChartComponent
   ],
   providers: [
-    ChartItemService
+    ChartItemService,
+    UtilsService
   ],
   entryComponents: [ 
     BarChartComponent

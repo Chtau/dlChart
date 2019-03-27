@@ -2,9 +2,9 @@ import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, Eve
 import { ChartItemService } from '../services/chart-item.service';
 import { IChartItem } from '../models/chartitem.interface';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
-import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
 import { IValue } from '../models/value.interface';
+import { UtilsService } from '../services/utils.service';
 
 @Component({  
   selector: 'dl-chart-legend',  
@@ -57,7 +57,7 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
   currentLegendConfiguration: LegendConfiguration = null;
 
-  constructor(public chartItemService: ChartItemService) {
+  constructor(public chartItemService: ChartItemService, private utilsService: UtilsService) {
   }
 
   ngOnInit() {
@@ -95,11 +95,11 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
 
   legendTextValue(item: IChartItem) {
-    return Utils.textValue(this.currentLegendConfiguration, item.sourceItem, item.calculatedPercent);
+    return this.utilsService.textValue(this.currentLegendConfiguration, item.sourceItem, item.calculatedPercent);
   }
 
   tooltipTextValue(item: IChartItem) {
-    return Utils.textValue(item.sourceItem.tooltipConfig, item.sourceItem, item.calculatedPercent);
+    return this.utilsService.textValue(item.sourceItem.tooltipConfig, item.sourceItem, item.calculatedPercent);
   }
 
   onItemClick(event: any, item: IChartItem) {

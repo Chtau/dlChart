@@ -1,12 +1,12 @@
 import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';
 import { ChartItemService } from '../services/chart-item.service';
-import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
 import { Axis } from '../models/axis.model';
 import { Line } from '../models/line.model';
 import { LinePoint } from '../models/linepoint.model';
 import { AxisPoint } from '../models/axispoint.model';
 import { BaseChartComponent } from '../shared/base-chart.component';
+import { UtilsService } from '../services/utils.service';
 
 @Component({
   selector: 'dl-line-chart',
@@ -76,8 +76,8 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.activeHideSelectionLines = val;
   }
 
-  constructor(chartItemService: ChartItemService, cd: ChangeDetectorRef) {
-    super(chartItemService)
+  constructor(chartItemService: ChartItemService, cd: ChangeDetectorRef, utilsService: UtilsService) {
+    super(chartItemService, utilsService)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -144,8 +144,8 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     );
     let index = 1;
     for (index = 1; index <= (this.valueSteps - 1); index++) {
-      var currentValue = Utils.roundScale(yMinValue + (singleStepYValue * index));
-      var step = 100 - Utils.roundScale(singleStepY * index);
+      var currentValue = this.utilsService.roundScale(yMinValue + (singleStepYValue * index));
+      var step = 100 - this.utilsService.roundScale(singleStepY * index);
       this.yAxis.push(
         {
           text: this.onFormatUnkownAxisValue(currentValue),
@@ -182,12 +182,12 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       const element = items[index];
       let pointAxis: LinePoint[] = [];
       let indexPoints: number = 0;
-      let subItemId: string = Utils.createElementId('chart-line-point-', index);
+      let subItemId: string = this.utilsService.createElementId('chart-line-point-', index);
 
       element.points.forEach(point => {
         let x: number = ((point.xValue - xMinValue) / onePercentX);
-        var percentValueY = Utils.roundScale((point.yValue - yMinValue) / oneValueYPercent);
-        var displayValueY = Utils.roundScale(percentValueY * 1);
+        var percentValueY = this.utilsService.roundScale((point.yValue - yMinValue) / oneValueYPercent);
+        var displayValueY = this.utilsService.roundScale(percentValueY * 1);
         let y: number = 100 - displayValueY
 
         if (point.name === '' || point.name === null || point.name === undefined) {
@@ -200,9 +200,9 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
             y: y,
             size: 5,
             sourceItem: point,
-            calculatedPercent: Utils.roundScale((point.xValue - xMinValue) / onePercentX),
+            calculatedPercent: this.utilsService.roundScale((point.xValue - xMinValue) / onePercentX),
             color: point.color === null ? element.color : point.color,
-            id: Utils.createElementId(subItemId + '-', indexPoints),
+            id: this.utilsService.createElementId(subItemId + '-', indexPoints),
           }
         );
 
@@ -213,7 +213,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
         sourceItem: element,
         calculatedPercent: null,
         color: element.color,
-        id: Utils.createElementId('chart-line-axis-', index),
+        id: this.utilsService.createElementId('chart-line-axis-', index),
       });
     }
 

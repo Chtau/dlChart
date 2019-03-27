@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LegendComponent } from "./legend.component";
 import { ChartItemService } from '../services/chart-item.service';
+import { UtilsService } from '../services/utils.service';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { ChartItemService } from '../services/chart-item.service';
     LegendComponent
   ],
   providers: [
-    ChartItemService
+    ChartItemService,
+    UtilsService
   ],
   entryComponents: [ 
     LegendComponent

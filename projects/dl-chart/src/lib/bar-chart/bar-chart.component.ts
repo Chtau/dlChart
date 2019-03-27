@@ -1,12 +1,12 @@
 import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
-import { Utils } from "../shared/utils";
 import { ServiceItem } from '../models/serviceitem.model';
 import { Bar } from '../models/bar.model';
 import { Axis } from '../models/axis.model';
 import { ChartOrientation } from '../models/enums';
 import { BaseChartComponent } from '../shared/base-chart.component';
+import { UtilsService } from '../services/utils.service';
 
 @Component({  
   selector: 'dl-bar-chart',  
@@ -71,8 +71,8 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     this.currentOrientation = val;
   }
 
-  constructor(chartItemService: ChartItemService) {
-    super(chartItemService);
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService) {
+    super(chartItemService, utilsService);
   }
  
   ngOnChanges(changes: SimpleChanges): void {
@@ -106,8 +106,8 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
       }
     );
     for (let index = 1; index <= (this.valueSteps - 1); index++) {
-      var currentValue = Utils.roundScale(minValueCalc + (singleStepValue * index));
-      var step = 100 - Utils.roundScale(singleStepY * index);
+      var currentValue = this.utilsService.roundScale(minValueCalc + (singleStepValue * index));
+      var step = 100 - this.utilsService.roundScale(singleStepY * index);
       this.yAxis.push(
         {
           text: currentValue.toString(),
@@ -185,9 +185,9 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
           y:  y,
           x: element.position,
           sourceItem: element.val,
-          calculatedPercent: element.val.value === 0 ? 0 : Utils.roundScale(element.val.value / onePercent),
+          calculatedPercent: element.val.value === 0 ? 0 : this.utilsService.roundScale(element.val.value / onePercent),
           color: element.val.color,
-          id: Utils.createElementId('chart-bar-', index),
+          id: this.utilsService.createElementId('chart-bar-', index),
           isMinusValue: isMinusValue
         }
       );
