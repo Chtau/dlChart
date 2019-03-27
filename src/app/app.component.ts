@@ -87,6 +87,7 @@ export class AppComponent implements AfterViewInit {
 
   filterValues: Value[] = this.values;
   filterValuesBar: Value[] = this.values;
+  filterValuesLines: Line[] = this.lines;
 
   onKey(event: any) {
     let inputValue = event.target.value;
@@ -108,6 +109,19 @@ export class AppComponent implements AfterViewInit {
         return true;
       }
       if (val.name === inputValue || val.value.toString() === inputValue) {
+        return true;
+      }
+      return false;
+    });
+  }
+
+  onKeyLine(event: any) {
+    let inputValue = event.target.value;
+    this.filterValuesLines = this.lines.filter(val => {
+      if (inputValue === undefined || inputValue === '') {
+        return true;
+      }
+      if (val.name.toLowerCase().startsWith(inputValue.toLowerCase())) {
         return true;
       }
       return false;

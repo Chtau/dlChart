@@ -5,7 +5,7 @@
 </div>
 <div style="text-align: center;">
   <div>
-  <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
+  <!--<div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Pie Chart</h2>
     <input (keyup)="onKey($event)" placeholder="Filter the Chart ('3' shows only two Values)">
     <br>
@@ -16,7 +16,7 @@
     <dl-pie-chart [chartid]="'test-chart'" [values]="values1"></dl-pie-chart>
     <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
   </div>
-  <br>
+  <br>-->
   <!--<div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
     <h2>Bar Chart</h2>
     <div>
@@ -74,8 +74,10 @@
     </div>
   </div>-->
   <br>
-  <!--<div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
+  <div style="display: inline-block;height: 400px;text-align:center;margin: 50px;">
     <h2>Line Chart</h2>
+    <input (keyup)="onKeyLine($event)" placeholder="Filter the Chart ('3' shows only two Values)">
+    <br>
     <input [(ngModel)]="wrapperWidthLine" (ngModelChange)="changeWidthLine()">
     <input [(ngModel)]="wrapperHeightLine" (ngModelChange)="changeHeightLine()">
     <br>
@@ -102,7 +104,7 @@
     <div style="height: 250px;width: 450px;">
       <dl-line-chart 
         [chartid]="'line-chart'" 
-        [values]="lines" 
+        [values]="filterValuesLines" 
         [leftScaleAxis]="leftScaleAxisLine"
         [rightScaleAxis]="rightScaleAxisLine"
         [steps]="currentStepsLine"
@@ -114,7 +116,7 @@
       ></dl-line-chart>
     </div>
     <dl-chart-legend [chartid]="'line-chart'"></dl-chart-legend>
-  </div>-->
+  </div>
 </div>
 </div>
 
