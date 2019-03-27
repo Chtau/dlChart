@@ -10,7 +10,6 @@ export class YAxisComponent {
 
   currentSVGX: string = '';
   currentSVGY: string = '';
-  currentScaleLabel: string = '';
   currentActiveScaleAxis: boolean = true;
   currentYAxis: Axis[] = [];
   currentIsLeft: boolean = true;
@@ -62,5 +61,24 @@ export class YAxisComponent {
       this.lineX1 = '0';
       this.lineX2 = '0';
     }
+  }
+
+  currentSVGXLabel: string = '';
+  currentSVGYLabel: string = '';
+  currentScaleLabel: string = '';
+
+  @Input()
+  set scaleLabel(val: string) {
+    this.currentScaleLabel = val;
+  }
+
+  @Input()
+  set svgXLabel(val: string) {
+    this.currentSVGXLabel = val;
+  }
+
+  @Input()
+  set svgYLabel(val: string) {
+    this.currentSVGYLabel = val;
   }
 }

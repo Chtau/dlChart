@@ -7,3 +7,6 @@
     <line id="dlChartBarYLine" y1="0%" [attr.x1]="lineX1" y2="100%" [attr.x2]="lineX2" class="x-stroke" />
   </g>
 </svg>
+<svg *ngIf="currentActiveScaleAxis" [attr.x]="currentSVGXLabel" [attr.y]="currentSVGYLabel">
+  <text [attr.y]="'0'" [attr.x]="'0'" dy=".71em" style="transform: rotate(-90deg); text-anchor: end;">{{ currentScaleLabel }}</text>
+</svg>
