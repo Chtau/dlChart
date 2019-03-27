@@ -14,7 +14,7 @@
       [attr.y]="normOrientation(axis.position + '%', '12px', '18px', (100 - axis.position) + '%', axis.position + '%', '18px', '12px', (100 - axis.position) + '%')" 
       [style.text-anchor]="normOrientation('end', 'middle', 'middle', 'start', 'start', 'middle', 'middle', 'end')">{{ axis.text }}</text>
     </g>
-    <line [attr.id]="'dlChartBarYLine'" 
+    <line
     [attr.x1]="normOrientation('100%', '0', '0', 0, 0, '0', 0, '100%')" 
     [attr.x2]="normOrientation('100%', '100%', '100%', 0, 0, '100%', '100%', '100%')" 
     [attr.y1]="normOrientation('0%', '0', '30px', '0%', '0%', '30px', 0, '0%')" 
