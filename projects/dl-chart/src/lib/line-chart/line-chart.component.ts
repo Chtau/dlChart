@@ -81,7 +81,12 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.compare(changes.values.currentValue, changes.values.previousValue)) {
+    if (changes.values != undefined && <Line[]>changes.values.currentValue != undefined && <Line[]>changes.values.previousValue != undefined) {
+      if (!this.compare(changes.values.currentValue, changes.values.previousValue)) {
+        this.resetActiveElement();
+        this.calculateChart();
+      }
+    } else {
       this.resetActiveElement();
       this.calculateChart();
     }
@@ -230,7 +235,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     let axis: Axis[] = [];
     var step = (length / (items.length - 1));
     for (let index = 0; index < (items.length); index++) {
-      const element = items[index];
+      const element: string = items[index];
       axis.push(
         {
           text: element,
