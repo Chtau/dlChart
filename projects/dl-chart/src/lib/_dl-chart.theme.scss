@@ -3,6 +3,7 @@
 @import './line-chart/line-chart.theme';
 @import './pie-chart/pie-chart.theme';
 @import './shared/tooltip.theme';
+@import './shared/axis.theme';
 
 @function light-chart-theme() {
   @return (
@@ -10,7 +11,8 @@
     bar-chart: light-bar-chart-theme(),
     line-chart: light-line-chart-theme(),
     pie-chart: light-pie-chart-theme(),
-    tooltip: light-tooltip-chart-theme()
+    tooltip: light-tooltip-chart-theme(),
+    axis: light-axis-theme()
   );
 }
 
@@ -20,7 +22,8 @@
     bar-chart: dark-bar-chart-theme(),
     line-chart: dark-line-chart-theme(),
     pie-chart: dark-pie-chart-theme(),
-    tooltip: dark-tooltip-chart-theme()
+    tooltip: dark-tooltip-chart-theme(),
+    axis: dark-axis-theme()
   );
 }
 
@@ -28,9 +31,10 @@
   @return (
     legend-chart: legend-theme($border-color, $border-width, $border-style),
     bar-chart: bar-theme($bar-line-color, $bar-text-color, $ground-line-color, $bar-selection-line-color, $select-stroke-width, $selection-stroke-dasharray),
-    line-chart: line-theme(line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color),
+    line-chart: line-theme($line-line-color, $line-text-color, $raster-line-color, $line-selection-line-color),
     pie-chart: pie-theme($donut-color),
-    tooltip: tooltip-theme($background-color, $foreground-color)
+    tooltip: tooltip-theme($background-color, $foreground-color),
+    axis: axis-theme($line-line-color, $line-text-color)
   );
 }
 
@@ -41,5 +45,6 @@
   @include line-chart-theme(map-get($theme, line-chart));
   @include pie-chart-theme(map-get($theme, pie-chart));
   @include tooltip-chart-theme(map-get($theme, tooltip));
+  @include axis-chart-theme(map-get($theme, axis));
 }
 

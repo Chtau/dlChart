@@ -1,0 +1,29 @@
+
+@function light-axis-theme() {
+  @return axis-theme(#000, #000);
+}
+
+@function dark-axis-theme() {
+  @return axis-theme(#fff, #fff);
+}
+
+@function axis-theme($line-color, $text-color) {
+  @return (
+    line-color: $line-color,
+    text-color: $text-color,
+  );
+}
+
+
+@mixin axis-chart-theme($theme) {
+
+  .axis path,
+  .axis line {
+    stroke: map-get($theme, line-color) !important;
+  }
+
+  .axis text {
+    fill: map-get($theme, text-color) !important;
+  }
+}
+
