@@ -1,7 +1,7 @@
 <div>
   <div class="legend-items">
     <div (click)="onItemClick($event, item)" [class]="'tooltip legend-item' + legendClass(item)" *ngFor="let item of chartItems">
-      <span class="legend-color-box" [style.background-color]="item.color"></span>
+      <span id="legend-color" class="legend-color-box" [style.background-color]="item.color"></span>
       <span class="legend-text-content ">  
         {{ legendTextValue(item) }}
         <span id="dlChartTooltip" class="legend-tooltip tooltiptext ">{{ tooltipTextValue(item) }}</span>
