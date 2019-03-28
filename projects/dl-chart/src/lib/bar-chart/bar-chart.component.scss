@@ -4,18 +4,8 @@
   stroke-width: 2px;
 }
 
+.bar-selected,
 .bar:hover {
-  opacity: .8;
-
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  
-  transition:.5s;
-}
-
-.bar-selected {
   opacity: .8;
 
   -o-transition:.5s;
