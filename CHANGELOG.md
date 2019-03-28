@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.2.0
+
+- fix refresh Problem with filters on the Line chart
+- Y Axis shows now "" when filter values are out of range (instead of previous "NAN" & "infinity")
+- structor change for Axis (axis x & y are now standalone svg components)
+- a theme can now be applied to axis
+- add "barFullFilled" as new Input to Bar chart
+- add "hideTooltip" for all charts
+- expose mouse position X/Y in chart-item.service (this can be used to show a custom tooltip)
+- remove "!important" from themes
+- code improvements
+
 ## 1.1.1
 
 - Bar Chart change style
