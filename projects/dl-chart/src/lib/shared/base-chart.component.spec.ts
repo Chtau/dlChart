@@ -86,6 +86,17 @@ describe('BaseChartComponent', () => {
         sourceItem: bar
       }
     );
+
+    baseChart.hideTooltip = true;
+    baseChart.onHoverSegment({ clientX: 100, clientY: 100 }, 
+      { 
+        id: '0', 
+        color: 'red', 
+        calculatedPercent: 0, 
+        sourceItem: bar
+      }
+    );
+    expect(baseChart.tooltipShow).toBe(false, 'hide tooltip');
   });
 
   it('click Segement', () => {

@@ -40,7 +40,7 @@ describe('LegendComponent', () => {
     component.items = new ServiceItem<Slice[]>('test', [
       { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]);
+    ], null, null);
 
     expect(component.chartItems.length).toBe(2, '2 slices');
   });
@@ -100,7 +100,7 @@ describe('LegendComponent', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '0',  calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]));
+    ], null, null));
   });
 
   it('Value changed from Service', (done) => {
@@ -112,7 +112,7 @@ describe('LegendComponent', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]));
+    ], null, null));
   });
 
   it('Legend class', () => {
@@ -139,7 +139,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('selected');
       done();
     });
-    service.selectChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.selectChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('selection from Service (wrong chartId)', (done) => {
@@ -148,7 +148,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('selected');
       done();
     });
-    service.selectChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.selectChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('deselect changed from Service', (done) => {
@@ -157,7 +157,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('deselect');
       done();
     });
-    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('deselect changed from Service (wrong chartId)', (done) => {
@@ -166,7 +166,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('deselect');
       done();
     });
-    service.deselectChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.deselectChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('hover changed from Service', (done) => {
@@ -175,7 +175,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('hover');
       done();
     });
-    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('hover from Service (wrong chartId)', (done) => {
@@ -184,7 +184,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('hover');
       done();
     });
-    service.hoverChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.hoverChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('leave changed from Service', (done) => {
@@ -193,7 +193,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('leave');
       done();
     });
-    service.leaveChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.leaveChartValue(new ServiceItem<Slice>('test', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('leave changed from Service (wrong chartId)', (done) => {
@@ -202,7 +202,7 @@ describe('LegendComponent', () => {
       expect(val).toBeDefined('leave');
       done();
     });
-    service.leaveChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }));
+    service.leaveChartValue(new ServiceItem<Slice>('test-1', { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null));
   });
 
   it('hide chart hover/select effect', () => {

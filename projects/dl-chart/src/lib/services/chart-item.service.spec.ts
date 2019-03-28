@@ -30,7 +30,7 @@ describe('ChartItemService', () => {
   });
 
   it('set get Slice values', () => {
-    service.setChartValues(new ServiceItem<Slice[]>('test', []))
+    service.setChartValues(new ServiceItem<Slice[]>('test', [], null, null))
 
     var values = service.getChartValues('test');
     expect(values.value.length).toBe(0, 'set and get Slice values')
@@ -40,7 +40,7 @@ describe('ChartItemService', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
 
     var values = service.getChartValues('test');
     expect(values.value.length).toBe(2, 'set and get Slice values (2)')
@@ -51,7 +51,7 @@ describe('ChartItemService', () => {
       expect(vals.chartId).toBe('test', 'chart values has changed');
       expect(vals.value.length).toBe(0, 'chart values has changed')  
     });
-    service.setChartValues(new ServiceItem<Slice[]>('test', []))
+    service.setChartValues(new ServiceItem<Slice[]>('test', [], null, null))
   });
 
   it('subscribe to values from Slice (2)', () => {
@@ -62,14 +62,14 @@ describe('ChartItemService', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
   });
 
   it('set value get wrong chartId', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '0', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '1', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
 
     var values = service.getChartValues('test-1');
     expect(values).toBeUndefined('set Slice values and get wrong chartId')
@@ -79,11 +79,11 @@ describe('ChartItemService', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '13', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
     service.setChartValues(new ServiceItem<Bar[]>('test-1', [
       { id: '123', calculatedPercent: 0, color: 'red', sourceItem: null, height: 0, width: 0, y: 0, x: 0, isMinusValue: false },
       { id: '124', calculatedPercent: 0, color: 'red', sourceItem: null, height: 0, width: 0, y: 0, x: 0, isMinusValue: false }
-    ]))
+    ], null, null))
 
     var values = service.getChartValues('test-1');
     expect(values.value[0].id).toBe('123', 'get Bar chart id value 0 index')
@@ -96,11 +96,11 @@ describe('ChartItemService', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '13', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
     service.setChartValues(new ServiceItem<Bar[]>('test-1', [
       { id: '123', calculatedPercent: 0, color: 'red', sourceItem: null, height: 0, width: 0, y: 0, x: 0, isMinusValue: false },
       { id: '124', calculatedPercent: 0, color: 'red', sourceItem: null, height: 0, width: 0, y: 0, x: 0, isMinusValue: false }
-    ]))
+    ], null, null))
 
     var values = service.values;
     expect(values.length).toBe(2, '2 charts')
@@ -116,7 +116,7 @@ describe('ChartItemService', () => {
         service.setChartValues(new ServiceItem<Slice[]>('test', [
           { id: '123', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
           { id: '124', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-        ]));
+        ], null, null));
         
       }
       if (waitforResult === true) {
@@ -131,40 +131,44 @@ describe('ChartItemService', () => {
     service.setChartValues(new ServiceItem<Slice[]>('test', [
       { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null },
       { id: '13', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }
-    ]))
+    ], null, null))
   });
 
-  it('subscribe to hover ChartItem', () => {
+  it('subscribe to hover ChartItem', (done) => {
     service.chartValueHover.subscribe((vals: ServiceItem<IChartItem>) => {
       expect(vals.chartId).toBe('test', 'chart values has changed');
-      expect(vals.value.color).toBe('red', 'chart values has changed')  
+      expect(vals.value.color).toBe('red', 'chart values has changed');
+      done();
     });
-    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null))
   });
 
-  it('subscribe to leave ChartItem', () => {
+  it('subscribe to leave ChartItem', (done) => {
     service.chartValueLeave.subscribe((vals: ServiceItem<any>) => {
       expect(vals.chartId).toBe('test', 'chart values has changed');
-      expect(vals.value).toBe(null, 'chart values has changed')  
+      expect(vals.value).toBe(null, 'chart values has changed');
+      done();
     });
-    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
-    service.leaveChartValue(new ServiceItem<Slice>('test', null));
+    service.hoverChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null))
+    service.leaveChartValue(new ServiceItem<Slice>('test', null, null, null));
   });
 
-  it('select ChartItem', () => {
-    service.chartValueDeselect.subscribe((vals: ServiceItem<IChartItem>) => {
+  it('select ChartItem', (done) => {
+    service.chartValueSelect.subscribe((vals: ServiceItem<IChartItem>) => {
       expect(vals.chartId).toBe('test', 'chart values has changed');
-      expect(vals.value.id).toBe('12', 'chart values has changed')  
+      expect(vals.value.id).toBe('12', 'chart values has changed');
+      done();
     });
-    service.selectChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+    service.selectChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null))
   });
 
-  it('deselect ChartItem', () => {
+  it('deselect ChartItem', (done) => {
     service.chartValueDeselect.subscribe((vals: ServiceItem<IChartItem>) => {
       expect(vals.chartId).toBe('test', 'chart values has changed');
-      expect(vals.value.id).toBe('12', 'chart values has changed')  
+      expect(vals.value.id).toBe('12', 'chart values has changed');
+      done();
     });
-    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }))
+    service.deselectChartValue(new ServiceItem<Slice>('test', { id: '12', calculatedPercent: 0, color: 'red', draw: null, sourceItem: null }, null, null))
   });
 
 });

@@ -185,7 +185,7 @@ describe('LineChartComponent', () => {
     });
     fixture.detectChanges();
 
-    component.onClickSegment(component.axisPoint[0].points[0]);
+    component.onClickSegmentPoint(component.axisPoint[0].points[0], component.axisPoint[0]);
     expect(component.currentActiveChartItem).toBeDefined('Axis Point selected');
 
     var css = component.cssClassSegmentPoint(component.axisPoint[0].points[0]);
