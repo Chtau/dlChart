@@ -19,12 +19,13 @@
 
 @mixin line-chart-theme($theme) {
 
-  .raster line {
-    stroke: map-get($theme, raster-line-color) !important;
+  #background-raster .background-raster {
+    stroke: map-get($theme, raster-line-color);
   }
 
-  .point-selected {
-    stroke: map-get($theme, selection-line-color) !important;
+  #selection .point-selected,
+  #selection-point .point-selected {
+    stroke: map-get($theme, selection-line-color);
   }
 }
 

@@ -4,7 +4,7 @@
     <svg yaxis [activeScaleAxis]="activeLeftScaleAxis" [orientation]="0" [yAxis]="yAxis" [scaleLabel]="currentScaleLabel"></svg>
     <svg yaxis [activeScaleAxis]="activeRightScaleAxis" [orientation]="0" [yAxis]="yAxis" [isLeft]="false" [scaleLabel]="currentScaleLabel"></svg>
     <svg width="calc(100% - 60px)" height="calc(100% - 60px)" x="30px" y="30px" style="overflow: visible;">
-      <g *ngIf="!activeHideRaster" class="raster">
+      <g *ngIf="!activeHideRaster" class="raster" id="background-raster">
         <line class="background-raster" [attr.x1]="axis.position + '%'" [attr.x2]="axis.position + '%'" y1="0" y2="100%"
           *ngFor="let axis of xAxis"></line>
         <line class="background-raster" [attr.y1]="axis.position + '%'" [attr.y2]="axis.position + '%'" x1="0" x2="100%"
@@ -17,14 +17,14 @@
             [attr.points]="getPathFromAxisLine(axis.points) + ' 100,100 0,100'" />
         </g>
       </svg>
-      <g *ngIf="!activeHideSelectionLines && currentActivePoint != null">
+      <g *ngIf="!activeHideSelectionLines && currentActivePoint != null" id="selection">
         <line class="point-selected x-point-selected" x2="0" [attr.y2]="currentActivePoint.y + '%'" [attr.x2]="currentActivePoint.x + '%'"
           [attr.y1]="'100%'" [attr.x1]="currentActivePoint.x + '%'"></line>
         <line class="point-selected y-point-selected" [attr.x1]="selectionXEndPoint + '%'" [attr.x2]="currentActivePoint.x+ '%'"
           [attr.y2]="currentActivePoint.y+ '%'" [attr.y1]="currentActivePoint.y+ '%'"></line>
       </g>
       <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
-        <g *ngIf="!activeHidePoints">
+        <g *ngIf="!activeHidePoints" id="selection-point">
           <circle *ngFor="let point of axis.points" (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)"
             (click)="onClickSegment(point)" [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)"
             [attr.fill]="point.color" [attr.cx]="point.x + '%'" [attr.cy]="point.y + '%'" [attr.r]="pointSize(point)" />
