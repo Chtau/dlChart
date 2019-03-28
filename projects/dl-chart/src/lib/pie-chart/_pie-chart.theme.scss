@@ -15,8 +15,8 @@
 
 @mixin pie-chart-theme($theme) {
 
-  .inner-circle {
-    fill: map-get($theme, donut-color) !important;
+  #piechart .inner-circle {
+    fill: map-get($theme, donut-color);
   }
 }
 
