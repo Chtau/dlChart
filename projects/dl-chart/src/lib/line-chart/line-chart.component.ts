@@ -195,7 +195,7 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
       });
     }
 
-    this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint))
+    this.chartItemService.setChartValues(new ServiceItem<AxisPoint[]>(this.chartid, this.axisPoint, null, null))
   }
 
   getPathFromAxisLine(points: LinePoint[]) {

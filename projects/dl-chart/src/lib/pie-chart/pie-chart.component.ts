@@ -73,7 +73,7 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
       cumulativePercent = this.createSlice(item, totalValue, cumulativePercent);
     });
 
-    this.chartItemService.setChartValues(new ServiceItem<Slice[]>(this.chartid, this.pie));
+    this.chartItemService.setChartValues(new ServiceItem<Slice[]>(this.chartid, this.pie, null, null));
   }
 
   createSlice(item: Value, totalValue: number, cumulativePercent: number) {

@@ -50,6 +50,12 @@ export class BaseChartComponent<T> {
   currentTooltipConfiguration: TooltipConfiguration = null;
   
   @Input()
+  set hideTooltip(val: boolean) {
+    this.currentHideTooltip = val;
+  }
+  currentHideTooltip: boolean = false;
+
+  @Input()
   set allowSelect(val: boolean) {
     this.currentAllowSelect = val;
   }
@@ -75,11 +81,11 @@ export class BaseChartComponent<T> {
       if (event === this.currentActiveChartItem) {
         this.currentActiveChartItem = null;
         this.valueDeselect.emit(event.sourceItem);
-        this.chartItemService.chartValueDeselect.emit(new ServiceItem(this.chartid, event));
+        this.chartItemService.chartValueDeselect.emit(new ServiceItem(this.chartid, event, null, null));
       } else {
         this.currentActiveChartItem = event;
         this.valueSelect.emit(event.sourceItem);
-        this.chartItemService.chartValueSelect.emit(new ServiceItem(this.chartid, event));
+        this.chartItemService.chartValueSelect.emit(new ServiceItem(this.chartid, event, null, null));
       }
     }
     this.valueClick.emit(event.sourceItem);
@@ -90,9 +96,13 @@ export class BaseChartComponent<T> {
     this.tooltipContentItem = item.sourceItem;
     this.tooltipLeft = (event.clientX + 10);
     this.tooltipTop = (event.clientY + 10);
-    this.tooltipShow = true;
+    if (this.currentHideTooltip === false) {
+      this.tooltipShow = true;
+    } else {
+      this.tooltipShow = false;
+    }
     this.valueChange.emit(item.sourceItem);
-    this.chartItemService.chartValueHover.emit(new ServiceItem(this.chartid, item));
+    this.chartItemService.chartValueHover.emit(new ServiceItem(this.chartid, item, this.tooltipLeft, this.tooltipTop));
   }
 
   onLeaveSegment(event: any) {
@@ -100,7 +110,7 @@ export class BaseChartComponent<T> {
     this.tooltipContentItem = null;
     this.tooltipShow = false;
     this.valueChange.emit(null);
-    this.chartItemService.chartValueLeave.emit(new ServiceItem(this.chartid, null));
+    this.chartItemService.chartValueLeave.emit(new ServiceItem(this.chartid, null, null, null));
   }
 
   resetActive() {

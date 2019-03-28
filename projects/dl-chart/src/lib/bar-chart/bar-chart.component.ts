@@ -123,7 +123,7 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     }
     this.createBars(maxValue, singleBarWidht, bars);
 
-    this.chartItemService.setChartValues(new ServiceItem<Bar[]>(this.chartid, this.bars))
+    this.chartItemService.setChartValues(new ServiceItem<Bar[]>(this.chartid, this.bars, null, null))
   }
 
   createXAxis(singleBarWidht: number, items: { val: Value, position: number}[]) {
