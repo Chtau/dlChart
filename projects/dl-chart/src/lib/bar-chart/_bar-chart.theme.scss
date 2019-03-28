@@ -23,19 +23,16 @@
 
 @mixin bar-chart-theme($theme) {
 
-  .bars line {
-    stroke: map-get($theme, line-color) !important;
+  #dlChartBarSelectLineIndicator {
+    stroke: map-get($theme, line-color);
+    fill: map-get(map-get($theme, selection), line-color);
+    stroke-width: map-get(map-get($theme, selection), stroke-width);
+    stroke-dasharray: map-get(map-get($theme, selection), stroke-dasharray);
   }
 
-  .selection-line {
-    fill: map-get(map-get($theme, selection), line-color) !important;
-    stroke-width: map-get(map-get($theme, selection), stroke-width) !important;
-    stroke-dasharray: map-get(map-get($theme, selection), stroke-dasharray) !important;
+  #dlChartBarNormalizedLine {
+    stroke: map-get($theme, line-color);
+    fill: map-get($theme, ground-line-color);
   }
-
-  .ground-line {
-    fill: map-get($theme, ground-line-color) !important;
-  }
-
 }
 
