@@ -17,13 +17,16 @@
 
 @mixin axis-chart-theme($theme) {
 
-  .axis path,
-  .axis line {
-    stroke: map-get($theme, line-color) !important;
+  #yaxis .axis path,
+  #yaxis .axis line,
+  #xaxis .axis path,
+  #xaxis .axis line {
+    stroke: map-get($theme, line-color);
   }
 
-  .axis text {
-    fill: map-get($theme, text-color) !important;
+  #xaxis .axis text,
+  #yaxis .axis text {
+    fill: map-get($theme, text-color);
   }
 }
 

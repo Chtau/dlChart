@@ -5,7 +5,7 @@ import { ChartOrientation } from '../models/enums';
 @Component({
   selector: '[xaxis]',
   templateUrl: './xaxis.component.html',
-  styleUrls: ['./xaxis.component.scss'],
+  styleUrls: ['./axis.component.scss'],
 })
 export class XAxisComponent {
 

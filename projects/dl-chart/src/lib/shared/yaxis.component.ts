@@ -5,7 +5,7 @@ import { ChartOrientation } from '../models/enums';
 @Component({
   selector: '[yaxis]',
   templateUrl: './yaxis.component.html',
-  styleUrls: ['./yaxis.component.scss'],
+  styleUrls: ['./axis.component.scss'],
 })
 export class YAxisComponent {
 
