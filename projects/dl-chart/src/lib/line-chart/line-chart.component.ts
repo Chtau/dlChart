@@ -228,6 +228,11 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     super.resetActive();
   }
 
+  onClickSegmentPoint(event: LinePoint, aPoint: AxisPoint) {
+    event.id = aPoint.id;
+    super.onClickSegment(event);
+  }
+
   cssClassSegmentPoint(item: LinePoint): string {
     let css: string = '';
 
@@ -258,8 +263,9 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
   }
 
   get selectionXEndPoint() {
-    if (this.currentActivePoint != null) {
-      if (this.currentActivePoint.x > 50) {
+    if (this.currentActiveChartItem != null) {
+      let point: LinePoint = this.currentActiveChartItem as LinePoint;
+      if (point.x > 50) {
         if (this.activeRightScaleAxis === true) {
           return 100;
         } else {
