@@ -19,19 +19,6 @@
 
 @mixin line-chart-theme($theme) {
 
-  .axis path,
-  .axis line {
-    stroke: map-get($theme, line-color) !important;
-  }
-
-  .axis text {
-    fill: map-get($theme, text-color) !important;
-  }
-
-  .scale-label text {
-    fill: map-get($theme, text-color) !important;
-  }
-
   .raster line {
     stroke: map-get($theme, raster-line-color) !important;
   }

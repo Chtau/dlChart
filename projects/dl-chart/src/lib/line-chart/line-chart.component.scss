@@ -1,23 +1,9 @@
 @import '../shared/tooltip.scss';
 
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line,
 .raster line {
   fill: none;
   stroke: #000;
 }
-
-.axis text {
-  fill: #000;
-}
-
-/*.scale-label text {
-  fill: #000;
-}*/
 
 .background-raster {
   opacity: .1;

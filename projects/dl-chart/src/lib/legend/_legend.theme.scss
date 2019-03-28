@@ -22,5 +22,9 @@
     border-width: map-get($theme, border-width) !important;
     border-style: map-get($theme, border-style) !important;
   }
+
+  .legend-items .legend-item span:not(.tooltiptext) {
+    color: map-get($theme, border-color) !important;
+  }
 }
 

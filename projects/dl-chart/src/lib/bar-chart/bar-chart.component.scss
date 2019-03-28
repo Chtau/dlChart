@@ -27,24 +27,10 @@
   transition:.5s;
 }
 
-.axis {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line,
 .bars line {
   fill: none;
   shape-rendering: crispEdges;
   stroke: #000;
-}
-
-.axis text {
-  fill: #000;
-}
-
-.scale-label text {
-  fill: #000;
 }
 
 .selection-line {
@@ -69,10 +55,6 @@
   animation-direction: reverse;
   animation-delay: 1ms;
   transform-origin: 100% 90% 0;
-}
-
-.scale-label {
-  overflow: visible;
 }
 
 @keyframes scaleBar {
