@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
 

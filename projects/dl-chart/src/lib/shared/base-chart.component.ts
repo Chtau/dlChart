@@ -1,5 +1,5 @@
 import { ChartItemService } from '../services/chart-item.service';
-import { Output, Input, EventEmitter } from '@angular/core';
+import { Output, Input, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { TooltipConfiguration } from '../models/tooltipconfiguration.model';
 import { IChartItem } from '../models/chartitem.interface';
 import { ServiceItem } from '../models/serviceitem.model';
@@ -18,10 +18,17 @@ export class BaseChartComponent<T> {
   tooltipClass: string = '';
 
   currentActiveChartItem: IChartItem;
+  animationActive: boolean = true;
 
   @Input()
   set values(val: T[]) {
     this.currentValues = val;
+    this.cd.detectChanges();
+  }
+
+  @Input()
+  set animation(val: boolean) {
+    this.animationActive = val;
   }
 
   @Output() valueSelect: EventEmitter<IValue> = new EventEmitter<IValue>();
@@ -40,24 +47,28 @@ export class BaseChartComponent<T> {
   set chartid(val) {
     this.currentChartid = val;
     this.chartidChange.emit(this.currentChartid);
+    this.cd.detectChanges();
   }
   currentChartid: string = 'dl-chart-1';
 
   @Input()
   set tooltipConfiguration(val: TooltipConfiguration) {
     this.currentTooltipConfiguration = val;
+    this.cd.detectChanges();
   }
   currentTooltipConfiguration: TooltipConfiguration = null;
   
   @Input()
   set hideTooltip(val: boolean) {
     this.currentHideTooltip = val;
+    this.cd.detectChanges();
   }
   currentHideTooltip: boolean = false;
 
   @Input()
   set allowSelect(val: boolean) {
     this.currentAllowSelect = val;
+    this.cd.detectChanges();
   }
   currentAllowSelect: boolean = true;
 
@@ -72,7 +83,7 @@ export class BaseChartComponent<T> {
     return null;
   }
 
-  constructor(public chartItemService: ChartItemService, public utilsService: UtilsService) {
+  constructor(public chartItemService: ChartItemService, public utilsService: UtilsService, public cd: ChangeDetectorRef) {
     
   }
 

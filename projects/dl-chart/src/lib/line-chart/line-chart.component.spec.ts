@@ -144,10 +144,10 @@ describe('LineChartComponent', () => {
     fixture.detectChanges();
 
     let css = component.cssClassSegmentPoint(component.axisPoint[0].points[0]);
-    expect(css).toBe('', 'Segement css class Point created');
+    expect(css).toBe(' point-anim', 'Segement css class Point created');
 
     let cssCustom = component.cssClassSegmentPoint(component.axisPoint[1].points[0]);
-    expect(cssCustom).toBe(' test', 'Segement custom css Point class created');
+    expect(cssCustom).toBe(' point-anim test', 'Segement custom css Point class created');
   });
 
   it('select/deselect Line', () => {
@@ -189,7 +189,7 @@ describe('LineChartComponent', () => {
     expect(component.currentActiveChartItem).toBeDefined('Axis Point selected');
 
     var css = component.cssClassSegmentPoint(component.axisPoint[0].points[0]);
-    expect(css).toBe(' point-selected', 'Line Point deselected');
+    expect(css).toBe(' point-anim point-selected', 'Line Point deselected');
 
     var size = component.pointSize(component.axisPoint[0].points[0]);
     expect(size).toBe(7, 'Line Point size changed');

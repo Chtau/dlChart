@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Value, TooltipConfiguration } from '../../projects/dl-chart/src/public_api';
 import { ChartOrientation } from '../../projects/dl-chart/src/public_api';
@@ -172,6 +172,10 @@ export class AppComponent implements AfterViewInit {
   wrapperWidthLine: number = 450;
   wrapperHeightLine: number = 450;
 
+  constructor(private cd: ChangeDetectorRef) {
+    
+  }
+
   ngAfterViewInit(): void {
     //this.wrapperHeight = this.barchartWrapper.nativeElement.clientHeight;
     //this.wrapperWidth = this.barchartWrapper.nativeElement.clientWidth;
@@ -191,5 +195,23 @@ export class AppComponent implements AfterViewInit {
 
   changeHeightLine() {
     
+  }
+
+  pieChangeValue() {
+    var val: Value[] = [];
+    Object.assign(val, this.values1);
+    val[1].value += 1;
+    
+    this.values1 = val;
+    this.cd.detectChanges();
+  }
+
+  pieSetNewValue() {
+    this.values1 = [
+      new Value('Red', 6, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
+      new Value('Blue', 12, 'Blue'),
+      new Value('Orange', 3, 'Orange'),
+    ]
+    this.cd.detectChanges();
   }
 }

@@ -11,10 +11,13 @@
     <br>
     <label><input [(ngModel)]="useDonutStyle" (ngModelChange)="onChangeUseDonut($event)"  type="checkbox"/>use Donut style</label>
     <br>
-    <label>Size <input [(ngModel)]="donutSize" (ngModelChange)="onChangeDonutSize($event)" type="number"></label>
-    <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>
-    <dl-pie-chart [chartid]="'test-chart'" [values]="values1" [donut]=".5"></dl-pie-chart>
-    <dl-chart-legend [chartid]="'test-chart'"></dl-chart-legend>
+    <button (click)="pieChangeValue()">Add Value</button>
+    <button (click)="pieSetNewValue()">Set new Value</button>
+    <br>
+    <!--<label>Size <input [(ngModel)]="donutSize" (ngModelChange)="onChangeDonutSize($event)" type="number"></label>
+    <label>Color <input [(ngModel)]="donutColor" (ngModelChange)="onChangeDonutColor($event)" type="color"></label>-->
+    <dl-pie-chart [chartid]="'test-chart-pie-1'" [animation]="false" [values]="values1" [donut]=".5"></dl-pie-chart>
+    <dl-chart-legend [chartid]="'test-chart-pie-1'"></dl-chart-legend>
   </div>
   <br>
   <div style="display: inline-block; height: 400px;text-align:center;margin: 50px;">
@@ -45,6 +48,7 @@
         <label><input [(ngModel)]="barFullFilled" type="checkbox" />Bar full filled</label>
         <div #barchartWrapper style="height: 250px;">
           <dl-bar-chart 
+          [animation]="false"
             [orientation]="selectedOrientation" 
             [chartid]="'test-chart-bar'" 
             [scaleLabel]="'Demo Values'" 
@@ -105,6 +109,7 @@
     <label><input [(ngModel)]="hideSelectionLines" type="checkbox" />Hide selection lines</label>
     <div style="height: 250px;width: 450px;">
       <dl-line-chart 
+      [animation]="false"
         [chartid]="'line-chart'" 
         [values]="filterValuesLines" 
         [leftScaleAxis]="leftScaleAxisLine"

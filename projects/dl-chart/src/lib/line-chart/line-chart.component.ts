@@ -76,8 +76,8 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     this.activeHideSelectionLines = val;
   }
 
-  constructor(chartItemService: ChartItemService, cd: ChangeDetectorRef, utilsService: UtilsService) {
-    super(chartItemService, utilsService)
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService, cd: ChangeDetectorRef) {
+    super(chartItemService, utilsService, cd)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -233,9 +233,25 @@ export class LineChartComponent extends BaseChartComponent<Line> implements OnCh
     super.onClickSegment(event);
   }
 
+  cssClassSegmentLine(item: AxisPoint): string {
+    let css: string = '';
+    if (this.animationActive) {
+      css += ' line-anim';
+    }
+    if (item === this.currentActiveChartItem) {
+      css += ' ';
+    }
+    if (item.sourceItem.cssClass != null) {
+      css += ' ' + item.sourceItem.cssClass;
+    }
+    return css;
+  }
+
   cssClassSegmentPoint(item: LinePoint): string {
     let css: string = '';
-
+    if (this.animationActive) {
+      css += ' point-anim';
+    }
     if (item === this.currentActiveChartItem) {
       css += ' point-selected';
     }

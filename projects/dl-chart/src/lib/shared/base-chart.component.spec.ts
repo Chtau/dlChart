@@ -5,6 +5,25 @@ import { IChartItem } from '../models/chartitem.interface';
 import { Value } from '../models/value.model';
 import { IValue } from '../models/value.interface';
 import { UtilsService } from '../services/utils.service';
+import { ChangeDetectorRef } from '@angular/core';
+
+export class CD implements ChangeDetectorRef {
+  markForCheck(): void {
+    
+  }
+  detach(): void {
+    
+  }
+  detectChanges(): void {
+    
+  }
+  checkNoChanges(): void {
+    
+  }
+  reattach(): void {
+    
+  }
+}
 
 describe('BaseChartComponent', () => {
   let baseChart: BaseChartComponent<IValue>;
@@ -24,7 +43,7 @@ describe('BaseChartComponent', () => {
 
   beforeEach(() => {
     var service = TestBed.get(ChartItemService);
-    baseChart = new BaseChartComponent(service, utils);
+    baseChart = new BaseChartComponent(service, utils, new CD());
   });
 
   it('should create', () => {

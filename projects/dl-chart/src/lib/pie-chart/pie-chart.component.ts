@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { Value } from '../models/value.model';
 import { ChartItemService } from '../services/chart-item.service';
 import { BaseChartComponent } from '../shared/base-chart.component';
@@ -36,10 +36,12 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
     if (slice.sourceItem.cssClass != null) {
       css += ' ' + slice.sourceItem.cssClass;
     }
-    if (index % 2 == 0) {
-      css += ' ' + 'slice-anim-even';
-    } else {
-      css += ' ' + 'slice-anim';
+    if (this.animationActive) {
+      if (index % 2 == 0) {
+        css += ' ' + 'slice-anim-even';
+      } else {
+        css += ' ' + 'slice-anim';
+      }
     }
     return css;
   }
@@ -50,8 +52,8 @@ export class PieChartComponent extends BaseChartComponent<Value> implements OnCh
     return id;
   } 
 
-  constructor(chartItemService: ChartItemService, utilsService: UtilsService) {
-      super(chartItemService, utilsService);
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService, cd: ChangeDetectorRef) {
+      super(chartItemService, utilsService, cd);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

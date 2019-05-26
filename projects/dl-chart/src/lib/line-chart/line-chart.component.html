@@ -12,7 +12,7 @@
       </g>
       <svg *ngIf="!activeHideLines" width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" style="overflow:visible">
         <g *ngFor="let axis of axisPoint">
-          <polyline class="line line-anim" fill="none" [attr.stroke]="axis.color" stroke-width="1" [attr.points]="getPathFromAxisLine(axis.points)" />
+          <polyline class="line cssClassSegmentLine(axis)" fill="none" [attr.stroke]="axis.color" stroke-width="1" [attr.points]="getPathFromAxisLine(axis.points)" />
           <polygon *ngIf="!activeHideLinesFiller" class="line-filler" [attr.fill]="axis.color" stroke="none"
             [attr.points]="getPathFromAxisLine(axis.points) + ' 100,100 0,100'" />
         </g>
@@ -26,7 +26,7 @@
       <g [attr.class]="'line-axis line-axis-anim'" *ngFor="let axis of axisPoint">
         <g *ngIf="!activeHidePoints" id="selection-point">
           <circle *ngFor="let point of axis.points" (mousemove)="onHoverSegment($event, point)" (mouseleave)="onLeaveSegment($event)"
-            (click)="onClickSegmentPoint(point, axis)" [attr.id]="point.id" [attr.class]="'point point-anim ' + cssClassSegmentPoint(point)"
+            (click)="onClickSegmentPoint(point, axis)" [attr.id]="point.id" [attr.class]="'point ' + cssClassSegmentPoint(point)"
             [attr.fill]="point.color" [attr.cx]="point.x + '%'" [attr.cy]="point.y + '%'" [attr.r]="pointSize(point)" />
         </g>
       </g>

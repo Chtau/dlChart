@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges } from '@angular/core';  
+import { Component, Input, ViewEncapsulation, OnChanges, SimpleChanges, ChangeDetectorRef } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { Value } from '../models/value.model';
 import { ServiceItem } from '../models/serviceitem.model';
@@ -71,8 +71,8 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
     this.currentOrientation = val;
   }
 
-  constructor(chartItemService: ChartItemService, utilsService: UtilsService) {
-    super(chartItemService, utilsService);
+  constructor(chartItemService: ChartItemService, utilsService: UtilsService, cd: ChangeDetectorRef) {
+    super(chartItemService, utilsService, cd);
   }
  
   ngOnChanges(changes: SimpleChanges): void {
@@ -190,10 +190,12 @@ export class BarChartComponent extends BaseChartComponent<Value> implements OnCh
   cssClassSegment(item: Bar): string {
     let css: string = '';
     
-    if (this.currentOrientation === ChartOrientation.Bottom || this.currentOrientation === ChartOrientation.Top) {
-      css += ' bar-anim-top-bottom';
-    } else {
-      css += ' bar-anim-left-right';
+    if (this.animationActive) {
+      if (this.currentOrientation === ChartOrientation.Bottom || this.currentOrientation === ChartOrientation.Top) {
+        css += ' bar-anim-top-bottom';
+      } else {
+        css += ' bar-anim-left-right';
+      }
     }
 
     if (item === this.currentActiveChartItem) {

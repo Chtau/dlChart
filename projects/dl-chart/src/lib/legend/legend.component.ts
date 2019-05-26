@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';  
+import { Component, OnInit, AfterViewInit, Input, ViewEncapsulation, Output, EventEmitter, ChangeDetectorRef, AfterContentChecked } from '@angular/core';  
 import { ChartItemService } from '../services/chart-item.service';
 import { IChartItem } from '../models/chartitem.interface';
 import { LegendConfiguration } from '../models/legendconfiguration.model';
@@ -12,7 +12,7 @@ import { UtilsService } from '../services/utils.service';
   styleUrls: ['./legend.component.scss'],
   encapsulation: ViewEncapsulation.Emulated
 })  
-export class LegendComponent implements OnInit, AfterViewInit {
+export class LegendComponent implements OnInit, AfterViewInit, AfterContentChecked  {
 
   @Output() legendClick: EventEmitter<IValue> = new EventEmitter<IValue>();
 
@@ -57,7 +57,7 @@ export class LegendComponent implements OnInit, AfterViewInit {
   }
   currentLegendConfiguration: LegendConfiguration = null;
 
-  constructor(public chartItemService: ChartItemService, private utilsService: UtilsService) {
+  constructor(public chartItemService: ChartItemService, private utilsService: UtilsService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -92,6 +92,10 @@ export class LegendComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
 
+  }
+
+  ngAfterContentChecked(): void {
+    this.cd.detectChanges();
   }
 
   legendTextValue(item: IChartItem) {
