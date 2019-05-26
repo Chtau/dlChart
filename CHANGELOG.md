@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+
+- new input "animation" can deactivate chart build/refresh animation
+- minor improvments for detecting changes
+
 ## 1.2.0
 
 - fix refresh Problem with filters on the Line chart
