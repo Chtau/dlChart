@@ -1,5 +1,10 @@
 # Changelog
 
+## 8.0.0
+
+- new Versioning by following Angular major build number
+- update to Angular Version 8+
+
 ## 1.2.1
 
 - new input "animation" can deactivate chart build/refresh animation
