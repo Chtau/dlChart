@@ -13,7 +13,7 @@ import { Point } from 'projects/dl-chart/src/lib/models/point.model';
 })
 export class AppComponent implements AfterViewInit {
   
-  @ViewChild('barchartWrapper') barchartWrapper: ElementRef;
+  @ViewChild('barchartWrapper', { static: true }) barchartWrapper: ElementRef;
 
   values: Value[] = [
     new Value('Red', 5, 'Red', null, new TooltipConfiguration(null, (val, perc) => { return val.name + ' ( ' + perc + '% )' })),
