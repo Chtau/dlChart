@@ -1,13 +1,13 @@
 {
   "name": "dl-chart",
-  "version": "1.2.1",
+  "version": "8.0.0",
   "description": "Lightweight Angular Chart Library",
-  "keywords": ["angular", "chart", "lightweight", "angular7", "typescript", "svg"],
+  "keywords": ["angular", "chart", "lightweight", "angular8", "typescript", "svg"],
   "author": "Christoph Taucher",
   "license": "MIT",
   "homepage": "https://github.com/Chtau/dlChart",
   "peerDependencies": {
-    "@angular/common": "^7.0.0-rc.0 || ^7.0.0",
-    "@angular/core": "^7.0.0-rc.0 || ^7.0.0"
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0"
   }
 }

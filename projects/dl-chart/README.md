@@ -3,8 +3,7 @@
 Lightweight Angular Chart Library.
 
 The goal of this Library is to have an easy to use and small in size Chart Library.
-
-Currently if both Charts and the Legend is imported the `main.js` for Angular in Production build with Webpack is only **~7kb** bigger which makes it perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a Chart Library.
+It perfect for the usage in a Dashboard or somewhere where you can't / won't lazy load a Chart Library.
 
 The Charts are created with SVG which makes them responsive for every screen resolution and have no extern Library Dependencies.
 
@@ -22,7 +21,7 @@ View [Example and Documentation](https://chtau.github.io/dlChartDoc/)
   * Line Chart
   * Horizontal & Vertical Bar Chart (can also be mirrored)
   * Legend module & service
-  * minimal package size (~7kb)
+  * minimal package size
   * no external Libraries
   * SVG
   * Autoscaling
@@ -58,4 +57,4 @@ Run `ng test dlChart` to execute the unit tests via [Karma](https://karma-runner
 
 [Changelog](https://github.com/Chtau/dlChart/blob/master/CHANGELOG.md)
 
-Angular 7+
+Angular 8+
